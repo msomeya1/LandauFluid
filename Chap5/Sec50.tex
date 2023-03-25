@@ -1,4 +1,271 @@
 \section{非圧縮性流体中の熱伝導}
+\subsection*{熱伝導方程式}
+ある場合には，熱輸送の一般式\eqref{eq49.4:熱輸送の一般式}を簡単な形に書くことができる：
+流体の速度が音速に比べて十分小さい場合，流体の運動によって生じる圧力変化を無視することができ，
+圧力変化による密度変化もまた無視することができる．
+一方，温度変化による密度変化は無視することができず，速度が遅い場合でも，非一様に加熱された流体の密度は一様とはみなせない．
+つまり，熱力学量の微分を計算する際，圧力は一定だが密度は一定でないと仮定する必要がある（\emph{Boussinesq近似}）．
+\[
+    ds = \PDV{s}{T}{p} dT
+\]
+定圧比熱は$c_p = T \dPDV{s}{T}{p}$と書けるから，
+\[
+    T \, ds = c_p \, dT \qquad \yueni T \frac{Ds}{Dt} = c_p \frac{DT}{Dt}
+\]
+となる．\eqref{eq49.4:熱輸送の一般式}は
+\begin{equation}
+    \rho c_p \frac{DT}{Dt} = \Div(\kappa \Grad T) + \sigma_{ij}' \pdv{v_i}{x_j} .
+\end{equation}
+
+
+Boussinesq近似では，密度変化は浮力の形でのみ考慮され，今考えている状況では$\rho$の変化をあらわに考える必要はない．
+この場合$\Div \v=0$である．
+また，この近似は流体中の温度差が小さい場合にのみ成り立つから，$\eta,\kappa,c_p$などの温度依存性を無視して定数とみなしてよい．
+
+\S~16の結果から，非圧縮性流体では
+$\sigma'_{ij} \dpdv{v_i}{x_j} = \dfrac{\eta}{2} \left( \dpdv{v_i}{x_j} + \dpdv{v_j}{x_i} \right)^2$
+であるから
+\begin{equation}\label{eq50.2:非圧縮性流体での熱輸送の式}
+    \pdv{T}{t} + \v \cdot \Grad T = \chi \Laplacian T + \frac{\nu}{2c_p} \left( \pdv{v_i}{x_j} + \pdv{v_j}{x_i} \right)^2
+\end{equation}
+となる．ここで$\nu=\eta/\rho$は動粘性率であり，
+\begin{equation}
+    \chi = \frac{\kappa}{\rho c_p}
+\end{equation}
+は\emph{温度伝導度}（\emph{熱拡散率}）である．
+
+
+流体が静止しているとき$\v=\vec{0}$であり，エネルギーの輸送は熱伝導によってのみ生じる．
+この場合\eqref{eq50.2:非圧縮性流体での熱輸送の式}は
+\begin{equation}\label{eq50.4:静止流体での熱伝導方程式}
+    \pdv{T}{t} = \chi \Laplacian T
+\end{equation}
+となる（\emph{熱伝導方程式，Fourierの式}）．
+\eqref{eq50.4:静止流体での熱伝導方程式}は，運動する流体の熱輸送の一般式を経由することなく，もっと簡単に導くことができる．
+ある体積で単位時間に吸収される熱量は，境界から流入する熱フラックスに等しいことから
+\[
+    \rho c_p \pdv{T}{t} = -\Div \vec{q} = \kappa \Laplacian T
+\]
+となる．
+
+
+
+
+\eqref{eq50.4:静止流体での熱伝導方程式}は，実際には限られた場合にしか適用できない．
+というのは，重力場中では温度勾配が小さくても流体が運動しうるからである（\emph{対流}，\S~56）．
+そのため，重力と温度勾配が逆向きであるか，粘性が非常に大きい流体の場合のみ，静止状態が可能である．
+しかし\eqref{eq50.4:静止流体での熱伝導方程式}は固体の熱伝導をも記述する重要な方程式であるから，
+\S~\ref{sec:51}-\ref{sec:52}で詳しく調べることにしよう．
+
+
+
+\subsection*{定常な場合の熱伝導方程式}
+静止している媒質が，外部の熱源によって時間的に一定な（しかし空間的には一様でない）温度分布を持つとき，熱伝導方程式は
+\begin{equation}
+    \Laplacian T = 0
+\end{equation}
+というLaplace方程式になる．
+より一般の場合として，$\kappa$が一様でなければ
+\begin{equation}
+    \Div(\kappa \Grad T) = 0
+\end{equation}
+となる．
+
+
+
+
+\subsection*{外部熱源がある場合の熱伝導方程式}
+媒質が（媒質内部の物理過程によって起こるのではない）外的な熱源を含んでいる場合，熱伝導方程式に項が加わる．
+単位時間・単位体積当たりの発熱量を$Q$とすると（一般には時間と座標の関数である）
+\begin{equation}
+    \rho c_p \pdv{T}{t} = \kappa \Laplacian T + Q
+\end{equation}
+となる．
+
+
+
+\subsection*{熱伝導方程式の境界条件}
+2つの媒質の境界における条件を書き下そう．
+境界では2つの媒質の温度は等しいから
+\begin{equation}
+    T_1=T_2.
+\end{equation}
+境界を通って一方から他方の媒質に流れる熱フラックスは等しいから，（境界が静止していれば）
+\begin{equation}
+    \kappa_1 \pdv{T_1}{n} = \kappa_2 \pdv{T_2}{n} .
+\end{equation}
+もし境界に，単位時間・単位面積当たり$Q^{(s)}$の熱を発する外的な熱源があるなら
+\begin{equation}
+    \kappa_1 \pdv{T_1}{n} - \kappa_2 \pdv{T_2}{n} = Q^{(s)}.
+\end{equation}
+
+\subsection*{熱爆発}
+熱源が存在する場合に媒質の温度分布を求める問題では，熱源の強さは温度の関数として与えられるのが普通である．
+関数$Q(T)$が$T$とともに急激に大きくなる場合，固定境界条件のもとでは，媒質の温度分布が定常的になることはできない；
+媒質表面を通って外に逃げる熱量は，加熱の仕方に関係なく，媒質と外部の温度差$T-T_0$（の平均値）に比例する．
+よって，$T$の増加によって大量の熱が生成されても，表面から熱が逃げるのが追いつかないのである．
+
+
+定常状態が実現しないため，\emph{熱爆発}が生じるかもしれない：
+発熱燃焼反応の速度が温度とともに急激に増加する場合，定常分布が実現できないために，物質の急速な発火と反応の加速が起こる
+（N. N. Semyonov 1923）．
+爆発的な燃焼反応の速度（つまり熱の生成速度）は，活性化エネルギー$U$が大きい場合，$e^{-U/T}$のような温度依存性を持つ．
+熱爆発が起こる条件を調べるためには，着火が比較的遅い反応の経過を考えなければならない．
+外部の温度を$T_0$とすると
+\[
+    \frac{1}{T} = \frac{1}{T_0 + (T-T_0)} = \frac{1}{T_0} \left( 1 + \frac{T-T_0}{T_0} \right)^{-1}
+    \simeq \frac{1}{T_0} \left( 1 - \frac{T-T_0}{T_0} \right) = \frac{1}{T_0} - \frac{T-T_0}{{T_0}^2}
+\]
+であるから，結局
+\begin{equation}\label{eq50.11:指数的温度依存性を持つ熱源}
+    Q = Q_0 e^{\alpha(T-T_0)}
+\end{equation}
+のような熱源を考えればよいことになる
+（D. A. Frank-Kamenetskii 1939）．
+問題~\ref{mo:問題50.1（1次元FK理論）}参照．
+
+
+\begin{details}
+熱爆発に関する一連の理論はFrank-Kamenetskii理論と呼ばれている．
+\end{details}
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{問題50.1（1次元FK理論）}
+\eqref{eq50.11:指数的温度依存性を持つ熱源}で与えられる熱源が，2つの平行な平面に挟まれた媒質中に分布しており，平面の温度は一定に保たれている．
+定常な温度分布が可能な条件を求めよ（D. A. Frank-Kamenetskii 1939）．
+\end{mondai}
+\begin{kaitou}
+定常状態での熱伝導方程式は
+\[
+    \kappa \dv[2]{T}{x} = - Q_0 e^{\alpha(T-T_0)}
+\]
+であり，境界条件は$x=0,2l$で$T=T_0$である（$2l$は2平面の距離とする）．
+無次元の変数$\tau = \alpha(T-T_0)$，$\xi = x/l$を導入すると
+\[
+    \dv[2]{\tau}{\xi} = -\lambda e^{\tau}, \quad \lambda = \frac{Q_0 \alpha l^2}{\kappa}
+\]
+となる．
+両辺に$2\ddv{\tau}{\xi}$をかけて1回積分すると
+\[
+    \left( \dv{\tau}{\xi} \right)^2 = 2\lambda (\const - e^{\tau}).
+\]
+対称性から，$\xi=1$で$\ddv{\tau}{\xi}=0$となる．このときの$\tau$を$\tau_0$とすると$\const=e^{\tau_0}$であり，
+$e^{\tau_0} \ijou e^\tau$よりこれは最大値である．
+$\xi=0$で$\tau=0$，$\xi=1$で$\tau=\tau_0$という条件に注意して上式を積分する．
+\[
+    \dv{\tau}{\xi} = \sqrt{2\lambda (e^{\tau_0} - e^{\tau}) }
+\]
+\[
+    \frac{1}{\sqrt{2\lambda}} \int_{0}^{\tau_0} \frac{d\tau}{\sqrt{e^{\tau_0} - e^{\tau}}} = \int_{0}^{1} d\xi = 1
+\]
+左辺の積分を実行するため$y=\sqrt{e^{\tau_0} - e^{\tau}}$とおくと，
+$y^2 = e^{\tau_0} - e^{\tau}$より$2y\,dy = - e^{\tau} \, d\tau$であり
+\[
+    \frac{d\tau}{\sqrt{e^{\tau_0} - e^{\tau}}} = \frac{d\tau}{y}
+    = -\frac{2dy}{e^\tau} = - \frac{2dy}{e^{\tau_0}-y^2}.
+\]
+\begin{align*}
+    \int_{0}^{\tau_0} \frac{d\tau}{\sqrt{e^{\tau_0} - e^{\tau}}}
+    &= \int_{\sqrt{e^{\tau_0}-1}}^{0} \frac{-2dy}{e^{\tau_0}-y^2}
+    = 2\int_0^{\sqrt{e^{\tau_0}-1}} \frac{dy}{e^{\tau_0}-y^2} \\
+    &= 2 \left[ \frac{1}{e^{\tau_0/2}} \tanh^{-1} \left( \frac{y}{e^{\tau_0/2}} \right) \right]_0^{\sqrt{e^{\tau_0}-1}}
+    =  2e^{-\tau_0/2} \tanh^{-1} \left( \sqrt{1-e^{-\tau_0}} \right)
+\end{align*}
+\begin{details}
+$\tanh^{-1}(\sqrt{1-x}) = \cosh^{-1}\left(\sqrt{x}\right)$であるから結局
+\end{details}
+\[
+    e^{-\tau_0/2} \cosh^{-1} ( e^{\tau_0/2} ) = \sqrt{\frac{\lambda}{2}}
+\]
+を得る．
+この式は，与えられた$\lambda$に対して温度の最大値$\tau_0$を求める方程式である．これを
+\[
+    \lambda = 2 e^{-\tau_0} \left\{ \cosh^{-1} ( e^{\tau_0/2} ) \right\}^2 .
+\]
+と変形し，右辺を$\tau_0$の関数と見て$f(\tau_0)$とおくと，
+$f(\tau_0)$は$\tau_0 = 1.187$で最大値$0.878$をとる．
+よって
+\begin{itemize}
+    \item $\lambda > 0.878$のときは境界条件を満たす解が存在しないから，定常な温度分布は不可能である．
+    \item $\lambda \ika 0.878$のときは定常な温度分布が可能であり，2つの解のうち小さい方が定常な温度分布に対応する．
+\end{itemize}
+
+
+
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+温度勾配が一定に保たれている静止流体中に球が浸されているとき，流体および球の定常温度分布を求めよ．
+\end{mondai}
+\begin{kaitou}
+球の内外で，温度分布はLaplace方程式$\Laplacian T=0$に従う．
+球と流体を添字1/2で区別し，球の半径を$R$とすると，境界条件は$r=R$で
+\[
+    T_1 = T_2, \quad
+    \kappa_1 \pdv{T_1}{r} = \kappa_2 \pdv{T_2}{r}
+\]
+となることである．
+また，与えられた温度勾配を$\vec{A}$とすると，無限遠で$\Grad T_2 \to \vec{A}$でなければならない．
+
+
+問題の対称性から，解を決定づけるパラメータは$\vec{A}$のみである．
+定ベクトル$\vec{A}$を線形に含む，Laplace方程式の解は$\vec{A}\cdot\vec{r}$または
+$\vec{A}\cdot\Grad\left( \dfrac{1}{r} \right) = - \dfrac{\vec{A}\cdot\vec{r}}{r^3}$である．
+球の温度は$r=0$で有限でなければならないことに注意すると
+\[
+    T_1 = c_1 \vec{A}\cdot\vec{r}, \quad 
+    T_2 = \vec{A}\cdot\vec{r} + c_2 \frac{\vec{A}\cdot\vec{r}}{r^3}
+\]
+と書ける．
+
+1つ目の境界条件から
+\[
+    c_1 = 1 + \frac{c_2}{R^3} .
+    \mytag{1}
+\]
+また，
+\[
+    \pdv{T_1}{r} = c_1 A_r, \quad
+    \pdv{T_2}{r} = A_r + c_2 \left( \frac{A_r}{r^3} - \frac{3\vec{A}\cdot\vec{r}}{r^4} \right)
+    = \left( 1-\frac{2c_2}{r^3} \right) A_r
+\]
+であるから2つ目の境界条件は
+\[
+    \kappa_1 c_1 = \kappa_2 \left( 1-\frac{2c_2}{R^3} \right) .
+    \mytag{2}
+\]
+\ajMaru{1}を\ajMaru{2}に代入して
+\[
+    \kappa_1 \left( 1 + \frac{c_2}{R^3} \right) = \kappa_2 \left( 1-\frac{2c_2}{R^3} \right)
+\]
+\[
+    c_2 (\kappa_1 + 2\kappa_2) = (\kappa_2-\kappa_1) R^3
+    \qquad\yueni c_2 = \frac{\kappa_2-\kappa_1}{\kappa_1 + 2\kappa_2} R^3 .
+\]
+\[
+    c_1 = 1 + \frac{\kappa_2-\kappa_1}{\kappa_1 + 2\kappa_2}
+    = \frac{3\kappa_2}{\kappa_1 + 2\kappa_2}
+\]
+ゆえに，求める温度分布は
+\[
+    T_1 = \frac{3\kappa_2}{\kappa_1 + 2\kappa_2} \vec{A}\cdot\vec{r}, \quad 
+    T_2 = \left[ 1 + \frac{\kappa_2-\kappa_1}{\kappa_1 + 2\kappa_2} \left( \frac{R}{r} \right)^3 \right] \vec{A}\cdot\vec{r} 
+\]
+となる．
+もちろん，$\kappa_1=\kappa_2$なら$T_1=T_2=\vec{A}\cdot\vec{r}$である．
+
+
+\end{kaitou}
 
 
 
