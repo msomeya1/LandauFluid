@@ -1,18 +1,17 @@
 \section{熱輸送の一般式}
 
 \S~2の終わりで，流体力学の完全な方程式系は5つの方程式を含まなければならないことを述べた．
-ここでは，熱伝導や内部摩擦の過程を伴う流体について，方程式系を書き下してみよう．
-1つは（以前と同様に）連続の式であり，理想流体でのEuler方程式はNavier-Stokes方程式に置きかわる．
-5番目の方程式は理想流体ではエントロピー保存の式(2.6)である．
-もちろん，粘性流体の場合には，非可逆的なエネルギーの散逸が生じるから，この式は成り立たない．
-粘性流体の場合に成り立つ式を求めるために，エネルギー保存の式を考えよう．
+熱伝導や内部摩擦の過程を伴う流体であっても，連続の式と運動方程式（Navier-Stokes方程式）は成り立つ．
+理想流体では，5番目の方程式はエントロピー保存の式(2.6)であった．
+粘性流体では，非可逆的なエネルギーの散逸が生じるから，この式は成り立たない．
+粘性流体の場合に成り立つ式を決めるために，エネルギー保存の式を考えよう．
 
 
 理想流体でのエネルギー保存則は(6.1)で与えられる
 （$\varepsilon$は単位質量あたりの内部エネルギー，$h$は単位質量あたりのエンタルピー）：
 \[
     \pdv{t} \left( \frac{1}{2}\rho v^2 + \rho\varepsilon \right)
-    = -\Div \left[ \rho \v \left( \frac{1}{2}v^2 + h \right) \right]
+    = -\Div \left[ \rho \v \left( \frac{1}{2}v^2 + h \right) \right] .
 \]
 左辺は，単位体積の流体のエネルギー変化率であるから，右辺のdivの中は流体表面を通る全エネルギーフラックスを表している．
 粘性流体の場合，ここに
@@ -24,7 +23,7 @@
 \S~16によれば，（$\sigma_{ij}'$を粘性応力テンソルとして）1は$v_i\sigma_{ij}'$と書ける．
 2は流体中の温度が一様でない場合に生じるエネルギーの輸送であり，マクロな運動の有無によらず存在する
 （すなわち，静止流体中でも生じる）．
-温度勾配が大きく無い場合，$\vec{q}$と温度変化の関係をただちに書き下すことができる．
+温度勾配が大きくない場合，$\vec{q}$と温度変化の関係をただちに書き下すことができる．
 $\vec{q}$を温度勾配の冪で展開して1次まで取れば
 \begin{equation}\label{eq49.1:Fourierの法則}
     \vec{q} = -\kappa \cdot \Grad T
@@ -99,17 +98,50 @@ $\mu$は剛性率，$K$は体積弾性率）と比較せよ．
 
 
 \eqref{eq49.4:熱輸送の一般式}の意味を明らかにするために，流体の全体積にわたってエントロピーの時間変化を計算しよう．
-
-
-
+\[
+    \dv{t} \int \rho s \dV = \int \pdv{t} (\rho s) \dV
+\]
+ここで
+\begin{align*}
+    \pdv{t} (\rho s) &= \frac{D}{Dt} (\rho s) - \v \cdot \Grad(\rho s) \\
+    &= \rho \frac{Ds}{Dt} + s \frac{D\rho}{Dt} - \v \cdot \Grad(\rho s) \\
+    & \gyoukan{連続の式から$s \frac{D\rho}{Dt} = -\rho s \Div\v $} \\
+    &= \rho \frac{Ds}{Dt} - \Div (\rho s \v)
+\end{align*}
+$\Div (\rho s \v)$は表面積分に変換され，無限に広がる流体を考えるとその寄与は0になる．よって
+\[
+    \dv{t} \int \rho s \dV = \int \rho \frac{Ds}{Dt} \dV
+    \overset{\eqref{eq49.4:熱輸送の一般式}}{=} \int \frac{1}{T} \left( \Div(\kappa \Grad T) + \Phi \right) \dV .
+    \mytag{2}
+\]
+第1項は
+\begin{align*}
+    \int \frac{1}{T} \Div(\kappa \Grad T) \dV
+    &= \int \left\{ \Div\left( \frac{1}{T} \cdot \kappa \Grad T \right)  - \kappa \Grad T \cdot \Grad \left( \frac{1}{T} \right)\right\} \dV \\
+    &= \int \frac{\kappa}{T} \Grad T \cdot \dS + \int \frac{\kappa (\Grad T)^2}{T^2} \dV 
+\end{align*}
+と書ける．
+無限に広がる流体を考え，無限遠で流体の温度が十分速く一定値に近づくと仮定すれば第1項は0となる．
+したがって
+\setcounter{equation}{5}%
+\begin{equation}
+    \dv{t} \int \rho s \dV = \int \frac{\kappa (\Grad T)^2}{T^2} \dV + \int \frac{1}{T} \Phi \dV .
+\end{equation}
+この式は，単位時間の全エントロピーの変化を熱伝導と内部摩擦の寄与で表した式である．
+熱力学第2法則によればエントロピーは増加しなければならないから，右辺は正である．
+$\kappa>0$，$\eta>0$であるから，第2粘性率$\zeta$も正であることが導かれた．
 
 
 
 \eqref{eq49.1:Fourierの法則}を導く際に，熱伝導フラックスは圧力勾配によらず温度勾配のみで書けることを仮定していた．
 これは次のように正当化できる；
-もし$\vec{q}$に$-\alpha \Grad p$（$\alpha$は比例係数）が加わったとすると，\ajMaru{2}は
-
-となり，結果には$\Grad p \cdot \Grad T$という項が現れる．
+もし$\vec{q}$に$-\alpha \Grad p$（$\alpha$は比例係数）が加わったとすると，\ajMaru{2}には
+\begin{align*}
+    \int \frac{1}{T} \Div (\alpha \Grad p)\dV
+    &= \int \left\{ \Div\left( \frac{1}{T} \alpha \Grad p \right)  - \alpha \Grad p \cdot \Grad \left( \frac{1}{T} \right)\right\} \dV \\
+    &= \int \frac{\alpha}{T} \Grad p \cdot \dS + \int \frac{\alpha\Grad p \cdot \Grad T}{T^2} \dV
+\end{align*}
+という項が加わり，結果には$\Grad p \cdot \Grad T$という項が現れる．
 これは正にも負にもなりうるから，エントロピーは増加するとは限らなくなり，矛盾が生じる．
 
 
@@ -117,13 +149,13 @@ $\mu$は剛性率，$K$は体積弾性率）と比較せよ．
 
 最後に，これまでの議論は以下に述べる点においても厳密にされなければならないことに触れておこう；
 温度勾配や速度勾配が存在する流体は熱力学的な平衡状態にはなく，（平衡状態で成り立つ）熱力学量の関係式は厳密には成り立たなくなる．
-つまり，$\rho,\varepsilon,\v$を適切に定義したとしても，（平衡状態でのエントロピーの定義により定まる量）
+つまり，$\rho,\varepsilon,\v$を適切に定義したとしても，平衡状態でのエントロピーの定義により定まる量
 $s=s(\rho, \varepsilon)$は真のエントロピーではなく，積分
 \[
     \int \rho s \dV
 \]
 は時間と共に増加するとは限らない．
-しかし，温度勾配や圧力勾配が小さい場合には，この$s$が近似的に真のエントロピーに等しいことが示せる：
+しかし，温度勾配や速度勾配が小さい場合には，この$s$が近似的に真のエントロピーに等しいことが示せる：
 この$s$は平衡状態での値であるから，最大値である．
 よってエントロピーを微小な勾配で展開したとき，1次の項は0であり，2次以上の項のみが現れる．
 勾配が小さければ，これらの寄与は無視できる．

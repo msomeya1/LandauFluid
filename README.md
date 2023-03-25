@@ -1,2 +1,15 @@
 # LandauFluid
-Landau-Lifshitz「流体力学」（2nd English edition）のノート
+学部4年の時から，Landau-Lifshitz「流体力学」（2nd English edition）を読むゼミを行っています．
+
+このレポジトリには，その際に自分が作ったノートを置いています．
+
+各章のpdfへの直リンクは以下の通りです．
+
+[第1章（理想流体）](./Chap1/Chap1.pdf)
+
+[第2章（粘性流体）](./Chap2/Chap2.pdf)
+
+[第5章（流体中の熱伝導）](./Chap5/Chap5.pdf)
+
+内容の正確性は保証できません．
+また，ゼミで飛ばした部分のノートはありません．

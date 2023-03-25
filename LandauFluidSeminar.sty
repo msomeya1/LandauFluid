@@ -1,0 +1,195 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{LandauFluidSeminar}
+%
+\RequirePackage{amsmath , amssymb}
+\RequirePackage{mathcomp}
+\RequirePackage{siunitx}
+\RequirePackage[version = 3 , arrows = pgf-filled]{mhchem}
+\RequirePackage{graphicx,xcolor}
+\RequirePackage{comment}
+\RequirePackage{cancel}
+\RequirePackage[showseconds=false, showzone=false]{datetime2}
+
+\RequirePackage{titlesec}
+\titleformat{\section}{\bfseries\Large}{\S\,\thesection}{1\zw}{}
+\RequirePackage{titletoc}
+\titlecontents{section}[0\zw]{\bfseries}{\S\,\thecontentslabel\hspace{1\zw}}{}{\hfill\contentspage}
+\setcounter{tocdepth}{1}
+
+\usepackage{mathtools}
+\numberwithin{equation}{section}
+
+%
+% 行列用の太字サンセリフを出すための処方
+\RequirePackage{bm}
+\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
+\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
+\newcommand{\mat}[1]{\bm{\mathsfit{#1}}}
+%
+% physics パッケージ，及びインライン数式での微分記号を大きくするための処方
+\RequirePackage[italicdiff]{physics}
+\DeclareDocumentCommand\ddv{}{\displaystyle\derivative}
+\DeclareDocumentCommand\dpdv{}{\displaystyle\partialderivative}
+%
+\newcommand{\spade}{\ajSpade\;}
+%
+% 行間の説明を入れるbox
+\RequirePackage{tcolorbox}
+\tcbuselibrary{theorems,breakable,skins}
+% 行間の説明を入れるbox
+\newtcolorbox{details}{
+	blanker, left=3mm,
+	right=3mm,
+	before skip = 0.6\baselineskip,
+	after skip = 0.6\baselineskip,
+	borderline vertical={2pt}{2pt}{black},
+	breakable,
+	before upper = {\setlength{\lineskip}{3pt}\setlength{\lineskiplimit}{3pt}}
+}
+%
+%
+%
+% ハイパーリンク
+\RequirePackage[pdfencoding=auto,colorlinks]{hyperref}
+\hypersetup{linkcolor=black}
+%
+%
+% 問題環境を正しくrefするためには，hyperrefを読んだ後にtcbの定義を行う必要がある．
+% https://tex.stackexchange.com/questions/485251/tcolorbox-potential-bug-with-duplicate-label-for-hyperref-link
+% 
+% 問題のbox
+\newtcbtheorem[number within = section]{mondai}{問題}{%
+	separator sign none,
+	colframe = black,
+	colback = white,
+	colbacktitle = white,
+	coltitle = black,
+	fonttitle = \bf,
+	enhanced jigsaw,
+	breakable,
+	pad at break* = 0mm,
+	attach boxed title to top left={xshift=5mm, yshift*=-\tcboxedtitleheight/2},
+	boxed title style = {colframe = white},
+	before upper = {\setlength{\lineskip}{3pt}\setlength{\lineskiplimit}{3pt}}
+}{mo}
+\newtcbtheorem[number within = section, use counter from=mondai]{smondai}{\spade 問題}{%
+	separator sign none,
+	colframe = black,
+	colback = white,
+	colbacktitle = white,
+	coltitle = black,
+	fonttitle = \bf,
+	enhanced jigsaw,
+	breakable,
+	pad at break* = 0mm,
+	attach boxed title to top left={xshift=5mm, yshift*=-\tcboxedtitleheight/2},
+	boxed title style = {colframe = white},
+	before upper = {\setlength{\lineskip}{3pt}\setlength{\lineskiplimit}{3pt}}
+}{}
+% 問題の解答のbox
+\newenvironment{kaitou}{%
+	\noindent%
+	\textbf{【解答】}%
+}{%
+	\vspace{1\baselineskip}%
+}%
+%
+%
+\newtcolorbox{myitembox}{
+	separator sign none,
+	colframe = black,
+	colback = white,
+	colbacktitle = white,
+	coltitle = black,
+	fonttitle = \bf,
+	enhanced jigsaw,
+	breakable,
+	pad at break* = 0mm,
+	before upper = {\setlength{\lineskip}{3pt}\setlength{\lineskiplimit}{3pt}}
+}
+%
+% 行間を少し広げる
+\setlength{\lineskip}{3pt}
+\setlength{\lineskiplimit}{3pt}
+%
+%%%%%%%%%%%%%%%%%% 私家版マクロ集 %%%%%%%%%%%%%%%%%%
+\newcommand{\yueni}[0]{%
+	\therefore\quad%
+}%
+\newcommand{\nazenara}[0]{%
+	$\because$\quad %
+}%
+%
+\newcommand{\ika}{%
+	\mathrel{%
+		\raisebox{0.08em}{%
+			\scalebox{1}[0.65]{$\leqq$}%
+		}%
+	}%
+}%
+%
+\newcommand{\ijou}{%
+	\mathrel{%
+		\raisebox{0.08em}{%
+			\scalebox{1}[0.65]{$\geqq$}%
+		}%
+	}%
+}%
+%
+
+%\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator\Div{div}
+\DeclareMathOperator\Grad{grad}
+\DeclareMathOperator\Rot{rot}
+\renewcommand{\vec}[1]{\vb*{#1}}
+\renewcommand{\v}{\vec{v}}
+\newcommand{\Unit}[1]{\vu*{#1}}
+\newcommand{\dl}{d\vec{l}}
+\newcommand{\dS}{d\vec{S}}
+\newcommand{\dV}{\, dV}
+\newcommand{\DDt}[1]{\frac{D #1}{D t}}
+\newcommand{\dDDt}[1]{\dfrac{D #1}{D t}}
+\newcommand{\PDV}[3]{\pqty{\pdv{#1}{#2}}_{#3}}
+\newcommand{\dPDV}[3]{\pqty{\dpdv{#1}{#2}}_{#3}}
+\newcommand{\Laplacian}{\triangle}
+\newcommand{\R}{\mathrm{R}} % レイノルズ数
+\newcommand{\Rcr}{\mathrm{R}_{\mathrm{cr}}} % 臨界レイノルズ数
+\newcommand{\D}{\scalebox{0.7}[1]{$\varDelta$}\hspace{0.1em}}
+%\newcommand{\wfrac}[2]{\frac{#1}{\,#2\,}}
+%\newcommand{\wdfrac}[2]{\dfrac{#1}{\,#2\,}}
+\newcommand{\const}{\mathrm{const.}}
+\newcommand{\mytag}[1]{\eqno{\mbox{\ajMaru{#1}}}}
+\newcommand{\gyoukan}[1]{\qq{\textcolor{gray}{#1}}}
+%
+\makeatletter
+\let\@msm@th@eqref\eqref
+\newcommand{\Eqref}[2]{%
+  \begingroup
+  \leavevmode
+  \color{#1}%
+  \hypersetup{linkcolor=#1}%
+  \@msm@th@eqref{#2}%
+  \endgroup
+}
+\makeatother
+%
+% 下線（文字コメント）
+\newcommand{\ucomment}[2]{%
+   \textcolor{gray}{%
+      \underset{%
+         \text{#2}%
+      }{%
+         \underline{%
+            \textcolor{white}{%
+               \underline{%
+                  \textcolor{black}{#1}%
+               }%
+            }%
+         }%
+      }%
+   }%
+}
+
+
+\newcommand{\BackToTheToc}{\vspace{0.5\baselineskip}\hfill\hyperlink{targetofBackToTheToc}{\textcolor{gray}{\ajUpBArrow\, 目次へ戻る}}}
+\renewcommand{\emph}[1]{\textsf{\textgt{#1}}}
