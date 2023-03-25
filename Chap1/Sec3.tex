@@ -1,0 +1,108 @@
+\section{静水力学}
+一様重力場中の静止流体（$\v=\vec{0}$）に対しては，Euler方程式\eqref{eq2.4:一様重力場中のEuler方程式}は
+\begin{equation}\label{eq3.1:静水圧平衡}
+    \Grad p = \rho \vec{g}.
+\end{equation}
+これは静水圧平衡を表しており，特に外力がないときは$p=\const$，つまり圧力は一様となる．
+
+まず初めに，流体の圧縮性が無視でき，$\rho$が一様と仮定しよう．$z$軸を鉛直上向きにとると，\eqref{eq3.1:静水圧平衡}は
+\[
+    \pdv{p}{x} = \pdv{p}{y} = 0, \quad \pdv{p}{z} = -\rho g
+    \qquad\yueni p = -\rho gz + \const
+\]
+静止流体が高さ$h$の自由表面をもち，その表面上で圧力が外圧$p_0$に等しいなら，表面は$z=h$という水平面で
+$p_0 = -\rho gh + \const$となる．2式を辺々引いて
+\begin{equation}
+    p = p_0 -\rho g(z-h).
+\end{equation}
+
+流体の体積が大きい等，$\rho$が一様と仮定できない場合を考える（大気など）．
+系が力学的に平衡であるだけでなく，熱力学的にも平衡だと仮定しよう．
+$ \mathcal{G} = \varepsilon -Ts + \dfrac{p}{\rho}$
+を単位質量あたりのGibbsの自由エネルギーとすると，熱力学的平衡であれば温度が一定であるから
+\[
+    d \mathcal{G} = -sdT + \frac{1}{\rho}dp = \frac{1}{\rho}dp
+    \qquad\yueni \frac{1}{\rho}\Grad p = \Grad \mathcal{G}.
+\]
+また，定ベクトル$\vec{g}$は$-z$方向を向いているから$\vec{g} = -\Grad(gz)$となる．
+よって\eqref{eq3.1:静水圧平衡}は$\Grad(\mathcal{G}+gz)=0$となり，流体全体にわたって
+\begin{equation}
+    \mathcal{G}+gz = \const
+\end{equation}
+この「（Gibbsの自由エネルギー）＋（外力のポテンシャルエネルギー）＝（一定）」という式は，
+統計力学において，外力場中にある系が熱力学的に平衡である条件として知られている（『統計物理学』\S~25参照）．
+
+
+重力場中で力学的平衡にある流体では，圧力$p$は高度$z$のみの関数としてよい（もし同じ高度で圧力が異なるならば，運動が生じる）．
+\eqref{eq3.1:静水圧平衡}より，$\rho$も$z$のみの関数となり
+\begin{equation}\label{eq3.4:1次元の静水圧平衡}
+    \rho = - \frac{1}{g} \dv{p}{z}.
+\end{equation}
+$\rho,p$から決まる$T$もまた，$z$のみの関数となる（もし同じ高度で温度が異なるならば，平衡ではない）．
+
+最後に，自己重力によって形を保っている流体（例えば恒星）の平衡の式を導こう．
+万有引力のポテンシャル$\phi$は次の微分方程式を満たす；
+\begin{equation}
+    \Laplacian\phi = 4\pi G\rho.
+\end{equation}
+$\vec{g} = -\Grad\phi$であるから，\eqref{eq3.1:静水圧平衡}は
+\[
+    \frac{1}{\rho} \Grad p = -\Grad \phi.
+\]
+両辺のdivを取り
+\begin{equation}\label{eq3.6:自己重力系の静水圧平衡}
+    \yueni \Div\pqty{\frac{1}{\rho} \Grad p} = -\Laplacian\phi = -4\pi G\rho.
+\end{equation}
+なお，ここでは力学的平衡のみを考えているのであって，熱力学的平衡の成立を仮定していないことに注意．
+
+もし天体が自転していなければ，平衡状態では球形となり，$\rho,p$は球対称となるだろう．
+球座標系での\eqref{eq3.6:自己重力系の静水圧平衡}は
+\begin{equation}\label{eq3.7:球天体での静水圧平衡}
+    \frac{1}{r^2}\dv{r} \pqty{ \frac{r^2}{\rho} \dv{p}{r} } = -4\pi G\rho.
+\end{equation}
+\begin{details}
+\nazenara
+球座標系でのgrad, divの表現
+\[
+    \Grad f = \pdv{f}{r} \Unit{r} + \frac{1}{r} \pdv{f}{\theta} \Unit{\theta} + \frac{1}{r\sin\theta} \pdv{f}{\varphi} \Unit{\varphi}
+\]
+\[
+    \Div\vec{A} = \frac{1}{r^2} \pdv{r}(r^2A_r) + \frac{1}{r\sin\theta} \pqty{ \pdv{\theta}(\sin\theta A_\theta) + \pdv{A_\varphi}{\varphi} } 
+\]
+で$\partial/\partial\theta=\partial/\partial\varphi=0$とした式から明らかである．なお$\Unit{}$は単位ベクトルを表すものとする．
+\end{details}
+
+
+
+\subsubsection*{\spade\spade Lane-Emden方程式}
+圧力が密度だけの関数で$p = K \rho^{1+1/n}$と与えられているとする（このような流体はポリトロープであるという．$n$はポリトロピック指数と呼ばれる）．
+このとき，\eqref{eq3.7:球天体での静水圧平衡}は$\rho$だけの微分方程式になり，Lane-Emden方程式と呼ばれる；
+\[
+    \frac{1}{\xi^2} \dv{\xi} \pqty{ \xi^2 \dv{\theta}{\xi} } = -\theta^n.
+    \mytag{1}
+\]
+ここで，$\xi\equiv r/a$は無次元化した半径で$a^2 = \dfrac{(n+1)p_c}{4\pi G{\rho_c}^2}$，
+$\theta$は$\rho=\rho_c \theta^n$により無次元化した密度，
+$p_c, \rho_c$は中心での圧力と密度である．
+ふつう，
+\begin{itemize}
+    \item $\theta(0)=1$（中心で$\rho=\rho_c$）
+    \item $\eval{\ddv{\theta}{\xi}}_{\xi=0}=0$（中心で圧力・密度勾配がない）
+\end{itemize}
+という境界条件を付ける．
+
+\ajMaru{1}の導出は次の通り．
+\eqref{eq3.7:球天体での静水圧平衡}の両辺を$4\pi G\rho_c$で割り
+\begin{align*}
+    - \theta^n &= \frac{1}{4\pi G\rho_c} \frac{1}{r^2}\dv{r} \pqty{ \frac{r^2}{\rho} \dv{p}{r} } \\
+    &= \frac{1}{4\pi G\rho_c} \frac{1}{(a\xi)^2} \dv{(a\xi)} \bqty{ \frac{(a\xi)^2}{\rho_c \theta^n} \dv{(a\xi)} K(\rho_c \theta^n)^{1+1/n} } \\
+    &= \frac{1}{4\pi G\rho_c} \cdot \frac{K{\rho_c}^{1+1/n}}{a^2\rho_c} \cdot \frac{1}{\xi^2} \dv{\xi} \pqty{ \frac{\xi^2}{\theta^n} \dv{\theta^{n+1}}{\xi} } \\
+    &= \frac{K{\rho_c}^{1/n}}{4\pi G\rho_c} \cdot \frac{1}{a^2} \cdot \frac{1}{\xi^2} \dv{\xi} \pqty{ \frac{\xi^2}{\cancel{\theta^n}} (n+1) \cancel{\theta^n} \dv{\theta}{\xi} } \\
+    &= \underline{ \frac{(n+1)K{\rho_c}^{1/n}}{4\pi G\rho_c} } \cdot \frac{1}{a^2} \cdot \frac{1}{\xi^2} \dv{\xi} \pqty{ \xi^2 \dv{\theta}{\xi} } .
+\end{align*}
+$p_c = K {\rho_c}^{1+1/n}$より$K{\rho_c}^{1/n} = p_c/\rho_c$であるから，下線部は$a^2$に等しい．よって\ajMaru{1}が成り立つ．
+
+
+
+
+\BackToTheToc

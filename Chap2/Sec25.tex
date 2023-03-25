@@ -1,0 +1,86 @@
+\section{重力波の減衰}
+
+前節と同様の議論は，流体の自由表面付近の速度分布についても当てはまる．
+重力波のような，表面付近での振動現象について考えよう．
+長さスケール$l$の代わりに波長$\lambda$をとった場合，条件\eqref{eq24.11:δ<<lで移流項が無視できる条件}が成り立つと仮定する；
+\begin{equation}
+    \lambda^2\omega \gg \nu, \quad a \ll \lambda.
+\end{equation}
+$a$は波の振幅，$\omega$はその振動数である．
+前節と同様に，\eqref{eq24.11:δ<<lで移流項が無視できる条件}が成り立つ場合には，表面の薄い層でのみ流れは回転的であり，残りの領域では（理想流体と同様）ポテンシャル流とみなすことができる．
+
+
+粘性流体の運動は，自由表面での境界条件\eqref{eq15.16:粘性流体の境界条件（自由表面）}（$\sigma_{ij}n_j=0$）を満たさなければならない．
+これは，速度の空間微分を組み合わせたものが0となることを要求するが，理想流体の運動方程式の解はこれを満足しない（表面で$p=p_0$という条件のみのため）．
+よって前節で$v_y$について議論したのと同様に，表面の薄い層では，速度微分が急速に0に近づくと言うことができる
+（固体表面付近でそうであったように，大きな速度勾配が生じるわけではないことに注意しよう）．
+
+
+
+さて，重力波のエネルギー散逸を計算しよう．
+散逸は，運動エネルギーだけでなく，重力のポテンシャルエネルギーを合わせた力学的エネルギー$E_\mathrm{mech}$について考えなければならない．
+しかし重力場が存在するかどうかは，流体の内部摩擦によるエネルギー散逸とは明らかに無関係である．
+よって$\dot{E}_\mathrm{mech}$は\eqref{eq16.3:非圧縮性流体のエネルギー散逸}で与えられる：
+\[
+    \dot{E}_\mathrm{mech} = -\frac{1}{2} \eta \int \left( \pdv{v_i}{x_j} + \pdv{v_j}{x_i} \right)^2 \dV.
+\]
+この積分を計算する際，表面付近の回転的流れの領域は小さく，そこでの速度勾配も大きくないために，（固体が振動していたときとは異なり）この領域の寄与を無視してよいことに注意しよう．
+言いかえれば，全流体が理想流体のポテンシャル流であるとみなして積分を行うことができる．
+理想流体中の重力波については\S~12で述べた．ポテンシャル流と仮定しているから
+$\dpdv{v_i}{x_j} = \dpdv{\phi}{x_j}{x_i} = \dpdv{v_j}{x_i}$であり
+\[
+    \dot{E}_\mathrm{mech} = -2\eta \int \left( \pdv{\phi}{x_i}{x_j} \right)^2 \dV
+\]
+となる．
+鉛直上向きに$z$軸をとれば，\S~12よりポテンシャルの形は
+\[
+    \phi = \phi_0 \cos(kx-\omega t+ \alpha) e^{kz}
+\]
+であり，0でない（空間）2階微分は
+\[
+    \pdv[2]{\phi}{x} = -k^2 \phi_0 \cos(\;)e^{kz}, \quad
+    \pdv[2]{\phi}{z} = k^2 \phi_0 \cos(\;)e^{kz}, \quad
+    \pdv{\phi}{x}{z} = -k^2 \phi_0 \sin(\;)e^{kz}
+\]
+である．
+
+我々が興味があるのは，各瞬間でのエネルギー散逸ではなく，その時間平均である．
+$\sin^2$と$\cos^2$の時間平均が等しいことに注意すると
+\begin{align}
+    \overline{\dot{E}_\mathrm{mech}} &= -2\eta \int \overline{ \left( \pdv{\phi}{x_i}{x_j} \right)^2 } \dV \notag \\
+    &= -2\eta \int \left\{ \overline{\left(\pdv[2]{\phi}{x}\right)^2} + 2 \overline{\left(\pdv{\phi}{x}{z}\right)^2} + \overline{\left(\pdv[2]{\phi}{z}\right)^2} \right\} \dV \notag \\
+    &= -2\eta \int 4k^4 {\phi_0}^2 \overline{\cos^2(\;)} e^{2kz} \dV \notag \\
+    &= -8\eta k^4 \int \overline{\phi^2} \dV \label{eq25.2:重力波での，力学的エネルギー散逸の時間平均}
+\end{align}
+となる．
+
+
+次に，力学的エネルギー$E_\mathrm{mech}$自身を計算しよう．
+そのために，微小振動を行っている系では，運動エネルギーの平均とポテンシャルエネルギーの平均が等しいという，力学の原理を用いよう：
+\begin{align}
+    \overline{E_\mathrm{mech}} &= 2 \cdot \frac{1}{2}\rho \int \overline{ v^2 } \dV \notag \\
+    &= \rho \int \overline{\left(\pdv{\phi}{x_i}\right)^2} \dV \notag \\
+    &= 2\rho k^2 \int \overline{\phi^2} \dV \label{eq25.3:重力波での，力学的エネルギーの時間平均}
+\end{align}
+波動が時間とともにどのように減衰するかは，\emph{減衰係数}$\gamma$で表される．
+波の振幅が$e^{-\gamma t}$で減衰するとすれば，エネルギーは$\overline{E_\mathrm{mech}} = A e^{-2\gamma t}$で減衰する（$A$は定数）．両辺を時間微分し（平均操作と入れ替えれば）
+$-\overline{\dot{E}_\mathrm{mech}} = 2\gamma A e^{-2\gamma t}$，よって
+\begin{equation}
+    \gamma \equiv \frac{\left|\overline{\dot{E}_\mathrm{mech}}\right|}{2\overline{E_\mathrm{mech}}}
+\end{equation}
+で定義すればよい．
+
+
+重力波の場合には，\eqref{eq25.2:重力波での，力学的エネルギー散逸の時間平均},\eqref{eq25.3:重力波での，力学的エネルギーの時間平均}から
+\begin{equation}
+    \gamma = 2\nu k^2
+\end{equation}
+を得る．
+あるいは分散関係(12.7)から
+\begin{equation}
+    \gamma = \frac{2\nu \omega^4}{g^2}
+\end{equation}
+となる．
+
+
+\BackToTheToc

@@ -1,0 +1,239 @@
+\section{粘性流体の運動方程式}
+
+流体の運動中に生じるエネルギーの散逸が，流体の運動にどのような影響を及ぼすか考えよう．
+エネルギーの散逸過程は，熱力学的に不可逆な運動；内部摩擦（粘性）や熱伝導によって生じる．
+
+
+
+粘性流体の方程式系を導きたい．
+導き方から明らかなように，連続の式はどのような流体に対しても成立する．
+一方で，運動方程式とエネルギー方程式
+\footnote{エネルギー方程式については\S~49で議論する．}
+は書き改めなければならない．
+
+
+\subsection*{粘性応力テンソル}
+
+Euler方程式は，運動量フラックス密度テンソルを$\varPi_{ij}$として
+\[
+    \pdv{t} (\rho v_i) = - \pdv{\varPi_{ij}}{x_j}
+\]
+と書ける．(7.2)の運動量フラックスは，流体粒子の運動と圧力による，運動量の可逆な輸送を表している．
+粘性流体の運動方程式を得るためには，(7.2)に不可逆な運動量の輸送を表す項$-\sigma'_{ij}$を加えればよい．
+粘性流体の運動量フラックス密度テンソルは
+\begin{equation}
+    \varPi_{ij} = p \delta_{ij} + \rho v_iv_j -\sigma'_{ij}
+    = -\sigma_{ij} + \rho v_iv_j
+\end{equation}
+と表される．
+テンソル
+\begin{equation}
+    \sigma_{ij} = -p \delta_{ij} + \sigma'_{ij}
+\end{equation}
+は\emph{応力テンソル}，$\sigma'_{ij}$は\emph{粘性応力テンソル}と呼ばれる．
+$\sigma_{ij}$は，運動する流体によって直接運ばれる運動量（$\rho v_iv_j$）以外の運動量フラックスを表している．
+
+
+
+$\sigma'_{ij}$の一般的な形を導こう．
+内部摩擦は，流体粒子の速度が異なるために，流体の各部分の間に相対運動が起こる場合にのみ生じる．
+つまり$\sigma'_{ij}$は速度の空間微分の関数でなければならない．
+ここでは，速度勾配が小さく，$\sigma'_{ij}$が速度の1階微分の線型結合で表される流体（ニュートン流体）を考えることにしよう．
+この条件を満たすテンソルの一般的な形は
+\[
+    \sigma'_{ij} = a \pdv{v_i}{x_j} + a' \pdv{v_j}{x_i} + b \pdv{v_k}{x_k} \delta_{ij}
+    \mytag{1}
+\]
+である（定数項は，$-p \delta_{ij}$として既に応力テンソルに組み込まれている）．
+
+
+
+流体が一様な角速度で回転している場合，内部摩擦は生じず$\sigma'_{ij}=0$でなければならない．
+このことから，係数についての制約条件を得ることができる．
+角速度ベクトルを$\vec{\Omega}$とすると，速度は$\v = \vec{\Omega}\times\vec{r}$または
+$v_i = \varepsilon_{ilm}\Omega_lx_m$となる（$\varepsilon_{ilm}$はEddingtonのイプシロン）．
+これを\ajMaru{1}に代入し
+\begin{align*}
+    \sigma'_{ij} &= a \pdv{x_j}(\varepsilon_{ilm}\Omega_lx_m) + a' \pdv{x_i}(\varepsilon_{jlm}\Omega_lx_m) + b \pdv{x_k}(\varepsilon_{klm}\Omega_lx_m) \delta_{ij} \\
+    &= a \varepsilon_{ilm}\Omega_l\delta_{jm} + a' \varepsilon_{jlm}\Omega_l\delta_{im} + b \varepsilon_{klm}\Omega_l\delta_{km}\delta_{ij} \\
+    &= \pqty{ a \varepsilon_{ilj} + a' \varepsilon_{jli} + b \varepsilon_{klk}\delta_{ij} } \Omega_l .
+\end{align*}
+Eddingtonのイプシロンは添字を1組交換すると符号が反転するから$\varepsilon_{jli} = -\varepsilon_{ilj}$であり，
+添字に重複があると0になるから$\varepsilon_{klk}=0$である．よって
+\[
+    \sigma'_{ij} = (a-a') \varepsilon_{ilj} \Omega_l = 0
+    \qquad\yueni a = a' .
+\]
+
+以上より，$\sigma'_{ij}$の一般的な形は
+\[
+    \sigma'_{ij} = a \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} } + b \pdv{v_k}{x_k} \delta_{ij}
+\]
+となる．あるいは，$a,b$を他の定数で表した次の形が便利である．
+\begin{equation}\label{eq15.3:粘性応力テンソルの具体形}
+    \sigma'_{ij} = \eta \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} - \frac{2}{3}\pdv{v_k}{x_k} \delta_{ij} } + \zeta \pdv{v_k}{x_k} \delta_{ij}
+\end{equation}
+$(\,)$内を$i,j$について縮約すると0になる．
+$\eta,\zeta$は速度に無関係の定数で，$\eta$は\emph{粘性率}，$\zeta$は\emph{第２粘性率}と呼ばれる．
+\S~\ref{sec:16}，\S~49で見るように，これらは正である．
+\begin{equation}
+    \eta > 0, \quad \zeta > 0.
+\end{equation}
+
+
+
+\subsection*{粘性流体の運動方程式}
+さて，粘性流体の運動方程式を得よう．
+$\varPi_{ij}$に$-\sigma'_{ij}$を加えたことに対応して，Euler方程式に$\dpdv{\sigma'_{ij}}{x_j}$を加えればよいことがわかる．
+よって
+\begin{align}
+    \rho \pqty{ \pdv{v_i}{t} + v_j \pdv{v_i}{x_j} } &= - \pdv{p}{x_i} + \pdv{\sigma'_{ij}}{x_j} \notag \\
+    &= - \pdv{p}{x_i} + \pdv{x_j} \bqty{ \eta \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} - \frac{2}{3}\pdv{v_k}{x_k} \delta_{ij} } } + \pdv{x_i} \pqty{ \zeta \pdv{v_k}{x_k} }.
+\end{align}
+これは粘性流体の運動方程式の最も一般的な形である．
+$\eta,\zeta$は一般に温度と圧力の関数であり，流体中で一様とは限らないから，微分の外に出すことはできない．
+しかし多くの場合には，$\eta,\zeta$は定数とみなしてよい．その場合には
+\begin{align*}
+    \pdv{\sigma'_{ij}}{x_j} &= \eta \bqty{ \pdv{v_i}{x_j}{x_j} + \pdv{x_i} \pqty{\pdv{v_j}{x_j}} - \frac{2}{3}\pdv{x_i} \pqty{\pdv{v_k}{x_k}} } + \zeta \pdv{x_i} \pqty{\pdv{v_k}{x_k}} \\
+    &= \eta \Laplacian v_i + \pqty{\zeta+\frac{1}{3}\eta} \pdv{x_i} (\Div\v) .
+\end{align*}
+よって粘性流体の運動方程式をベクトル形式で表すと
+\begin{equation}
+    \rho \bqty{ \pdv{\v}{t} + (\v\cdot\Grad)\v } = -\Grad p + \eta\Laplacian\v + \pqty{\zeta+\frac{1}{3}\eta} \Grad \Div\v .
+\end{equation}
+この式は\emph{Navier-Stokes方程式}と呼ばれている．
+
+
+粘性流体を論じる際，ほとんどの場合非圧縮であると仮定してよい．
+その場合$\Div\v=0$であるから
+\begin{equation}\label{eq15.7:非圧縮性流体のNS方程式}
+    \pdv{\v}{t} + (\v\cdot\Grad)\v  = - \frac{1}{\rho}\Grad p + \frac{\eta}{\rho} \Laplacian\v 
+\end{equation}
+を得る．
+\eqref{eq15.3:粘性応力テンソルの具体形}で$\Div\v=0$とおくことにより，非圧縮性流体での応力テンソルは
+\begin{equation}\label{eq15.8:非圧縮性流体での応力テンソル}
+    \sigma_{ij} = -p \delta_{ij} + \eta \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} }
+\end{equation}
+と簡単な形に書ける．
+
+
+非圧縮性流体では，粘性はただ1つの係数$\eta$で表される．
+このため，粘性率といえばふつう$\eta$のことを指す．
+また，
+\begin{equation}
+    \nu = \frac{\eta}{\rho}
+\end{equation}
+は\emph{動粘性率}と呼ばれる．
+ある温度での気体の粘性率$\eta$は圧力によらない
+\footnote{これは気体分子運動論の結果である．『物理的運動学』\S~8参照．}
+が，動粘性率$\nu$は圧力に反比例する．
+
+
+
+
+Euler方程式で行ったのと同様にして，Navier-Stokes方程式から圧力の項を除くことができる．
+\eqref{eq15.7:非圧縮性流体のNS方程式}の両辺のrotをとれば，理想流体での(2.11)に対応して
+\[
+    \pdv{t}(\Rot\v) = \Rot(\v \times \Rot\v) + \nu\Laplacian(\Rot\v) .
+\]
+流体が非圧縮であるから，右辺第1項を展開して$\Div\v=0$を用いると
+\[
+    \Rot(\v \times \Rot\v)
+    = (\Rot\v \cdot \Grad)\v - (\v\cdot\Grad)(\Rot\v) + \cancel{(\Div\Rot\v)} \v - \cancel{(\Div\v)} (\Rot\v) ,
+\]
+\begin{equation}
+    \yueni \pdv{t}(\Rot\v) + (\v\cdot\Grad)(\Rot\v) - (\Rot\v \cdot \Grad)\v = \nu\Laplacian(\Rot\v) .
+\end{equation}
+
+\spade
+\eqref{eq15.7:非圧縮性流体のNS方程式}の両辺のdivをとると
+\[
+    \Div[ (\v\cdot\Grad)\v ] = -\frac{1}{\rho} \Laplacian p
+\]
+\[
+    \yueni \Laplacian p = -\rho \pdv{x_i} \pqty{ v_j \pdv{v_i}{x_j} }
+    = -\rho \bqty{ \pdv{v_j}{x_i} \pdv{v_i}{x_j} + v_j \pdv{x_j} \cancel{(\Div\v)} }
+\]
+また
+$ \dpdv{(v_iv_j)}{x_i}{x_j} = \dpdv{x_i} \pqty{ \dpdv{v_i}{x_j} v_j + v_i \cancel{\dpdv{v_j}{x_j}} } $
+でもあるから，結局
+\begin{equation}
+    \Laplacian p = -\rho \pdv{v_i}{x_j} \pdv{v_j}{x_i} = -\rho \pdv{(v_iv_j)}{x_i}{x_j}
+\end{equation}
+この式は，速度分布が分かっているときに圧力を求めるためのPoisson方程式である．
+
+
+
+非圧縮性粘性流体の2次元流で，流線関数$\psi(x,y)$が満たすべき方程式を書き下そう．
+(10.10)の導き方から分かるように，(10.10)の左辺に$\nu\Laplacian(\Rot\v)=\nu\Laplacian(-\Laplacian\psi)$を加え
+\begin{equation}
+    \pdv{t}(\Laplacian\psi) - \pdv{\psi}{x} \pdv{y}(\Laplacian\psi) + \pdv{\psi}{y} \pdv{x}(\Laplacian\psi) -\nu\Laplacian(\Laplacian\psi) = 0 .
+\end{equation}
+
+
+\subsection*{粘性流体の運動方程式の境界条件}
+
+さて，粘性流体の運動方程式の境界条件を考えよう．
+粘性流体と固体表面の間には常に分子間引力が働いており，表面に接する流体の層は表面に密着して静止状態にある．
+よって境界条件は，固定された物体の表面で流体の速度が0となることである．
+\begin{equation}
+    \v = \vec{0}
+\end{equation}
+理想流体では法線速度$v_n$が0となることが条件であったが，粘性流体では，法線速度と接線速度の両方が0となることが条件である．
+\begin{details}
+一般に，Euler方程式に接線速度が0という条件を加えてしまうと，解が存在し得ないことに注意しよう．
+これはEuler方程式が1階の偏微分方程式であり，$v_n=0$以外の境界条件を課すことは許されないためである．
+\end{details}
+\noindent
+また，物体表面が動く場合には，$\v$は表面の速度に等しくなければならない．
+
+
+
+粘性流体中にある物体表面に働く力を書き下すことは容易である．
+表面の面積要素$\dS$に働く力は，この要素を通り抜ける運動量フラックスに等しく
+\footnote{これは各要素の静止座標系に乗って考えた場合に限る．}
+\[
+    \varPi_{ij}dS_j = (\rho v_iv_j - \sigma_{ij}) dS_j .
+\]
+$\vec{n}$を法線ベクトルとすると$dS_j=n_j dS$，また表面では$\v=\vec{0}$である．
+よって表面の単位面積に働く力$\vec{P}$は
+\begin{equation}\label{eq15.14:粘性流体中の物体表面に働く力}
+    P_i = -\sigma_{ij} n_j = p n_i - \sigma'_{ij} n_j .
+\end{equation}
+第1項は通常の圧力，第2項は粘性により表面に働く摩擦力である．
+なお\eqref{eq15.14:粘性流体中の物体表面に働く力}の$\vec{n}$は流体から見て外向きを正とするベクトルであるから，
+固体から見て内向きが正であることに注意．
+
+
+
+固体以外の境界条件に触れておこう．
+互いに混じり合わない2つの流体が接している場合，境界面で成り立つ条件は，
+流体の速度が等しいこと
+\[
+    \v^{(1)} = \v^{(2)}
+\]
+と，もう一方の流体に働く力の大きさが等しく向きが逆となること
+\[
+    \sigma_{1,ij}n_{1,j} + \sigma_{2,ij}n_{2,j} = 0
+\]
+である（添字1,2は2つの流体を表す）．
+$\vec{n}_1,\vec{n}_2$は逆向きであるから，$\vec{n}\equiv\vec{n}_1=-\vec{n}_2$とおくと
+\begin{equation}
+    \sigma_{1,ij}n_j = \sigma_{2,ij}n_j .
+\end{equation}
+また，自由表面で満たされるべき条件は
+\begin{equation}\label{eq15.16:粘性流体の境界条件（自由表面）}
+    \sigma_{ij}n_j = -p n_i + \sigma'_{ij} n_j = 0
+\end{equation}
+である．
+
+
+\begin{details}
+曲線座標（特に円筒座標，球座標）におけるNavier-Stokes方程式について本文を参照のこと．
+ここでは導出を省略し，先へ進むことにする．
+\end{details}
+
+
+
+
+\BackToTheToc

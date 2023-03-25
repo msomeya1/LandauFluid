@@ -1,0 +1,510 @@
+\section{管を通る流れ}
+
+ここでは，非圧縮性粘性流体の簡単な定常流を扱おう．
+
+
+\subsection*{Couette流}
+流体が2つの板に挟まれていて，上の板は下の板に対して一定の相対速度$\vec{u}$で動いているとする．
+$x$軸を$\vec{u}$の方向にとり，下の板を$xz$平面（$y=0$），上の板を$y=h$とする．
+このとき，流れは$x$方向にのみ存在し，全ての量は$y$のみに依存することは明らかである．
+定常流であるから，\eqref{eq15.7:非圧縮性流体のNS方程式}より
+\[
+    \begin{cases}
+        0 = \ddv[2]{v}{y} \\[7pt]
+        0 = \ddv{p}{y}
+    \end{cases}
+\]
+となる（$\Div\v=0$は自動的に満たされている）．
+第2式より$p=\const$であり，第1式より$v=ay+b$と書ける．
+境界条件は$y=0$で$v=0$，$y=h$で$v=u$であるから
+\begin{equation}\label{eq17.1:平行平板間のCouette流}
+    v(y) = u\frac{y}{h}
+\end{equation}
+となり，流速分布は線形である．平均流速は
+\begin{equation}
+    \overline{v} = \frac{1}{h} \int_0^h v(y)\; dy = \frac{u}{h^2} \frac{h^2}{2} = \frac{1}{2}u .
+\end{equation}
+粘性応力テンソル$\sigma_{ij}'$のうち0でないものは
+\[
+    \sigma_{xy}' = \eta \dv{v}{y} = \eta\frac{u}{h}
+\]
+である．よって\eqref{eq15.14:粘性流体中の物体表面に働く力}より，板に働く力の
+法線成分（$y$成分）は一定値$p$であり，
+接線成分（$x$成分）は
+\begin{equation}
+    y=0 \;\text{で}\; \sigma_{xy} = \sigma_{xy}' = \eta\frac{u}{h},
+\end{equation}
+\[
+    y=h \;\text{で}\; -\eta\frac{u}{h}
+\]
+となる．
+
+\begin{details}
+\eqref{eq15.14:粘性流体中の物体表面に働く力}によれば，固体が流体から受ける力の$i$成分は，
+$\vec{n}$を\underline{固体表面から外へ向く}法線ベクトルとして$\sigma_{ij}n_j$と表され，今の場合
+\[
+    \sigma_{ij} = -p \delta_{ij} + \sigma_{ij}'
+    = \pmqty{
+        -p & \eta u/h & 0 \\
+        \eta u/h & -p & 0 \\
+        0 & 0 & -p 
+    }
+\]
+である．
+$y=0$の板にとっては$\vec{n}=\pmqty{0 \\ 1 \\ 0}$であるから，力の$x$成分は$\eta u/h$，$y$成分は$-p$であり，
+$y=h$の板にとっては$\vec{n}=\pmqty{0 \\ -1 \\ 0}$であるから，力の$x$成分は$-\eta u/h$，$y$成分は$p$である．
+\end{details}
+
+
+\subsection*{圧力勾配により駆動される流れ}
+
+次に，2つの固定された板に挟まれた流体が，圧力勾配によって流れている場合を考えよう．
+
+座標系は前と同様とし，流れは$x$方向とする．
+Navier-Stokes方程式は
+\[
+    \begin{cases}
+        0 = - \dpdv{p}{x} + \eta \dpdv[2]{v}{y} \\[7pt]
+        0 = \dpdv{p}{y}
+    \end{cases} .
+\]
+第2式より圧力は$y$によらず，$x$のみの関数である（すなわち圧力は上下方向に一様で，流れの方向にのみ変化する）．
+すると$\dpdv{p}{x}$は$x$のみの関数，$\dpdv[2]{v}{y}$は$y$のみの関数であるから，両者は定数でなければならない．
+つまり
+\[
+    \dv{p}{x} = \const
+\]
+であり，圧力は$x$に比例する．
+管両端の圧力差を$\D p$，管の長さを$l$として$\ddv{p}{x}=-\dfrac{\D p}{l}\;(<0)$と書くことにすると，第1式は
+\[
+    \dv[2]{v}{y} = -\frac{\D p}{\eta l}.
+\]
+$y=0,h$で$v=0$の条件から$v(y)$を求めると
+\begin{equation}
+    v(y) = \frac{\D p}{2\eta l} y(h-y) .
+\end{equation}
+となり，速度分布は$y=\dfrac{1}{2}h$で極値
+\[
+    v_* = \frac{\D p h^2}{8\eta l}
+\]
+をとる放物線型である．
+また平均速度は
+\begin{equation}\label{eq17.5:圧力勾配により駆動される流れの平均流速}
+    \overline{v} = \frac{1}{h} \int_0^h v(y)\; dy
+    = \frac{1}{h} \cdot \frac{\D p}{2\eta l} \cdot \frac{h^3}{6} = \frac{\D p h^2}{12\eta l}
+\end{equation}
+であり，$v_* = \dfrac{3}{2}\overline{v}$となることが分かる．
+さらに，下の板に働く摩擦力は
+\begin{equation}
+    \eval{\sigma_{xy}'}_{y=0} = \eta \eval{\dv{v}{y}}_{y=0} 
+    = \frac{\D p}{2l} (h-2y)_{y=0} = \frac{\D p h}{2l} 
+\end{equation}
+であり，上の板に働く摩擦力も同じである．
+
+
+\subsection*{Hagen-Poiseuille流}
+
+最後に，任意の形の断面をもつ管の中の定常流を考えよう．但し，断面の形は管に沿って変わらないとする．
+管の軸方向に$x$軸をとると，流れは$x$軸に平行で，$y,z$のみの関数である．
+このとき連続の式は自動的に満たされる．
+また，Navier-Stokes方程式の$y,z$成分$\dpdv{p}{y}=\dpdv{p}{z}=0$より，圧力は管の断面内では一様で，$x$方向のみに変化する．
+\eqref{eq15.7:非圧縮性流体のNS方程式}の$x$成分は
+\begin{equation}\label{eq17.7:管の中の定常流の方程式}
+    \pdv[2]{v}{y} + \pdv[2]{v}{z} = \frac{1}{\eta} \dv{p}{x} = -\frac{\D p}{\eta l}.
+\end{equation}
+よって流速分布$v(y,z)$は，$\Laplacian v=\const$という2次元Poisson方程式を，管断面の周上で$v=0$という条件で解くことで求められる．
+
+
+
+
+半径$R$の円形断面の管について，\eqref{eq17.7:管の中の定常流の方程式}を解こう．
+円の中心を原点とする極座標をとると，対称性から$v=v(r)$であり，極座標でのラプラシアンの表式から
+\[
+    \frac{1}{r} \dv{r} \pqty{r\dv{v}{r}} = -\frac{\D p}{\eta l}
+\]
+\[
+    \dv{r} \pqty{r\dv{v}{r}} = -\frac{\D p}{\eta l}r
+\]
+\[
+    r\dv{v}{r} = -\frac{\D p}{2\eta l}r^2 + a
+\]
+\[
+    \dv{v}{r} = -\frac{\D p}{2\eta l}r + \frac{a}{r}
+\]
+\begin{equation}\label{eq17.8:管の中の流速（極座標での一般形）}
+    v(r) = -\frac{\D p}{4\eta l}r^2 + a \log r + b.
+\end{equation}
+管の中心で速度が有限の値をもつためには，$a=0$でなければならない．
+また，$r=R$で$v=0$という条件から$b$を決めると
+\begin{equation}\label{eq17.9:円形断面の管の中の流速}
+    v(r) = \frac{\D p}{4\eta l} (R^2-r^2)
+\end{equation}
+となり，この場合の流速分布も放物線的である．
+
+
+管の断面を通って毎秒運ばれる流体の質量$Q$（\emph{流量}）を求めよう．
+半径$r \sim r+dr$のリングを通る流量は$dQ \simeq \rho \cdot 2\pi rdr \cdot v$で近似できるから
+\[
+    Q = 2\pi\rho \int_0^R rv  \; dr
+\]
+となる．\eqref{eq17.9:円形断面の管の中の流速}を代入し
+\begin{equation}\label{eq17.10:Hagen-Poiseuilleの法則}
+    Q = 2\pi\rho \cdot \frac{\D p}{4\eta l} \int_0^R r(R^2-r^2) \; dr
+    = \frac{\pi\D p}{2\nu l} \pqty{\frac{R^4}{2}-\frac{R^4}{4}} = \frac{\pi\D p}{8\nu l} R^4
+\end{equation}
+を得る．
+つまり，流量は半径の4乗に比例する（\emph{Hagen-Poiseuilleの法則}）．
+
+なお，$r=0$での速度を$v_* = \dfrac{\D p}{4\eta l}R^2$とおくと，
+\[
+    \overline{v} = \frac{Q}{\rho\pi R^2} = \frac{\D p}{8\eta l}R^2 = \frac{1}{2} v_*
+\]
+である．
+
+
+
+\BackToTheToc
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+内径$R_1$，外径$R_2$のドーナツ状の断面をもつ管の中の流れを求めよ．
+\end{mondai}
+\begin{kaitou}
+\eqref{eq17.8:管の中の流速（極座標での一般形）}の定数$a,b$を，境界条件：$r=R_1,R_2$で$v=0$のもとで求める．
+但し計算の便宜のため，$a,b$の定義は
+\[
+    v(r) = -\frac{\D p}{4\eta l}r^2 + a \log\pqty{\frac{r}{R_2}} + b
+\]
+とする．
+\[
+    \begin{cases}
+        0 = -\dfrac{\D p}{4\eta l} {R_1}^2 + a \log\pqty{\dfrac{R_1}{R_2}} + b \\[7pt]
+        0 = -\dfrac{\D p}{4\eta l} {R_2}^2 + b \\
+    \end{cases}
+\]
+第2式より$b = \dfrac{\D p}{4\eta l}{R_2}^2$であり，これを第1式に代入して
+\[
+    a \log\pqty{\frac{R_1}{R_2}} = \frac{\D p}{4\eta l} ({R_1}^2-{R_2}^2)
+    \qquad\yueni a = \frac{\D p}{4\eta l} \cdot \frac{ {R_2}^2-{R_1}^2 }{\log(R_2/R_1)}
+\]
+となる．よって流速分布は
+\[
+    v(r) = \frac{\D p}{4\eta l} \bqty{ {R_2}^2 - r^2 + \frac{ {R_2}^2-{R_1}^2 }{\log(R_2/R_1)} \log\pqty{\frac{r}{R_2}} } .
+\]
+
+
+不定積分
+\[
+    \int r \log\pqty{\frac{r}{R_2}} \; dr = \frac{r^2}{2} \log\pqty{\frac{r}{R_2}} - \frac{r^2}{4}  
+\]
+に注意すると
+\begin{align*}
+    Q &= 2\pi\rho \int_{R_1}^{R_2} rv \; dr \\
+    &= 2\pi\rho \cdot \frac{\D p}{4\eta l} \bqty{ 
+        {R_2}^2\frac{r^2}{2} - \frac{r^4}{4} + \frac{ {R_2}^2-{R_1}^2 }{\log(R_2/R_1)} \Bqty{ \frac{r^2}{2} \log\pqty{\frac{r}{R_2}} - \frac{r^2}{4} }
+    }_{R_1}^{R_2} \\
+    &= \frac{\pi\D p}{2\nu l} \cdot \frac{1}{4} \bqty{
+        2{R_2}^2 ({R_2}^2-{R_1}^2) - ( {R_2}^4-{R_1}^4 ) + 0
+        - \frac{ {R_2}^2-{R_1}^2 }{\cancel{\log(R_2/R_1)}} \Bqty{ -2{R_1}^2 \cancel{\log\pqty{\frac{R_2}{R_1}}} }
+        - \frac{ {R_2}^2-{R_1}^2 }{\log(R_2/R_1)} ({R_2}^2-{R_1}^2)
+    } \\
+    &= \frac{\pi\D p}{8\nu l} \bqty{ {R_2}^4-{R_1}^4 - \frac{ ({R_2}^2-{R_1}^2)^2 }{\log(R_2/R_1)} }
+\end{align*}
+
+
+    
+\end{kaitou}
+
+
+
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+楕円形の断面をもつ管の中の流れを求めよ．
+\end{mondai}
+\begin{kaitou}
+楕円の形を$\dfrac{y^2}{a^2}+\dfrac{z^2}{b^2}=1$とする．
+円は楕円の特別な場合であるから，流速分布$v(y,z)$は\eqref{eq17.9:円形断面の管の中の流速}から類推して
+\[
+    v(y,z) = v_0 \pqty{1-\dfrac{y^2}{a^2}-\dfrac{z^2}{b^2}}
+\]
+と書けるはずである．
+境界条件は満たされているから，未定の定数$v_0$を\eqref{eq17.7:管の中の定常流の方程式}から求めればよい．
+\[
+    v_0 \pqty{ -\frac{2}{a^2}-\frac{2}{b^2} } = -\frac{\D p}{\eta l}
+    \qquad\yueni v_0 = \frac{\D p}{2\eta l} \cdot \frac{a^2b^2}{a^2+b^2}
+\]
+よって，
+\[
+    v(y,z) = \frac{\D p}{2\eta l} \cdot \frac{a^2b^2}{a^2+b^2} \pqty{1-\dfrac{y^2}{a^2}-\dfrac{z^2}{b^2}}
+\]
+を得る．
+
+
+流量は
+\[
+    Q = \int_{y^2/a^2+z^2/b^2\ika1} \rho v \; dydz
+\]
+で与えられる．
+これを計算するために，まず変数変換$\eta=y/a, \zeta=z/b$により$(\eta,\zeta)$座標系に移り，次に$(\eta,\zeta)$系での極座標系に移る．
+\[
+    v = v_0 (1-\eta^2-\zeta^2) = v_0(1-r^2), \quad
+    \int_{y^2/a^2+z^2/b^2\ika1} dydz = \int_0^1 ab\cdot 2\pi r \; dr
+\]
+であるから
+\[
+    Q = \rho v_0 \cdot 2\pi ab \int_0^1 r(1-r^2)dr
+    = \rho \frac{\D p}{2\eta l} \frac{a^2b^2}{a^2+b^2} \cdot 2\pi ab \cdot \frac{1}{4}
+    = \frac{\pi\D p}{4\nu l} \cdot \frac{a^3b^3}{a^2+b^2} 
+\]
+
+    
+\end{kaitou}
+
+
+
+
+
+
+
+%%%%%%%%%% 問題3 %%%%%%%%%%
+
+\begin{mondai}{}{}
+1辺の長さが$a$の正三角形の断面をもつ管の中の流れを求めよ．
+\end{mondai}
+\begin{kaitou}
+正三角形内の任意の点Pから三辺に下ろした垂線の長さを$h_1, h_2, h_3$とすると，解は
+\[
+    v = v_0 \, h_1h_2h_3
+\]
+と書ける（これは明らかに境界条件を満たす）．
+まずはこのことを証明しよう．
+
+\begin{details}
+Landau本文では幾何的に証明されているが，ここでは座標を導入する．
+\end{details}
+
+図のように座標を設定し，$\mathrm{P}(y,z)$とおく．
+三辺の方程式は$z=0, y+\dfrac{z}{\sqrt{3}}=\dfrac{a}{2}, -y+\dfrac{z}{\sqrt{3}}=\dfrac{a}{2}$であるから，点と直線の距離の公式より
+\[
+    h_1 = z, \;
+    h_2 = \frac{\sqrt{3}}{2} \pqty{ \frac{a}{2} - y - \frac{z}{\sqrt{3}} }, \;
+    h_3 = \frac{\sqrt{3}}{2} \pqty{ \frac{a}{2} + y - \frac{z}{\sqrt{3}} }
+\]
+となり，
+\[
+    v = v_0 \, h_1h_2h_3
+    = \frac{3}{4} v_0 z \bqty{ \pqty{\frac{a}{2} - \frac{z}{\sqrt{3}}}^2 -y^2 } .
+\]
+よって
+\begin{align*}
+    \pdv[2]{v}{y} + \pdv[2]{v}{z} &=
+    \frac{3}{4} v_0 \pqty{\pdv[2]{y} + \pdv[2]{z}} \, z \bqty{ \pqty{\frac{a}{2} - \frac{z}{\sqrt{3}}}^2 -y^2 } \\
+    &= \frac{3}{4} v_0 \bqty{ -2z + \pdv[2]{z} \pqty{ \frac{a^2}{4}z - \frac{a}{\sqrt{3}}z^2 + \frac{1}{3}z^3 } } \\
+    &= \frac{3}{4} v_0 \pqty{ -2z - \frac{2a}{\sqrt{3}} + 2z } = - \frac{\sqrt{3}}{2}av_0
+\end{align*}
+は定数となり\eqref{eq17.7:管の中の定常流の方程式}を満たす．
+これと$-\dfrac{\D p}{\eta l}$を比べ$v_0 = \dfrac{2}{\sqrt{3}a} \cdot \dfrac{\D p}{\eta l}$となるから
+\[
+    v = \frac{2}{\sqrt{3}a} \cdot \frac{\D p}{\eta l} h_1h_2h_3
+    = \frac{\sqrt{3}\D p}{2\eta la} z \bqty{ \pqty{\frac{a}{2} - \frac{z}{\sqrt{3}}}^2 -y^2 } .
+\]
+
+
+流量は
+\begin{align*}
+    Q &= \int \rho v \; dydz \\
+    &= \frac{\sqrt{3}\D p}{2\nu la} \int_0^{\frac{\sqrt{3}}{2}a} dz \int_{-(\frac{a}{2} - \frac{z}{\sqrt{3}})}^{\frac{a}{2} - \frac{z}{\sqrt{3}}} dy \cdot z \bqty{ \pqty{\frac{a}{2} - \frac{z}{\sqrt{3}}}^2 -y^2 } \\
+    &= \frac{\sqrt{3}\D p}{2\nu la} \int_0^{\frac{\sqrt{3}}{2}a} dz \cdot z \cdot \frac{1}{6} \Bqty{2\pqty{\frac{a}{2} - \frac{z}{\sqrt{3}}}}^3 \\
+    &= \frac{\sqrt{3}\D p}{2\nu la} \cdot \frac{1}{6} \pqty{\frac{2}{\sqrt{3}}}^3 \int_0^{\frac{\sqrt{3}}{2}a} dz \cdot z \pqty{ \frac{\sqrt{3}}{2}a-z }^3 \\
+    &= \frac{\sqrt{3}\D p}{2\nu la} \cdot \frac{1}{6} \pqty{\frac{2}{\sqrt{3}}}^3 \cdot \frac{1}{20} \pqty{\frac{\sqrt{3}}{2}a}^5
+    = \frac{\sqrt{3}\D p a^4}{320 \nu l} .
+\end{align*}
+
+\begin{details}
+※流量の積分計算では（いわゆる）1/6公式
+\[
+    -\int_{\alpha}^{\beta} (x-\alpha)(x-\beta)\; dx = \frac{1}{6}(\beta-\alpha)^3
+\]
+および1/20公式（？）
+\[
+    -\int_{\alpha}^{\beta} (x-\alpha)(x-\beta)^3\; dx = \frac{1}{20}(\beta-\alpha)^5
+\]
+を用いた．    
+\end{details}
+
+
+
+    
+\end{kaitou}
+
+
+
+
+
+
+
+%%%%%%%%%% 問題4 %%%%%%%%%%
+
+\begin{mondai}{}{}
+共通の軸をもつ2つの円筒があり，外側の円筒は半径$R_2$で静止し，内側の円筒は半径$R_1$で速度$u$で軸の方向に動いている．
+2つの円筒間の流体の運動を求めよ．
+\end{mondai}
+\begin{kaitou}
+円筒の軸を$z$軸とする円筒座標を用い，流れは$z$方向を向いているとする．
+流れは$r$のみに依存し$v_z=v(r)$と書ける．
+また，移流項が0になること，圧力が$r$のみに依存することは容易に分かる（$z$方向の圧力勾配はないという仮定であろう）．
+Navier-Stokes方程式の$z$成分から
+\[
+    \Laplacian v = \frac{1}{r} \dv{r} \pqty{ r \dv{v}{r} } = 0
+    \qquad\yueni v = a \log r + b .
+\]
+境界条件：$r=R_1$で$v=u$，$r=R_2$で$v=0$から定数$a,b$を求めよう．
+\[
+    \begin{cases}
+        u = a \log R_1 + b \\
+        0 = a \log R_2 + b \\
+    \end{cases}
+    \qquad\yueni u = a \log (R_1/R_2)
+\]
+\[
+    a = \frac{u}{\log(R_1/R_2)} \; (<0), \quad
+    b = - a\log R_2 = -u \frac{\log R_2}{\log(R_1/R_2)}
+\]
+よって
+\[
+    v = u \frac{\log(r/R_2)}{\log(R_1/R_2)}
+    = u \frac{\log(R_2/r)}{\log(R_2/R_1)}
+\]
+を得る．
+
+円筒の単位長さに働く摩擦力を求めよう．
+ゼロでない粘性応力テンソルは
+\[
+    \sigma_{zr}' = \eta \pdv{v_z}{r} = -\frac{\eta u}{r\log(R_2/R_1)}
+\]
+のみであるから，内側の円筒（単位長さあたりの表面積は$2\pi R_1$）に働く摩擦力の$z$成分は
+\[
+    2\pi R_1 \eval{\sigma_{zr}'}_{r=R_1} = -\frac{2\pi\eta u}{\log(R_2/R_1)} .
+\]
+同様に外側の円筒については$\dfrac{2\pi\eta u}{\log(R_2/R_1)}$である．
+
+
+    
+\end{kaitou}
+
+
+
+
+
+
+
+%%%%%%%%%% 問題5 %%%%%%%%%%
+
+\begin{mondai}{}{}
+水平面に対して角度$\alpha$で傾いている板の上に，厚さ$h$の流体層があり，上面は自由表面である．
+重力により生じる流れを求めよ．
+\end{mondai}
+\begin{kaitou}
+板の表面を$xy$平面とし，$x$軸は流れの方向，$z$軸は板から自由表面へ向かう方向にとる．
+流れは$z$のみに依存し$v_x=v(z)$となる．
+重力場中のNavier-Stokes方程式より
+\[
+    \begin{cases}
+        0 = \eta \ddv[2]{v}{z} + \rho g \sin\alpha \\[7pt]
+        0 = -\ddv{p}{z} - \rho g \cos\alpha \\
+    \end{cases}
+    \qquad\yueni
+    \begin{cases}
+        v = - \dfrac{g\sin\alpha}{2\nu} z^2 + az + b \\[7pt]
+        p = -\rho gz\cos\alpha + c \\
+    \end{cases} .
+\]
+境界条件：
+$z=h$（自由表面）で$\sigma_{xz}=\eta\ddv{v}{z}=0,\; \sigma_{zz}=-p=-p_0$（大気圧），
+$z=0$で$v=0$から定数$a,b,c$を決める．
+\[
+    \eval{\ddv{v}{z}}_{z=h} = - \frac{g\sin\alpha}{\nu} h + a = 0
+    \qquad\yueni a = \frac{gh \sin\alpha}{\nu}
+\]
+\[
+    \eval{p}_{z=h} = -\rho gh\cos\alpha + c = p_0
+    \qquad\yueni c = p_0 + \rho gh\cos\alpha
+\]
+\[
+    \eval{v}_{z=0} = b = 0
+\]
+以上より
+\[
+    \begin{cases}
+        v = \dfrac{g\sin\alpha}{2\nu} (-z^2+2hz) = \dfrac{g\sin\alpha}{2\nu} \bqty{ h^2 - (z-h)^2 } \\[7pt]
+        p = p_0 - \rho g \cos\alpha (z-h) \\
+    \end{cases}    
+\]
+
+$y$方向の単位長さを通過する流量は
+\[
+    Q = \rho \int_0^h v \; dz
+    = \dfrac{\rho g\sin\alpha}{2\nu} \pqty{ -\frac{h^3}{3} + h^3 }
+    = \frac{\rho gh^3\sin\alpha}{3\nu}
+\]
+
+
+
+
+ 
+\end{kaitou}
+
+
+
+
+
+
+
+%%%%%%%%%% 問題6 %%%%%%%%%%
+
+\begin{mondai}{}{}
+等温の粘性理想気体が円形断面（半径$R$）の管の中を流れているとき，圧力がどのように減少するか求めよ
+（理想気体の粘性率$\eta$は圧力によらないことに注意せよ）．
+\end{mondai}
+\begin{kaitou}
+\eqref{eq17.10:Hagen-Poiseuilleの法則}より
+\[
+    - \dv{p}{x} = \frac{8\eta Q}{\pi\rho R^4}.
+    \mytag{1}
+\]
+流量$Q$は，気体が圧縮性・非圧縮性のどちらであっても一定である．
+
+\begin{itemize}
+    \item 管の短い区間では，圧力勾配が非常に大きくない限り，気体を非圧縮とみなすことができる．
+        つまり，$\rho$は定数であり，\ajMaru{1}が圧力変化を与える．
+    \item 管の長い区間を考えるときには，$\rho$は変化しうるから，もはや$p$は$x$の1次関数ではなくなる．
+        分子量を$m$，ボルツマン定数を$k_B$とすると$\rho=\dfrac{mp}{k_BT}$であるから，\ajMaru{1}に代入して
+        \[
+            - \dv{p}{x} = \frac{8\eta Q k_BT}{\pi mR^4} \cdot \frac{1}{p}
+            \qquad\yueni -pdp = \frac{8\eta Q k_BT}{\pi mR^4} dx
+        \]
+        両辺を積分し，両端の圧力を$p_1,p_2$，管の長さを$l$とすれば
+        \[
+            {p_1}^2 - {p_2}^2 = \frac{16\eta Q k_BT}{\pi mR^4} l
+        \]
+\end{itemize}
+
+
+
+
+
+
+
+
+    
+\end{kaitou}
+
+
+\BackToTheToc

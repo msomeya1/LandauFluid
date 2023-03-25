@@ -1,0 +1,64 @@
+\section{Bernoulliの定理}
+流体中のどの点でも，速度が時間によらず一定である流れを\emph{定常流}という
+（つまり$\v$が座標だけの関数で$\dpdv{\v}{t}=0$）．
+この場合，運動方程式を簡単に積分することができる．\eqref{eq2.10:rotとhを用いたEuler方程式}は
+\begin{equation}\label{eq5.1:rotとhを用いた定常流でのEuler方程式}
+    \vec{0} = \v \times \Rot \v - \Grad\pqty{ \frac{1}{2}v^2+h } .
+\end{equation}
+ここで，\emph{流線}の概念を導入しよう．流線とは，その線上の任意の点における接ベクトルがその点での速度ベクトルと平行であるような曲線で，以下の微分方程式系により決められる．
+\begin{equation}\label{eq5.2:流線の方程式}
+    \frac{dx}{v_x} = \frac{dy}{v_y} = \frac{dz}{v_z}
+\end{equation}
+定常流では，流線は時間とともに変化せず，流体粒子の道筋（流跡線）と一致する．
+非定常流では両者は一致しない．
+この場合，流線の接線は各瞬間・各点での流体粒子の速度の方向を表し，流跡線は様々な時刻における特定の粒子の速度の方向を表している．
+\begin{details}
+（空間に固定された）1点を通過した流体粒子を連ねてできる曲線を，流脈線という
+（非定常流では流脈線は流線とも流跡線とも一致しないが，定常流ではこれらと一致する）．
+流跡線は川の流れに乗った枯れ葉の動き，流脈線は煙突から出る煙の動きに相当する．
+\end{details}
+
+さて，各点での流線の単位接ベクトルを$\vec{l}$として，$\vec{l}$と\eqref{eq5.1:rotとhを用いた定常流でのEuler方程式}の内積を取ろう．
+ある方向へ勾配を射影したものはその方向の微分であるから$\vec{l}\cdot\Grad f = \dpdv{f}{l}$，
+$\v \times \Rot \v \perp \v$より$\vec{l}\cdot(\v \times \Rot \v)=0$であるから
+\begin{equation}\label{eq5.3:Bernoulliの定理}
+    \pdv{l}\pqty{ \frac{1}{2}v^2+h }=0
+    \qquad\yueni \frac{1}{2}v^2+h = \const \qq{（各流線に沿って）}
+\end{equation}
+となる（右辺の値は流線ごとに異なる）．\eqref{eq5.3:Bernoulliの定理}は \emph{Bernoulliの定理}と呼ばれる．
+
+流れが一様重力場中にあるときは，\eqref{eq5.1:rotとhを用いた定常流でのEuler方程式}の右辺に$\vec{g}$を付け加えて
+\[
+    -\pdv{l}\pqty{ \frac{1}{2}v^2+h } + \vec{g}\cdot\vec{l}=0.
+\]
+鉛直上向きに$z$軸を取ると$\vec{g} = -g\Unit{z}$，
+$\Unit{z}$と$\vec{l}$のなす角を$\theta$とすると$\cos\theta=\ddv{z}{l}$であるから
+$\vec{g}\cdot\vec{l} = -g\ddv{z}{l}$となり
+\[
+    \pdv{l}\pqty{ \frac{1}{2}v^2+h+gz } =0.
+\]
+よって各流線に沿って
+\begin{equation}\label{eq5.4:一様重力場中のBernoulliの定理}
+    \frac{1}{2}v^2+h+gz = \const
+\end{equation}
+
+\begin{details}
+一般に，流体に働いている外力$\vec{K}$が保存力であればよい．
+単位質量あたりのポテンシャルエネルギーを$u$とすると$\vec{K}=-\Grad u$であるから，
+運動方程式は
+\[
+    \pdv{\v}{t} = \v \times \Rot \v - \Grad\pqty{\frac{1}{2}v^2+h+u}.
+\]
+ここから直ちに
+\[
+    \frac{1}{2}v^2+h+u=\const
+\]
+が得られる．
+特に一様重力場では$u=gz$であるから，\eqref{eq5.4:一様重力場中のBernoulliの定理}が得られる
+（このようにすれば，$\vec{g}$と$\vec{l}$のなす角を考える必要はない）．
+\end{details}
+
+
+
+
+\BackToTheToc

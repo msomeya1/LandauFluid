@@ -1,0 +1,338 @@
+\section{\spade 回転流体中の波動}
+\subsection*{慣性波}
+全体が一様に回転している非圧縮性流体では，別の種類の内部波が伝播しうる．
+これは回転の際に生じるCoriolis力によるものである．
+
+流体とともに回転する座標系で考えることにすると，Euler方程式の右辺に遠心力，Coriolis力（流体の単位質量あたり）を付け加えなければならない．
+流体の回転の角速度ベクトルを$\vec{\Omega}$とすると，遠心力は$\Grad \bqty{\dfrac{1}{2}(\vec{\Omega}\times\vec{r})^2}$，Coriolis力は$2\v\times\vec{\Omega}$と書ける．
+Euler方程式は
+\[
+    \pdv{\v}{t} + (\v\cdot\Grad)\v = -\frac{1}{\rho} \Grad p + \Grad \bqty{\frac{1}{2}(\vec{\Omega}\times\vec{r})^2} + 2\v\times\vec{\Omega}
+\]
+となる．
+\begin{equation}
+    P = p-\frac{1}{2}\rho (\vec{\Omega}\times\vec{r})^2 
+\end{equation}
+で有効圧力を定義し，Coriolis力を左辺に移せば
+\begin{equation}\label{eq14.2:回転流体の運動方程式}
+    \pdv{\v}{t} + (\v\cdot\Grad)\v + 2\vec{\Omega}\times\v = -\frac{1}{\rho} \Grad P .
+\end{equation}
+連続の式は変わらない；非圧縮性流体では単に$\Div\v=0$となる．
+
+
+
+波の振幅が小さいと仮定して\eqref{eq14.2:回転流体の運動方程式}の速度の二次の項を無視し，圧力の摂動を$p'$とすると
+\begin{equation}\label{eq14.3:線形化した，回転流体の運動方程式}
+    \pdv{\v}{t} + 2\vec{\Omega}\times\v = -\frac{1}{\rho} \Grad p' .
+\end{equation}
+両辺のrotをとると，右辺は0になる．
+また，$\Div\v=0$に注意すると
+\[
+    \Rot(\vec{\Omega}\times\v) = \vec{\Omega} \Div\v - (\vec{\Omega}\cdot\Grad)\v
+    = - (\vec{\Omega}\cdot\Grad)\v .
+\]
+$\vec{\Omega}$の方向に$z$軸をとれば
+\[
+    2 \Rot(\vec{\Omega}\times\v) = -2\Omega \pdv{\v}{z}.
+\]
+よって\eqref{eq14.3:線形化した，回転流体の運動方程式}は
+\begin{equation}\label{eq14.4:回転流体の渦度方程式}
+    \pdv{t}(\Rot\v) = 2\Omega \pdv{\v}{z}
+\end{equation}
+となる．
+
+この解を平面波 
+\begin{equation}\label{eq14.5:回転流体・平面波の形}
+    \v = \vec{A} e^{i(\vec{k}\cdot\vec{r}-\omega t)}
+\end{equation}
+の形に求める．
+$\Div\v=0$であるから，横波の条件
+\begin{equation}
+    \vec{k} \cdot \vec{A} = 0
+\end{equation}
+を満たす．
+\eqref{eq14.5:回転流体・平面波の形}を\eqref{eq14.4:回転流体の渦度方程式}に代入すると
+\[
+    -i\omega(i\vec{k}\times\v) = 2\Omega ik_z \v ,
+\]
+\begin{equation}\label{eq14.7:回転流体での途中式}
+    \omega \vec{k}\times\v = 2i\Omega k_z \v.
+\end{equation}
+分散関係を得るために，両辺と$\vec{k}$の外積をとると
+\footnote{
+$\vec{k}\times(\vec{k}\times\v) = (\vec{k}\cdot\v)\vec{k} -k^2\v = -k^2\v$に注意する．
+}，
+\[
+    -\omega k^2 \v = 2i\Omega k_z \vec{k}\times\v .
+\]
+これと\eqref{eq14.7:回転流体での途中式}を比べて
+\[
+    \omega^2 k^2 = (2\Omega k_z)^2 .
+\]
+よって$\vec{k}$と$\vec{\Omega}$のなす角を$\theta$とすると（$k_z=k\cos\theta$），分散関係
+\begin{equation}\label{eq14.8:回転流体の分散関係}
+    \omega = \frac{2\Omega k_z}{k} = 2\Omega \cos\theta 
+\end{equation}
+が得られる．
+
+
+\eqref{eq14.7:回転流体での途中式}を\eqref{eq14.8:回転流体の分散関係}で割ると$\vec{k}\times\v = ik\v$であり，
+$\vec{n}= \vec{k}/k$とおくと
+\[
+    \vec{n}\times\v = i\v
+\]
+となる．
+$\vec{a}$と$\vec{b}$を実数ベクトルとして，複素振幅を$\vec{A} = \vec{a}+i\vec{b}$と表すと，
+\[
+    \vec{n} \times (\vec{a}+i\vec{b}) = i (\vec{a}+i\vec{b}) = i\vec{a} - \vec{b} .
+\]
+実部を比べ$\vec{n}\times\vec{a}=-\vec{b}$，
+虚部を比べ$\vec{n}\times\vec{b}=\vec{a}$となる．
+よってベクトル$\vec{a}$と$\vec{b}$（どちらも$\vec{k}$と垂直な平面にある）は直角で大きさが等しくなる．
+これらの方向を$x$軸，$y$軸とし，\eqref{eq14.5:回転流体・平面波の形}で実部，虚部を分離すると
+\[
+    v_x = a \cos(\vec{k}\cdot\vec{r}-\omega t), \quad
+    v_y = a \sin(\vec{k}\cdot\vec{r}-\omega t)
+\]
+となる．
+このように，波は円偏光している：空間の各点で，ベクトル$\v$は大きさ一定のまま，時間の経過とともに回転する
+\footnote{この運動は回転座標系に対する相対的なものである．固定座標系で見る場合には，流体全体の回転と組み合わされる．}．
+
+
+波の伝搬速度を求めよう．
+$\omega=2\Omega \dfrac{\vec{k}\cdot\vec{\nu}}{k}$（$\vec{\nu}$は$\vec{\Omega}$方向の単位ベクトル）であるから
+\[
+    \pdv{k_i} \pqty{ \frac{k_j\nu_j}{k} } = \frac{1}{k} \delta_{ij} \nu_j + k_j\nu_j \pdv{k_i} \pqty{\frac{1}{k}}
+    = \frac{\nu_i}{k} + (\vec{k}\cdot\vec{\nu}) \pqty{ -\frac{\vec{n}}{k^2} } ,
+\]
+\begin{equation}
+    \yueni \vec{U} = \pdv{\omega}{\vec{k}} = \frac{2\Omega}{k} [ \vec{\nu} - \vec{n}(\vec{n}\cdot\vec{\nu}) ] .
+\end{equation}
+$\vec{U}$の大きさは
+\[
+    U = \frac{2\Omega}{k} \sqrt{ \nu^2 -2(\vec{n}\cdot\vec{\nu})^2 + (\vec{n}\cdot\vec{\nu})^2 }
+    = \frac{2\Omega}{k} \sqrt{1-\cos^2\theta} = \frac{2\Omega}{k} \sin\theta ,
+\]
+$\vec{\Omega}$に沿った成分は
+\[
+    \vec{U}\cdot\vec{\nu} = \frac{2\Omega}{k} \bqty{ 1-(\vec{n}\cdot\vec{\nu})^2 }
+    = \frac{2\Omega}{k}\sin^2\theta = U \sin\theta .
+\]
+
+
+
+以上の波を\emph{慣性波}と呼ぶ．
+Coriolis力は移動する流体に対して仕事をしないので，波のエネルギーは運動エネルギーのみで構成される．
+
+軸対称の（平面でない）慣性波の特殊な形として，流体の回転軸に沿って伝播するものがある（問題~\ref{mo:問題14.1（回転流体中の軸対称波動）}参照）．
+
+
+\subsection*{回転流体中の定常運動}
+もう一つ，回転流体中の波動伝播ではなく，回転流体中の定常運動について述べておこう．
+
+このような運動の特徴的な長さを$l$，特徴的な速度を$u$とする．
+\eqref{eq14.2:回転流体の運動方程式}の$(\v\cdot\Grad)\v$のオーダーは$u^2/l$であり，$2\vec{\Omega}\times\v$のオーダーは$\Omega u$となる．
+$u/l\Omega \ll 1$
+\footnote{移流項とCoriolis項の比$u/l\Omega$はロスビー数と呼ばれる無次元数に相当する．}
+であれば前者は後者に比べて無視することができ，定常運動の方程式は次のように簡単化される．
+\begin{equation}\label{eq14.10:回転流体の定常運動でのEuler方程式}
+    2\vec{\Omega}\times\v = -\frac{1}{\rho} \Grad P 
+\end{equation}
+回転軸方向に$z$軸をとれば
+\[
+    2\Omega v_y = \frac{1}{\rho} \pdv{P}{x}, \quad
+    2\Omega v_x = -\frac{1}{\rho} \pdv{P}{y}, \quad
+    \pdv{P}{z} = 0 .
+\]
+第3式から$P$は$z$に依存せず，これを第1式，第2式に代入することで$v_x,v_y$も$z$に依存しないことがわかる．
+また，第2式を$x$で，第1式を$y$で微分して加えると
+\[
+    \pdv{v_x}{x} + \pdv{v_y}{y} = 0
+\]
+となり，連続の式$\Div\v=0$は$\dpdv{v_z}{z}=0$となる
+\footnote{\eqref{eq14.10:回転流体の定常運動でのEuler方程式}のrotを取ると$(\vec{\Omega}\cdot\Grad)\v=0$で，ここからただちに$\dpdv{v_z}{z}=0$を得ることもできる．}
+．
+このように，高速（$\Omega \gg u/l$）で回転する流体の（回転座標系における）定常運動は，$xy$平面内の2次元流と，$z$に依存しない軸方向の流れという，独立した2つの運動の重ね合わせになる（J. Proudman 1916）．
+この結果は，地球流体力学で\emph{Taylor-Proudmanの定理}として知られている．
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{問題14.1（回転流体中の軸対称波動）}
+全体が回転している非圧縮性流体の，軸に沿って伝播する軸対称な波動を求めよ（W. Thomson 1880）．
+\end{mondai}
+\begin{kaitou}
+$z$軸が$\vec{\Omega}$に平行な円筒座標$r,\phi,z$をとる．
+軸対称な波動ではすべての量は角度$\phi$に依存しないから，\eqref{eq14.3:線形化した，回転流体の運動方程式}の成分は
+\[
+    \pdv{v_r}{t} -2\Omega v_\phi = -\frac{1}{\rho} \pdv{p'}{r} , \quad 
+    \pdv{v_\phi}{t} + 2\Omega v_r = -\frac{1}{\rho r} \pdv{p'}{\phi}, \quad
+    \pdv{v_z}{t} = -\frac{1}{\rho} \pdv{p'}{z} .
+\]
+$z$方向の進行波$\exp[i(kz-\omega t)]$を代入すると
+\[
+    -i\omega v_r-2\Omega v_\phi = -\frac{1}{\rho} \pdv{p'}{r} ,
+    \mytag{1}  
+\]
+\[
+    -i\omega v_\phi + 2\Omega v_r = 0, \quad -i\omega v_z = - \frac{ik}{\rho} p' .
+    \mytag{2}
+\]
+円筒座標での連続の式は
+\[
+    \frac{1}{r} \pdv{r} (rv_r) + \pdv{v_z}{z} = 0
+\]
+\[
+    \frac{1}{r} \pdv{r} (rv_r) + ik v_z = 0
+    \mytag{3}
+\]
+となる．
+
+\ajMaru{2}の第1式より
+\[
+    v_\phi = \frac{2\Omega}{i\omega} v_r = - \frac{2i\Omega}{\omega} v_r .
+\]
+\ajMaru{3}より$v_z = \dfrac{1}{-ikr} \dpdv{r}(rv_r)$，これを\ajMaru{2}の第2式に代入して
+\[
+    \frac{ik}{\rho} p' = i\omega v_z = -\frac{\omega}{kr} \pdv{r} (rv_r) ,
+\]
+\[
+    \frac{p'}{\rho} = \frac{i\omega}{k^2r} \pdv{r} (rv_r) .
+\]
+以上を\ajMaru{1}に代入して
+\[
+    -i\omega v_r -2\Omega \pqty{ - \frac{2i\Omega}{\omega} v_r } = -\frac{i\omega}{k^2} \pdv{r} \bqty{\frac{1}{r} \pdv{(rv_r)}{r} } ,
+\]
+\[
+    \yueni \pdv{r} \bqty{\frac{1}{r} \pdv{(rv_r)}{r} } + \pqty{ \frac{4\Omega^2}{\omega^2} - 1 } k^2 v_r = 0 .
+\]
+$v_r$の$r$依存性を
+\[
+    v_r = F(r) e^{i(kz-\omega t)}
+\]
+とすると
+\begin{details}
+\[
+    \pdv{r} \bqty{\frac{1}{r} \pdv{(rF)}{r} } = \pdv{r} \bqty{ \frac{1}{r}\pqty{F + r\pdv{F}{r}} } 
+    = \pdv{r} \pqty{\frac{F}{r} + \pdv{F}{r}} = \frac{1}{r} \pdv{F}{r} -\frac{F}{r^2} + \pdv[2]{F}{r} 
+\]
+\end{details}
+\[
+    \pdv[2]{F}{r} + \frac{1}{r} \pdv{F}{r} + \bqty{ \pqty{ \frac{4\Omega^2}{\omega^2} - 1 } k^2 - \frac{1}{r^2} } F = 0 .
+    \mytag{4}
+\]
+これは（1次の）Besselの微分方程式であり，解はBessel関数$J_1$とNeumann関数$N_1$である．
+しかし後者は原点で特異性を持つので捨てなければならない．よって
+\[
+    F = \const \times J_1 \bqty{ kr\sqrt{ \frac{4\Omega^2}{\omega^2} -1 } } .
+    \mytag{5}
+\]
+$J_1$は原点$r=0$で0となり，$r>0$に無限の零点$x_1<x_2<\cdots$を持つ．よって
+\[
+    kr_n \sqrt{ \frac{4\Omega^2}{\omega^2} -1 } = x_n \quad (n=1,2,\ldots)
+    \mytag{6}
+\]
+を満たす$r_n$に対し，流れは同軸円筒の間の領域
+\[
+    0 < r < r_1, \; r_1 < r < r_2, \cdots
+\]
+に制限される．
+すなわち円筒面$r=r_n$上では$v_r=0$であり，これらを1つまたぐごとに流れの方向が逆転する．
+
+
+
+流体が無限に広がっている場合，任意の$\omega<2\Omega$と$k$に対して\ajMaru{6}を満たす$r_n$が自由に取れるから，$\omega$は$k$に依存しない．
+一方$\omega \ijou \Omega$のときは\ajMaru{4}は有限な解を持たない．
+
+\begin{details}
+$\omega=2\Omega$のとき，\ajMaru{4}は冪関数$r,1/r$を解に持つが，前者は$r\to\infty$，後者は$r\to0$で発散するから，解として適切ではない．
+$\omega>2\Omega$のとき，\ajMaru{4}は1次の変形Bessel関数$I_1,K_1$を解に持つが，
+前者は$r\to\infty$，後者は$r\to0$で発散するから，やはり適切ではない．
+\end{details}
+
+
+回転する流体が半径$a$
+\footnote{原著には$R$とあるが誤植だろう．あるいは次の式の$a$が$R$の誤り．}
+の円筒状の壁に囲まれている場合，その壁では$v_r=0$という条件を満たさなければならない．
+よって分散関係
+\[
+    ka \sqrt{ \frac{4\Omega^2}{\omega^2} -1 } = x_n \quad (n=1,2,\ldots)
+\]
+が成り立つ．
+
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+回転流体中の圧力の任意の小さな摂動を記述する方程式を導け．
+\end{mondai}
+\begin{kaitou}
+やはり回転軸に沿って$z$軸をとる．
+\eqref{eq14.3:線形化した，回転流体の運動方程式}の各成分は
+\[
+    \pdv{v_x}{t} -2\Omega v_y = -\frac{1}{\rho} \pdv{p'}{x}, \quad
+    \pdv{v_y}{t} +2\Omega v_x = -\frac{1}{\rho} \pdv{p'}{y}, \quad
+    \pdv{v_z}{t} = - \frac{1}{\rho} \pdv{p'}{z} .
+    \mytag{1}
+\] 
+$x,y,z$に関して微分した式を加え，$\Div\v=0$を用いると
+\begin{align*}
+    - \frac{1}{\rho} \Laplacian p' 
+    &= \pdv{x} \pqty{ \pdv{v_x}{t} -2\Omega v_y } + \pdv{y} \pqty{ \pdv{v_y}{t} +2\Omega v_x } + \pdv{z}\pqty{\pdv{v_z}{t}} \\
+    &= \pdv{t} (\Div\v) -2\Omega \pqty{ \pdv{v_y}{x}-\pdv{v_x}{y} }
+\end{align*}
+\[
+    \frac{1}{\rho} \Laplacian p' = 2\Omega \pqty{ \pdv{v_y}{x}-\pdv{v_x}{y} } .
+\]
+$t$に関して微分して\ajMaru{1}の第1式，第2式と$\Div\v=0$を用いると 
+\begin{align*}    
+    \frac{1}{\rho} \pdv{t} (\Laplacian p') &= 2\Omega \bqty{ \pdv{x}\pqty{ \pdv{v_y}{t} } - \pdv{y}\pqty{ \pdv{v_x}{t} } } \\
+    &= 2\Omega \bqty{ \pdv{x}\pqty{ -2\Omega v_x - \cancel{ \frac{1}{\rho} \pdv{p'}{y} } } - \pdv{y}\pqty{ 2\Omega v_y - \cancel{ \frac{1}{\rho} \pdv{p'}{x} } } } \\
+    &= -4\Omega^2 \pqty{ \pdv{v_x}{x} + \pdv{v_y}{y} } \\
+    &= 4\Omega^2 \pdv{v_z}{z} .
+\end{align*}
+さらに$t$に関して微分して\ajMaru{1}の第3式を用いると
+\[
+    \frac{1}{\rho} \pdv[2]{t} (\Laplacian p') = 4\Omega^2 \pdv{z} \pqty{ - \frac{1}{\rho} \pdv{p'}{z} }
+\]
+\[
+    \pdv[2]{t} (\Laplacian p') + 4\Omega^2 \pdv[2]{p'}{z} = 0
+    \mytag{2}
+\]
+を得る．
+
+周波数$\omega$の周期的な摂動に対して（つまり$p' \propto e^{-i\omega t}$），\ajMaru{2}は次のようになる． 
+\[
+    \pdv[2]{p'}{x} + \pdv[2]{p'}{y} + \pqty{1-\frac{4\Omega^2}{\omega^2}} \pdv[2]{p'}{z} = 0
+    \mytag{3}
+\]
+\eqref{eq14.5:回転流体・平面波の形}のような波（$p' \propto e^{i\vec{k}\cdot\vec{r}}$）に対しては
+\[
+    -\omega^2(-k^2) - 4\Omega^2 {k_z}^2 = 0
+    \qquad\yueni \omega = \frac{2\Omega k_z}{k} \; (<2\Omega) .
+\]
+これは既知の分散関係\eqref{eq14.8:回転流体の分散関係}を与える．
+ただし$\omega<2\Omega$でなければならない．
+このとき，\ajMaru{3}の$\dpdv[2]{p'}{z}$の係数は負であるから，\ajMaru{3}は双曲型の偏微分方程式である．
+原点で生じた摂動の影響は，$z$方向に伸びた頂角$2\theta$
+$\pqty{\sin\theta=\dfrac{\omega}{2\Omega}}$の無限に長い円錐内のみにあらわれる．
+
+もし$\omega>2\Omega$なら，\ajMaru{3}の$\dpdv[2]{p'}{z}$の係数は正であるから，\ajMaru{3}は楕円型の偏微分方程式である．
+つまり$z$方向のスケールを適当に変えることによりLaplace方程式に帰着させることができる．
+この場合，点源からの摂動は流体の全領域に影響を与え，その大きさは摂動源から離れるにつれてべき乗則にしたがって減少する．
+
+
+
+\end{kaitou}
+
+
+
+
+
+
+
+\BackToTheToc

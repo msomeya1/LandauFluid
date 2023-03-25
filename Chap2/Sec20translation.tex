@@ -1,0 +1,389 @@
+\section{\spade 小Reynolds数での流れ（日本語訳）}
+Reynolds数が小さい流れの場合，Navier-Stokes方程式はかなり簡単になる．
+非圧縮性流体の定常流の場合，方程式は
+\[
+    (\v\cdot\Grad)\v = - \frac{1}{\rho} \Grad p + \frac{\eta}{\rho} \Laplacian \v .
+\]
+$u$と$l$を\S19と同じものとすると，$(\v\cdot\Grad)\v$は$u^2/l$のオーダー，
+$(\eta/\rho)\Laplacian\v$は$\eta u/\rho l^2$のオーダーであり，
+両者の比がちょうどReynolds数である．
+したがって，Reynolds数が小さければ$(\v\cdot\Grad)\v$の項は無視してよく，運動方程式は線形の方程式になる．
+\begin{equation}\label{eq20.1:線形化したNS方程式}
+    \eta \Laplacian\v - \Grad p = 0
+\end{equation}
+この式と連続の式
+\begin{equation}\label{eq20.2:連続の式（Stokes流）}
+    \Div\v=0
+\end{equation}
+により，運動が完全に決まる．また，\eqref{eq20.1:線形化したNS方程式}のrotをとることで得られる式
+\begin{equation}\label{eq20.3:rotvに対するLaplace方程式}
+    \Laplacian \Rot\v = 0
+\end{equation}
+も有用な式である．
+
+
+例として，粘性流体中の球の一様な直線運動を考えよう（G. G. Stokes 1851）．
+球の運動の問題が，固定された球のまわりに生じる，無限遠で速度が$\vec{u}$で一定となる流れの問題と全く等価であるのは明らかである．
+最初の問題の速度分布は，2番目の問題の速度分布から速度$\vec{u}$を差し引くことで得られる；
+そうすれば流体は無限遠で静止し，球は速度$-\vec{u}$で動く．
+定常流の場合には，固定された球のまわりの流れとして考えなければならない．
+というのは，球が動く問題では，任意の点における流体の速度が時間とともに変化してしまうからである．
+
+
+$\Div(\v-\vec{u})=\Div\v=0$であるから，$\v-\vec{u}$はあるベクトル$\vec{A}$のrotとして表すことができる．
+\[
+    \v - \vec{u} = \Rot\vec{A}
+\]
+但し$\Rot\vec{A}$は無限遠で0になる．
+また，$\vec{A}$のrotが速度と同じく極性ベクトルとなるためには，$\vec{A}$は軸性ベクトルでなければならない．
+球のまわりの流れでは，球が対称であるから，$\vec{u}$が最も好ましい方向である．
+運動方程式と境界条件が線形であるため，$\vec{A}$は$\vec{u}$の1次関数でなければならない．
+これらの条件を満たすベクトル関数$\Vec{A}(\vec{r})$の一般形は$\Vec{A}=f'(r) \vec{n}\times\vec{u}$である．
+但し，$\vec{n}$は位置ベクトル$\vec{r}$（原点は球の中心にとる）に平行な単位ベクトル，$f'(r)$は$r$のスカラー関数である．
+積$f'(r)\vec{n}$はある関数$f(r)$の勾配の形で書くことができる．
+したがって，次のような形で速度を求めることにする．
+\begin{equation}\label{eq20.4:Stokes流でのvの表現}
+    \v = \vec{u} + \Rot(\Grad f \times \vec{u})
+    = \vec{u} + \Rot\Rot(f\vec{u})
+\end{equation}
+最後の式は，$\vec{u}$が一定であることから得られる．
+
+
+
+関数$f$を求めるため，式\eqref{eq20.3:rotvに対するLaplace方程式}を用いる．
+
+\[
+    \Rot\v = \Rot\Rot\Rot(f\vec{u}) = (\Grad\Div-\Laplacian)\Rot(f\vec{u})
+    = -\Laplacian\Rot(f\vec{u})
+\]
+であるから，\eqref{eq20.3:rotvに対するLaplace方程式}は
+$\Laplacian^2\Rot(f\vec{u}) = \Laplacian^2(\Grad f\times \vec{u}) = (\Laplacian^2 \Grad f) \times\vec{u} = 0$
+となる．よって
+\begin{equation}
+    \Laplacian^2 \Grad f = 0 .
+\end{equation}
+1回積分すると
+\[
+    \Laplacian^2f = \const 
+\]
+速度差$\v-\vec{u}$は無限遠で0となるから，$\const=0$であり，
+速度差の微分も0でなければならないことは容易にわかる．
+$\Laplacian^2f$は$f$の4階微分を含み，一方速度は$f$の2階微分で与えられる．
+よって
+\[
+    \Laplacian^2f \equiv \frac{1}{r^2} \dv{r} \pqty{r^2 \dv{r}} \Laplacian f = 0
+    \qquad\yueni \Laplacian f = \frac{2a}{r}+c .
+\]
+速度$\v-\vec{u}$が無限遠で0となるためには，定数$c$は0でなければならない．
+$\Laplacian f = \dfrac{2a}{r}$より
+\begin{equation}
+    f = ar + \frac{b}{r} .
+\end{equation}
+付加定数は重要ではないので省略する（速度は$f$の微分で与えられる）．
+
+
+\eqref{eq20.4:Stokes流でのvの表現}に代入すると，簡単な計算の後
+\begin{equation}\label{a,bで表したStokes流の速度}
+    \v = \vec{u} -a \frac{\vec{u}+\vec{n}(\vec{u}\cdot\vec{n})}{r} +b \frac{3\vec{n}(\vec{u}\cdot\vec{n})-\vec{u}}{r^3}
+\end{equation}
+を得る．
+
+
+定数$a$と$b$は境界条件から決まる：球の表面（$r=R$）では，$\v=\vec{0}$すなわち
+\[
+    -\vec{u} \pqty{ \frac{a}{R}+\frac{b}{R^3}-1 } + \vec{n}(\vec{u}\cdot\vec{n}) \pqty{ -\frac{a}{R}+\frac{3b}{R^3} } = 0 .
+\]
+この式はすべての$\vec{n}$に対して成り立つから，$\vec{u}$と$\vec{n}(\vec{u}\cdot\vec{n})$の係数はそれぞれ0でなければならない．
+よって$a=\dfrac{3}{4}R, \; b = \dfrac{1}{4}R^3$となる．
+したがって，最終的に
+\begin{equation}
+    f = \frac{3}{4}Rr + \frac{1}{4} \frac{R^3}{r} ,
+\end{equation}
+\begin{equation}\label{eq20.9:Stokes流での流速}
+    \v = -\frac{3}{4}R \frac{\vec{u}+\vec{n}(\vec{u}\cdot\vec{n})}{r} -\frac{1}{4}R^3 \frac{\vec{u}-3\vec{n}(\vec{u}\cdot\vec{n})}{r^3} + \vec{u} .
+\end{equation}
+あるいは，極軸が$\vec{u}$と平行な球座標系では
+\begin{equation}\label{eq20.10:Stokes流での流速成分}
+    \begin{cases}
+        v_r = u\cos\theta \bqty{ 1-\dfrac{3R}{2r} + \dfrac{R^3}{2r^3} } \\[7pt]
+        v_\theta = -u\sin\theta \bqty{ 1-\dfrac{3R}{4r} - \dfrac{R^3}{4r^3} } \\
+    \end{cases}
+\end{equation}
+こうして，運動する球のまわりの流速分布が得られた．
+圧力を求めるには\eqref{eq20.4:Stokes流でのvの表現}を\eqref{eq20.1:線形化したNS方程式}に代入すればよい．
+\[
+    \Grad p = \eta\Laplacian\v
+    = \eta\Laplacian\Rot\Rot(f\vec{u})
+    = \eta\Laplacian\pqty{ \Grad\Div(f\vec{u})-\vec{u}\Laplacian f }
+\]
+$\Laplacian^2f=0$であるから，
+\[
+    \Grad p = \Grad\bqty{ \eta\Laplacian\Div(f\vec{u}) }  
+    = \Grad(\eta\vec{u}\cdot\Grad\Laplacian f)
+\]
+となる．
+したがって
+\begin{equation}
+    p = \eta \vec{u}\cdot\Grad\Laplacian f + p_0
+\end{equation}
+ここで，$p_0$は無限遠での流体の圧力である．
+$f$の表式を代入すると，最終的に次の式を得る．
+\begin{equation}\label{eq20.12:Stokes流での圧力1}
+    p = p_0 - \frac{3}{2}\eta \frac{\vec{u}\cdot\vec{n}}{r^2} R
+\end{equation}
+
+
+以上の式を用いて，運動する流体が球に与える力$F$（あるいは，同じことだが，球が流体中を運動するときの抗力）を計算することができる．
+そのために，極軸が$\vec{u}$と平行な球座標系をとろう；対称性から，すべての量は$r$と極軸から測った角度$\theta$だけの関数である．
+力$\vec{F}$は明らかに速度$\vec{u}$と平行である．
+この力の大きさは(15.14)から求めることができる．
+(15.14)において，球の面積要素に働く力を表面の法線成分と接線成分に分け，これらの成分を$\vec{u}$の方向に射影すると
+\begin{equation}\label{eq20.13:Stokes流で抗力を求める積分}
+    F = \int( -p\cos\theta + \sigma'_{rr}\cos\theta - \sigma'_{r\theta} \sin\theta )dS
+\end{equation}
+ここで，積分は球の表面全体にわたって行う．
+
+
+\eqref{eq20.10:Stokes流での流速成分}を，(15.20)の
+\[
+    \sigma'_{rr} = 2\eta \pdv{v_r}{r}, \quad
+    \sigma'_{r\theta} = \eta \pqty{ \frac{1}{r}\pdv{v_r}{\theta} + \pdv{v_\theta}{r} - \frac{v_\theta}{r} }
+\]
+に代入すると，球の表面では
+\[
+    \sigma'_{rr} = 0, \quad
+    \sigma'_{r\theta} = -\frac{3\eta}{2R} u \sin\theta 
+\]
+であり，圧力\eqref{eq20.12:Stokes流での圧力1}は
+$p=p_0-\dfrac{3\eta}{2R}u\cos\theta$となる．
+したがって，積分\eqref{eq20.13:Stokes流で抗力を求める積分}は
+$\displaystyle F = \frac{3\eta u}{2R} \int dS$となる．
+こうしてようやく，流体中をゆっくり動く球の抗力に関する\emph{Stokesの法則}に到達する：
+\footnote{
+後の応用のために，\eqref{a,bで表したStokes流の速度}で定数$a,b$を決めずに計算した式を書いておくと
+\[
+    F = 8\pi\eta au
+    \tag{20.14a}
+\]
+となる．
+
+ゆっくり動く任意の形の楕円体に対しても，抗力を計算することができる．
+関連する式は H. Lamb, \textit{Hydrodynamics}, 6th ed., \S~339, Cambridge 1932 に示されている．
+ここでは，極限の場合として，半径$R$の円板が平面と垂直に運動する場合の式
+\[
+    F = 16\eta Ru
+\]
+および平面と平行に運動する場合の式
+\[
+    F = \frac{32}{3}\eta Ru
+\]
+をあげておく．
+}
+\begin{equation}
+    F = 6\pi\eta Ru .
+\end{equation}
+
+
+抗力は，速度と物体の大きさに比例する．これは次元解析から予想できたことである：
+流体の密度$\rho$は近似式\eqref{eq20.1:線形化したNS方程式}，\eqref{eq20.2:連続の式（Stokes流）}に現れないので，
+これらの式から導かれる力$F$は，$\eta,u,R$で表されなければならない．
+これらの量から作られる，力の次元をもつ組み合わせは$\eta Ru$のみである．
+
+
+ゆっくりと運動する，他の形の物体についても同様の依存性がある．
+任意の形状の物体に働く抗力の方向は速度の方向と同じではないから，$\vec{F}$の$\vec{u}$に対する依存性は一般に
+\begin{equation}
+    F_i = \eta a_{ik} u_k
+\end{equation}
+と書ける．ここで$a_{ik}$は2階のテンソルであり，速度によらない．
+このテンソルが対称であることは重要である；
+これは速度に関して線形の近似を行った結果であり，散逸過程を伴うゆっくりとした運動に対する一般法則の特別な場合である（『統計物理学』\S~121参照）．
+
+
+
+\subsection*{Stokesの法則の精密化}
+球のまわりの流れの問題に対する上記の解は，たとえReynolds数が小さくても，距離が大きくなると成り立たない．
+これを明らかにするために，\eqref{eq20.1:線形化したNS方程式}で無視されている$(\v\cdot\Grad)\v$の大きさを見積もってみよう．
+離れたところでは$\v\simeq\vec{u}$であり，\eqref{eq20.9:Stokes流での流速}からわかるように，速度微分は$uR/r^2$のオーダーである．
+したがって$(\v\cdot\Grad)\v \sim u^2R/r^2$となる．
+\eqref{eq20.1:線形化したNS方程式}で残る項は，速度については\eqref{eq20.9:Stokes流での流速}，圧力については\eqref{eq20.12:Stokes流での圧力1}から見積もって$\eta Ru/\rho r^3$のオーダーである．
+条件$\eta Ru/\rho r^3 \gg u^2R/r^2$が成立するのは，次のような距離のときだけである．
+\begin{equation}
+    r \ll \frac{\nu}{u}
+\end{equation}
+それ以上の距離では，無視した項が無視できなくなり，求めた速度分布が正しくなくなる．
+
+
+
+
+球から離れたところでの速度分布を求めるためには，\eqref{eq20.1:線形化したNS方程式}で省略した$(\v\cdot\Grad)\v$の項を考慮しなければならない．
+この距離では$\v$はほとんど$\vec{u}$に等しいので，$\v\cdot\Grad$を近似的に$\vec{u}\cdot\Grad$で置き換えることができる．
+そこで，離れたところでの速度について，線形の方程式
+\begin{equation}\label{eq20.17:Oseen近似した定常NS方程式}
+    (\vec{u}\cdot\Grad)\v = -\frac{1}{\rho} \Grad p + \nu \Laplacian\v
+\end{equation}
+を得る（C. W. Oseen 1910）．
+ここでは，この方程式を球のまわりの流れについて解く手順は省略するが
+\footnote{
+詳しい計算は
+N. E. Kochin, I. A. Kibei' and N. V. Roze, \textit{Theoretical Hydromechanics}, Part 2, chapter II, \S~25--26, Moscow 1963や，
+H. Lamb, \textit{Hydrodynamics}, 6th ed., \S~342--3, Cambridge 1932
+にある．
+}，
+こうして得られた速度分布を使って，球に働く抗力のより正確な式を導くことができることだけは述べておく．
+その式は，抗力をReynolds数$\R = uR/\nu$の冪で展開した次の項を含む．
+\begin{equation}\label{eq20.18:Stokesの法則の1次補正}
+    F = 6\pi\eta uR\pqty{ 1 + \frac{3uR}{8\nu} }
+\end{equation}
+
+
+無限円柱のまわりに，軸に対して垂直な流れがある場合の問題を解くには，最初からOseenの方程式を用いなければならない．
+この場合，式\eqref{eq20.1:線形化したNS方程式}には円柱の表面と無限遠での境界条件を満たす解が存在しない．
+円柱の単位長さあたりの抗力は
+\begin{equation}
+    F = \frac{4\pi\eta u}{ \dfrac{1}{2} -C -\log(\dfrac{uR}{4\nu}) }
+    = \frac{4\pi\eta u}{ \log(3.70\nu/uR) }
+\end{equation}
+となる．ここで$C=0.577\cdots$はEulerの定数である（H. Lamb 1911）
+\footnote{
+円柱の問題で抗力を\eqref{eq20.1:線形化したNS方程式}から計算できないことは，次元解析から明らかである．
+すでに述べたように，結果は$\eta,u,R$で表さなければならないが，
+この場合，我々は円柱の単位長さあたりの力を考えており，正しい次元を持つ唯一の量は$\eta u$である．
+これは物体の大きさに依存しないので，$R\to0$で0にならない；これは物理的にありえない．
+}．
+
+
+
+球のまわりの流れの問題について，もう一つコメントしておく．
+\eqref{eq20.17:Oseen近似した定常NS方程式}の非線形項で，$\v$を$\vec{u}$に置き換えたことは，球からの距離が$r\gg R$のときに有効である．
+したがってOseenの方程式は，距離が遠いところの流れは正しく記述しているが，距離が近いところでは正しく記述していないのは当然である．
+このことは，無限遠で必要な条件を満たす\eqref{eq20.17:Oseen近似した定常NS方程式}の解が，球面上で速度がゼロであるという厳密な条件を満たさないことからも明らかである；
+この条件は，速度をReynolds数の冪で展開したときの0次項によってのみ満たされ，1次項でさえ満たすことができない．
+
+
+したがって，一見するとOseenの方程式の解は抗力の補正項の有効な計算には使えないように思われるかもしれない．
+しかし，以下に述べる理由から，そうではない．
+近距離（$u\ll\nu/r$）における，流体の運動の$\vec{F}$への寄与は，$\vec{u}$の冪で展開できなければならない．
+したがって，この寄与から生じる$\vec{F}$の最初の非ゼロ補正項は$\vec{u}u^2$に比例しなければならず，Reynolds数に関する2次の補正を与える；
+よって\eqref{eq20.18:Stokesの法則の1次補正}の1次の補正項には影響しない．
+
+
+Stokesの法則に対する更なる補正と近距離での流れパターンの有効な精密化は，\eqref{eq20.17:Oseen近似した定常NS方程式}の直接解法では得られない．
+これらの精密化自体はあまり重要ではないが，小さなReynolds数での粘性流の問題を解くための一貫した摂動論の導出と解析には，かなりの方法論的関心がある
+（S. Kaplun and P. A. Lagerstrom 1957; I. Proudman and J. R. A. Pearson 1957）．
+ここでは詳細な計算には立ち入らず，これまでに得られた結果を説明し，そのために必要な式を掲げることにする
+\footnote{
+結果は
+M. Van Dyke, \textit{Perturbation Methods in Fluid Mechanics}, New York 1964
+に記載されている．
+そこでの計算は，速度$\v(\vec{r})$ではなく，よりコンパクトで，視覚的にわかりにくい流線関数を用いて行われている．
+球のまわりの流れを含む軸対称の流れに対して，球座標におけるStokesの流線関数$\psi(r,\theta)$は次式で定義される．
+\[
+    v_r = \frac{1}{r^2\sin\theta} \pdv{\psi}{\theta}, \quad
+    v_\theta = -\frac{1}{r\sin\theta} \pdv{\psi}{r}, \quad
+    v_\phi = 0
+\]
+これらは連続の式(15.22)を満たす．
+}．
+
+
+
+Reynolds数という小さなパラメータ$\R$を明示的に示すために，無次元の速度・位置ベクトル$\v '= \v/u$，$\vec{r}'=\vec{r}/R$を用い，本節のこれ以降ではダッシュを省いて$\v$，$\vec{r}$と表すことにする．
+運動方程式（圧力を排除して(15.10)の表式とする）は次のようになる．
+\begin{equation}\label{rotで表したNS方程式（Stokes精密化用）}
+    \R \Rot(\v\times\Rot\v) + \Laplacian\Rot\v = 0
+\end{equation}
+
+
+球の周囲には，$r \ll 1/\R$の近傍領域と$r \gg 1$の遠方領域という，2つの領域が存在する．
+この2つで全領域をカバーし，中間領域
+\begin{equation}\label{Stokes流の中間領域}
+    \frac{1}{\R} \gg r \gg 1
+\end{equation}
+で重なり合っている．
+
+
+一貫した摂動論において，近傍領域の第一近似はStokes近似，すなわち\eqref{rotで表したNS方程式（Stokes精密化用）}から因子$\R$を含む項を無視して得られる方程式$\Laplacian\Rot\v=0$の解である．
+この解は式\eqref{eq20.10:Stokes流での流速成分}で与えられ，無次元変数では
+\begin{equation}\label{無次元化した，Stokes流の流速成分}
+    v_r^{(1)} = \cos\theta \pqty{ 1-\frac{3}{2r}+\frac{1}{2r^3} }, \quad
+    v_{\theta}^{(1)} = -\sin\theta \pqty{ 1-\frac{3}{4r}-\frac{1}{4r^3} }, \quad 
+    r \ll \frac{1}{\R} .
+\end{equation}
+ここで上付き文字$(1)$は第一近似を表す．
+
+
+
+遠方領域での第一近似は，単に，摂動のない一様な流れに対応する定数$\v^{(1)}=\vec{\nu}$である（$\vec{\nu}$は流れの方向の単位ベクトル）．
+\eqref{rotで表したNS方程式（Stokes精密化用）}に$\v = \vec{\nu} + \v^{(2)}$を代入すると，$\v^{(2)}$についてのOseenの方程式が得られる．
+\begin{equation}
+    \R \Rot(\v\times\Rot\v^{(2)}) + \Laplacian\Rot\v^{(2)} = 0
+\end{equation}
+この解は，速度$\v^{(2)}$が無限遠で0であるという条件と，中間領域で解\eqref{無次元化した，Stokes流の流速成分}に接続するという条件を満たすものでなければならない．
+後者は特に，$r$が小さくなるにつれて急激に増加するような解を除外する
+\footnote{解の係数を決定するために，球の周りの任意の閉曲面を通過する流体の総量は0であるという条件も考慮に入れなければならない．}．
+よって適切な解は
+\begin{equation}\label{Stokes流の精密化（遠方）}
+    \begin{cases}
+        v_r^{(1)} + v_r^{(2)} = \cos\theta + \dfrac{3}{2r^2\R} \Bqty{ 1-\bqty{ 1+\dfrac{1}{2}r\R(1+\cos\theta) } e^{-r\R(1-\cos\theta)/2} } \\[8pt]
+        v_{\theta}^{(1)} + v_{\theta}^{(2)} = -\sin\theta + \dfrac{3}{4r}\sin\theta e^{-r\R(1-\cos\theta)/2} \\
+    \end{cases},
+    r\gg 1 .
+\end{equation}
+遠方領域での変数は，実際には半径$r$自身ではなく，積$\rho=r\R$であることに注意しよう．
+この変数を用いると，$r \gtrsim 1/\R$のとき式中の粘性項と慣性項が同程度の大きさになることにより，\eqref{rotで表したNS方程式（Stokes精密化用）}から$\R$が消えてしまう．
+$\R$が解に現れるのは，近傍領域の境界条件と接続する境界条件によってのみである．
+\eqref{Stokes流の精密化（遠方）}の第2項を$\rho$で表すと$\R$を係数として含むので，遠方領域での$\v(\vec{r})$の展開は$\rho=r\R$が与えられたときの$\R$の冪展開となる．
+
+
+
+解\eqref{無次元化した，Stokes流の流速成分}と\eqref{Stokes流の精密化（遠方）}の接続が正しいかどうかを調べるために，
+中間領域\eqref{Stokes流の中間領域}では$r\R \ll 1$であること，式\eqref{Stokes流の精密化（遠方）}がこの変数の累乗で展開できることを見てみよう．
+（一様流を除いた）最初の2項に関しては，次のようになる．
+\begin{equation}\label{中間領域でのStokes流の補正}
+    \begin{cases}
+        v_r = \cos\theta \pqty{1-\dfrac{3}{2r}} + \dfrac{3\R}{16} (1-\cos\theta)(1+3\cos\theta) \\[7pt]
+        v_\theta = -\sin\theta \pqty{1-\dfrac{3}{4r}} - \dfrac{3\R}{8} \sin\theta(1-\cos\theta) \\
+    \end{cases}
+\end{equation}
+この範囲では$r\gg1$なので，\eqref{無次元化した，Stokes流の流速成分}の$1/r^3$の項は省略できる；
+残りの項は\eqref{中間領域でのStokes流の補正}の第1項と同じであり，第2項は後で利用する．
+
+
+
+
+近傍領域で次の近似に進む場合，$\v = \v^{(1)} + \v^{(2)}$と書き，\eqref{rotで表したNS方程式（Stokes精密化用）}から第二近似での補正式を得る．
+\begin{equation}
+    \Laplacian\Rot\v^{(2)} = -\R \Rot (\v^{(1)} \times \Rot\v^{(1)} )
+\end{equation}
+この方程式の解は，球面上で0になるという条件と，遠方領域での解に接続するという条件を満たす必要がある．
+後者は，$r \gg 1$のときの関数$\v^{(2)}(\vec{r})$の主要項が，\eqref{中間領域でのStokes流の補正}の第2項と一致しなければならないことを意味する．
+適切な解は
+\begin{equation}\label{近傍領域でのStokes流の2次補正}
+    \begin{cases}
+        v_r^{(2)} = \dfrac{3\R}{8}v_r^{(1)} + \dfrac{3\R}{32} \pqty{1-\dfrac{1}{r}}^2 \pqty{ 2 + \dfrac{1}{r} + \dfrac{1}{r^2} }(1-3\cos^2\theta) \\[7pt]
+        v_{\theta}^{(2)} = \dfrac{3\R}{8}v_{\theta}^{(1)} + \dfrac{3\R}{32} \pqty{1-\dfrac{1}{r}} \pqty{ 4 + \dfrac{1}{r} + \dfrac{1}{r^2} + \dfrac{2}{r^3} } \sin\theta\cos\theta \\
+    \end{cases}
+    , r \ll \frac{1}{\R}
+\end{equation}
+中間領域では，これらの式で$1/r$の因子を含まない項だけが残り，実際に\eqref{中間領域でのStokes流の補正}の第2項と一致する．
+
+
+速度分布\eqref{近傍領域でのStokes流の2次補正}から，抗力に関するStokesの法則の補正項を計算することができる．
+\eqref{近傍領域でのStokes流の2次補正}の第2項は角度依存性があるため抗力に寄与せず，第1項は\eqref{eq20.18:Stokesの法則の1次補正}に示した補正量$3\R/8$を与える．
+以上の考察から，球面近傍の正確な速度分布は，この近似では，抗力に関してOseenの方程式の解と同じ結果を導く．
+
+
+次の近似は，説明した手順を続けることによって得ることができ，速度分布の中に対数項を含む；
+抗力の式\eqref{eq20.18:Stokesの法則の1次補正}において，括弧を
+\[
+    1 + \frac{3}{8}\R -\frac{9}{40}\R^2 \log(\frac{1}{\R}),
+\]
+で置き換え，対数が大きいと仮定する
+\footnote{I. Proudman and J. R. A. Pearson, \textit{Journal of Fluid Mechanics} \textbf{2}, 237, 1957 参照．}．
+
+
+
+
+
+\BackToTheToc

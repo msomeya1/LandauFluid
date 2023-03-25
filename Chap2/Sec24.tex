@@ -1,0 +1,776 @@
+\section{粘性流体中の振動}
+
+粘性流体中の物体が振動するとき，それによって起こる流れは多くの特徴を持つ．
+それらを調べるために，単純だが典型的な例から始めよう（G. G. Stokes 1851）．
+
+
+
+\subsection*{振動する無限平面がつくる流れ}
+
+振動数$\omega$で調和振動している無限平面によって仕切られた非圧縮性流体を考え，その結果生じる流体の運動を調べる．
+固体表面を$yz$平面にとり，流体は$x>0$の部分を占めているとし，振動方向に$y$軸をとる．
+振動している表面の速度$u$は時間の関数で，$u(t)=A\cos(\omega t+\alpha)$という形で表されるとする．
+これを，複素数の実部の形で書くと便利である：
+\[
+    u = \Re \{ u_0 e^{-i\omega t}\}
+\]
+ここで，定数$u_0 = A e^{-i\alpha}$は一般には複素数だが，時間の原点を適当に選ぶことにより実数とすることができる．
+
+
+速度$u$に関する線形演算のみが含まれる計算に限り$\Re$の記号を省略し，$u$が複素数であるかのように取り扱い，最後の結果で実部を取ることにしよう．すると
+\begin{equation}
+    u_y = u = u_0 e^{-i\omega t}
+\end{equation}
+と書ける．
+流体の速度は，境界条件：$x=0$で$\v=\vec{u}$すなわち$v_x=v_z=0, \; v_y=u$を満たさなければならない．
+
+対称性から，全ての量が座標$x$と時間$t$にのみ依存することは明らかであり，連続の式
+$\Div \v = \dpdv{v_x}{x} = 0$から$v_x = \const = 0$を得る（境界条件を用いた）．
+また，全ての量は座標$y,z$によらないから$(\v\cdot\Grad)\v = v_x \dpdv{v_x}{x}$であり，$v_x=0$より自動的に$(\v\cdot\Grad)\v = 0$となる．
+よって運動方程式\eqref{eq15.7:非圧縮性流体のNS方程式}は
+\begin{equation}\label{eq24.2:無限平面が振動するときのNS方程式}
+    \pdv{\v}{t} = - \frac{1}{\rho} \Grad p + \nu \Laplacian \v
+\end{equation}
+という線形の方程式になる．
+$x$成分から$\dpdv{p}{x}=0$，すなわち$p=\const$を得る．
+さらに，対称性から速度$\v$はどこでも$y$方向を向いている．
+$v_y=v$を\eqref{eq24.2:無限平面が振動するときのNS方程式}へ代入し
+\begin{equation}\label{eq24.3:無限平面が振動するときのNS方程式（熱伝導型）}
+    \pdv{v}{t} = \nu \pdv[2]{v}{x}
+\end{equation}
+を得る．
+これは（1次元）熱伝導方程式の形をしている．
+$x$と$t$に関して周期的で，かつ$x=0$で$v=u$となるような解
+\[
+    v = u_0 e^{i(kx-\omega t)}
+\]
+を求めよう．
+\eqref{eq24.3:無限平面が振動するときのNS方程式（熱伝導型）}へ代入し$i\omega=\nu k^2$を得る．
+$i$の平方根$\pm\dfrac{1+i}{\sqrt{2}}$のうちマイナスの方を取ると，流体の速度が$x\to\infty$で発散するから不適である．よって
+\begin{equation}
+    k = \sqrt{\frac{i\omega}{\nu}} = (1+i) \sqrt{\frac{\omega}{2\nu}}
+    = \frac{1+i}{\delta} \quad \left( \delta \equiv \sqrt{\frac{2\nu}{\omega}} \right) .
+\end{equation}
+速度は
+\begin{equation}
+    v = u_0 e^{i(\frac{1+i}{\delta}x-\omega t)} = u_0 e^{-x/\delta} e^{i(x/\delta-\omega t)}
+\end{equation}
+となる．
+よって，粘性流体中では，速度$v_y=v$が伝播方向に垂直な横波が生じうる．
+しかし，この波は，運動を引き起こしている固体表面から離れるにつれて指数的に減衰する．
+振幅が$1/e$になる距離$\delta$は\emph{表皮厚さ（表皮深さ）}と呼ばれる（1波長離れると$1/e^{2\pi} \approx 1/540$に減衰する）．
+この厚さは，波の振動数が高いほど薄いが，流体の動粘性率が大きいほど厚くなる．
+
+
+固体表面に働く単位面積あたりの摩擦力（明らかに$y$方向である）を計算してみよう．
+\begin{align}
+    \eval{\sigma_{xy}}_{x=0} &= \eta \eval{\pdv{v_y}{x}}_{x=0} = \eta \frac{i-1}{\delta} u_0 \eval{ e^{i(\frac{1+i}{\delta}x-\omega t)} }_{x=0} = \eta \sqrt{\frac{\omega}{2\nu}} (i-1) u \notag \\
+    &= \sqrt{\frac{1}{2}\rho\eta\omega} \, (i-1) u \label{eq24.6:無限平面に働く摩擦力}
+\end{align}
+$i-1=-\sqrt{2}e^{-i\pi/4}$に注意して\eqref{eq24.6:無限平面に働く摩擦力}の実部をとると（$u_0$は実とする）
+\[
+    \eval{\sigma_{xy}}_{x=0} = - \sqrt{\rho\eta\omega} \, u_0 \cos \left( \omega t + \frac{\pi}{4} \right) 
+\]
+となる．一方，振動している表面の速度は$u=u_0 \cos \omega t$である．
+よって，速度と摩擦力の間には位相差が生じている．
+
+\begin{details}
+半平面がその縁（ふち）と平行に振動する場合，縁の影響による摩擦力も生じる．
+半平面の振動による粘性流体の運動の問題や，任意の角度のくさびの振動の問題は，くさびによる回折の理論で用いられる方程式：$\Laplacian f + \kappa^2 f = 0$の解を用いて解くことができる．
+ここでは参考のため1つの結果だけを掲げておこう；
+半平面の振動の場合，縁によって生じる摩擦力は，半平面の長さが$\dfrac{\delta}{2}=\sqrt{\dfrac{\nu}{2\omega}}$だけ増えた効果に等しい（L. D. Landau 1947）．
+\end{details}
+
+
+以上の問題で，エネルギー散逸の時間平均を簡単に計算することができる．
+もちろん一般形\eqref{eq16.3:非圧縮性流体のエネルギー散逸}を用いてもよいが，この場合には，摩擦力のする仕事として直接計算する方が易しい．
+振動している平面の単位面積で単位時間に散逸するエネルギーは，摩擦力$\sigma_{xy}$と速度$u_y=u$の積に等しい．
+\begin{align}
+    \overline{ -\eval{\sigma_{xy}}_{x=0} \cdot u} &= \sqrt{\rho\eta\omega} \, {u_0}^2 \overline{ \cos \omega t \cdot \cos \left( \omega t + \frac{\pi}{4} \right)} \notag \\
+    & \gyoukan{ 時間平均部は$\overline{\cos \omega t \cdot \dfrac{\cos \omega t - \sin \omega t}{\sqrt{2}}} = \dfrac{1}{2\sqrt{2}}$} \notag \\
+    &= \sqrt{\frac{1}{2} \rho\eta\omega} \, \frac{{u_0}^2}{2} \label{eq24.7:平面振動によるエネルギー散逸}
+\end{align}
+これは振動数及び粘性率の平方根に比例する．
+
+
+
+$u=u(t)$で任意に運動する平面により生ずる流体の運動は，\eqref{eq24.3:無限平面が振動するときのNS方程式（熱伝導型）}を$x=0$で$v=u$という境界条件のもとで解くことで得られる．
+\eqref{eq24.3:無限平面が振動するときのNS方程式（熱伝導型）}の形の熱伝導の問題は\S~52で論ずるから，ここでは詳しい計算を省き，結果のみ記す．
+流体の速度と，表面に働く単位面積あたりの摩擦力は
+\[
+    v(x,t) = \frac{x}{2\sqrt{\pi\nu}} \int_{-\infty}^{t} \frac{u(\tau)}{(t-\tau)^{3/2}} \exp \left[ - \frac{x^2}{4\nu(t-\tau)} \right] \; d\tau
+\]
+\begin{equation}
+    \eval{\sigma_{xy}}_{x=0} = - \sqrt{\frac{\rho\eta}{\pi}}  \int_{-\infty}^{t} \dv{u(\tau)}{\tau} \frac{d\tau}{\sqrt{t-\tau}}
+\end{equation}
+となる（それぞれ(52.13)(52.14)と比較せよ）．
+
+
+
+
+\subsection*{任意の形の物体が振動する場合}
+
+次に，任意の形の物体が振動する，一般的な場合を考えよう．
+平面が振動する場合には，移流項$(\v\cdot\Grad)\v$は自動的に0となったが，任意の形の表面を持つ場合にはそうとは限らない．
+しかし，移流項は他の項に比べて小さく，無視できるとしよう（この仮定が成り立つ条件についてはのちに調べる）．
+よって，前と同様に線形の方程式\eqref{eq24.2:無限平面が振動するときのNS方程式}を用いることができる．両辺のrotをとって$\Rot\Grad=0$に注意すると
+\begin{equation}\label{eq24.9:渦度に対する熱伝導型の方程式}
+    \pdv{t} (\Rot\v) = \nu \Laplacian(\Rot\v)
+\end{equation}
+となり，渦度$\Rot\v$は熱伝導型の方程式を満たす．
+すでに見たように，その解は指数的に減衰する．すなわち，渦度は流体内部に向かって急激に減少する．
+言い換えれば，物体の振動によって生じる流れは，物体に近い層内では回転的だが，物体から離れたところではポテンシャル流とみなせる．
+回転的な領域の厚さはもちろん$\delta$のオーダーである．
+
+重要な極限として，2つの場合が考えられる：
+振動する物体の大きさ$l$に比べて，$\delta$が大きい場合と小さい場合である．
+
+
+\subsubsection*{$\delta \gg l$の極限}
+$\delta \gg l$つまり$l^2\omega \ll \nu$という条件に加えて，Reynolds数が小さいと仮定しよう．
+振動の振幅を$a$とすると，物体の速度は$a\omega$のオーダーであるから，Reynolds数は$\dfrac{a\omega\cdot l}{\nu}$のオーダーである．よって
+\begin{equation}\label{eq24.10:δ>>lで移流項が無視できる条件}
+    l^2\omega \ll \nu , \; \frac{a\omega l}{\nu} \ll 1
+\end{equation}
+を仮定することになる．
+これは振動数が小さい，つまり時間の経過に対して速度がゆっくりとしか変化しないことを意味する．
+よって運動方程式で$\partial\v/\partial t$を無視することができる（もちろんReynolds数が小さいから移流項も無視できる）．
+これは，流れが定常であることを意味する．
+よって$\delta \gg l$のとき，流れは常に定常とみなすことができ，ある瞬間の流れは，物体が（その時点での）速度で一様に運動している場合と同じになる．
+例えば，流体中の球の振動を考える場合（$l$は球の半径になる），振動数が条件\eqref{eq24.10:δ>>lで移流項が無視できる条件}を満たすなら，
+球に働く抗力は，Reynolds数が小さい場合の球の一様運動に関するStokesの法則\eqref{eq20.14:Stokesの法則}で与えられるものになる．
+
+
+
+
+
+
+\subsubsection*{$\delta \ll l$の極限}
+$\delta \ll l$に加え，移流項が無視できるためには，振動の振幅が物体の大きさに比べて小さくなければならない．
+\begin{details}
+平面が振動する場合，$\v$は物体から離れるにつれて$\delta$程度のオーダーで指数的に減少した．
+これは，振動する平面は流体に変位を与えず，平面から離れたところでは流体が静止状態にあったためである．
+別の形の物体では，流体は変位し，流体の速度は物体の大きさ$l$程度の距離まで変化する．
+したがって$(\v\cdot\Grad)\v \sim \dfrac{v^2}{l} \sim \dfrac{(a\omega)^2}{l}$であり，
+\[
+    \frac{(\v\cdot\Grad)\v}{\partial\v/\partial t} \sim \frac{(a\omega)^2/l}{(a\omega)\cdot\omega} = \frac{a}{l}
+\]
+が無視できるとき$a\ll l$である．
+\end{details}
+
+\begin{equation}\label{eq24.11:δ<<lで移流項が無視できる条件}
+    l^2 \omega \gg \nu, \; a \ll l
+\end{equation}
+この場合，Reynolds数は小さいとは限らない．
+
+
+
+
+さて，条件\eqref{eq24.11:δ<<lで移流項が無視できる条件}が成り立つ場合の，振動する物体のまわりの流れを考えよう．
+物体の表面近くの薄い層では流れは回転的だが，それ以外の領域ではポテンシャル流とみなせる．
+よって，物体に近接した層を除けば，流れは方程式
+\begin{equation}\label{eq24.12:δ<<lでポテンシャル流領域で成り立つ方程式}
+    \Rot\v=\vec{0}, \quad \Div\v=0
+\end{equation}
+で与えられる．$\Laplacian\v=\Rot\Rot\v - \Grad\Div\v=\vec{0}$となるから，Navier-Stokes方程式はEuler方程式に帰着する．
+つまり（物体表面に近い層を除けば）理想流体と同じである．この層は薄いから，
+\eqref{eq24.12:δ<<lでポテンシャル流領域で成り立つ方程式}を解くときには，物体表面で満たすべき境界条件（流体の速度が物体の速度に等しい）を与えればよい．
+ところが，理想流体での境界条件は，速度の法線成分が等しいことしか要求しない．
+よって，\eqref{eq24.12:δ<<lでポテンシャル流領域で成り立つ方程式}を解いて得られる解のうち
+\begin{itemize}
+    \item 速度の法線成分は理想流体の場合と同様であり，改めて調べる必要はない．
+    \item 速度の接線成分は境界条件を満たしておらず，実際には，物体から少し離れたところでの値と，物体表面での値は異なる．
+    つまり，表面付近の層で，接線速度は急激に変化しなければならない．
+\end{itemize}
+この変化の様子は，簡単に調べることができる．
+物体表面のうち，$\delta$に比べれば大きいが，$l$に比べれば小さいような部分を考えよう．
+この部分は近似的に平面とみなせるから，平面について既に得られた解を使うことができる．
+$x$軸をこの部分の法線方向に，$y$軸を接線速度の方向にとり，$v_y$を物体に対する流体の相対的な接線速度としよう．
+$v_y$は表面で0である．
+一方で，\eqref{eq24.12:δ<<lでポテンシャル流領域で成り立つ方程式}を解いて得られた，（物体表面の層の外側での）$v_y$を$v_0 e^{-i\omega t}$としよう
+\footnote{ここでは，物体表面が静止している（$x=0$で$v_y=0$）ような座標系で書かれている．
+よって$v_0$は，静止している物体のまわりに生じるポテンシャル流の解と考える必要がある．}．
+求める解は，$x=0$で0だが，$x$が大きくなるにつれ指数的に$v_0 e^{-i\omega t}$に漸近するようなもので
+\begin{equation}
+    v_y = v_0 e^{-i\omega t} \left[ 1 - e^{-(1-i)x/\delta} \right]
+    = v_0 e^{-i\omega t} \left( 1 - e^{-x/\delta}e^{ix/\delta} \right)
+\end{equation}
+（ただし$\delta=\sqrt{2\nu/\omega}$）となる．
+
+また，単位時間に散逸する全エネルギーは，\eqref{eq24.7:平面振動によるエネルギー散逸}の代わりに，物体の表面全体にわたる面積分
+\begin{equation}\label{eq24.14:任意の物体が振動するときのエネルギー散逸}
+    \dot{E}_\mathrm{kin} = - \frac{1}{2} \sqrt{\frac{\rho\eta\omega}{2}} \int |v_0|^2 \; dS 
+\end{equation}
+で与えられる．
+
+
+
+
+\subsection*{粘性流体中で振動する物体に働く抗力}
+
+ここでは，抗力について一般的な記述をしておこう．
+物体の速度を複素表示で$u = u_0 e^{-i\omega t}$と書くと，速度$u$に比例する抗力$F$を複素表示で$F=\beta u$と書くことができる（$\beta=\beta_1+i\beta_2$は複素定数）．
+この式は，実係数を持つ2つの項の和としても表せる．
+\begin{equation}\label{eq24.15:抗力の速度と加速度による表示}
+    F = (\beta_1+i\beta_2)u = \beta_1 u - \frac{\beta_2}{\omega} \dot{u}
+    \gyoukan{←$iu = - \dfrac{1}{\omega} \dot{u}$に注意}
+\end{equation}
+第1項は速度$u$に，第2項は加速度$\dot{u}$に比例する．
+
+
+エネルギー散逸の時間平均は，抗力と速度の積を平均したものである．
+これは$u$に関する線形演算ではないから，初めから実数で書いておく必要がある．
+\[
+    u = \frac{1}{2} (u_0 e^{-i\omega t} + u_0^* e^{i\omega t}),
+\]
+\[
+    F = \frac{1}{2} ( \beta u + \beta^* u^*) = \frac{1}{2} ( u_0 \beta e^{-i\omega t} + u_0^* \beta^* e^{i\omega t})
+\]
+より
+\[
+    Fu = \frac{1}{4} (u_0 e^{-i\omega t} + u_0^* e^{i\omega t}) ( u_0 \beta e^{-i\omega t} + u_0^* \beta^* e^{i\omega t})
+    = \frac{1}{4} [ {u_0}^2 \beta e^{-2i\omega t} + u_0 u_0^* \beta + u_0 u_0^* \beta^* + (u_0^*)^2 \beta^* e^{2i\omega t} ] .
+\]
+$\overline{e^{\pm 2i\omega t}} = 0$であるから結局
+\begin{equation}
+    \overline{Fu} = \frac{1}{4} (\beta+\beta^*) |u_0|^2
+    = \frac{1}{2} \beta_1 |u_0|^2
+\end{equation}
+となる．
+エネルギー散逸は$\beta$の実部，\eqref{eq24.15:抗力の速度と加速度による表示}で言えば速度に比例する項のみから生じる．
+この項は\emph{散逸項}と呼ばれる．
+一方，$\beta$の虚部すなわち加速度に比例する項はエネルギー散逸に寄与せず，\emph{慣性項}と呼ばれる．
+
+粘性流体中で回転振動する物体に働く力のモーメントに対しても，同様の議論が成り立つ．
+
+
+
+
+
+
+
+\begin{details}
+以下の問題の解答で，
+\[
+    k = \frac{1+i}{\delta}, \quad \delta =\sqrt{\frac{2\nu}{\omega}} 
+\]
+は共通とする．
+\end{details}
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{問題24.1（振動する2平面の間の流体）}
+平行な2枚の固体平面が距離$h$離れて置かれており，間を粘性流体が満たしている．
+一方の平面がその面内で振動するとき，それぞれの面に働く摩擦力を求めよ．
+\end{mondai}
+\begin{kaitou}
+座標系は本文と同じとする．
+\eqref{eq24.3:無限平面が振動するときのNS方程式（熱伝導型）}$\dpdv{v}{t} = \nu \dpdv[2]{v}{x}$の解は
+\[
+    v = (A\cos kx + B \sin kx) e^{-i\omega t}
+\]
+と書ける．
+$x=0$で$v=u=u_0 e^{-i\omega t}$，$x=h$で$v=0$という境界条件から$A,B$を決めると
+$A=u_0$，\\
+$B = - \dfrac{\cos kh}{\sin kh} u_0$となるから
+\[
+    v = u_0 \left( \cos kx - \frac{\cos kh}{\sin kh} \sin kx \right) e^{-i\omega t}
+    = u \frac{\sin k(h-x)}{\sin kh}
+\]
+を得る．
+
+振動している方の平面に働く単位面積あたりの摩擦力は
+\[
+    P_{1y} = \eta \eval{\pdv{v}{x}}_{x=0} = \eta u \eval{ \frac{-k \cos k(h-x)}{\sin kh} }_{x=0}
+    = -\eta ku \cdot \cot kh,
+\]
+静止している方の平面では
+\[
+    P_{2y} = -\eta \eval{\pdv{v}{x}}_{x=h} = -\eta u \eval{ \frac{-k \cos k(h-x)}{\sin kh} }_{x=h}
+    = \frac{\eta ku}{\sin kh}.
+\]
+もちろん，考えている全ての量の実部をとるものとする．
+
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+振動している平面が厚さ$h$の流体層に覆われ，流体の表面が自由表面のとき，平面に働く摩擦力を求めよ．
+\end{mondai}
+\begin{kaitou}
+問題~\ref{mo:問題24.1（振動する2平面の間の流体）}の$A,B$を，$x=0$で$v=u$，$x=h$で$\sigma_{xy}=\eta\dpdv{v}{x}=0$という境界条件から決めると
+$A=u_0$，$B = \dfrac{\sin kh}{\cos kh} u_0$となるから
+\[
+    v = u_0 \left( \cos kx + \frac{\sin kh}{\cos kh} \sin kx \right) e^{-i\omega t}
+    = u \frac{\cos k(h-x)}{\cos kh}
+\]
+を得る．摩擦力は
+\[
+    P_y = \eta \eval{\pdv{v}{x}}_{x=0} = \eta u \eval{ \frac{k \sin k(h-x)}{\cos kh} }_{x=0}
+    = \eta ku \cdot \tan kh.
+\]
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題3 %%%%%%%%%%
+
+\begin{mondai}{}{}
+大きな半径$R$の平面平板が，軸を中心に微小な回転振動をしている（回転角は$\theta(t)=\theta_0 \cos \omega t, \; \theta_0 \ll 1$とする）．
+円板に働く摩擦力のモーメントを求めよ．
+\end{mondai}
+\begin{kaitou}
+円板は非常に大きいから，端の影響はないとしてよい．
+回転軸を$z$軸とする円筒座標系をとると$v_r=v_z=0$である．
+$v_\phi = r\Omega(z, t)$という形の解を求めよう．
+微小振幅であるから，移流項は（$\omega$によらず）無視することができる．
+運動方程式の$\phi$成分は
+\[
+    \pdv{v_\phi}{t} = -\frac{1}{\rho r} \pdv{p}{\phi} 
+    + \nu \left( \pdv[2]{v_\phi}{r} + \frac{1}{r^2} \pdv[2]{v_\phi}{\phi} + \pdv[2]{v_\phi}{z} + \frac{1}{r} \pdv{v_\phi}{r} - \frac{v_\phi}{r^2} \right) .
+\]
+対称性から$\partial/\partial\phi=0$であり，$v_\phi=r\Omega$を代入すると
+\[
+    r \pdv{\Omega}{t} = \nu \left( r \pdv[2]{\Omega}{z} + \frac{1}{r} \Omega -\frac{r\Omega}{r^2} \right)
+    \qquad\yueni \pdv{\Omega}{t} = \nu \pdv[2]{\Omega}{z} .
+\]
+よって角速度$\Omega$は熱伝導型の方程式を満たす．
+回転角を$\theta(t) = \theta_0 e^{-i\omega t}$と書く（もちろん実部をとる）と，表面$z=0$での境界条件は
+\[
+    \Omega \; \left( = \dv{\theta}{t} \right) = -i\omega \theta_0 e^{-i\omega t}
+\]
+であり，$z\to\infty$での境界条件は$\Omega=0$である．
+
+$z$と$t$について周期的な解で，$z=0$での境界条件を満たすようなもの$\Omega=-i\omega\theta_0 e^{i(kz-\omega t)}$を考えると，
+本文と同様にして$k=\dfrac{1+i}{\delta}$を得る．よって
+\[
+    \Omega = -i\omega \theta_0 e^{-z/\delta} e^{i(z/\delta-\omega t)}
+\]
+となり，実部をとれば
+\[
+    \Omega = \omega \theta_0 e^{-z/\delta} \sin(z/\delta-\omega t)
+\]
+となる．
+
+平板表面に働く単位面積あたりの摩擦力は
+\begin{align*}
+    \eval{\sigma_{z\phi}}_{z=0} &= \eta r \eval{\pdv{\Omega}{z}}_{z=0} \\
+    &= \eta r \omega\theta_0 \left[ -\frac{1}{\delta} e^{-z/\delta} \sin(z/\delta-\omega t) 
+    + e^{-z/\delta} \frac{1}{\delta} \cos(z/\delta-\omega t) \right]_{z=0} \\
+    &= \frac{\eta r \omega\theta_0}{\delta}(\sin\omega t + \cos\omega t) 
+     = \omega\theta_0 r \sqrt{\frac{\rho\eta\omega}{2}} \cdot \sqrt{2} \cos \left( \omega t - \frac{\pi}{4} \right)
+\end{align*}
+であるから，摩擦力のモーメントは（流体は円板の片側にのみ存在するとする）
+\[
+    M = \int_{0}^{R}\int_{0}^{2\pi}r \cdot \eval{\sigma_{z\phi}}_{z=0} r \; dr d\phi
+    = \omega\theta_0 \sqrt{\rho\eta\omega}  \cos \left( \omega t - \frac{\pi}{4} \right) \cdot 2\pi \cdot \frac{R^4}{4}
+    = \frac{\pi\omega\theta_0}{2} \sqrt{\rho\eta\omega} R^4 \cos \left( \omega t - \frac{\pi}{4} \right).
+\]
+
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題4 %%%%%%%%%%
+
+\begin{mondai}{}{}
+平行な2平面の間に流体があり，（平面に平行な）圧力勾配が時間について調和振動している．
+この場合の流れを求めよ．
+\end{mondai}
+\begin{kaitou}
+2平面の中間に$xz$平面をとり，$x$軸は圧力勾配に平行とする．
+そして圧力勾配は
+\[
+    -\frac{1}{\rho} \pdv{p}{x} = a e^{-i\omega t}
+\]
+のように表されるとする．
+
+対称性から，速度は$x$方向を向いており，$y$のみに依存するから，Navier-Stokes方程式から
+\[
+    \pdv{v}{t} = a e^{-i\omega t} + \nu \pdv[2]{v}{y}.
+\]
+$v=f(y)e^{-i\omega t}$という形の解を求めよう．
+\[
+    -i\omega f = a + \nu \dv[2]{f}{y}
+    \qquad \yueni \dv[2]{f}{y} + \frac{i\omega}{\nu} f = -\frac{a}{\nu} .
+\]
+特解$f = \dfrac{ia}{\omega}$と斉次方程式の一般解$f = A\cos ky + B\sin ky \; \left( k^2 = \dfrac{i\omega}{\nu} \right)$を重ね合わせて，
+方程式の解は
+\[
+    v = \left( \frac{ia}{\omega} + A\cos ky + B\sin ky \right) e^{-i\omega t}
+\]
+となる．$y=\pm\dfrac{h}{2}$であるから$B=0, \; A=-\dfrac{ia/\omega}{\cos(kh/2)}$となり
+\[
+    v = \frac{ia e^{-i\omega t}}{\omega} \left( 1 - \dfrac{\cos ky}{\cos(kh/2)} \right)
+\]
+を得る．
+
+速度の断面全体にわたる平均は
+\begin{align*}
+    \overline{v} &\equiv \frac{1}{h} \int_{-h/2}^{h/2} v \; dy \\
+    &= \frac{ia e^{-i\omega t}}{\omega} \frac{2}{h} \left[ y - \frac{\sin ky}{k \cos(kh/2)} \right]_0^{h/2} \\
+    &= \frac{ia e^{-i\omega t}}{\omega} \left\{ 1 - \frac{2}{kh} \tan\left( \frac{kh}{2} \right) \right\}
+\end{align*}
+となる．
+
+
+最後に，2つの極限の場合を考えよう．
+\begin{itemize}
+    \item $h/\delta \ll 1 \; (kh \ll 1)$の場合．$\dfrac{\tan x}{x} = 1 + \dfrac{x^2}{3} + \order{x^4}$であるから
+    \[
+        \overline{v} \simeq \frac{ia e^{-i\omega t}}{\omega} \left( - \frac{1}{3} \right) \cdot \left( \frac{kh}{2} \right)^2
+        = \frac{ia e^{-i\omega t}}{\omega} \left( - \frac{h^2}{12} \right) \cdot \frac{i\omega}{\nu}
+        = \frac{h^2}{12\nu} a e^{-i\omega t}
+    \]
+    となり\eqref{eq17.5:圧力勾配により駆動される流れの平均流速}に戻る．
+    \item $h/\delta \gg 1 \; (kh \gg 1)$の場合．$\overline{v} \simeq \dfrac{ia e^{-i\omega t}}{\omega}$となる．
+    これは$\nu\to0$の極限に対応し，（平面に近いところを除けば）速度が一様であるという事実に一致する．
+\end{itemize}
+
+
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題5 %%%%%%%%%%
+
+\begin{mondai}{}{問題24.5（前後に振動する球のまわりの流れ）}
+流体中で前後に振動している半径$R$の球に働く抗力を求めよ．
+\end{mondai}
+\begin{kaitou}
+球の速度を$\vec{u} = \vec{u}_0 e^{-i\omega t}$と書くことにする（$\vec{u}_0$は実ベクトル）．
+\S~20と同様に，$\v = e^{-i\omega t} \Rot\Rot(f\vec{u}_0)$の形の解を求めよう．
+$f$は$r$のみの関数とし，原点はある瞬間の球の中心にとるものとする．
+\begin{align*}
+    \Rot\v &= e^{-i\omega t} \Rot\Rot\Rot(f\vec{u}_0) = e^{-i\omega t} \left\{ -\Laplacian \Rot(f\vec{u}_0) \right\} \\
+    &= -e^{-i\omega t} \Laplacian \left( \Grad f \times \vec{u}_0 \right) = -e^{-i\omega t} \Laplacian \left( \Grad f \right) \times \vec{u}_0
+\end{align*}
+となるから，\eqref{eq24.9:渦度に対する熱伝導型の方程式}へ代入して
+\[
+    i\omega e^{-i\omega t} \Laplacian \left( \Grad f \right) \times \vec{u}_0
+    = -\nu e^{-i\omega t} \Laplacian^2 \left( \Grad f \right) \times \vec{u}_0.
+\]
+$\vec{u}_0 \neq \vec{0}$であるから
+\[
+    \Laplacian^2 \left( \Grad f \right) + \frac{i\omega}{\nu} \Laplacian \left( \Grad f \right) = \vec{0}.
+\]
+\[
+    \Grad\left( \Laplacian^2 f + \frac{i\omega}{\nu} \Laplacian f \right)  = \vec{0}
+\]
+\[
+    \Laplacian^2 f + \frac{i\omega}{\nu} \Laplacian f = \const
+\]
+$\Laplacian f$が無限遠で0となることを要求すれば，右辺は0とすることができる．
+\[
+    \Laplacian^2 f + \frac{i\omega}{\nu} \Laplacian f = 0
+\]
+球座標系では$\Laplacian g = \dfrac{1}{r^2} \ddv{r} \left( r^2 \ddv{g}{r} \right) = \dfrac{1}{r} \ddv[2]{(rg)}{r}$が成り立つから
+（$g=\Laplacian f$とすれば）
+\[
+    \frac{1}{r} \dv[2]{(r\Laplacian f)}{r} + \frac{i\omega}{\nu} \Laplacian f = 0
+    \qquad \yueni 
+    \dv[2]{(r\Laplacian f)}{r} + k^2 (r\Laplacian f) = 0.
+\]
+よって$r\Laplacian f \propto e^{\pm ikr}$となるが，マイナスを選ぶと$e^{-ikr} = e^{-i\frac{1+i}{\delta}r}$は無限遠で発散するからプラスが適する．
+ゆえに，$a$を実数として
+\[
+    \Laplacian f = ika \frac{e^{ikr}}{r}
+\]
+となる．左辺に再び$\Laplacian = \dfrac{1}{r^2} \ddv{r} \left( r^2 \ddv{r} \right)$を用いれば
+\begin{align*}
+    \dv{r} \left( r^2 \dv{f}{r} \right) &= ik ar e^{ikr} \\
+    & \gyoukan{← $\displaystyle\int x e^{px} \; dx = \frac{(px-1)e^{px}}{p^2}$ } \\
+    r^2 \dv{f}{r} &= ika \cdot \frac{(ikr-1)e^{ikr}}{(ik)^2} + b = a \left( r - \frac{1}{ik} \right) e^{ikr} + b \\
+    \yueni \dv{f}{r} &= \frac{ a \left( r - \frac{1}{ik} \right) e^{ikr} + b }{r^2} .
+\end{align*}
+（速度は$f$の微分で与えられるから，これ以上積分する必要はない）
+
+このとき
+\[
+    \Grad f = \dv{f}{r} \cdot \frac{\vec{r}}{r}
+    = \frac{a(r-\frac{1}{ik})e^{ikr}+b}{r^3} \vec{r},
+\]
+\[
+    \dv{r} \left[ a \left( r-\frac{1}{ik} \right) e^{ikr}+b \right] = a ikr e^{ikr}
+\]
+\[
+    \Grad \left[ \frac{a(r-\frac{1}{ik})e^{ikr}+b}{r^3} \right]
+    = \frac{1}{r^3} a ik \vec{r} e^{ikr} + \left\{ a \left( r-\frac{1}{ik} \right) e^{ikr}+b \right\} \frac{-3\vec{r}}{r^5}
+\]
+などに注意すると
+\begin{align*}
+    \Rot\Rot(f\vec{u}_0) &= \Grad(\vec{u}_0 \cdot \Grad f) - \vec{u}_0 (\Laplacian f) \\
+    &= \Grad\left[ (\vec{u}_0\cdot\vec{r}) \frac{a(r-\frac{1}{ik})e^{ikr}+b}{r^3} \right] - \vec{u}_0 \frac{ika e^{ikr}}{r} \\
+    &= \vec{u}_0 \frac{a(r-\frac{1}{ik})e^{ikr}+b}{r^3} + (\vec{u}_0\cdot\vec{r}) \Grad \left[ \frac{a(r-\frac{1}{ik})e^{ikr}+b}{r^3} \right] - \vec{u}_0 \frac{ika e^{ikr}}{r} \\
+    &= \vec{u}_0 \left\{ a e^{ikr} \left( -\frac{ik}{r} + \frac{1}{r^2} - \frac{1}{ikr^3} \right) + \frac{b}{r^3} \right\} 
+    + (\vec{u}_0\cdot\vec{n})\vec{n} \left\{ a e^{ikr} \left( \frac{ik}{r} - \frac{3}{r^2} + \frac{3}{ikr^3} \right) - \frac{3b}{r^3} \right\} 
+\end{align*}
+であり，$\v$はこれに$e^{-i\omega t}$をかけたものである．
+
+
+境界条件は，$r=R$で$\v=\vec{u} = \vec{u}_0 e^{-i\omega t}$となることで
+\[
+    \begin{cases}
+        a e^{ikR} \left( -\dfrac{ik}{R} + \dfrac{1}{R^2} - \dfrac{1}{ikR^3} \right) + \dfrac{b}{R^3} = 1 \\[8pt]
+        a e^{ikR} \left( \dfrac{ik}{R} - \dfrac{3}{R^2} + \dfrac{3}{ikR^3} \right) - \dfrac{3b}{R^3} = 0 .
+    \end{cases}
+\]
+これを解いて
+\[
+    \begin{cases}
+        a = - \dfrac{3R}{2ik} e^{-ikR} \\[8pt]
+        b = - \dfrac{R^3}{2} \left( 1 - \dfrac{3}{ikR} - \dfrac{3}{k^2R^2} \right)
+    \end{cases}
+\]
+となる．
+
+
+
+抗力$F$の導出は諦めて結果のみ記すと
+\[
+    F = 6\pi\eta R \left( 1 + \frac{R}{\delta} \right) u 
+    + 3\pi R^2 \sqrt{\frac{2\rho\eta}{\omega}} \left( 1 + \frac{2R}{9\delta} \right) \dv{u}{t}
+    \quad \left( \delta = \sqrt{\frac{2\nu}{\omega}} \right).
+\]
+
+\begin{itemize}
+    \item $\omega\to 0 \; (\delta\to\infty)$のとき，第1項はStokesの法則になる．
+    \item $\omega\to\infty \; (\delta\to 0)$のときの漸近形は
+    \[
+        F \simeq 6\pi\eta R \cdot \frac{R}{\sqrt{2\nu/\omega}} u 
+        + 3\pi R^2 \sqrt{\frac{2\rho\eta}{\omega}}  \cdot \frac{2R}{9\sqrt{2\nu/\omega}} \dv{u}{t}
+        = 3\pi R^2 \sqrt{2\rho\eta\omega} u + \frac{2}{3}\pi R^3 \rho \dv{u}{t}
+    \]
+    で与えられる．第1項は散逸項の極限であり，\eqref{eq24.14:任意の物体が振動するときのエネルギー散逸}を用いてエネルギー散逸を計算することでも得られる．
+    第2項は球のまわりのポテンシャル流での慣性項と一致する（問題11.1）．
+\end{itemize}
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題6 %%%%%%%%%%
+
+\begin{mondai}{}{}
+高周波数の極限（$\delta\ll R$）で，半径$R$の無限に長い円柱が軸と垂直に振動する場合の，散逸抗力を求めよ．
+\end{mondai}
+\begin{kaitou}
+省略する．
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題7 %%%%%%%%%%
+
+\begin{mondai}{}{}
+任意の速度$u(t)$で動く球に働く抗力を求めよ．
+\end{mondai}
+\begin{kaitou}
+$u(t)$をFourier積分の形で表そう．
+\[
+    u(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} u_\omega e^{-i\omega t} \; d\omega, \quad
+    u_\omega = \int_{-\infty}^{\infty} u(\tau) e^{i\omega \tau} \; d\tau. 
+\]
+方程式が線形であるから，あるFourier成分$u_\omega e^{-i\omega t}$がもたらす抗力を求めて，全ての$\omega$について積分すればよい．
+$u_\omega e^{-i\omega t}$による抗力は問題~\ref{mo:問題24.5（前後に振動する球のまわりの流れ）}から
+\begin{align*}
+    &\phantom{=} 6\pi\eta R \left( 1 + \frac{R}{\sqrt{2\nu/\omega}} \right) u_\omega e^{-i\omega t}
+    + 3\pi R^2 \sqrt{\frac{2\rho\eta}{\omega}} \left( 1 + \frac{2R}{9\sqrt{2\nu/\omega}} \right) (-i\omega u_\omega e^{-i\omega t}) \\
+    &= \pi\rho R^3 \left[ 
+        \frac{6\nu}{R^2} \left( 1 + R \sqrt{\frac{\omega}{2\nu}} \right) 
+        -i\omega \frac{3}{R} \sqrt{\frac{2\eta}{\rho\omega}} \left( 1 + \frac{2R}{9} \sqrt{\frac{\omega}{2\nu}} \right)
+     \right] u_\omega e^{-i\omega t} \\
+    &= \pi\rho R^3 \left[ \frac{6\nu}{R^2} - \frac{2}{3} i\omega + \frac{3\sqrt{2\nu}}{R} (1-i) \sqrt{\omega}\right] u_\omega e^{-i\omega t} \\
+    & \gyoukan{
+        $\dot{u}$のFourier成分を$(\dot{u})_\omega$と書くと（$u_\omega$の時間微分ではない）
+        $\displaystyle (\dot{u})_\omega = \int_{-\infty}^{\infty} \dv{u}{\tau}  e^{i\omega \tau} \; d\tau = -i\omega u_\omega$
+    } \\
+    &= \pi\rho R^3 \left[ \frac{6\nu}{R^2} u_\omega + \frac{2}{3} (\dot{u})_\omega + \frac{3\sqrt{2\nu}}{R} \cdot \frac{1+i}{\sqrt{\omega}} (\dot{u})_\omega \right] e^{-i\omega t} .
+\end{align*}
+これに$1/2\pi$をかけて$\omega$で積分すれば，第1項と第2項は
+\[
+    2\pi\rho R^3 \left[ \frac{3\nu}{R^2} u + \frac{1}{3} \dv{u}{t} \right]
+\]
+を与える．
+また$\dfrac{1+i}{\sqrt{\omega}} (\dot{u})_\omega e^{-i\omega t}$を$(-\infty,\infty)$で積分したものは，$(0,\infty)$で積分したものを2倍すればよい（その後実部をとる）から
+\begin{align*}
+    &\phantom{=} \frac{1}{2\pi} \int_{-\infty}^{\infty} \frac{1+i}{\sqrt{\omega}} (\dot{u})_\omega e^{-i\omega t} \; d\omega \\
+    &= \frac{1}{2\pi} \cdot 2\Re\left[ (1+i) \int_{0}^{\infty} \frac{(\dot{u})_\omega}{\sqrt{\omega}}  e^{-i\omega t} \; d\omega \right] \\
+    &= \frac{1}{\pi} \Re\left[ (1+i) \int_{0}^{\infty} \int_{-\infty}^{\infty} \dot{u}(\tau) e^{i\omega \tau} \; d\tau \; \frac{e^{-i\omega t}}{\sqrt{\omega}} \; d\omega \right] \\
+    & \gyoukan{←$\tau$の積分区間を$(-\infty,t)$と$(t,\infty)$に分け，$\tau$と$\omega$の積分を交換する．} \\
+    &= \frac{1}{\pi} \Re\left[ (1+i) \int_{-\infty}^{t} \dot{u}(\tau) \int_{0}^{\infty} \frac{e^{-i\omega(t-\tau)}}{\sqrt{\omega}} \; d\omega d\tau 
+    +(1+i) \int_{t}^{\infty} \dot{u}(\tau) \int_{0}^{\infty} \frac{e^{i\omega(\tau-t)}}{\sqrt{\omega}} \; d\omega d\tau \right] 
+\end{align*}
+
+\begin{details}
+$a>0$として，積分$\displaystyle\int_{0}^{\infty} \frac{e^{-ia\omega}}{\sqrt{\omega}} \; d\omega$を計算しなければならない．
+$\sqrt{\omega}=x$とおくと
+\[
+    \int_{0}^{\infty} \frac{e^{-ia\omega}}{\sqrt{\omega}} \; d\omega = \int_{0}^{\infty} \frac{e^{-iax^2}}{x} 2x \; dx
+    = 2\int_{0}^{\infty} e^{-iax^2} \; dx
+    = 2\int_{0}^{\infty} \cos (ax^2) \; dx - 2i\int_{0}^{\infty} \sin(ax^2) \; dx
+\]
+Fresnel積分より，この2つの積分はどちらも$\dfrac{1}{2}\sqrt{\dfrac{\pi}{2a}}$に等しいから
+\[
+    \int_{0}^{\infty} \frac{e^{-ia\omega}}{\sqrt{\omega}} \; d\omega = (1-i) \sqrt{\frac{\pi}{2a}} 
+\]
+であり，同様に
+\[
+    \int_{0}^{\infty} \frac{e^{ia\omega}}{\sqrt{\omega}} \; d\omega = (1+i) \sqrt{\frac{\pi}{2a}} 
+\]
+となる．
+\end{details}
+
+
+\begin{align*}
+    &= \frac{1}{\pi} \Re\left[ (1+i) \int_{-\infty}^{t} \dot{u}(\tau) (1-i) \sqrt{\frac{\pi}{2(t-\tau)}} \; d\tau 
+    +(1+i) \int_{t}^{\infty} \dot{u}(\tau) (1+i) \sqrt{\frac{\pi}{2(\tau-t)}} \; d\tau \right] \\
+    &= \sqrt{\frac{1}{2\pi}} \Re \left[ (1+1) \int_{-\infty}^{t} \frac{\dot{u}(\tau)}{\sqrt{t-\tau}} \; d\tau
+    + \cancel{ 2i \int_{t}^{\infty} \frac{\dot{u}(\tau)}{\sqrt{\tau-t}} \; d\tau } \right] \\
+    &= \sqrt{\frac{2}{\pi}} \int_{-\infty}^{t} \frac{\dot{u}(\tau)}{\sqrt{t-\tau}} \; d\tau
+\end{align*}
+
+以上より，求める抗力は
+\[
+    F = 2\pi\rho R^3 \left[ \frac{3\nu}{R^2} u + \frac{1}{3} \dv{u}{t} + \frac{3}{R} \sqrt{\frac{\nu}{\pi}} \int_{-\infty}^{t} \frac{du/d\tau}{\sqrt{t-\tau}} \; d\tau \right].
+\]
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題8 %%%%%%%%%%
+
+\begin{mondai}{}{}
+時刻$t=0$で一様な加速度で動き始めた（$u=\alpha t$）球に働く抗力を求めよ．
+\end{mondai}
+\begin{kaitou}
+$t \ika 0$では$u=0$より$F=0$である．以下$t \ijou 0$とする．
+\[
+    \int_{-\infty}^{t} \frac{du/d\tau}{\sqrt{t-\tau}} \; d\tau = \int_{0}^{t} \frac{\alpha \; d\tau}{\sqrt{t-\tau}}
+    = \alpha \Bigl[ -2\sqrt{t-\tau} \Bigr]_{\tau=0}^{\tau=t} = 2\alpha\sqrt{t}
+\]
+であるから結局
+\[
+    F = 2\pi\rho R^3 \alpha \left( \frac{3\nu t}{R^2} + \frac{1}{3} + \frac{6}{R} \sqrt{\frac{\nu t}{\pi}} \right).
+\]
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題9 %%%%%%%%%%
+
+\begin{mondai}{}{}
+前問で，$t=0$で瞬間的に等速度運動を始めた場合はどうか．  
+\end{mondai}
+\begin{kaitou}
+$t < 0$で$u=0$，$t > 0$で$u=u_0$であり，$\ddv{u}{t} = u_0 \delta(t)$である．
+\[
+    \int_{-\infty}^{t} \frac{du/d\tau}{\sqrt{t-\tau}} \; d\tau = u_0 \int_{-\infty}^{t} \frac{\delta(\tau) \; dt}{\sqrt{t-\tau}}
+    = \frac{u_0}{\sqrt{t}} \; (t>0)
+\]
+となるから，$t>0$での抗力は
+\[
+    F = 2\pi\rho R^3 \left( \frac{3\nu}{R^2} u_0 + \frac{1}{3}u_0 \delta(t) + \frac{3u_0}{R} \sqrt{\frac{\nu}{\pi t}} \right)
+    = 6\pi\eta R u_0 \left( 1 + \frac{R}{\sqrt{\pi\nu t}} \right) + \frac{2}{3}\pi\rho R^3 u_0 \delta(t).
+\]
+$t\to\infty$では$F \to 6\pi\eta R u_0$でStokesの法則に漸近する．
+また，$t=0$で働いた撃力の力積は，最後の項を積分した$\dfrac{2}{3}\pi\rho R^3 u_0$で与えられる．
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題10 %%%%%%%%%%
+
+\begin{mondai}{}{}
+粘性流体中で，直径のまわりに回転振動を行っている球に働く力のモーメントを求めよ．
+\end{mondai}
+\begin{kaitou}
+回転軸を極軸とする球座標系をとると，極軸に垂直な断面内では，流体の速度は$\phi$成分のみが0でない．
+また対称性から$\dpdv{p}{\phi}=0$である．よって$\dpdv{v_\phi}{t} = \nu\Laplacian v_\phi$となる．
+$\vec{\Omega} = \vec{\Omega}_0 e^{-i\omega t}$を球の回転角速度ベクトルとして，
+$\v = \Rot(f \vec{\Omega}_0)e^{-i\omega t} = \left( \Grad f \times \vec{\Omega}_0 \right) e^{-i\omega t}$の形の解を求めよう．
+$\dpdv{\v}{t} = \nu\Laplacian\v$より
+\[
+    -i\omega \left( \Grad f \times \vec{\Omega}_0 \right) e^{-i\omega t} = \nu \Laplacian \left( \Grad f \times \vec{\Omega}_0 \right) e^{-i\omega t}
+\]
+\[
+    \Grad\left( \nu\Laplacian f + i\omega f \right) \times \vec{\Omega}_0 e^{-i\omega t} = 0
+    \qquad\yueni \Laplacian f + k^2 f = \const
+\]
+$f$が無限遠で0となることを要求すれば右辺は0となり，問題~\ref{mo:問題24.5（前後に振動する球のまわりの流れ）}と同様にして$f = a \dfrac{e^{ikr}}{r}$となる．
+このとき
+\[
+    \Grad f = \dv{f}{r} \cdot \frac{\vec{r}}{r} = a \frac{ik e^{ikr}r - e^{ikr}}{r^2} \cdot \frac{\vec{r}}{r}
+    = \frac{a(ikr-1) e^{ikr}}{r^3} \vec{r},
+\]
+\[
+    \v = ( \vec{\Omega}\times\vec{r} ) \frac{a(1-ikr) e^{ikr}}{r^3}
+\]
+となる．
+境界条件：$r=R$（$R$は球の半径）で$\v = ( \vec{\Omega}\times\vec{r} )$から定数を決めると
+\[
+    \v = ( \vec{\Omega}_0\times\vec{r} ) \left( \frac{R}{r} \right)^3 \frac{1-ikr}{1-ikR} e^{i[k(r-R)-\omega t]}
+\]
+を得る．
+力のモーメントの計算は省略する．
+
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題11 %%%%%%%%%%
+
+\begin{mondai}{}{}
+粘性流体の入った球形の容器が直径のまわりに回転振動を行っているとき，力のモーメントを求めよ．
+\end{mondai}
+\begin{kaitou}
+$\Laplacian f + k^2 f = \const$までは前問と同じである．
+$\const$を0と選び，$r=0$で有限な解$f = a\dfrac{\sin kr}{r}$を用いよう．
+\[
+    \Grad f = \dv{f}{r} \cdot \frac{\vec{r}}{r} = \frac{a (kr\cdot\cos kr - \sin kr)}{r^3}\vec{r},
+\]
+\[
+    \v = ( \vec{\Omega}\times\vec{r} ) \frac{a (kr\cdot\cos kr - \sin kr)}{r^3}
+\]
+となる．
+境界条件：$r=R$で$\v=( \vec{\Omega}\times\vec{r} )$より$a$が決まり
+\[
+    \v = ( \vec{\Omega}\times\vec{r} ) \left( \frac{R}{r} \right)^3 \frac{kr\cdot\cos kr - \sin kr}{kR\cdot\cos kR - \sin kR}
+\]
+となる．
+力のモーメントの計算は省略する．
+
+
+\end{kaitou}
+
+
+
+\BackToTheToc

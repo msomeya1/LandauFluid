@@ -1,0 +1,66 @@
+\section{運動量フラックス}
+\S~\ref{sec:6}と同様に，$\rho\v$の時間変化を発散の形で書こう．
+連続の式とEuler方程式を用いると
+\begin{align*}
+	\pdv{t}(\rho v_i) &= v_i \pdv{\rho}{t} + \rho \pdv{v_i}{t} \\
+	&= v_i \bqty{ -\pdv{x_j}(\rho v_j) } - \rho v_j \pdv{v_i}{x_j} - \pdv{p}{x_i} \\
+	&= - \pdv{x_j}(\rho v_iv_j) - \pdv{p}{x_i} \\
+	&= - \pdv{x_j}( p\delta_{ij} + \rho v_iv_j ).
+\end{align*}
+よって，\emph{運動量フラックス密度テンソル}を
+\setcounter{equation}{1}
+\begin{equation}
+	\varPi_{ij} \equiv p\delta_{ij} + \rho v_iv_j
+\end{equation}
+で定義すれば
+\footnote{
+これは2階テンソルであり，
+$
+\displaystyle	
+\mat{\varPi} =
+\begin{pmatrix}
+	p + \rho {v_x}^2 & \rho v_xv_y & \rho v_xv_z \\
+	\rho v_xv_y & p + \rho {v_y}^2 & \rho v_yv_z \\
+	\rho v_xv_z & \rho v_yv_z & p + \rho {v_z}^2 \\
+\end{pmatrix}
+$
+と書けば明らかなように対称である．
+}，
+\setcounter{equation}{0}
+\begin{equation}\label{eq7.1:理想流体の運動量流保存則（微分形）}
+	\pdv{t}(\rho v_i) = -\pdv{\varPi_{ij}}{x_j}
+\end{equation}
+となる．
+
+$\varPi_{ij}$の意味を明らかにするため\eqref{eq7.1:理想流体の運動量流保存則（微分形）}を体積積分する．
+\setcounter{equation}{2}
+\begin{equation}
+	\pdv{t} \int_V \rho v_i \dV = - \int_V \pdv{\varPi_{ij}}{x_j} dV = - \int_S \varPi_{ij} dS_j
+\end{equation}
+\begin{details}
+2つ目の等号はGaussの発散定理を用いているだけである．
+明示的に書けば，例えば$i=1$の成分は
+\[
+	\int_V \pdv{\varPi_{1j}}{x_j} dV = \int_V \pqty{ \pdv{\varPi_{11}}{x} + \pdv{\varPi_{12}}{y} + \pdv{\varPi_{13}}{z} } \dV
+	= \int_S ( \varPi_{11} dS_x + \varPi_{12} dS_y + \varPi_{13} dS_z ) = \int_S \varPi_{1j} dS_j
+\]
+\end{details}
+左辺は，考えている体積に含まれる運動量の$i$成分の時間変化率を表している．
+よって右辺は，単位時間に表面から流れ出す運動量である．
+$\vec{n}$を外向き法線ベクトルとすると$\varPi_{ij} dS_j = \varPi_{ij} n_j dS$であるから，単位表面積を通る運動量フラックスは$\varPi_{ij} n_j$であることがわかる．
+ベクトルで書けば
+\begin{equation}\label{eq7.4:運動量フラックスベクトル}
+	p \vec{n} + \rho\v (\v\cdot\vec{n})
+\end{equation}
+となる．
+
+このように$\varPi_{ij}$は，$x_j$軸に垂直な単位面積を単位時間に流れる運動量の$j$成分を表す．
+また\eqref{eq7.4:運動量フラックスベクトル}は，$\vec{n}$方向の運動量フラックスを与える．
+$\vec{n}$を$\v$の方向にとることにより，運動と同じ（縦）方向に輸送される運動量は$p+\rho v^2$であることがわかる．
+また$\vec{n}$を$\v$と垂直な方向にとることにより，垂直（横）方向に輸送される運動量は$p$であることがわかる．
+
+
+
+
+
+\BackToTheToc

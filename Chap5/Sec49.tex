@@ -1,0 +1,139 @@
+\section{熱輸送の一般式}
+
+\S~2の終わりで，流体力学の完全な方程式系は5つの方程式を含まなければならないことを述べた．
+ここでは，熱伝導や内部摩擦の過程を伴う流体について，方程式系を書き下してみよう．
+1つは（以前と同様に）連続の式であり，理想流体でのEuler方程式はNavier-Stokes方程式に置きかわる．
+5番目の方程式は理想流体ではエントロピー保存の式(2.6)である．
+もちろん，粘性流体の場合には，非可逆的なエネルギーの散逸が生じるから，この式は成り立たない．
+粘性流体の場合に成り立つ式を求めるために，エネルギー保存の式を考えよう．
+
+
+理想流体でのエネルギー保存則は(6.1)で与えられる
+（$\varepsilon$は単位質量あたりの内部エネルギー，$h$は単位質量あたりのエンタルピー）：
+\[
+    \pdv{t} \left( \frac{1}{2}\rho v^2 + \rho\varepsilon \right)
+    = -\Div \left[ \rho \v \left( \frac{1}{2}v^2 + h \right) \right]
+\]
+左辺は，単位体積の流体のエネルギー変化率であるから，右辺のdivの中は流体表面を通る全エネルギーフラックスを表している．
+粘性流体の場合，ここに
+\begin{enumerate}
+    \item 内部摩擦によるフラックス
+    \item \emph{熱伝導}によるフラックス$\vec{q}$
+\end{enumerate}
+を加えなければならない．
+\S~16によれば，（$\sigma_{ij}'$を粘性応力テンソルとして）1は$v_i\sigma_{ij}'$と書ける．
+2は流体中の温度が一様でない場合に生じるエネルギーの輸送であり，マクロな運動の有無によらず存在する
+（すなわち，静止流体中でも生じる）．
+温度勾配が大きく無い場合，$\vec{q}$と温度変化の関係をただちに書き下すことができる．
+$\vec{q}$を温度勾配の冪で展開して1次まで取れば
+\begin{equation}\label{eq49.1:Fourierの法則}
+    \vec{q} = -\kappa \cdot \Grad T
+\end{equation}
+となる（温度勾配がないとき熱伝導は生じないから定数は0である）．
+定数$\kappa$は\emph{熱伝導率}と呼ばれる．
+温度差があるとき，熱は温度の高い方から低い方へ流れるから，$\vec{q}$と$\Grad T$は逆符号であり，$\kappa>0$でなければならない．
+$\kappa$は一般には温度と圧力の関数である．
+
+1,2を加えると，エネルギー保存則は以下のようになる．
+\begin{equation}\label{eq49.2:粘性流体中でのエネルギー保存}
+    \pdv{t} \left( \frac{1}{2}\rho v^2 + \rho\varepsilon \right)
+    = -\Div \left[ \rho \v \left( \frac{1}{2}v^2 + h \right) - v_i\sigma_{ij}' -\kappa \cdot \Grad T \right]
+\end{equation}
+この形でもよいが，運動方程式を用いて書き直しておくと便利である．
+\begin{details}
+Landauは一から考え直しているが，我々は既に\S~6で同様の議論を行なっているから，その結果を用いることにしよう．
+\end{details}
+\noindent%
+連続の式，運動方程式，熱力学第1法則より，以下の式が成り立つ．
+\[
+    \pdv{t} \left( \frac{1}{2}\rho v^2 + \rho\varepsilon \right)
+    +\Div \left[ \rho \v \left( \frac{1}{2}v^2 + h \right) \right] 
+    = \rho T \frac{Ds}{Dt} + v_i \pdv{\sigma_{ij}'}{x_j}
+    \mytag{1}
+\]
+$\Div(v_i\sigma_{ij}') = \dpdv{x_j}(v_i\sigma_{ij}') = \sigma_{ij}' \dpdv{v_i}{x_j} + v_i \dpdv{\sigma_{ij}'}{x_j}$
+に注意して\eqref{eq49.2:粘性流体中でのエネルギー保存}と\ajMaru{1}を見比べると
+\setcounter{equation}{3}%
+\begin{equation}\label{eq49.4:熱輸送の一般式}
+    \rho T \frac{Ds}{Dt} = \sigma_{ij}' \pdv{v_i}{x_j} + \Div(\kappa \Grad T).
+\end{equation}
+こうして\emph{熱輸送の一般式}が得られた．
+粘性と熱伝導がなければ右辺は0であり，理想流体に対するエントロピー保存の式(2.6)に戻る．
+
+
+
+\eqref{eq49.4:熱輸送の一般式}の左辺は，単位体積の流体が単位時間に獲得する熱量を表している．
+そしてそれは，粘性散逸によるものと，伝導により考えている体積に持ち込まれるものからなる．
+前者について，粘性応力テンソルの表式(15.3)を代入して，速度の空間微分で表そう．
+\begin{align*}
+    \sigma_{ij}' \pdv{v_i}{x_j}
+    &= \uline{ \eta \left( \pdv{v_i}{x_j} + \pdv{v_j}{x_i} - \frac{2}{3}\pdv{v_k}{x_k} \delta_{ij} \right) \pdv{v_i}{x_j} }
+    + \zeta \pdv{v_k}{x_k} \delta_{ij} \pdv{v_i}{x_j} \\
+    &= \uwave{ \frac{1}{2} \eta \left( \pdv{v_i}{x_j} + \pdv{v_j}{x_i} - \frac{2}{3}\pdv{v_k}{x_k} \delta_{ij} \right) ^2 }
+    + \zeta (\Div \v)^2 \\
+    &\equiv \Phi
+\end{align*}
+
+\begin{details}
+2番目の等号を確かめるためには，逆向きに計算する方が楽である．
+\begin{align*}
+    \text{（波線部）} &= \frac{1}{2} \eta \left( 
+        \pdv{v_i}{x_j} \pdv{v_i}{x_j} \cdot 2 + \frac{4}{9} \pdv{v_k}{x_k} \pdv{v_l}{x_l} \cdot 3
+        + 2 \pdv{v_i}{x_j} \pdv{v_j}{x_i} -2 \cdot \frac{2}{3} \pdv{v_i}{x_i} \pdv{v_k}{x_k} \cdot 2
+    \right) \\
+    &= \eta \left( 
+        \pdv{v_i}{x_j} \pdv{v_i}{x_j} + \pdv{v_i}{x_j} \pdv{v_j}{x_i} - \frac{2}{3} \pdv{v_k}{x_k} \pdv{v_l}{x_l} 
+    \right) \\
+    &= \text{（下線部）}
+\end{align*}
+\end{details}
+
+$\Phi$は\emph{散逸関数}と呼ばれる．
+弾性理論における弾性自由エネルギー
+\[
+    F = \mu \left( u_{ij} - \frac{1}{3} u_{kk} \delta_{ij} \right)^2 + \frac{K}{2} {u_{kk}}^2
+\]
+（$ u_{ij} = \dfrac{1}{2} \left( \dpdv{u_i}{x_j} + \dpdv{u_j}{x_i} \right)$は歪みテンソル，
+$\mu$は剛性率，$K$は体積弾性率）と比較せよ．
+
+
+
+\eqref{eq49.4:熱輸送の一般式}の意味を明らかにするために，流体の全体積にわたってエントロピーの時間変化を計算しよう．
+
+
+
+
+
+
+\eqref{eq49.1:Fourierの法則}を導く際に，熱伝導フラックスは圧力勾配によらず温度勾配のみで書けることを仮定していた．
+これは次のように正当化できる；
+もし$\vec{q}$に$-\alpha \Grad p$（$\alpha$は比例係数）が加わったとすると，\ajMaru{2}は
+
+となり，結果には$\Grad p \cdot \Grad T$という項が現れる．
+これは正にも負にもなりうるから，エントロピーは増加するとは限らなくなり，矛盾が生じる．
+
+
+
+
+最後に，これまでの議論は以下に述べる点においても厳密にされなければならないことに触れておこう；
+温度勾配や速度勾配が存在する流体は熱力学的な平衡状態にはなく，（平衡状態で成り立つ）熱力学量の関係式は厳密には成り立たなくなる．
+つまり，$\rho,\varepsilon,\v$を適切に定義したとしても，（平衡状態でのエントロピーの定義により定まる量）
+$s=s(\rho, \varepsilon)$は真のエントロピーではなく，積分
+\[
+    \int \rho s \dV
+\]
+は時間と共に増加するとは限らない．
+しかし，温度勾配や圧力勾配が小さい場合には，この$s$が近似的に真のエントロピーに等しいことが示せる：
+この$s$は平衡状態での値であるから，最大値である．
+よってエントロピーを微小な勾配で展開したとき，1次の項は0であり，2次以上の項のみが現れる．
+勾配が小さければ，これらの寄与は無視できる．
+
+
+
+
+
+
+
+
+
+\BackToTheToc

@@ -1,0 +1,489 @@
+\section{重力波}
+
+重力場中で平衡状態にある液体の自由表面は平面となる．
+なんらかの摂動が外から加わると，表面は平面からずれて，液体中に運動が生じる．
+これは重力場の作用により生じるため\emph{重力波}（gravity wave）と呼ばれる．
+重力波は主に液体表面に生じ，内部へいくほどその影響は小さくなる．
+
+
+ここでは，流体粒子の速度が十分小さく，Euler方程式で$\dpdv{\v}{t}$に比べて$(\v\cdot\Grad)\v$が無視できるような重力波を考えよう．
+その物理的意味は次のようにして分かる：
+波の周期を$\tau$，振幅を$a$，波長を$\lambda$とする．
+$\tau$程度の時間に流体粒子は$a$程度の距離を動くから，流体粒子の速度は$v\sim a/\tau$のオーダーである．
+速度は$\tau$程度の時間経つと，あるいは$\lambda$程度離れれば大きく変化する．
+よって速度の時間微分は$v/\tau$，空間微分は$v/\lambda$のオーダーである．
+したがって，条件$(\v\cdot\Grad)\v \ll \dpdv{\v}{t}$は
+\begin{equation}
+    \frac{1}{\lambda} \pqty{\frac{a}{\tau}}^2 \ll \frac{1}{\tau} \pqty{\frac{a}{\tau}}
+    \qquad\yueni a \ll \lambda .
+\end{equation}
+すなわち，波の振幅が波長に比べて十分短いような場合が，ここでの考察の対象である．
+
+
+\S~\ref{sec:9}で見たように，移流項$(\v\cdot\Grad)\v$を$\dpdv{\v}{t}$に比べて無視できる場合
+\footnote{本当は，振動の周期にわたって$\v$の平均が0という条件も必要である．
+あるいは，運動が静止状態から始まったとして，その後も渦なしであると考える．}
+には，流れをポテンシャル流とみなすことができる．
+さらに非圧縮性流体を仮定すれば，Laplace方程式\eqref{eq10.6:速度ポテンシャルのLaplace方程式}，圧力方程式\eqref{eq10.7:非圧縮性流体のポテンシャル流に対する圧力方程式}を用いることができる．
+\eqref{eq10.7:非圧縮性流体のポテンシャル流に対する圧力方程式}は速度の2乗を含んでいるが，これは落とすことができる．
+\begin{details}
+$\dpdv{\phi}{t}$に比べて$\dfrac{1}{2}v^2$を無視できることが次のようにして分かる：
+$\v=\Grad\phi$であるから$\phi\sim v\lambda \sim \dfrac{a\lambda}{\tau}$，$\dpdv{\phi}{t}\sim\dfrac{a\lambda}{\tau^2}$である．
+一方$\dfrac{1}{2}v^2 \sim \pqty{\dfrac{a}{\tau}}^2$であるから，$a\ll\lambda$のとき$\dfrac{1}{2}v^2 \ll \dpdv{\phi}{t}$．
+\end{details}
+\noindent
+$f(t)=0$と置き，重力場中であるから$gz$を加えて（鉛直上方を$z$軸に，平衡状態での自由表面を$xy$平面にとる）
+\begin{equation}\label{eq12.2:重力波における圧力}
+    \pdv{\phi}{t} + \frac{p}{\rho} + gz = 0
+    \qquad\yueni p = -\rho gz - \rho\pdv{\phi}{t} .
+\end{equation}
+流体表面の流体粒子の$z$座標を$\zeta$とする．
+平衡状態では$\zeta=0$であるから，$\zeta$は振動している表面の鉛直変位を表し，$x,y,t$の関数である．
+表面には一定の圧力$p_0$が働いているとすると，\eqref{eq12.2:重力波における圧力}は
+\[
+    p_0 = -\rho g\zeta - \rho \eval{\pdv{\phi}{t}}_{z=\zeta} .
+\]
+これを$g\zeta + \dpdv{t} \pqty{\phi+\dfrac{p_0}{\rho}t}_{z=\zeta} = 0$と書き，$\phi+\dfrac{p_0}{\rho}t$を改めて$\phi$としてよい
+（$\v=\Grad\phi$であるから，$\phi$には時間の関数の分だけ不定性がある）．よって
+\begin{equation}\label{eq12.3:重力波における変位とポテンシャルの関係}
+    g\zeta + \eval{\pdv{\phi}{t}}_{z=\zeta} = 0
+\end{equation}
+を得る．
+
+
+
+波の振幅は小さいと仮定しているから，変位$\zeta$も小さく，表面での$v_z$は$\zeta$の時間微分で近似できる．
+\[
+    \eval{v_z}_{z=\zeta} = \pdv{\zeta}{t}
+\]
+一方$v_z=\dpdv{\phi}{z}$であるから
+\[
+    \eval{\pdv{\phi}{z}}_{z=\zeta} = \pdv{\zeta}{t} .
+\]
+よって\eqref{eq12.3:重力波における変位とポテンシャルの関係}を$t$で微分して
+\[
+    \pqty{ g\pdv{\zeta}{t} + \pdv[2]{\phi}{t} }_{z=\zeta} = \pqty{ g\pdv{\phi}{z} + \pdv[2]{\phi}{t} }_{z=\zeta} = 0 .
+\]
+波の振幅が小さいから，$z=\zeta$での値は$z=0$での値と近似してよい．
+以上より，重力波を記述する方程式が得られた：
+\begin{equation}\label{eq12.4:重力波でのLaplace方程式}
+    \Laplacian\phi = 0
+\end{equation}
+\begin{equation}\label{eq12.5:重力波の表面での境界条件}
+    \pqty{ \pdv{\phi}{z} + \frac{1}{g} \pdv[2]{\phi}{t} }_{z=0} = 0
+\end{equation}
+
+
+\subsection*{短波}
+この小節では，流体表面は無限に広がっているとし，波長は流体の深さに比べて十分短い（$a \ll \lambda \ll h$）場合を考える．
+つまり，流体は半無限空間$z<0$に存在し，底面と端での境界条件は考える必要がない．
+
+
+$y$軸方向に一様な波動が$x$軸方向に伝播する問題を考えよう．
+$\phi$が$y$によらず，$x,t$について周期関数であるような解
+\[
+    \phi = f(z) \cos(kx-\omega t)
+\]
+を求める（$\omega$は\emph{角周波数}，$k$は\emph{波数}，$\lambda=2\pi/k$は\emph{波長}である）．
+これを$\Laplacian\phi = \dpdv[2]{\phi}{x} +  \dpdv[2]{\phi}{z} = 0$へ代入すると
+\[
+    \dv[2]{f}{z} - k^2f = 0
+    \qquad\yueni f \propto e^{kz}, e^{-kz} .
+\]
+流体の内部（$z<0$）で減衰する解をとり，速度ポテンシャルは
+\begin{equation}
+    \phi = A e^{kz} \cos(kx-\omega t)
+\end{equation}
+となる．次に境界条件\eqref{eq12.5:重力波の表面での境界条件}は
+\begin{equation}
+    k - \frac{\omega^2}{g}  = 0 
+    \qquad\yueni \omega^2  = gk .
+\end{equation}
+この式は重力波の\emph{分散関係}を与える．
+
+流体の速度分布は，$\phi$を$x,z$で微分することで得られる．
+\begin{equation}\label{eq12.8:重力波での速度分布}
+    \begin{cases}
+        v_x = \dpdv{\phi}{x} = -Ak e^{kz} \sin(kx-\omega t) \\[7pt]
+        v_z = \dpdv{\phi}{z} = Ak e^{kz} \cos(kx-\omega t) 
+    \end{cases}
+\end{equation}
+空間のある点における速度ベクトルは，$xz$平面内で一様に回転する．
+その大きさ$Ake^{kz}$は深さとともに指数関数的に減少する．
+
+
+波動中での流体粒子の軌跡を求めよう．
+ここでは一時的に，$x,z$を，運動している流体粒子の座標とする．
+平衡状態での流体粒子の座標を$(x_0,z_0)$とすると，波の振幅が小さいことから，\eqref{eq12.8:重力波での速度分布}右辺の$x,z$を$x_0,z_0$で近似することができる．
+\[
+    \begin{cases}
+        \ddv{x}{t} = v_x \simeq -Ak e^{kz_0} \sin(kx_0-\omega t) \\[7pt]
+        \ddv{z}{t} = v_z \simeq Ak e^{kz_0} \cos(kx_0-\omega t) 
+    \end{cases}
+\]
+時間に関して積分し
+\begin{equation}
+    \begin{cases}
+        x = x_0 - \dfrac{Ak}{\omega} e^{kz_0} \cos(kx_0-\omega t) \\[7pt]
+        z = z_0 - \dfrac{Ak}{\omega} e^{kz_0} \sin(kx_0-\omega t) 
+    \end{cases}
+\end{equation}
+となる．
+よって，流体粒子は点$(x_0,z_0)$を中心とする半径$\dfrac{Ak}{\omega} e^{kz_0}$の円を描く．
+この半径は深さとともに指数関数的に減少する．
+
+\S~67\footnote{日本語版では\S~66}で示すように，波動の伝播速度（群速度）は$U=\dpdv{\omega}{k}$で与えられる．
+$\omega=\sqrt{gk}$より
+\begin{equation}\label{eq12.10:短波の群速度}
+    U = \pdv{k}\sqrt{gk} = \frac{1}{2} \sqrt{\frac{g}{k}} = \frac{1}{2} \sqrt{\frac{g\lambda}{2\pi}}
+\end{equation}
+が，半無限の流体の表面を伝わる重力波の速度であり，これは波長が長いほど大きい．
+
+
+
+
+\subsection*{長波}
+流体の深さに比べて波長が十分短い重力波を扱ったので，今度は逆の極限として，深さに比べて波長が十分長い波（\emph{長波}）を考えよう．
+
+最初に，水路内の長波を考える．
+水路は$x$方向に無限に長いとし，水路の断面の形は任意（$x$方向に変化しうる）とする．
+ただし深さと幅は波長に比べて短い．水路内の流体の断面積を$S(x,t)$とする．
+
+ここでは，流体が水路に沿って動く縦波を考えよう．
+この場合$v_x \gg v_y,v_z$であるから，$v_x$を単に$v$とおいて，他の成分を無視してよい．
+微小量の2次以上を無視すると，Euler方程式の$x,z$成分は
+\[
+    \pdv{v}{t} = -\frac{1}{\rho} \pdv{p}{x} , \quad
+    \frac{1}{\rho} \pdv{p}{z} = -g.
+\]
+自由表面$z=\zeta$で$p=p_0$という条件で第2式を積分すると$p=p_0-\rho g(z-\zeta)$となる．これを第1式に代入し
+\begin{equation}\label{eq12.11:長波での1D運動方程式}
+    \pdv{v}{t} = -g \pdv{\zeta}{x} .
+\end{equation}
+この方程式の未知数$v,\zeta$を決めるためには，もう一つ方程式が必要であり，それは連続の式である．
+
+
+2つの断面$x,x+dx$に挟まれた流体の体積を考えよう．
+単位時間あたり，$x$の側からは体積$(Sv)_x dx$が流入し，$x+dx$の側からは体積$(Sv)_{x+dx} dx$が流出する．
+よって体積変化は
+\[
+    (Sv)_x dx - (Sv)_{x+dx} dx \simeq -\pdv{x}(Sv)\,dx .
+\]
+非圧縮性流体を仮定しているから，この変化は単に水面が動いたことによる体積変化$\dpdv{t}(Sdx)$に等しい．
+よって
+\[
+    \pdv{t}(Sdx) = -\pdv{x}(Sv)\,dx
+\]
+\begin{equation}\label{eq12.12:長波での1D連続の式（using断面積）}
+    \yueni \pdv{S}{t} + \pdv{x}(Sv) = 0 .
+\end{equation}
+
+平衡状態での流体の断面積を$S_0(x)$とすると$S(x,t)=S_0(x)+S'(x,t)$である．
+ここで$S'$は波による断面積変化で，水面の上下が小さいと仮定しているから，$b$を水路の幅として$S'\simeq b\zeta$となる．
+以上を\eqref{eq12.12:長波での1D連続の式（using断面積）}へ代入し，2次の微小量を落とせば
+\begin{equation}
+    b \pdv{\zeta}{t} + \pdv{x} (S_0v) =0  .
+\end{equation}
+これを$t$で微分し，$\dpdv{v}{t}$に\eqref{eq12.11:長波での1D運動方程式}を代入すれば
+\[
+    b \pdv[2]{\zeta}{t} + \pdv{x}\bqty{ S_0 \pqty{-g\pdv{\zeta}{x}} } =0 
+\]
+\begin{equation}
+    \pdv[2]{\zeta}{t} - \frac{g}{b} \pdv{x}\pqty{ S_0\pdv{\zeta}{x} } =0 
+\end{equation}
+となる．特に，水路の形が場所によって変わらないとすると
+\begin{equation}
+    \pdv[2]{\zeta}{t} - \frac{gS_0}{b} \pdv[2]{\zeta}{x} =0 
+\end{equation}
+という\emph{波動方程式}になる．波の伝播速度は（\S~64で見るように）
+\begin{equation}
+    U = \sqrt{\frac{gS_0}{b}}
+\end{equation}
+である．
+
+
+全く同様にして，深さ$h(x,y,t)$で$x,y$方向に無限に広がる容器内の長波の問題を考えることができる．\\
+$v_x,v_y \gg v_z$であるからEuler方程式は
+\begin{equation}\label{eq12.17:長波での2D運動方程式}
+    \pdv{v_x}{t} +g \pdv{\zeta}{x} = 0, \quad
+    \pdv{v_y}{t} +g \pdv{\zeta}{y} = 0 .
+\end{equation}
+連続の式\eqref{eq12.12:長波での1D連続の式（using断面積）}は
+\begin{align*}
+    \pdv{t}(hdxdy) &= (hdyv_x)_x - (hdyv_x)_{x+dx} + (hdxv_y)_y - (hdxv_y)_{y+dy} \\
+    &\simeq -\pdv{x}(hv_x)dxdy - \pdv{y}(hv_y)dxdy
+\end{align*}
+\[
+    \yueni \pdv{h}{t} + \pdv{x}(hv_x) + \pdv{y}(hv_y) = 0 .
+\]
+平衡状態での深さを$h_0(x,y)$とすると$h(x,y,t)=h_0(x,y)+\zeta(x,y,t)$であるから，2次の微小量を落とせば
+\begin{equation}
+    \pdv{\zeta}{t} + \pdv{x}(h_0v_x) + \pdv{y}(h_0v_y) = 0 .
+\end{equation}
+特に容器の底が水平（$h_0=\const$）なら
+\[
+    \pdv{\zeta}{t} + h_0 \pqty{ \pdv{v_x}{x} + \pdv{v_y}{y} }  = 0 .
+\]
+これを$t$で微分し，$\dpdv{v_x}{t}, \dpdv{v_y}{t}$に\eqref{eq12.17:長波での2D運動方程式}を代入すれば
+\[
+    \pdv[2]{\zeta}{t} + h_0 \bqty{ \pdv{x}\pqty{ -g\pdv{\zeta}{x} } + \pdv{y}\pqty{ -g\pdv{\zeta}{y} } }  = 0 ,
+\]
+\begin{equation}
+    \pdv[2]{\zeta}{t} - gh_0 \pqty{ \pdv[2]{\zeta}{x} + \pdv[2]{\zeta}{y} }  = 0 .
+\end{equation}
+これは2次元の波動方程式で，波の伝播速度は
+\begin{equation}\label{eq12.20:長波の群速度}
+    U = \sqrt{gh_0}
+\end{equation}
+である．
+
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{問題12.1（厚さhの流体表面の重力波）}
+深さ$h$の流体の表面を伝わる重力波の伝播速度を求めよ．
+\end{mondai}
+\begin{kaitou}
+\eqref{eq12.4:重力波でのLaplace方程式}の一般解は
+\[
+    \phi = (Ae^{kz}+Be^{-kz}) \cos(kx-\omega t)
+\]
+となる．底面$z=-h$での境界条件$v_z=\dpdv{\phi}{z}=0$から$A,B$の比を求めることができる．
+\begin{align*}
+    \eval{\pdv{\phi}{z}}_{z=-h} &= k(Ae^{kz}-Be^{-kz})_{z=-h} \cos(kx-\omega t) \\
+    &= k(Ae^{-kh}-Be^{kh}) \cos(kx-\omega t) = 0 \\
+    \yueni B &= A e^{-2kh}
+\end{align*}
+よって$A'=2Ae^{-kh}$とおけば
+\[
+    \phi = 2Ae^{-kh} \cdot \frac{e^{k(z+h)}+e^{-k(z+h)}}{2} \cos(kx-\omega t)
+    = A' \cosh[k(z+h)] \cos(kx-\omega t) .
+\]
+次に\eqref{eq12.5:重力波の表面での境界条件}から分散関係を求める．
+\[
+    \pqty{ \pdv{\phi}{z} + \frac{1}{g} \pdv[2]{\phi}{t} }_{z=0} 
+    = A'k \sinh(kh)\cos(kx-\omega t) -\frac{\omega^2}{g}A'\cosh(kh)\cos(kx-\omega t) = 0
+\]
+\[
+    \yueni \omega^2 = gk \tanh(kh) .
+\]
+波の伝播速度は
+\[
+    U = \pdv{k} \sqrt{gk \tanh(kh)}
+    = \frac{1}{2} \sqrt{\frac{g}{k\tanh(kh)}} \bqty{ \tanh(kh) + \frac{kh}{\cosh^2(kh)} } .
+\]
+
+もし$kh\gg 1$なら$\tanh(kh)\simeq 1$，$\dfrac{kh}{\cosh^2(kh)} \simeq \dfrac{4kh}{e^{2kh}}\simeq 0$であるから
+$U \simeq \dfrac{1}{2} \sqrt{\dfrac{g}{k}}$で\eqref{eq12.10:短波の群速度}に戻る．
+
+もし$kh\ll 1$なら$\tanh(kh)\simeq kh$，$\cosh(kh)\simeq 1$であるから
+$U \simeq \dfrac{1}{2} \sqrt{\dfrac{g}{k\cdot kh}} \cdot 2kh = \sqrt{gh}$で\eqref{eq12.20:長波の群速度}に戻る．
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+上下を水平面で仕切られた2層流体の境界を伝わる重力波の分散関係を求めよ．
+上側の流体の密度を$\rho'$，厚さを$h'$とし，下側の流体の密度を$\rho$，厚さを$h$とする（$\rho>\rho'$）．
+\end{mondai}
+\begin{kaitou}
+平衡状態における2層の境界を$z=0$とする．
+問題~\ref{mo:問題12.1（厚さhの流体表面の重力波）}の解より，上下端での境界条件（$z=-h,h'$で$\partial\phi/\partial z = 0$）を満たす解は
+\[
+    \begin{cases}
+        \phi = A \cosh[k(z+h)] \cos(kx-\omega t) \quad (z<0) \\
+        \phi' = B \cosh[k(z-h')] \cos(kx-\omega t) \quad (z>0)
+    \end{cases} .
+    \mytag{1}
+\]
+2層の境界$z=\zeta$での条件は，速度の$z$成分が連続となることと，圧力が連続となることで，
+前者の条件は
+\[
+    \eval{\pdv{\phi}{z}}_{z=0} = \eval{\pdv{\phi'}{z}}_{z=0} .
+    \mytag{2}
+\]
+後者の条件は，\eqref{eq12.2:重力波における圧力}より
+\[
+    \rho\pqty{ g\zeta + \eval{\pdv{\phi}{t}}_{z=\zeta} } = \rho'\pqty{ g\zeta + \eval{\pdv{\phi'}{t}}_{z=\zeta} } ,
+\]
+\[
+    (\rho-\rho')g\zeta = \pqty{ \rho'\pdv{\phi'}{t} - \rho\pdv{\phi}{t} }_{z=\zeta} .
+\]
+両辺を$t$で微分して$\dpdv{\zeta}{t} = v_z = \dpdv{\phi}{z}$を用い，$z=\zeta$を$z=0$で近似すると
+\[
+    (\rho-\rho')g \eval{\pdv{\phi}{z}}_{z=0} = \pqty{ \rho'\pdv[2]{\phi'}{t} - \rho\pdv[2]{\phi}{t} }_{z=0} .
+    \mytag{3}
+\]
+\ajMaru{1}を\ajMaru{2}\ajMaru{3}へ代入して，係数$A,B$に関する連立1次方程式が得られる．
+\ajMaru{2}は
+\[
+    A \sinh(kh) = B \sinh(-kh')
+    \qquad\yueni \sinh(kh) \cdot A + \sinh(kh') \cdot B = 0 .
+\]
+\ajMaru{3}は
+\[
+    (\rho-\rho')g \cdot kA \sinh(kh) = -\omega^2 \bqty{ \rho' B\cosh(-kh') - \rho A\cosh(kh) } ,
+\]
+\[
+    \yueni \bqty{ (\rho-\rho')gk \sinh(kh) - \rho\omega^2 \cosh(kh) }A + \rho'\omega^2 \cosh(kh') \cdot B = 0 .
+\]
+非自明な解を持つためには，行列式が0でなければならないから
+\[
+    \bqty{ (\rho-\rho')gk \sinh(kh) - \rho\omega^2 \cosh(kh) } \sinh(kh') - \rho'\omega^2 \cosh(kh')\sinh(kh) = 0
+\]
+\[
+    \bqty{ \rho\cosh(kh)\sinh(kh') + \rho'\cosh(kh')\sinh(kh) }\omega^2 = (\rho-\rho')gk \sinh(kh)\sinh(kh')
+\]
+\[
+    \yueni \omega^2 = \frac{ (\rho-\rho')gk }{ \rho\coth(kh) + \rho'\coth(kh') } .
+\]
+2流体が十分厚い場合（$kh,kh' \gg 1$），$\coth(x) \to 1 \;(x\to\infty)$であるから
+\[
+    \omega^2 \simeq \frac{\rho-\rho'}{\rho+\rho'}gk .
+\]
+2流体が十分浅いまたは長波の場合（$kh,kh' \ll 1$），$\coth(x) \simeq \dfrac{1}{x} \;(x\simeq 0)$であるから
+\[
+    \omega^2 \simeq \frac{ (\rho-\rho')gk }{ \dfrac{\rho}{kh} + \dfrac{\rho'}{kh'} }
+    = \frac{ (\rho-\rho')gk^2hh' }{ \rho h' + \rho' h } .
+\]
+\spade
+最後に，$kh \gtrsim 1$かつ$kh' \ll 1$（上側が薄い）場合，
+$\rho\coth(kh) \ll \rho'\coth(kh') \simeq \dfrac{\rho'}{kh'}$であるから
+\[
+    \omega^2 \simeq \frac{ (\rho-\rho')gk }{ \dfrac{\rho'}{kh'} } = \frac{\rho-\rho'}{\rho'} gh' k^2 .
+\]
+
+
+\end{kaitou}
+
+
+
+
+
+%%%%%%%%%% 問題3 %%%%%%%%%%
+
+\begin{mondai}{}{}
+2層流体で，上側の流体（密度$\rho'$，厚さ$h'$）の上面は自由表面，下側の流体（密度$\rho$）は無限に深いとする（$\rho>\rho'$）．
+自由表面および境界面を伝わる重力波の分散関係を求めよ．
+\end{mondai}
+\begin{kaitou}
+やはり平衡状態での境界面を$z=0$にとる．
+$z\to-\infty$で$\phi\to0$となる解は
+\[
+    \begin{cases}
+        \phi = A e^{kz} \cos(kx-\omega t) \quad (z<0) \\
+        \phi' = (Be^{-kz}+Ce^{kz}) \cos(kx-\omega t) \quad (z>0)
+    \end{cases} .
+    \mytag{1}
+\]
+境界$z=0$での条件は
+\[
+    \eval{\pdv{\phi}{z}}_{z=0} = \eval{\pdv{\phi'}{z}}_{z=0} ,
+    \mytag{2}
+\]
+\[
+    (\rho-\rho')g \eval{\pdv{\phi}{z}}_{z=0} = \pqty{ \rho'\pdv[2]{\phi'}{t} - \rho\pdv[2]{\phi}{t} }_{z=0} .
+    \mytag{3}
+\]
+自由表面$z=h'$での境界条件は，\eqref{eq12.5:重力波の表面での境界条件}より
+\[
+    \pqty{ g \pdv{\phi'}{z} + \pdv[2]{\phi'}{t} }_{z=h'} = 0 .
+    \mytag{4}
+\]
+\ajMaru{1}を\ajMaru{2}に代入すると$A=-B+C$となる．
+よって\ajMaru{1}を\ajMaru{3}\ajMaru{4}に代入することで，係数$B,C$に関する連立1次方程式が得られる．
+\ajMaru{3}より
+\[
+    (\rho-\rho')gkA = -\omega^2 \bqty{\rho'(B+C)-\rho A}
+\]
+\[
+    (\rho-\rho')gk(-B+C) = -\rho'\omega^2(B+C) + \rho\omega^2(-B+C)
+\]
+\[
+    \yueni \bqty{ (\rho+\rho')\omega^2 - (\rho-\rho')gk } B - (\rho-\rho')(\omega^2-gk) C = 0 .
+\]
+\ajMaru{4}より
+\[
+    gk(-Be^{-kh'}+Ce^{kh'}) -\omega^2 (Be^{-kh'}+Ce^{kh'}) = 0
+\]
+\[
+    \yueni (\omega^2+gk)e^{-kh'} B + (\omega^2-gk)e^{kh'} C = 0.
+\]
+行列式を0とおいて
+\[
+    \bqty{ (\rho+\rho')\omega^2 - (\rho-\rho')gk } (\omega^2-gk)e^{kh'} + (\rho-\rho')(\omega^2-gk) (\omega^2+gk)e^{-kh'} = 0 .
+\]
+$\omega^2=gk$は解の1つで，これは自由表面を伝わる波である．それ以外の解は
+\[
+    \bqty{ (\rho+\rho')\omega^2 - (\rho-\rho')gk }  + (\rho-\rho')(\omega^2+gk)e^{-2kh'} = 0
+\]
+\[
+    \bqty{ \rho+\rho' + (\rho-\rho')e^{-2kh'} } \omega^2 = (\rho-\rho')gk (1-e^{-2kh'})
+\]
+\[
+    \yueni \omega^2 = \frac{ (\rho-\rho') (1-e^{-2kh'}) }{ \rho+\rho' + (\rho-\rho')e^{-2kh'} } gk .
+\]
+上側の流体も十分厚い（$kh' \gg 1$）場合には$\omega^2 \simeq \dfrac{\rho-\rho'}{\rho+\rho'}gk$で前問で求めた極限と一致し，境界面を伝わる波を表す．
+
+
+
+\end{kaitou}
+
+
+
+
+
+%%%%%%%%%% 問題4 %%%%%%%%%%
+
+\begin{mondai}{}{}
+縦$a$，横$b$，深さ$h$の直方体の容器内で生じる定常波の，可能な振動数を求めよ．
+\end{mondai}
+\begin{kaitou}
+直方体の縦，横方向に沿って$x,y$軸をとる．定常波は
+\[
+    \phi = f(x,y) \cosh[k(z+h)] \cos\omega t
+\]
+とおける．
+これをLaplace方程式$\Laplacian\phi=0$に代入すると，$f$の満たすべき方程式は
+\[
+    \pdv[2]{f}{x} + \pdv[2]{f}{y} + k^2f = 0 .
+    \mytag{1}
+\]
+また，自由表面での境界条件\eqref{eq12.5:重力波の表面での境界条件}より分散関係は
+\[
+    gk \sinh(kh) - \omega^2 \cosh(kh) = 0
+    \qquad\yueni \omega^2 = gk \tanh(kh).
+\]
+
+\ajMaru{1}の解を$f=\cos(px)\cos(qy)$の形に求めよう．
+\ajMaru{1}より
+\[
+    p^2+q^2=k^2
+    \mytag{2}
+\]
+であり，側面での境界条件
+\[
+    \begin{cases}
+        v_x = \dpdv{\phi}{x} = 0 \quad (x=0,a) \\[7pt]
+        v_y = \dpdv{\phi}{y} = 0 \quad (y=0,b) 
+    \end{cases}
+\]
+より$pa=m\pi, qb=n\pi$となる（$m,n$は整数）．
+可能な$k$の値は
+\[
+    k^2 = \pqty{\frac{m\pi}{a}}^2 + \pqty{\frac{n\pi}{b}}^2
+    = \pi^2 \pqty{ \frac{m^2}{a^2} + \frac{n^2}{b^2} } .
+\]
+
+
+\end{kaitou}
+
+
+\BackToTheToc

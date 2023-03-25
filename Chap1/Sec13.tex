@@ -1,0 +1,199 @@
+\section{非圧縮性流体中の内部波}
+
+重力波の中には，非圧縮性流体の内部を伝播するものがある．
+そのような波動は，重力場によって流体が不均質となったことで生じる．
+この場合，必然的に圧力は（したがってエントロピーも）高さによって異なる値をとる．
+よって流体粒子が上下方向に変位することで力学的平衡は敗れ，振動が生じる．
+なぜなら，運動が断熱的であるため，流体粒子は元の位置でのエントロピーのまま新しい位置に移動し，新しい位置での平衡状態でのエントロピーとは異なるからである．
+
+
+以下では，重力場によって密度が大きく変化する距離に比べて波長が短く
+\footnote{\spade
+密度と圧力の勾配の関係は$\Grad p = \dPDV{p}{\rho}{s} \Grad\rho = c^2 \Grad\rho$で与えられる（$c$は音速）．
+よって静水圧平衡の式$\Grad p = \rho\vec{g}$は$\Grad\rho=\dfrac{\rho}{c^2}\vec{g}$となる．
+したがって，重力場によって密度が大きく変化する距離を$l$とすると，$\dfrac{\rho}{l} \sim \dfrac{\rho g}{c^2}$より$l \sim \dfrac{c^2}{g}$であり，
+空気では$l \sim \SI{10}{km}$，水では$l \sim \SI{200}{km}$となる．以下では，波長がこれより短い波動を扱うことになる．
+}，
+圧力による密度変化は無視できるとする．
+すなわち，密度変化は熱膨張によってのみ生じると仮定する（Boussinesq近似）．
+
+
+
+
+このような運動の方程式系を書き下そう．
+以下，添字0は力学的平衡での値，ダッシュ（$'$）はそこからのずれを表すものとする．
+エントロピー$s=s_0+s'$の保存則は，微小量の1次までとる近似で
+\begin{equation}\label{eq13.1:内部波でのエントロピー保存則}
+    \pdv{s'}{t} + \v \cdot \Grad s_0 = 0
+\end{equation}
+となる（$\v$も微小量とする）．
+$s_0$は，平衡状態における他の量と同様，鉛直座標$z$の（与えられた）関数である．
+
+
+
+次に，Euler方程式で2次の微小量$(\v\cdot\Grad)\v$を無視し，平衡状態での圧力分布が$\Grad p_0 = \rho_0 \vec{g}$で与えられることを用いると，同程度の近似で
+\begin{align*}
+    \pdv{\v}{t} &= - \frac{1}{\rho} \Grad p + \vec{g} \\
+    &= - \frac{1}{\rho_0+\rho'} \Grad(p_0+p') + \vec{g} \\
+    &\simeq - \frac{1}{\rho_0} \pqty{1-\frac{\rho'}{\rho_0}} \Grad(p_0+p') + \vec{g} \\
+    &\simeq - \cancel{ \frac{1}{\rho_0}\Grad p_0 } - \frac{1}{\rho_0}\Grad p' + \frac{\rho'}{{\rho_0}^2} \Grad p_0 + \cancel{\vec{g}} \\
+    &= - \frac{1}{\rho_0}\Grad p' + \frac{\rho'}{{\rho_0}^2} \Grad p_0 .
+\end{align*}
+第1項について，波長程度の距離では$\rho_0$が変化しないと仮定しているから，$\rho_0$をgradの中に入れることができる．
+また，$\Grad p_0 = \rho_0 \vec{g}$を用いて第2項を$\dfrac{\rho'}{\rho_0} \vec{g}$と書き，
+さらに密度変化がエントロピー変化のみであることから$\rho'=\dPDV{\rho_0}{s_0}{p}s'$を代入すると$\dfrac{\vec{g}}{\rho_0} \dPDV{\rho_0}{s_0}{p} s'$となる．
+したがってEuler方程式は
+\begin{equation}\label{eq13.2:内部波でのEuler方程式}
+    \pdv{\v}{t} = \frac{\vec{g}}{\rho_0} \PDV{\rho_0}{s_0}{p} s' - \Grad\pqty{\frac{p'}{\rho_0}} .
+\end{equation}
+$\rho_0$が波長程度の距離では変化しないことから，連続の式は
+\begin{equation}\label{eq13.3:内部波での連続の式}
+    \Div\v=0
+\end{equation}
+となる．
+
+
+さて，方程式系\eqref{eq13.1:内部波でのエントロピー保存則}〜\eqref{eq13.3:内部波での連続の式}の解を，平面波
+\[
+    \v \propto e^{i( \vec{k}\cdot\vec{r} -\omega t )}
+\]
+の形に求めよう（$s',p'$も同様）．
+\eqref{eq13.3:内部波での連続の式}より
+\begin{equation}\label{eq13.4:内部波は縦波}
+    \vec{k} \cdot \v = 0 ,
+\end{equation}
+つまり速度が\emph{波数ベクトル}$\vec{k}$に垂直な横波である．
+一方，\eqref{eq13.1:内部波でのエントロピー保存則}\eqref{eq13.2:内部波でのEuler方程式}へ代入すると
+\[
+    -i\omega s' + \v \cdot \Grad s_0 = 0 ,
+    \mytag{1}
+\]
+\[
+    -i\omega\v = \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s' \vec{g} - \frac{i\vec{k}}{\rho_0} p' .
+    \mytag{2}
+\]
+\ajMaru{2}と$\vec{k}$の内積をとって\eqref{eq13.4:内部波は縦波}を用いると
+\[
+    0 = \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s' \vec{g}\cdot\vec{k} - \frac{ip'}{\rho_0} k^2 .
+\]
+\begin{align*}
+    \yueni \frac{ip'}{\rho_0} &= \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s' \frac{ \vec{g}\cdot\vec{k} }{k^2} \\
+    & \gyoukan{$z$軸と$\vec{k}$のなす角を$\theta$とすると$\vec{g}\cdot\vec{k}=-gk\cos\theta$} \\
+    &= - \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s' \frac{g \cos\theta}{k} .
+\end{align*}
+再び\ajMaru{2}に戻して
+\begin{align*}
+    -i\omega\v &= \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s' \vec{g} + \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s' g\cos\theta \frac{\vec{k}}{k} \\
+    &= \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s'\pqty{ \vec{g} +  g\cos\theta \frac{\vec{k}}{k} }
+\end{align*}
+両辺と$\Grad s_0 = \ddv{s_0}{z} \Unit{z}$の内積をとり，左辺に\ajMaru{1}を用いると
+\[
+    -i\omega(i\omega s') = \frac{1}{\rho_0} \PDV{\rho_0}{s_0}{p} s' \dv{s_0}{z} {(-g+g\cos^2\theta)} ,
+\]
+\[
+    \omega^2 = - \frac{g}{\rho_0} \PDV{\rho_0}{s_0}{p} \dv{s_0}{z} \sin^2\theta .
+\]
+よって
+\begin{equation}\label{eq13.5:内部波の分散関係}
+    \omega^2 = {\omega_0}^2 \sin^2\theta ,
+\end{equation}
+\begin{equation}\label{eq13.6:内部波の固有振動数}
+    {\omega_0}^2 = - \frac{g}{\rho} \PDV{\rho}{s}{p} \dv{s}{z} .
+\end{equation}
+ただし，平衡状態での量を表す添字0は省いた．
+
+\eqref{eq4.1:対流がないときのエントロピー勾配の条件1}より
+$\dPDV{V}{s}{p} \ddv{s}{z} = - \dfrac{1}{\rho^2} \dPDV{\rho}{s}{p} \ddv{s}{z} > 0$であるから，
+\eqref{eq13.6:内部波の固有振動数}の右辺は正である．
+すなわち，\S~\ref{sec:4}の安定条件が満たされていれば，実数$\omega_0$は存在する．
+
+
+
+\eqref{eq13.5:内部波の分散関係}より，振動数は波数ベクトルの大きさにはよらず，方向のみに依存する．
+また$\theta=0$ならば$\omega=0$であるから，鉛直方向に伝わる波動は存在しないことがわかる．
+
+
+
+流体が力学的にも熱力学的にも平衡ならば，温度は一定であるから
+\[
+    \dv{s}{z} = \PDV{s}{p}{T} \dv{p}{z} = -\rho g \PDV{s}{p}{T}
+\]
+である．$c_p$を単位質量あたりの比熱とすると
+\[
+    \PDV{s}{p}{T} = \frac{1}{\rho^2} \PDV{\rho}{T}{p}, \quad
+    \PDV{\rho}{s}{p} = \frac{T}{c_p} \PDV{\rho}{T}{p}
+\]
+\begin{details}
+後者は\S~\ref{sec:4}の補足で説明した式$\dPDV{V}{s}{p} = \dfrac{T}{c_p} \dPDV{V}{T}{p}$より明らか．
+前者は，その補足で言及しているMaxwell関係式$\dPDV{s}{p}{T} = - \dPDV{V}{T}{p}$より明らか．
+\end{details}
+\noindent
+が成り立つから
+\[
+    {\omega_0}^2 = - \frac{g}{\rho} \frac{T}{c_p} \PDV{\rho}{T}{p} \cdot \bqty{ -\rho g \cdot \frac{1}{\rho^2} \PDV{\rho}{T}{p} }
+    = \frac{Tg^2}{c_p \rho^2} \bqty{\PDV{\rho}{T}{p}}^2
+\]
+\begin{equation}
+    \yueni \omega_0 = \sqrt{\frac{T}{c_p}} \frac{g}{\rho} \vqty{\PDV{\rho}{T}{p}}
+\end{equation}
+となる．
+特に理想気体では$-\dfrac{1}{\rho} \dPDV{\rho}{T}{p} = \dfrac{1}{T}$であるから
+\begin{equation}
+    \omega_0 =   \frac{g}{\sqrt{c_pT}} 
+\end{equation}
+となる．
+
+\spade
+周波数が波数ベクトルの方向に依存するため，群速度$\vec{U} = \dpdv{\omega}{\vec{k}}$は$\vec{k}$に平行ではなくなる．
+$\vec{n} = \dfrac{\vec{k}}{k}$，$\vec{\nu}$を$z$軸上向きの単位ベクトル（$=\Unit{z}$）とすると，
+$\cos\theta=\dfrac{\vec{k}\cdot\vec{\nu}}{k} = \vec{n}\cdot\vec{\nu}$であるから
+\[
+    \omega(\vec{k}) = \omega_0 \sqrt{ 1- \pqty{\frac{\vec{k}\cdot\vec{\nu}}{k}}^2 } .
+\]
+\begin{details}
+ここで
+\begin{align*}
+    \pdv{k_i} \pqty{\frac{\vec{k}\cdot\vec{\nu}}{k}}^2 
+    &= \frac{1}{k^2} \pdv{k_i} (\vec{k}\cdot\vec{\nu})^2 + (\vec{k}\cdot\vec{\nu})^2 \pdv{k_i} \pqty{\frac{1}{k^2}} \\
+    &= \frac{1}{k^2} \pdv{k_i} (k_j\nu_j k_l\nu_l) + (\vec{k}\cdot\vec{\nu})^2 \pqty{ -\frac{2k_i}{k^4} } \\
+    &= \frac{1}{k^2} (\delta_{ij}\nu_j k_l\nu_l + k_j\nu_j \delta_{il}\nu_l) - \frac{2(\vec{k}\cdot\vec{\nu})^2}{k^4} k_i  \\
+    &= \frac{k_l\nu_l+k_j\nu_j}{k^2} \nu_i - \frac{2(\vec{k}\cdot\vec{\nu})^2}{k^4} k_i .
+\end{align*}
+よって$\vec{n} = \dfrac{\vec{k}}{k}$に注意すると
+\begin{align*}
+    \pdv{\vec{k}} \pqty{\frac{\vec{k}\cdot\vec{\nu}}{k}}^2
+    &= \frac{2(\vec{k}\cdot\vec{\nu})}{k^2} \vec{\nu} - \frac{2(\vec{k}\cdot\vec{\nu})^2}{k^4} \vec{k} \\
+    &= \frac{2}{k} \bqty{ (\vec{n}\cdot\vec{\nu})\vec{\nu} - (\vec{n}\cdot\vec{\nu})^2\vec{n} } .
+\end{align*}
+\end{details}
+%
+%
+\begin{align}
+    \vec{U} &= \pdv{\omega}{\vec{k}} = \frac{-\omega_0}{2\sqrt{\qquad}} \pdv{\vec{k}} \pqty{\frac{\vec{k}\cdot\vec{\nu}}{k}}^2 \notag \\
+    &= \frac{-{\omega_0}^2}{2\omega} \cdot \frac{2}{k} (\vec{n}\cdot\vec{\nu}) \bqty{ \vec{\nu} - (\vec{n}\cdot\vec{\nu})\vec{n} } \notag \\
+    &= \frac{-{\omega_0}^2}{\omega k} (\vec{n}\cdot\vec{\nu}) \bqty{ \vec{\nu} - (\vec{n}\cdot\vec{\nu})\vec{n} } 
+\end{align}
+これと$\vec{n}$との内積$\propto (\vec{n}\cdot\vec{\nu}) - (\vec{n}\cdot\vec{\nu}) = 0$より，$\vec{U}$は$\vec{k}$と垂直であることがわかる．
+
+また，
+\[
+    \bqty{ \vec{\nu} - (\vec{n}\cdot\vec{\nu})\vec{n} }^2 = \nu^2 -2(\vec{n}\cdot\vec{\nu})^2 +2(\vec{n}\cdot\vec{\nu})^2
+    = 1-\cos^2\theta = \sin^2\theta
+\]
+に注意すると，$\vec{U}$の大きさは
+\[
+    U = \frac{{\omega_0}^2}{\omega k} |\vec{n}\cdot\vec{\nu}| \cdot |\vec{\nu} - (\vec{n}\cdot\vec{\nu})\vec{n}|
+    = \frac{\omega_0}{k\sin\theta} \cos\theta \cdot \sin\theta
+    = \frac{\omega_0}{k} \cos\theta ,
+\]
+$\vec{U}$の鉛直成分は
+\[
+    \vec{U}\cdot\vec{\nu} = -\frac{{\omega_0}^2}{\omega k} (\vec{n}\cdot\vec{\nu}) \bqty{ 1-(\vec{n}\cdot\vec{\nu})^2 }
+    = -\frac{\omega_0}{k\sin\theta} \cdot \cos\theta \sin^2\theta
+    = -\frac{\omega_0}{k} \cdot \cos\theta \sin\theta
+\]
+となる．
+
+
+
+\BackToTheToc

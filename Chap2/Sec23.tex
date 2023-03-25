@@ -1,0 +1,557 @@
+\section{粘性流体の運動方程式の厳密解}
+粘性流体の運動方程式の非線形項が自動的に0にならない場合，方程式を解くのは非常に困難であり，厳密解は非常に限られた場合にしか得られていない．
+そのような解は，必ずしも物理的に興味深いものではない（実際にはReynolds数が非常に大きいとき乱流になる）が，方法論的にはかなり興味深い．
+
+
+
+\subsection*{回転する円板による流体の巻き込み（von K\'{a}rm\'{a}n swirling flow）}
+
+\begin{myitembox}
+粘性流体中に置かれた無限に広い円板が，軸のまわりを一様に回転している．
+円板の動きによって引き起こされる流れを求めよ（T. von K\'{a}rm\'{a}n 1921）．
+\end{myitembox}
+\begin{details}
+この問題に関しては巽の13-2-3も参照のこと．
+\end{details}
+
+円板を$z=0$とする円筒座標系をとり，流体は$z>0$の部分を占めているとする．
+そして，円板は$z$軸のまわりを角速度$\Omega$で回転しているとする．
+境界条件は
+\begin{itemize}
+    \item $z=0$で$v_r = 0, \; v_\phi = \Omega r, \; v_z = 0$，
+    \item $z \to \infty$で$v_r \to 0, \; v_\phi \to 0$．
+\end{itemize}
+遠心力によって，円板近傍の流体は軸から外側に流れるだろう．
+連続の式が成り立つためには，無限遠から円板に向かって$-z$方向の流れが存在しなければならない．
+このため，$v_z$は$z\to\infty$で0とならず，負の一定値に近づく（その値は運動方程式により決まる）．
+
+
+$v_r$と$v_\phi$が回転軸からの距離に比例し，かつ全ての量が$z$に依存する，次のような形の解を求めよう．
+\begin{equation}
+    v_r = \Omega r F(z_1), \; v_\phi = \Omega r G(z_1), \; 
+    v_z = - \sqrt{\nu\Omega} H(z_1), \; p = -\rho\nu\Omega P(z_1) \;
+    \left( z_1 = \sqrt{\frac{\Omega}{\nu}}z\right) .
+\end{equation}
+これらをNavier-Stokes方程式と連続の式へ代入して，関数$F,G,H,P$に関する微分方程式を得よう
+（以下，プライム$(')$は$z_1$に関する微分を表すものとする）．
+Navier-Stokes方程式の$r$成分は
+\[
+    v_r \pdv{v_r}{r} + v_z \pdv{v_r}{z} - \frac{{v_\phi}^2}{r} = \nu \left( \cancel{\pdv[2]{v_r}{r}} + \pdv[2]{v_r}{z} + \frac{1}{r}\pdv{v_r}{r} - \frac{v_r}{r^2} \right).
+\]
+\[
+    \Omega rF \cdot \Omega F - \sqrt{\nu\Omega}H \cdot \Omega r \sqrt{\frac{\Omega}{\nu}} F' - \frac{(\Omega r)^2}{r} G^2
+    = \nu \left( \Omega r \cdot \frac{\Omega}{\nu} F'' + \cancel{ \frac{\Omega}{r}F - \frac{\Omega r}{r^2} F } \right)
+\]
+（両辺を$\Omega^2r$で割って）
+\[
+    F^2 - HF' - G^2 = F''.
+\]
+Navier-Stokes方程式の$\phi$成分は
+\[
+    v_r \pdv{v_\phi}{r} + v_z \pdv{v_\phi}{z} + \frac{v_rv_\phi}{r} = \nu \left( \cancel{\pdv[2]{v_\phi}{r}} + \pdv[2]{v_\phi}{z} + \frac{1}{r}\pdv{v_\phi}{r} - \frac{v_\phi}{r^2} \right).
+\]
+\[
+    \Omega rF \cdot \Omega G - \sqrt{\nu\Omega}H \cdot \Omega r \sqrt{\frac{\Omega}{\nu}} G' - \frac{\Omega rF \cdot \Omega rG}{r}
+    = \nu \left( \Omega r \cdot \frac{\Omega}{\nu} G'' + \cancel{ \frac{\Omega}{r}G - \frac{\Omega r}{r^2} G } \right)
+\]
+（両辺を$\Omega^2r$で割って）
+\[
+    2FG - HG' = G''.
+\]
+Navier-Stokes方程式の$z$成分は
+\[
+    v_z\pdv{v_z}{z} = -\frac{1}{\rho} \pdv{p}{z} + \nu \pdv[2]{v_z}{z}.
+\]
+\[
+    -\sqrt{\nu\Omega}H \cdot \left( -\sqrt{\nu\Omega} \cdot \sqrt{\frac{\Omega}{\nu}} H' \right)
+    = \nu\Omega \cdot \sqrt{\frac{\Omega}{\nu}} P' + \nu\left( -\sqrt{\nu\Omega} \cdot \frac{\Omega}{\nu} H'' \right)
+\]
+（両辺を$\Omega^{3/2}\nu^{1/2}$で割って）
+\[
+    HH' = P' - H''.
+\]
+連続の式は
+\[
+    \pdv{v_r}{r} + \pdv{v_z}{z} + \frac{v_r}{r} = 0
+\]
+\[
+    \Omega F - \sqrt{\nu\Omega} \cdot \sqrt{\frac{\Omega}{\nu}} H' + \Omega F = 0
+    \qquad \yueni 2F- H' = 0.
+\]
+以上まとめて
+\begin{equation}
+    \begin{cases}
+        F^2 - HF' - G^2 = F'' \\
+        2FG - HG' = G'' \\
+        HH' = P' - H'' \\
+        2F- H' = 0 
+    \end{cases} .
+\end{equation}
+境界条件は
+\begin{equation}
+    \begin{cases}
+        z_1=0\;\text{で}\; F=0, \; G=1, \; H=0 \\
+        z_1\to\infty\;\text{で}\; F\to0, \; G\to0
+    \end{cases}.
+\end{equation}
+
+
+よってこの問題の解は，1変数の連立微分方程式を解くことによって得られる．数値計算の結果は図7に示す通りである．
+\begin{details}
+詳細は
+Cochran, W. (1934). The flow due to a rotating disc. \textit{Mathematical Proceedings of the Cambridge Philosophical Society}, 30(3), 365-375.
+% doi:10.1017/S0305004100012561
+を参照のこと．
+\end{details}
+
+$z_1\to\infty$の極限で$H\to0.866$となる．
+すなわち，無限遠での流速は$v_z(\infty) = -0.866\sqrt{\nu\Omega}$である．
+
+
+円板の単位面積に働く摩擦力の$\phi$成分は
+\[
+    \eval{\sigma_{z\phi}}_{z=0} = \eta\eval{\pdv{v_\phi}{z}}_{z=0}
+    = \eta \cdot \Omega r \sqrt{\frac{\Omega}{\nu}} G'(0)
+    = \rho \sqrt{\Omega^3\nu} G'(0) r
+\]
+である．
+十分大きいが有限の半径$R$を持つ円板に働く摩擦力のモーメントは（端の影響を無視して）
+\[
+    M = \int_{0}^{R} 2\pi r \; dr \cdot r \eval{\sigma_{z\phi}}_{z=0}
+    = 2\pi\rho \sqrt{\Omega^3\nu} G'(0) \int_{0}^{R} r^3 \; dr
+    = \frac{\pi}{2} \rho R^4 \sqrt{\Omega^3\nu} G'(0).
+\]
+数値計算の結果を代入すると
+\begin{equation}
+    M = -0.97 \rho R^4 \sqrt{\Omega^3\nu}
+\end{equation}
+となる．
+
+
+\begin{details}
+英語版Wikipediaの``von K\'{a}rm\'{a}n swirling flow''の項には，この問題の拡張版として
+\begin{itemize}
+    \item 無限遠でも流体が回転している場合（$z\to\infty$で$v_\phi\to\Gamma r$）
+    \item その角速度が円板のそれに近い場合（$\Gamma\simeq\Omega$）
+    \item 非軸対称の場合
+    \item B\"{o}dewadt流れ（円板が静止し，無限遠で流体が一様速度で回転している場合．低気圧や竜巻の中心付近のモデル）
+    \item 共通の軸を持つ2枚の円板が別々の角速度で回転している場合
+\end{itemize}
+が紹介されている．
+\end{details}
+
+
+
+
+\subsection*{わき出し水路・吸い込み水路の流れ（Jeffery-Hamel flow）}
+
+\begin{myitembox}
+角度$\alpha$で交わる2平面の間の流れを求めよ．
+ただし，流体は2平面の交線から出入りするものとする（G. Hamel 1917）．
+\end{myitembox}
+\begin{details}
+この問題に関しては巽の13-2-1も参照のこと．
+\end{details}
+
+
+2平面の交線を$z$軸とする円筒座標系$(r, z, \phi)$をとり，角度$\phi$は図8のように平面の中央から測るものとする$\left( -\dfrac{\alpha}{2} \ika \phi \ika \dfrac{\alpha}{2} \right)$．
+流れは$z$方向に一様であるから，2次元平面で考えてよい（$v_z=0, \; \partial/\partial z = 0$）．
+また対称性から$v_\phi=0$であり$v_r = v(r, \phi)$となる．円筒座標系でのNavier-Stokes方程式と連続の式から
+\begin{equation}\label{eq23.5:わき出し吸い込み水路のNS方程式1}
+    v\pdv{v}{r} = -\frac{1}{\rho} \pdv{p}{r} + \nu \left( \pdv[2]{v}{r} + \frac{1}{r^2} \pdv[2]{v}{\phi} + \frac{1}{r} \pdv{v}{r} - \frac{v}{r^2} \right) ,
+\end{equation}
+\begin{equation}\label{eq23.6:わき出し吸い込み水路のNS方程式2}
+    0 = - \frac{1}{\rho r} \pdv{p}{\phi} + \frac{2\nu}{r^2} \pdv{v}{\phi} ,
+\end{equation}
+\[
+    \pdv{v}{r} + \frac{v}{r} = 0 .
+\]
+最後の式を$\dfrac{1}{r}\dpdv{r}(rv)=0$と書き直すことで，$rv$は$r$に依存せず$\phi$のみの関数であることが分かる
+（言いかえれば，速度は原点からの距離に反比例する）．
+そこで無次元の変数
+\begin{equation}
+    u(\phi) = \frac{rv}{6\nu}
+\end{equation}
+を導入しよう．\eqref{eq23.6:わき出し吸い込み水路のNS方程式2}より
+\[
+    \pdv{\phi} \left( \frac{p}{\phi} \right) = \frac{2\nu}{r} \pdv{v}{\phi} = \frac{12\nu^2}{r^2} \dv{u}{\phi}
+    \qquad \yueni
+    \frac{p}{\rho} = \frac{12\nu^2}{r^2} u(\phi) + f(r).
+\]
+\eqref{eq23.5:わき出し吸い込み水路のNS方程式1}へ代入し
+\[
+    \frac{6\nu u}{r} \cdot \left( -\frac{6\nu u}{r^2} \right)
+    = - \left( -\frac{24\nu^2}{r^3} u(\phi) + f'(r) \right)
+    + \nu \left[ \cancel{\frac{12\nu u}{r^3}} + \frac{1}{r^2} \cdot \frac{6\nu}{r} \dv[2]{u}{\phi}
+    + \cancel{ \frac{1}{r} \left( - \frac{6\nu u}{r^2} \right) - \frac{1}{r^2} \cdot \frac{6\nu u}{r} } \right] .
+\]
+（両辺を$6\nu^2/r^3$で割り）
+\[
+    \dv[2]{u}{\phi} + 4u + 6u^2 = \frac{1}{6\nu^2} r^3 f'(r) .
+\]
+この式の左辺は$\phi$のみに，右辺は$r$のみに依存するから，両辺は定数$2C_1$に等しくなければならない．\\
+$f'(r) = \dfrac{12\nu^2 C_1}{r^3}$から$f(r) = - \dfrac{6\nu^2C_1}{r^2} + \const$であり，圧力は
+\begin{equation}
+    \frac{p}{\rho} = \frac{12\nu^2}{r^2}u + f(r)
+    = \frac{6\nu^2}{r^2} (2u-C_1) +\const
+\end{equation}
+
+また$u(\phi)$については$\ddv[2]{u}{\phi} + 4u + 6u^2 = 2C_1$であり，両辺に$\ddv{u}{\phi}$をかけて1回積分すると
+\[
+    \frac{1}{2} \left( \dv{u}{\phi} \right)^2 + 2u^2 + 2u^3 = 2C_1u + 2C_2
+\]
+\[
+    \frac{1}{4} \left( \dv{u}{\phi} \right)^2 = -u^3 -u^2 +C_1u + C_2
+    \mytag{1}
+\]
+\begin{equation}\label{eq23.9:JH flow, φとuの関係}
+    \yueni 2\phi = \pm \int \frac{du}{\sqrt{-u^3-u^2+C_1u+C_2}} + C_3
+\end{equation}
+となり，角度$\phi$と$u$の関係が得られた．
+3つの定数$C_1,C_2,C_3$は壁面での境界条件
+\begin{equation}
+    u \left( \pm \frac{1}{2} \alpha \right) = 0
+\end{equation}
+と，$r=\const$の断面を単位時間に通過する質量$Q$が一定であるという条件
+\begin{equation}\label{eq23.11:JH flow, Q一定の条件}
+    Q = \rho \int_{-\alpha/2}^{\alpha/2} vr \; d\phi
+    = 6\nu\rho \int_{-\alpha/2}^{\alpha/2} u \; d\phi
+\end{equation}
+から決まる．定数$Q$は正負どちらの値もとりうる．
+$Q>0$の場合，2平面の交線はわき出しであり，頂点Oから流体が流れ出る（\emph{わき出し水路の流れ}）．
+$Q<0$の場合，2平面の交線は吸い込みである（\emph{吸い込み水路の流れ}）．
+無次元量$\R \equiv \dfrac{|Q|}{\nu\rho}$はこの問題におけるReynolds数の役割を果たす．
+
+
+\begin{details}
+Landauでは，解\eqref{eq23.9:JH flow, φとuの関係}〜\eqref{eq23.11:JH flow, Q一定の条件}の性質を定量的に調べているが，
+ここではその結果のみを簡潔に紹介する．
+\end{details}
+
+\subsubsection*{吸い込み（$Q<0$）の場合}
+任意の$\R$と$0<\alpha<\pi$に対して，対称な吸い込み流れが可能であることが知られている．
+また，$\R$が大きい極限では
+\begin{itemize}
+    \item 壁に近い，非常に薄い層（境界層）では速度が急激に（0から最大値へ）変化するが，
+    \item それ以外の領域では，理想流体のポテンシャル流に漸近する．
+\end{itemize}
+
+% 解\eqref{eq23.9:JH flow, φとuの関係}〜\eqref{eq23.11:JH flow, Q一定の条件}を調べる際，以下の仮定を設ける（これらの仮定はのちに正当化される）．
+% \begin{itemize}
+%     \item 流れは平面$\phi=0$に関して対称（$u(\phi)=u(-\phi)$）．
+%     \item 全ての$\phi$について$u(\phi)<0$（どの場所でも流れは原点に向かう向きであり，原点から離れる流れはない）．
+%     \item 壁$\phi=\pm \dfrac{\alpha}{2}$で$u$は最大値0をとり，そこから単調減少して，$\phi=0$で最小値$-u_0 \; (<0)$をとる（つまり$u_0$は$|u|$の最大値）．
+% \end{itemize}
+% これらの仮定から$u=-u_0$で$\ddv{u}{\phi}=0$であるから，\ajMaru{1}右辺の3次式の零点の1つは$u=-u_0$であることがわかる．
+% すなわち，$p,q$を別の定数として
+% \[
+%     -u^3 -u^2 +C_1u + C_2 = (u+u_0)(-u^2+pu+q) = (u+u_0) \{ -u^2 -(1-u_0)u + q \}.
+% \]
+% （∵$u^2$の係数を比べると$-1=p-u_0$だから$p = -(1-u_0)$）
+% これを\eqref{eq23.9:JH flow, φとuの関係}に代入し
+% \begin{equation}
+%     2\phi = \pm \int_{-u_0}^{u} \frac{du}{\sqrt{(u+u_0) \{ -u^2 -(1-u_0)u + q \}}}.
+% \end{equation}
+% （積分区間は，$u=-u_0$で$\phi=0$であることから決まっている）
+
+
+% \begin{equation}
+%     \alpha = , 
+%     \frac{1}{6} \R = 
+% \end{equation}
+
+
+\subsubsection*{わき出し（$Q>0$）の場合}
+吸い込みの場合とは異なり，（与えられた角度に対して）$\R$の上限$\R_\mathrm{max}$が存在して，
+\begin{itemize}
+    \item $\R<\R_\mathrm{max}$では対称なわき出し流れが可能だが，
+    \item $\R>\R_\mathrm{max}$では平面$\phi=0$について非対称となり，さらに$u>0$の領域と$u<0$の領域が混在する
+\end{itemize}
+ことが知られている．
+また，$\R\to\infty$のとき，吸い込みの流れはEuler方程式の解に収束したが，わき出しの流れは収束しない．
+
+
+
+なお，実際には$\R$が$\R_\mathrm{max}$を超えた途端，定常なわき出し流れは不安定となり，非定常流または乱流が生じることに注意．
+
+% \begin{equation}
+%     \alpha = , 
+%     \frac{1}{6} \R = 
+% \end{equation}
+
+
+
+
+
+
+\setcounter{equation}{15}
+
+
+\subsection*{液中ジェット（Submerged Landau jet / Landau-Squire jet）}
+
+\begin{myitembox}
+細い管の端から，流体で満たされた無限空間へ放出されるジェットが作る流れを求めよ（L. Landau 1943）．
+\end{myitembox}
+
+流出点を原点とし，流出点でのジェットの方向を極軸とする球座標系$(r,\theta,\phi)$をとる．
+流れは極軸に関して対称であるから$v_\phi=0$であり，$v_r$と$v_\theta$は$r$と$\theta$のみの関数である．
+
+原点を取り囲む閉曲面を通る全運動量フラックスは一定であるから，速度は$r$に反比例しなければならない．
+\begin{details}
+$\varPi_{ij}dS_j = (\rho v_iv_j - \sigma_{ij}) dS_j$において$dS = \order{r^2}$より$v=\order{1/r}$である．
+\end{details}
+\noindent%
+よって
+\begin{equation}\label{eq23.16:Landau jet fとFの定義}
+    v_r = \frac{F(\theta)}{r}, \quad 
+    v_\theta = \frac{f(\theta)}{r}
+\end{equation}
+と書くことができる（$F,f$は$\theta$だけの関数である）．
+連続の式
+\[
+    \frac{1}{r^2} \pdv{r} (r^2 v_r) + \frac{1}{r\sin\theta} \pdv{\theta} \left(v_\theta \sin\theta \right) = 0
+\]
+へ代入して
+\[
+    \frac{1}{r^2} \pdv{r} (rF(\theta)) + \frac{1}{r\sin\theta} \pdv{\theta} \left( \frac{f(\theta)}{r} \sin\theta \right) = 0
+\]
+\[
+    F(\theta) + \frac{1}{\sin\theta} \left( \pdv{f}{\theta} \sin\theta + f(\theta) \cos\theta \right) = 0
+\]
+\begin{equation}\label{eq23.17:Landau jet Fとfの式}
+    \yueni F(\theta) = - \dv{f}{\theta} - f \cot \theta.  
+\end{equation}
+
+
+次に運動量フラックス密度テンソル$\varPi_{ij}$について考えてみよう．
+\begin{details}
+$\varPi_{ij}$は，$x_j$軸に垂直な単位面積を単位時間に通過する運動量の$i$成分であったことを思い出そう．
+\end{details}
+\noindent%
+対称性より，$\varPi_{r\phi}, \varPi_{\theta\phi}$は0になることは明らかである．
+これらに加えて，$\varPi_{\theta\theta}, \varPi_{\phi\phi}$も0になると仮定する
+（必要な条件を全て満たす解が得られれば，この仮定は正当化される）．
+すると$\varPi_{r\theta}$も0になることが示せる．
+
+\begin{details}
+かなり厄介な計算であるが，追っておく．
+\[
+    \varPi_{r\theta} = \rho v_r v_\theta - \sigma_{r\theta}
+    = \rho v_r v_\theta - \eta \left( \frac{1}{r} \pdv{v_r}{\theta} + \pdv{v_\theta}{r} - \frac{v_\theta}{r} \right)
+    = \rho \frac{Ff}{r^2} - \eta\frac{1}{r^2} \left( \dv{F}{\theta} - 2f \right),
+\]
+\[
+    \varPi_{\theta\theta} = \rho {v_\theta}^2 - \sigma_{\theta\theta}
+    = \rho \frac{f^2}{r^2} + p - 2\eta \left( \frac{1}{r} \pdv{{v_\theta}}{\theta} + \frac{v_r}{r} \right)
+    = \rho \frac{f^2}{r^2} + p - 2\eta \frac{1}{r^2} \left( \dv{f}{\theta} + F \right),
+\]
+\[
+    \varPi_{\phi\phi} = \rho {v_\phi}^2 - \sigma_{\phi\phi}
+    = p - 2\eta \left( \frac{v_r}{r} + \frac{v_\theta \cot\theta}{r} \right)
+    = p - 2\eta \frac{1}{r^2} \left( F + f\cot\theta \right)
+\]
+であるから
+\[
+    \sin^2\theta (\varPi_{\phi\phi} - \varPi_{\theta\theta})
+    = \frac{\sin^2\theta}{r^2} \left[ -\rho f^2 + 2\eta \left( \dv{f}{\theta} - f \cot\theta \right) \right],
+\]
+\begin{align*}
+    &\phantom{=} \frac{1}{2} \pdv{\theta} \left[ \sin^2\theta (\varPi_{\phi\phi} - \varPi_{\theta\theta}) \right] \\
+    &= \frac{\sin\theta\cos\theta}{r^2} \left[ -\rho f^2 + 2\eta \left( \dv{f}{\theta} - f \cot\theta \right) \right]
+    + \frac{\sin^2\theta}{r^2} \left[ -\rho f \dv{f}{\theta} + \eta \left( \dv[2]{f}{\theta} - \dv{f}{\theta}\cot\theta + (1+\cot^2\theta) f\right) \right] \\
+    &= \frac{\sin^2\theta}{r^2} \left[ -\rho f^2 \cot\theta + 2\eta \left( \dv{f}{\theta} \cot\theta - f \cot^2\theta \right) 
+    - \rho f \dv{f}{\theta} + \eta \left( \dv[2]{f}{\theta} - \dv{f}{\theta}\cot\theta + (1+\cot^2\theta) f\right) \right] \\
+    &= \frac{\sin^2\theta}{r^2} \left[ -\rho f \left( f \cot\theta + \dv{f}{\theta} \right) 
+    + \eta \left( \dv[2]{f}{\theta} + \dv{f}{\theta}\cot\theta + (1-\cot^2\theta) f\right) \right].
+\end{align*}
+$[\;]$内の第1項に\eqref{eq23.17:Landau jet Fとfの式}を，第2項に\eqref{eq23.17:Landau jet Fとfの式}を$\theta$で微分した
+\[
+    \dv{F}{\theta} = - \dv[2]{f}{\theta} - \dv{f}{\theta} \cot\theta + (1+\cot^2\theta) f
+\]
+を代入すると
+\[
+    \frac{1}{2} \pdv{\theta} \left[ \sin^2\theta (\varPi_{\phi\phi} - \varPi_{\theta\theta}) \right]
+    = \frac{\sin^2\theta}{r^2} \left[ \rho fF + \eta \left( 2f - \dv{F}{\theta} \right) \right]
+    = \sin^2\theta \varPi_{r\theta}
+\]
+を得る．左辺は0であるから$\varPi_{r\theta}=0$となる．
+
+\end{details}
+
+以上より，$\varPi_{ij}$の0でない成分は
+\[
+    \varPi_{rr} = \rho {v_r}^2 - \sigma_{rr}
+    = \rho\frac{F^2}{r^2} + p - 2\eta\pdv{v_r}{r}
+    = \rho\frac{F^2}{r^2} + p + 2\eta\frac{F}{r^2}
+\]
+のみである．これは$\order{1/r^2}$の依存性を持つ．
+
+
+さて，未知関数$f$を求めるために
+\[
+    0 = \varPi_{\phi\phi} - \varPi_{\theta\theta}
+    = \frac{2\eta f^2}{r^2} \left( - \frac{1}{2\nu} + \frac{1}{f^2} \dv{f}{\theta} - \frac{1}{f} \cot\theta \right)
+\]
+より
+\[
+    \dv{\theta} \left( \frac{1}{f} \right) + \cot\theta \cdot \frac{1}{f} + \frac{1}{2\nu} = 0
+\]
+という関係式が成り立つことに注目しよう．これは$1/f$についての線形非斉次常微分方程式であり，
+斉次解$\dfrac{1}{f} = \dfrac{C}{\sin\theta}$と
+特解$\dfrac{1}{f} = \dfrac{\cot\theta}{2\nu} = \dfrac{\cos\theta}{2\nu \sin\theta}$を重ね合わせて
+$\dfrac{1}{f} = \dfrac{2\nu C + \cos\theta}{\sin\theta}$を得る．
+定数をおき直して
+\begin{equation}
+    f(\theta) = -2\nu \frac{\sin\theta}{A - \cos\theta} .
+\end{equation}
+これを\eqref{eq23.17:Landau jet Fとfの式}へ代入して
+\begin{align}
+    F(\theta) &= - \dv{f}{\theta} - f \cot \theta \notag \\
+    &= 2\nu \left[ \frac{\cos\theta(A-\cos\theta) - \sin\theta \cdot \sin\theta}{(A-\cos\theta)^2} + \frac{\cos\theta}{A-\cos\theta} \right] \notag \\
+    &= 2\nu \frac{A\cos\theta - 1 + \cos\theta(A-\cos\theta)}{(A-\cos\theta)^2} \notag \\
+    &= 2\nu \frac{2A\cos\theta - 1 - \cos^2\theta}{(A-\cos\theta)^2} = 2\nu \frac{A^2-1-(A-\cos\theta)^2}{(A-\cos\theta)^2} \notag \\
+    &= 2\nu \left[ \frac{A^2-1}{(A-\cos\theta)^2} -1 \right]
+\end{align}
+が得られる．
+
+
+
+圧力は，$\varPi_{\phi\phi} = p - 2\eta \dfrac{F+f\cot\theta}{r^2}=0$から
+\begin{align}
+    p &= \frac{2\eta}{r^2} (F+f\cot\theta) \notag \\
+    &= \frac{2\eta}{r^2} \cdot 2\nu \left[ \frac{2A\cos\theta - 1 - \cos^2\theta}{(A-\cos\theta)^2} - \frac{\cos\theta}{A - \cos\theta} \right] \notag \\
+    &= \frac{4\rho\nu^2}{r^2} \cdot \frac{2A\cos\theta -1 -\cos^2\theta -\cos\theta(A-\cos\theta)}{(A-\cos\theta)^2} \notag \\
+    &= \frac{4\rho\nu^2}{r^2} \cdot \frac{A\cos\theta-1}{(A-\cos\theta)^2}
+\end{align}
+となる．
+
+積分定数$A$は，ジェットの運動量，すなわち$r$方向の全運動量フラックス
+\[
+    P = \int \varPi_{rr} \cos\theta \; dS = \int_{0}^{\pi} \varPi_{rr} \cos\theta \cdot 2\pi r^2 \sin\theta \; d\theta
+\]
+と関係付けることができる．$\varPi_{rr}$は
+\begin{align*}
+    \varPi_{rr} &= \rho\frac{F^2}{r^2} + p + 2\eta \frac{F}{r^2} \\
+    &= \frac{\rho}{r^2} \cdot 4\nu^2 \left[ \frac{A^2-1}{(A-\cos\theta)^2} -1 \right]^2
+    + \frac{4\rho\nu^2}{r^2} \cdot \frac{A\cos\theta-1}{(A-\cos\theta)^2}
+    + 2\rho\nu \cdot \frac{1}{r^2} \cdot 2\nu \left[ \frac{A^2-1}{(A-\cos\theta)^2} -1 \right] \\
+    &= \frac{4\rho\nu^2}{r^2} \left[ 
+        \frac{(A^2-1)^2}{(A-\cos\theta)^4} -2 \frac{A^2-1}{(A-\cos\theta)^2} + 1
+        + \frac{A\cos\theta-1}{(A-\cos\theta)^2} + \frac{A^2-1}{(A-\cos\theta)^2} -1
+     \right] \\
+     &= \frac{4\rho\nu^2}{r^2} \left[ \frac{(A^2-1)^2}{(A-\cos\theta)^4} - \frac{A(A-\cos\theta)}{(A-\cos\theta)^2} \right] \\
+     &= \frac{4\rho\nu^2}{r^2} \left[ \frac{(A^2-1)^2}{(A-\cos\theta)^4} - \frac{A}{A-\cos\theta} \right] 
+\end{align*}
+で与えられるから，$t=\cos\theta$とおいて積分を実行すると
+\begin{align*}
+    P &= 8\pi\rho\nu^2 \int_{1}^{-1} \left\{ \frac{(A^2-1)^2}{(A-t)^4} - \frac{A}{A-t} \right\} t \; (-dt) \\
+    &= 8\pi\rho\nu^2 \int_{-1}^{1} \left\{ (A^2-1)^2 \frac{t}{(t-A)^4} +A \frac{t}{A-t} \right\} \; dt \\
+    &= 8\pi\rho\nu^2 \int_{-1}^{1} \left\{ (A^2-1)^2 \left( \frac{A}{(t-A)^4} + \frac{1}{(t-A)^3} \right) +A \left( 1 + \frac{A}{t-A} \right) \right\} \; dt \\
+    &= 8\pi\rho\nu^2 \left[ (A^2-1)^2 \left\{ -\frac{A}{3(t-A)^3} - \frac{1}{2(t-A)^2} \right\} +A (t+A\log|t-A|) \right]_{-1}^{1} \\
+    &= 8\pi\rho\nu^2 \left\{ (A^2-1)^2 \frac{A}{3} \left( \frac{1}{(A-1)^3} - \frac{1}{(A+1)^3} \right) 
+    - \frac{(A^2-1)^2}{2} \left( \frac{1}{(A-1)^2} - \frac{1}{(A+1)^2} \right) + 2A + A^2 \log \left| \frac{A-1}{A+1} \right| \right\} \\
+    &= 8\pi\rho\nu^2 \left\{ (A^2-1)^2 \frac{A}{3} \frac{6A^2+2}{(A^2-1)^3} - \cancel{ \frac{(A^2-1)^2}{2} \frac{4A}{(A^2-1)^2} }
+    + \cancel{2A} + A^2 \log \left| \frac{A-1}{A+1} \right| \right\} \\
+    &= 8\pi\rho\nu^2 \left\{ \frac{6A^3+2A}{3(A^2-1)} + A^2 \log \left| \frac{A-1}{A+1} \right| \right\} \\
+    &= 8\pi\rho\nu^2 \left\{ 2A + \frac{8A}{3(A^2-1)} + A^2 \log \left| \frac{A-1}{A+1} \right| \right\} .
+\end{align*}
+よって
+\begin{equation}\label{eq23.21:Landau jet PとAの式}
+    P = 16\pi\rho\nu^2 A \left\{ 1 + \frac{4}{3(A^2-1)} - \frac{A}{2} \log \left| \frac{A+1}{A-1} \right| \right\} 
+\end{equation}
+を得る．
+式\eqref{eq23.16:Landau jet fとFの定義}〜\eqref{eq23.21:Landau jet PとAの式}はこの問題に対する解を与える．
+$A$が1から$\infty$まで変わるとき，ジェットの運動量$P$は$\infty$から0まで全ての値をとる．
+
+
+流線の形は，$\dfrac{dr}{v_r} = \dfrac{r \; d\theta}{v_\theta}$すなわち
+\[
+    \frac{dr}{r} = \frac{v_r}{v_\theta} d\theta = \frac{F(\theta)}{f(\theta)} d\theta
+\]
+によって決まる．式\eqref{eq23.17:Landau jet Fとfの式}と
+$\dfrac{1}{f^2} \ddv{f}{\theta} = \dfrac{1}{f} \cot\theta + \dfrac{1}{2\nu}$を用いると
+\begin{align*}
+    \frac{dr}{r} &= \left( -\frac{1}{f} \pdv{f}{\theta} - \cot\theta \right) d\theta \\
+    &= \left( -2\cot\theta - \frac{f}{2\nu} \right) d\theta \\
+    &= \left( -2\cot\theta + \frac{\sin\theta}{A-\cos\theta} \right) d\theta \\
+    &= \left\{ -2 \frac{(\sin\theta)'}{\sin\theta} + \frac{(A-\cos\theta)'}{A-\cos\theta} \right\} d\theta \\
+    \log |r| &= \log |A-\cos\theta| -2 \log |\sin\theta| + \const 
+\end{align*}
+\begin{equation}
+    \frac{r\sin^2\theta}{A-\cos\theta} = \const
+\end{equation}
+図12は流線の概形を表している．
+この流れは，原点から流出して周囲の流体を引き寄せるようなジェットである．
+
+
+次に，極限として$P$が小さい場合と大きい場合を考えよう．
+
+
+\subsubsection*{弱いジェット（$P\to0, A\to\infty$）の極限}
+
+$A$が大きいとき
+\[
+    \log \frac{A+1}{A-1} = \frac{2}{A}+ \frac{2}{3A^3} + \order{A^{-5}}
+\]
+であるから
+\[
+    P = 16\pi\rho\nu^2 \left\{ A + \frac{4A}{3(A^2-1)} - \frac{A^2}{2} \left( \frac{2}{A}+ \frac{2}{3A^3} + \order{A^{-5}} \right) \right\} 
+    \simeq 16\pi\rho\nu^2 \left\{ \frac{4}{3A} - \frac{1}{3A} + \order{A^{-3}} \right\} 
+    \simeq \frac{16\pi\rho\nu^2}{A}
+\]
+となる．このとき
+\[
+    f \simeq \frac{-2\nu\sin\theta}{A} \simeq -\frac{P\sin\theta}{8\pi\rho\nu} ,
+\]
+\[
+    F = 2\nu \frac{2A\cos\theta-1-\cos^2\theta}{(A-\cos\theta)^2} \simeq 2\nu \frac{2A\cos\theta}{A^2}
+    = \frac{4\nu\cos\theta}{A} = \frac{P\cos\theta}{4\pi\rho\nu}
+\]
+となり
+\begin{equation}
+    v_r \simeq \frac{P\cos\theta}{4\pi\rho\nu r}, \quad
+    v_\theta \simeq - \frac{P\sin\theta}{8\pi\rho\nu r}
+\end{equation}
+を得る．
+
+
+\subsubsection*{強いジェット（$P\to\infty, A\to1$）の極限}
+
+\begin{details}
+十分強いジェットの場合，実際の流れは乱流となることに注意．
+\end{details}
+
+$A\simeq1$のとき，\eqref{eq23.21:Landau jet PとAの式}の中では$\dfrac{4}{3(A^2-1)}$の部分が卓越し
+\[
+    P \simeq 16\pi\rho\nu^2 \cdot 1 \cdot \frac{4}{3(A^2-1)}
+    \qquad \yueni
+    A^2 = 1 + \frac{64\pi\rho\nu^2}{3P} .
+\]
+${\theta_0}^2 \equiv \dfrac{64\pi\rho\nu^2}{3P}$とおくと
+$A = \sqrt{1 + {\theta_0}^2} \simeq 1 + \dfrac{1}{2}{\theta_0}^2$
+を得る．
+\begin{itemize}
+    \item $\theta$が小さくないとき．
+    $f \simeq -2\nu \dfrac{\sin\theta}{1-\cos\theta} = -2\nu \cot\dfrac{\theta}{2}$，$F\simeq -2\nu$であるから
+    \begin{equation}
+        v_r \simeq - \frac{2\nu}{r}, \quad v_\theta \simeq - \frac{2\nu \cot(\theta/2)}{r} .
+    \end{equation}
+    \item $\theta$が小さいとき（$\theta\approx\theta_0 \ll 1$）．
+    $A-\cos\theta \simeq 1 + \dfrac{1}{2} {\theta_0}^2 - \left( 1-\dfrac{1}{2} \theta^2 \right) = \dfrac{1}{2} \left( \theta^2+{\theta_0}^2 \right)$であるから
+    \[
+      f \simeq -2\nu \frac{\theta}{\left( \theta^2+{\theta_0}^2 \right)/2} = - \frac{4\nu\theta}{\theta^2+{\theta_0}^2}, \quad
+      F \simeq 2\nu \left\{ \frac{{\theta_0}^2}{\left( \theta^2+{\theta_0}^2 \right)^2/4} \cancel{-1}  \right\} 
+      \simeq \frac{8\nu{\theta_0}^2}{\left( \theta^2+{\theta_0}^2 \right)^2} .
+    \]
+    \begin{equation}
+        v_r \simeq \frac{8\nu{\theta_0}^2}{\left( \theta^2+{\theta_0}^2 \right)^2 r}, \quad 
+        v_\theta \simeq - \frac{4\nu\theta}{\left( \theta^2+{\theta_0}^2 \right) r} .
+    \end{equation}
+\end{itemize}
+
+最後に，ここで得られた解は点源から流出するジェットに対する厳密解であることを述べておこう．
+管の半径$R$が有限である場合，解は$(R/r)$の冪で展開される．
+点源の解はもちろん，展開の第1項に対応する．
+
+
+\BackToTheToc

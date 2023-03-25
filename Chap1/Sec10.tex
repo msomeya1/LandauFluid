@@ -1,0 +1,246 @@
+\section{非圧縮性流体}\label{sec:10}
+\subsection*{基本方程式}
+多くの場合，流体の密度は変化しない（大きな膨張や収縮が起こらない）と仮定できる．
+そのような流れは\emph{非圧縮性の流れ}と呼ばれる．
+非圧縮性流体の基礎方程式は簡単になる．
+Euler方程式は
+\begin{equation}\label{eq10.1:非圧縮性流体のEuler方程式}
+    \pdv{\v}{t} + (\v\cdot\Grad)\v = -\Grad \pqty{ \frac{p}{\rho} } \; (+\vec{g}), 
+\end{equation}
+連続の式は
+\begin{equation}\label{eq10.2:非圧縮性流体の連続の式}
+    \Div\v = 0
+\end{equation}
+となる
+\footnote{
+非圧縮であるとは，流体粒子の密度が運動とともに変わらないということであるから，本来は$\dDDt{\rho}=0$の意味であるが，
+$\rho=\const$（時間，空間にわたって）の意味で使われることが多い．
+どちらの式を使っても非圧縮性流体の連続の式は$\Div\v = 0$となるため，あまり重要視されていないが，本来は区別すべきと思う．
+}．
+密度が未知関数ではないために，方程式が速度のみを含むようにすることができる．
+それは\eqref{eq10.2:非圧縮性流体の連続の式}と\eqref{eq2.11:理想流体の渦度方程式}：
+\begin{equation}\label{eq10.3:理想流体の渦度方程式（再）}
+    \pdv{t}(\Rot\v) =  \Rot(\v \times \Rot \v)
+\end{equation}
+である．
+
+非圧縮性流体に対してBernoulliの定理を導こう．
+\eqref{eq10.1:非圧縮性流体のEuler方程式}は\eqref{eq2.9:hを用いたEuler方程式}で$h$を$p/\rho$で置き換えたものであるから，\eqref{eq5.4:一様重力場中のBernoulliの定理}は
+\begin{equation}
+    \frac{1}{2}v^2 + \frac{p}{\rho} +gz = \const
+\end{equation}
+エネルギーフラックス\eqref{eq6.3:エネルギーフラックス密度}は
+\begin{equation}
+    \rho\v \pqty{\frac{1}{2}v^2 + \frac{p}{\rho}}.
+\end{equation}
+$h = \varepsilon + \dfrac{p}{\rho}$であるのに，$h$を$\dfrac{p}{\rho}$で置き換えてよい理由は次のとおりである；
+熱力学第1法則より$d\varepsilon = Tds - pdV$であるが，エントロピー一定，$V = 1/\rho$一定であるから$\varepsilon$も一定となる．
+エネルギーでは付加定数を無視することができるから，$h = \varepsilon + \dfrac{p}{\rho}$で$\varepsilon$を除くことができる．
+
+
+
+\subsection*{非圧縮性流体のポテンシャル流}
+非圧縮性流体のポテンシャル流に対しては，方程式は非常に簡単になる．
+$\Rot\v=\vec{0}$のとき\eqref{eq10.3:理想流体の渦度方程式（再）}は自動的に満たされる．
+一方，$\v = \Grad\phi$を\eqref{eq10.2:非圧縮性流体の連続の式}に代入すると
+\begin{equation}\label{eq10.6:速度ポテンシャルのLaplace方程式}
+    \Laplacian\phi = 0
+\end{equation}
+これは速度ポテンシャルに対するLaplace方程式である．
+この方程式には，境界条件を付け加えなければならない．
+$v_n = \dpdv{\phi}{n} = \vec{n} \cdot \Grad \phi$を，固体表面に垂直な流速とする（$\partial/\partial n$は法線微分を表す）．
+\begin{itemize}
+    \item 固体表面が静止している場合は$v_n=0$である．
+    \item 固体表面が動いている場合には$v_n = \text{（表面の速度の垂直成分）}$で，これは時間と座標の関数である．
+\end{itemize}
+\eqref{eq10.6:速度ポテンシャルのLaplace方程式}は時間微分を含んでいないから，速度場は（過去の歴史とは無関係に）各瞬間の境界条件によって決まる．
+つまり，定常であろうとなかろうと，境界条件が同じなら，流れは同じである
+\footnote{ただし圧力場は，\eqref{eq10.7:非圧縮性流体のポテンシャル流に対する圧力方程式}のように圧力方程式が$\dpdv{\phi}{t}$を含むので，定常流と非定常流では異なる．}．
+特に，固体物体が流体中を運動することでポテンシャル流が生じるなら，速度場はその瞬間の物体の速度のみに依存し，加速度などにはよらないことに注意せよ．
+
+
+\begin{details}
+速度ポテンシャルに関するLaplace方程式は，非圧縮と渦なしの2つの仮定しか使っていない．
+よって原理的には，理想流体に限らず粘性流体であってもよい．
+しかし，粘性流体では境界条件がより厳しい（固体表面に平行な流速も0にならなければならない）ので，特別な場合を除いては，解が存在しない．
+\end{details}
+
+
+
+非圧縮性流体のポテンシャル流に対する圧力方程式は，\eqref{eq9.3:圧力方程式}で$h$を$p/\rho$で置きかえて
+\begin{equation}\label{eq10.7:非圧縮性流体のポテンシャル流に対する圧力方程式}
+    \pdv{\phi}{t} + \frac{1}{2}v^2 + \frac{p}{\rho} = f(t) .
+\end{equation}
+特に，重力場中にない定常流では，Bernoulliの定理は
+\[
+    \frac{1}{2}v^2 + \frac{p}{\rho} = \const
+\]
+となる．よって，この場合の最大圧力は速度0の点（\emph{よどみ点}，ふつう流体中に置かれた物体の表面にある）で生じる．
+$u$を無限遠での流体の速さ，$p_0$を無限遠での圧力とすると，よどみ点での圧力は
+\begin{equation}
+    p_\textrm{max} = p_0 + \frac{1}{2}\rho u^2
+\end{equation}
+となる．この式は，流速を計測するピトー管の原理を表している．
+
+
+
+
+\subsection*{非圧縮性流体の２次元流と流線関数}
+流体の速度が2つの座標$(x,y)$にのみ依存し，速度ベクトルが$xy$平面内にある流れを\emph{２次元流，平面流}と呼ぶ．
+非圧縮性流体の2次元流では，流れの関数（\emph{流線関数}）$\psi$を導入すると便利である；
+連続の式$\Div\v = \dpdv{v_x}{x} + \dpdv{v_y}{y} = 0$を満たすためには，速度成分が関数$\psi(x,y)$の微分として次のように書ければよい．
+\begin{equation}
+    v_x = \pdv{\psi}{y}, \quad v_y = -\pdv{\psi}{x}
+\end{equation}
+これを\eqref{eq10.3:理想流体の渦度方程式（再）}に代入することで，流線関数の満たすべき方程式が得られる．
+2次元流では，渦度は$z$成分
+\[
+    (\Rot\v)_z = \pdv{v_y}{x} - \pdv{v_x}{y} = -\Laplacian\psi
+\]
+のみ0でないから\footnote{
+このラプラシアンは当然，2次元の演算子$\Laplacian = \dpdv[2]{x} + \dpdv[2]{y}$である．
+2次元か3次元かは文脈で判断できるので，これ以降も両者を区別しない．
+}，
+\eqref{eq10.3:理想流体の渦度方程式（再）}の$x,y$成分は自動的に0となり，$z$成分のみが意味を持つ；
+\begin{align*}
+    \pdv{t}(-\Laplacian\psi) &= \pdv{x} \pqty{\v\times\Rot\v}_y - \pdv{y} \pqty{\v\times\Rot\v}_x \\
+    &= \pdv{x} \bqty{ 0-v_x(\Rot\v)_z } - \pdv{y} \bqty{ v_y(\Rot\v)_z -0 } \\
+    &= \pdv{x} \bqty{ {-\pdv{\psi}{y}} (-\Laplacian\psi) } - \pdv{y} \bqty{ {-\pdv{\psi}{x}}(-\Laplacian\psi) } \\
+    &= \cancel{ \pdv{\psi}{x}{y} \Laplacian\psi } + \pdv{\psi}{y} \pdv{x}(\Laplacian\psi)
+    - \bqty{ \cancel{ \pdv{\psi}{y}{x} \Laplacian\psi } + \pdv{\psi}{x} \pdv{y}(\Laplacian\psi) } 
+\end{align*}
+よって
+\begin{equation}
+    \pdv{t}(\Laplacian\psi) - \pdv{\psi}{x} \pdv{y}(\Laplacian\psi) + \pdv{\psi}{y} \pdv{x}(\Laplacian\psi) = 0
+\end{equation}
+を得る．
+
+
+定常流の場合，流線関数が分かれば流線の形が決まる．
+2次元での流線の方程式は，$ \dfrac{dx}{v_x} = \dfrac{dy}{v_y} $より
+\[
+    0 = -v_y dx + v_x dy = \pdv{\psi}{x} dx + \pdv{\psi}{y} dy = d\psi
+    \qquad\yueni \psi = \const
+\]
+つまり流線は，流線関数がある定数に等しいとして得られる曲線の集合である．
+
+
+$xy$平面上の2点A,Bを通る曲線を，（AからBを見たときに）左から右へ横切る質量フラックス$Q$を求めよう．
+線素ベクトル$\dl = \pmqty{dx \\ dy}$を右に\ang{90}回転したベクトルは$\pmqty{dy \\ -dx}$であるから，
+曲線を左から右へ横切る単位ベクトルは
+\[
+    \vec{n} = \frac{1}{\sqrt{dy^2+dx^2}} \pmqty{dy \\ -dx} = \pmqty{ \ddv{y}{l} \\[7pt] -\ddv{x}{l} } 
+\]
+である．よって
+\begin{align}
+    Q &= \rho \int_\textrm{A}^\textrm{B} \v \cdot \vec{n}  \, dl \notag \\
+    &= \rho \int_\textrm{A}^\textrm{B} (v_x n_x + v_y n_y) \, dl = \rho \int_\textrm{A}^\textrm{B} (v_x dy - v_y dx) \notag \\
+    &= \rho \int_\textrm{A}^\textrm{B} \bqty{ \pdv{\psi}{y}\dv{y}{l} + \pqty{-\pdv{\psi}{x}}\pqty{-\dv{x}{l}} } \, dl \notag \\
+    &= \rho \int_\textrm{A}^\textrm{B} \, d\psi \notag \\
+    &= \rho(\psi_\textrm{B}-\psi_\textrm{A}). \label{eq10.11:質量フラックスと流線関数の関係}
+\end{align}
+つまり，質量フラックス$Q$は曲線端点での流線関数の値の差だけで決まり，曲線の形にはよらない．
+
+
+
+\subsection*{非圧縮性流体の2次元ポテンシャル流と複素関数論}
+非圧縮性流体における物体まわりの2次元ポテンシャル流を求める際，複素関数論は非常に有力である．
+応用例は色々な本に書かれているので，ここでは基本的なアイデアを述べるにとどめる
+\footnote{
+Landauで書き漏らされている事項には，例えば次のようなものがある．
+\begin{itemize}
+    \item 円柱まわりの流れ，Milne-Thomsonの円定理（3次元ではWeissの球定理）
+    \item Blasiusの公式（物体に働く力とモーメントを与える）
+    \item Joukowski翼
+\end{itemize}
+なお，Kutta-Joukowskiの定理や，複素関数論を用いて翼の揚力を計算する方法については，\S~38,47,48に記載がある．}．
+
+
+
+速度成分，速度ポテンシャル，流線関数の間には次の関係がある
+\footnote{速度ポテンシャルは渦なしを仮定すれば存在が言えるが，流線関数の存在は2次元かつ非圧縮性のみから言うことができ，渦なしかどうかとは無関係であることに注意．}
+．
+\[
+    \begin{cases}
+        v_x = \dpdv{\phi}{x} = \dpdv{\psi}{y} \\[7pt]
+        v_y = \dpdv{\phi}{y} = -\dpdv{\psi}{x} \\
+    \end{cases}
+\]
+これは，複素関数
+\begin{equation}
+    w = \phi + i\psi
+\end{equation}
+が複素変数$z=x+iy$の正則関数となるための条件（Cauchy-Riemann の関係式）である．
+Cauchy-Riemann の関係式が成り立つとき，複素変数による微分は方向によらないことに注意すると
+\footnote{
+あるいは，Wirtingerの微分$\dpdv{z} = \dfrac{1}{2}\pqty{\dpdv{x}-i\dpdv{y}}$を代入してもよい．
+}
+\begin{align}
+    \dv{w}{z} &= \pdv{w}{x} \notag \\
+    &= \pdv{\phi}{x} + i \pdv{\psi}{x} \notag \\
+    &= v_x - i v_y \\
+    &= v e^{-i\theta}.
+\end{align}
+関数$w$は\emph{複素速度ポテンシャル}，微分$\ddv{w}{z}$は\emph{複素速度}と呼ばれる．
+$\ddv{w}{z}$の絶対値は速度の大きさ$\sqrt{{v_x}^2+{v_y}^2}$，偏角（の符号を変えたもの）は$\v$が$x$軸となす角を表している．
+
+
+
+理想流体の境界条件は，流れが物体表面に沿うこと，つまり表面を表す曲線が流線に一致することである．
+よって表面に沿って$\psi=\const$であり，この定数は0に取ることができる．
+したがって，非圧縮性流体における物体まわりの2次元ポテンシャル流を求める問題は，物体表面で実数となる正則関数$w(z)$を探すことに帰着する．
+そして，流体が自由表面を持つ場合にも，同様に取り扱うことができる（問題~\ref{mo:問題10.9（ジェットの形）}）．
+
+
+さて，閉曲線$C$に沿って複素速度$\ddv{w}{z}$を積分すると，$C$内に含まれる$\ddv{w}{z}$の留数を$A_k$として
+\[
+    \oint_C \dv{w}{z} \, dz = 2\pi i \sum_k A_k.
+\]
+一方，
+\begin{align*}
+    \oint_C \dv{w}{z} \, dz &= \oint_C (v_x-iv_y)(dx+idy) \\
+    &= \oint_C (v_xdx + v_ydy) + i \oint_C (v_xdy-v_ydx) \\
+    &= \varGamma + \frac{iQ}{\rho}
+\end{align*}
+ただし$\varGamma$は$C$に沿った循環，$Q$は$C$を横切る質量フラックスで，$C$内に湧き出しや吸い込みがなければ$Q=0$である．この場合，
+\begin{equation}
+    \varGamma = 2\pi i \sum_k A_k
+\end{equation}
+\begin{details}
+留数$A_k$は全て純虚数だというが，そうとは限らないように思う．
+\end{details}
+
+
+\subsection*{流体が非圧縮性とみなせる条件}
+断熱的な圧力変化$\D p$が生じたときの密度変化は$\D\rho = \dPDV{\rho}{p}{s} \D p$と表される．
+Bernoulliの定理より，定常流では$\D p \sim \rho v^2$である．
+また，\S~64\footnote{第1版では\S~63}で示すように，音速$c$は$c^2 = \dPDV{p}{\rho}{s}$で定義される．
+よって$\D\rho \sim \rho \dfrac{v^2}{c^2}$となり，非圧縮性とみなせる条件$\dfrac{\D\rho}{\rho} \ll 1$は
+\begin{equation}\label{eq10.16:定常流で非圧縮とみなせる条件}
+    v \ll c,
+\end{equation}
+つまり流体の速度が音速に比べて十分小さいことである．
+
+しかし，\eqref{eq10.16:定常流で非圧縮とみなせる条件}は定常流に対してのみ十分な条件であり，非定常流に対してはさらに別の条件を課さなければならない．
+流体の速度が大きく変化する時間・空間スケールをそれぞれ$\tau,l$とする．
+Euler方程式で$\dpdv{\v}{t}$と$-\dfrac{1}{\rho}\Grad p$が同じオーダーだとすると$\dfrac{v}{\tau} \sim \dfrac{\D p}{\rho l}$であるから，
+\[
+    \D p \sim \frac{\rho l v}{\tau}
+    \qquad\yueni \D\rho \sim \frac{\D p}{c^2} \sim \frac{\rho l v}{\tau c^2}
+\]
+となる．次に，連続の式で$\dpdv{\rho}{t}$と$\rho\Div\v$を比べたとき前者が無視できる条件は
+\[
+    \frac{\D\rho}{\tau} \ll \rho\frac{v}{l},
+\]
+\begin{equation}\label{eq10.17:非定常流で非圧縮とみなせる条件}
+    \frac{\rho l v}{\tau^2 c^2} \ll \rho\frac{v}{l}
+    \qquad\yueni \tau \gg \frac{l}{c}.
+\end{equation}
+これは，音波が距離$l$を通過するのに要する時間$l/c$が，流れが大きく変わる時間$\tau$に比べて十分短いこと，
+つまり流体中の相互作用の伝播が瞬間的とみなせることを意味する．
+
+\eqref{eq10.16:定常流で非圧縮とみなせる条件}\eqref{eq10.17:非定常流で非圧縮とみなせる条件}の双方が成り立つとき，流体は非圧縮性とみなすことができる．
+
+
+
+\BackToTheToc

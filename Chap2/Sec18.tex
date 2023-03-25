@@ -1,0 +1,103 @@
+\section{回転する2円筒の間の流れ}
+軸方向の長さが無限大で，半径$R_1<R_2$の同軸2円筒の間の定常流を考えよう．
+2つの円筒はそれぞれ角速度$\Omega_1, \Omega_2$で軸のまわりを回転しているとする．
+円筒の軸を$z$軸とする円筒座標系$(r,\phi,z)$では，対称性から
+\[
+    v_z = v_r = 0, \quad
+    v_\phi =  v(r), \quad
+    p  = p(r)
+\]
+であり，円筒座標系でのNavier-Stokes方程式は
+\begin{equation}\label{eq18.1:円筒座標系でのNS方程式1}
+    \dv{p}{r} = \frac{\rho v^2}{r}
+\end{equation}
+\begin{equation}\label{eq18.2:円筒座標系でのNS方程式2}
+    0 = \dv[2]{v}{r} + \frac{1}{r}\dv{v}{r} -\frac{v}{r^2}
+\end{equation}
+となる（連続の式は恒等的に満たされている）．
+\eqref{eq18.2:円筒座標系でのNS方程式2}は$v\sim r^n$という解を持つ．代入して
+\[
+    n(n-1)r^{n-2} + nr^{n-2} - r^{n-2} = 0
+    \qquad\yueni n = \pm 1 .
+\]
+よって$v=ar+\dfrac{b}{r}$と書ける．
+定数$a,b$は境界条件：$r=R_1$で$v=\Omega_1R_1$，$r=R_2$で$v=\Omega_2R_2$から決まる．
+\[
+    \Omega_1R_1 = aR_1 + \frac{b}{R_1}
+    \mytag{1}
+\]
+\[
+    \Omega_2R_2 = aR_2 + \frac{b}{R_2}
+    \mytag{2}
+\]
+$\text{\ajMaru{2}}\times R_2 - \text{\ajMaru{1}}\times R_1$より
+\[
+    \Omega_2{R_2}^2 - \Omega_1{R_1}^2 = a({R_2}^2-{R_1}^2)
+    \qquad\yueni a = \frac{\Omega_2{R_2}^2 - \Omega_1{R_1}^2}{{R_2}^2-{R_1}^2} .
+\]
+$\text{\ajMaru{1}}\divisionsymbol R_1 - \text{\ajMaru{2}}\divisionsymbol R_2$より
+\[
+    \Omega_1-\Omega_2 = b \pqty{ \frac{1}{{R_1}^2} - \frac{1}{{R_2}^2} } 
+    \qquad\yueni b = \frac{(\Omega_1-\Omega_2)(R_1R_2)^2}{{R_2}^2-{R_1}^2} .
+\]
+よって
+\begin{equation}\label{eq18.3:同軸2円筒間の流れ}
+    v = \frac{\Omega_2{R_2}^2 - \Omega_1{R_1}^2}{{R_2}^2-{R_1}^2} \cdot r
+    + \frac{(\Omega_1-\Omega_2)(R_1R_2)^2}{{R_2}^2-{R_1}^2} \cdot \frac{1}{r}
+\end{equation}
+となる．
+圧力は，\eqref{eq18.3:同軸2円筒間の流れ}を\eqref{eq18.1:円筒座標系でのNS方程式1}へ代入して積分すれば求められるが，省略する．
+
+特別な場合として，
+\begin{itemize}
+    \item $\Omega_1=\Omega_2=\Omega$のとき$v=\Omega r$となり，流体は円筒とともに剛体回転する．
+    \item 外側の円筒がないとき（$\Omega_2=0, R_2\to\infty$）
+    \[
+        v = \frac{\Omega_2 - \Omega_1(R_1/R_2)^2}{1-(R_1/R_2)^2} \cdot r
+        + \frac{(\Omega_1-\Omega_2){R_1}^2}{1-(R_1/R_2)^2} \cdot \frac{1}{r}
+        \to \frac{\Omega_1{R_1}^2}{r}
+    \]
+    となり，これは自由渦と呼ばれている．
+\end{itemize}
+
+円筒に働く摩擦力のモーメントを求めよう．
+まず，内側の円筒の単位面積に働く摩擦力は$\phi$方向で，大きさは粘性応力テンソル
+\begin{align*}
+    \eval{\sigma_{r\phi}'}_{r=R_1} &= \eta \pqty{\pdv{v_\phi}{r}-\frac{v_\phi}{r}}_{r=R_1} \\
+    &= \eta \pqty{ a-\frac{b}{r^2} -a-\frac{b}{r^2} }_{r=R_1} \\
+    &= -\frac{2\eta b}{{R_1}^2} = -2\eta \frac{(\Omega_1-\Omega_2){R_2}^2}{{R_2}^2-{R_1}^2}
+\end{align*}
+である．
+これに周長$2\pi R_1$をかけると，（内側）円筒の単位長さに働く摩擦力になり，さらに$R_1$をかけると，モーメントが得られる：
+\begin{equation}
+    M_1 = -4\pi\eta \frac{(\Omega_1-\Omega_2)(R_1R_2)^2}{{R_2}^2-{R_1}^2}
+\end{equation}
+外側の円筒に働くモーメントは，分子の$R_1,R_2$を交換し，（表面の法線ベクトルが逆向きであることから）符号を変えたもので
+$M_2=-M_1$である．
+
+
+\spade
+外側の円筒が回転しておらず（$\Omega_2=0$），円筒間の間隔が小さいとき（$\delta\equiv R_2-R_1 \ll R_1$），$R_1,R_2$をまとめて$R$と書くと
+$(R_1R_2)^2 \simeq R^4$，${R_2}^2-{R_1}^2 = (R_2-R_1)(R_2+R_1) \simeq \delta\cdot 2R$であるから
+\[
+    M_2 = + 4\pi\eta \frac{\Omega_1 R^4}{\delta \cdot 2R} = \frac{\eta R Su}{\delta} .
+\]
+ここで$S \simeq 2\pi R$は単位長さの円筒の表面積，$u=\Omega_1 R$は内側の円筒の回転速度である．
+
+
+
+ここで，\S~17,18で得られた，粘性流体の運動方程式の解について注意を述べておこう．
+以上の場合では，速度分布を決める式で，非線形項$(\v\cdot\Grad)\v$は自動的に0となり，実際には線形方程式を解いたために，問題は著しく簡単になった．
+このため，これらの解はすべて非圧縮性流体の運動方程式(10.2),(10.3)も満たしている．
+\eqref{eq17.1:平行平板間のCouette流},\eqref{eq18.3:同軸2円筒間の流れ}に粘性係数が含まれないのはこのためである．
+
+粘性係数が現れるのは，\eqref{eq17.9:円形断面の管の中の流速}のように速度が圧力勾配と関係する場合のみである；
+理想流体では圧力勾配がなくても管の中に流れが生じうるが，粘性流体では粘性によって圧力勾配が生じる．
+
+
+
+
+
+
+
+\BackToTheToc

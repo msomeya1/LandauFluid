@@ -1,0 +1,98 @@
+\section{エネルギーフラックス}\label{sec:6}
+空間に固定された体積要素に含まれるエネルギーの収支は，以下の式で表される．
+\begin{equation}\label{eq6.1:理想流体のエネルギー流保存則（微分形）}
+    \pdv{t}\pqty{ \frac{1}{2}\rho v^2 + \rho\varepsilon} + \Div \bqty{\rho\v\pqty{\frac{1}{2}v^2 + h}} = 0
+\end{equation}
+あるいは，$h=\varepsilon+\dfrac{p}{\rho}$より
+\[
+    \pdv{t} \pqty{ \frac{1}{2}\rho v^2 + \rho\varepsilon } + \Div\bqty{ \rho\v \pqty{ \frac{1}{2}v^2 + \varepsilon + \frac{p}{\rho} } } = 0.
+    \mytag{1}
+\]
+以下\ajMaru{1}を証明しよう．
+
+\begin{details}
+連続の式
+\[
+	\pdv{\rho}{t} + \Div(\rho\v) = 0
+\]
+とEuler方程式
+\[
+	\rho \pqty{ \pdv{\v}{t} + \Grad\frac{v^2}{2} - \v\times\Rot\v } = -\Grad p
+	\mytag{2}
+\]
+に注意する．
+\end{details}
+
+\begin{align*}
+    \text{（\ajMaru{1}の左辺）} 
+	&= \frac{v^2}{2} \pdv{\rho}{t} + \rho\v \cdot \pdv{\v}{t} + \varepsilon \pdv{\rho}{t} + \rho \pdv{\varepsilon}{t} + \frac{v^2}{2} \Div(\rho\v) + \rho\v \cdot \Grad \frac{v^2}{2} \\
+	&\phantom{=} + \varepsilon \Div(\rho\v) + \rho\v \cdot \Grad \varepsilon + p \Div \v + \v \cdot \Grad p \\
+	&= \frac{v^2}{2} \cancel{ \pqty{ \pdv{\rho}{t} + \Div(\rho\v) } } 
+    + \ucomment{ \v \cdot \pqty{ \rho\pdv{\v}{t} + \rho\Grad \frac{v^2}{2} + \Grad p } }{$(\,)=\rho\v\times\Rot\v$，これと$\v$の内積$=0$} \\
+	&\phantom{=} + \varepsilon \cancel{ \pqty{ \pdv{\rho}{t} + \Div(\rho\v) } } 
+	+ \rho \pdv{\varepsilon}{t} + \rho\v \cdot \Grad\varepsilon + p \Div{\v} 
+\end{align*}
+残った項を消すために，熱力学第1法則を用いる．
+\[
+	d \varepsilon = Tds -p d \pqty{ \frac{1}{\rho} } = Tds + \frac{p}{\rho^2} d\rho 
+\]
+より
+\[
+	\begin{cases}
+		\dpdv{\varepsilon}{t} = T \dpdv{s}{t} + \dfrac{p}{\rho^2} \dpdv{\rho}{t} \\
+		\Grad\varepsilon = T \Grad s + \dfrac{p}{\rho^2} \Grad \rho 
+	\end{cases}
+\]
+であるから，
+\begin{align*}
+	\text{（\ajMaru{1}の左辺）} &= \rho \pqty{ T \pdv{s}{t} + \frac{p}{\rho^2} \pdv{\rho}{t} }
+		+ \rho \v \cdot \pqty{ T \Grad s + \frac{p}{\rho^2} \Grad \rho } + p \Div{\v} \\
+	&= \frac{p}{\rho} \cancel{ \pqty{ \pdv{\rho}{t} + \v \cdot \Grad \rho + \rho \Div \v } }
+		+ \rho T \pqty{ \pdv{s}{t} + \v\cdot\Grad s } \\
+	&= \rho T \DDt{s} = 0 .
+\end{align*}
+
+
+\begin{details}
+後の都合上，結果を一般の形に書き直しておく．	
+粘性流体の運動方程式は，\ajMaru{2}の右辺に粘性応力テンソル$\sigma'_{ij}$の微分を加えた
+\[
+	\rho \pqty{ \pdv{\v}{t} + \Grad\frac{v^2}{2} - \v\times\Rot\v } = -\Grad p + \pdv{\sigma'_{ij}}{x_j}
+\]
+である．
+よって下線部は0ではなく$v_i \dpdv{\sigma'_{ij}}{x_j}$となり，
+\[
+	\pdv{t}\pqty{ \frac{1}{2}\rho v^2 + \rho\varepsilon } + \Div \bqty{\rho\v\pqty{\frac{1}{2}v^2 + h}} 
+	= \rho T \DDt{s} + v_i \dpdv{\sigma'_{ij}}{x_j}
+	\mytag{3}
+\]
+を得る．\ajMaru{3}は\S~49で参照する．
+
+\end{details}
+
+さて，\eqref{eq6.1:理想流体のエネルギー流保存則（微分形）}を体積積分してGaussの発散定理を用いると
+\begin{equation}\label{eq6.2:理想流体のエネルギー流保存則（積分形）}
+    \pdv{t} \int_V\pqty{ \frac{1}{2}\rho v^2 + \rho\varepsilon} \dV
+    = -\int_V \Div\bqty{\rho\v\pqty{\frac{1}{2}v^2 + h}} \dV
+    = -\int_S \rho\v \pqty{\frac{1}{2}v^2 + h} \cdot \dS.
+\end{equation}
+左辺は体積中の全エネルギーの時間変化率を表しているから，右辺は，単位時間にこの体積から流れ出すエネルギーである．
+ベクトル
+\begin{equation}\label{eq6.3:エネルギーフラックス密度}
+    \rho\v \pqty{\frac{1}{2}v^2 + h}
+\end{equation}
+は\emph{エネルギーフラックス密度}と呼ぶことができる．
+その大きさは，$\v$に垂直な単位面積を単位時間に通過するエネルギーに等しい．
+
+\eqref{eq6.2:理想流体のエネルギー流保存則（積分形）}の物理的意味を考えるために，次のように変形する；
+\[
+    \pdv{t} \int_V\pqty{ \frac{1}{2}\rho v^2 + \rho\varepsilon} \dV
+    = -\int_S \rho\v \pqty{\frac{1}{2}v^2 + \varepsilon} \cdot \dS -\int_S p\v \cdot \dS.
+\]
+右辺第1項は，流体の運ぶ全エネルギー（運動エネルギーと内部エネルギー）を表す．
+第2項は，体積内の流体が周囲からされた仕事を表す．
+
+
+
+
+\BackToTheToc

@@ -1,0 +1,169 @@
+\section{Euler方程式}\label{sec:2}
+\subsection*{Euler方程式}
+流体中の体積に働く力は，（エネルギーの散逸過程，つまり粘性や熱伝導が無視できる\emph{理想流体}の場合には）境界面上の圧力の積分
+\[
+    - \int p \,\dS = - \int \Grad p \dV
+\]
+に等しい．
+\begin{details}
+\nazenara
+発散定理
+$\displaystyle \int\vec{A}\cdot\dS = \int\Div\vec{A} \dV$
+で$\vec{A}=p\vec{c}$（$\vec{c}$は定ベクトル）とおけば
+\[
+    \int p\vec{c}\cdot\dS = \int \vec{c} \cdot \Grad p \dV
+    \qquad\yueni \vec{c}\cdot\pqty{ \int p\,\dS - \int\Grad p \dV } = 0 .
+\]
+任意の$\vec{c}$についてこの式が成り立つためには，$()$内は$\vec{0}$でなければならない．
+\end{details}
+\noindent
+つまり，単位体積の流体は周囲の流体から$-\Grad p$の力（圧力傾度力）を受ける．
+この単位体積の運動方程式は
+\begin{equation}\label{eq2.1:Euler方程式（Lagrange的）}
+    \rho\DDt{\v} = -\Grad p .
+\end{equation}
+
+ここで微分$\dDDt{\v}$は，固定点での流速変化ではなく，流体粒子の速度変化を表している（$D/Dt$をLagrange微分，物質微分などという）．これを固定点での微分に書き直そう．
+時間$\D t$の間の流体粒子の速度変化$\D\v$は，
+\begin{itemize}
+    \item 固定点における変化
+    \item $\D t$の間に位置が$\D \vec{r}$ずれたことによる変化
+\end{itemize}
+の和であるから，
+\[
+    \D\v = \pdv{\v}{t} \D t + \pqty{ \pdv{\v}{x} \D x + \pdv{\v}{y} \D y + \pdv{\v}{z} \D z } = \pdv{\v}{t} \D t + (\D\vec{r}\cdot\Grad)\v.
+\]
+よって，
+\begin{equation}\label{eq2.2:速度のLagrange微分}
+    \DDt{\v} = \pdv{\v}{t} + (\v\cdot\Grad)\v.
+\end{equation}
+一般に
+\[
+    \DDt{} = \pdv{t} + \v\cdot\Grad
+\]
+となる．右辺第1項は固定点での時間変化，第2項は「移流項」である．
+
+\eqref{eq2.2:速度のLagrange微分}を\eqref{eq2.1:Euler方程式（Lagrange的）}へ代入し
+\begin{equation}\label{eq2.3:Euler方程式}
+    \pdv{\v}{t} + (\v\cdot\Grad)\v = -\frac{1}{\rho} \Grad p .
+\end{equation}
+これが求める運動方程式で，\emph{Euler方程式}と呼ばれる．
+もし流体が一様重力場中にあるなら，単位体積では力$\rho\vec{g}$が働くから，\eqref{eq2.3:Euler方程式}は
+\begin{equation}\label{eq2.4:一様重力場中のEuler方程式}
+    \pdv{\v}{t} + (\v\cdot\Grad)\v = -\frac{1}{\rho} \Grad p + \vec{g}
+\end{equation}
+となる．
+ここで$\vec{g}$は重力加速度ベクトルで，一般には単位質量あたりの外力$\vec{K}$である．
+
+
+\subsection*{エネルギー方程式（断熱の式）}
+理想流体では流体内の熱輸送がなく，断熱的である．つまり，流体粒子の（単位質量あたり
+\footnote{日本語版では「単位体積あたり」となっているが，誤植だろう．日本語版には，他にも同様のミスがある．}
+の）エントロピー$s$は
+\begin{equation}
+    \DDt{s} = 0
+\end{equation}
+または
+\begin{equation}\label{eq2.6:展開した理想流体の断熱の式}
+    \pdv{s}{t} + \v\cdot\Grad s = 0
+\end{equation}
+を満たす．\eqref{eq1.1:連続の式}と\eqref{eq2.6:展開した理想流体の断熱の式}より
+\begin{align}
+    \pdv{(\rho s)}{t} + \Div(\rho s\v) &= s \pdv{\rho}{t} + \rho \pdv{s}{t} + \rho\v\cdot\Grad{s} + s \Div(\rho\v) \notag \\
+    &= s \cancel{\pqty{\pdv{\rho}{t} + \Div(\rho\v)}} + \rho \cancel{\pqty{\pdv{s}{t} + \v\cdot\Grad s}} = 0 
+\end{align}
+となり，エントロピーに対する連続の式が得られる．
+$\rho s\v$は「エントロピーフラックス密度」とでも呼ぶべき量である．
+
+もし，ある時刻に流体の全体積にわたってエントロピーが一様なら，その後もエントロピーは一定・一様である．
+この場合の断熱の式は
+\begin{equation}
+    s = \const
+\end{equation}
+という簡単な形になる．以下では，このような運動（\emph{等エントロピー運動}）を扱う．
+
+等エントロピー運動では，\eqref{eq2.3:Euler方程式}を違った形に書くことができる．
+$h = \varepsilon + pV = \varepsilon + \dfrac{p}{\rho}$
+を，単位質量あたりの\emph{エンタルピー}とすると（$\varepsilon$は単位質量あたりの内部エネルギー，$V=1/\rho$は比体積）
+\[
+    dh = Tds + Vdp = \frac{1}{\rho} dp .
+\]
+よって$\dfrac{1}{\rho}\Grad p = \Grad h$となり，\eqref{eq2.3:Euler方程式}は
+\begin{equation}\label{eq2.9:hを用いたEuler方程式}
+    \pdv{\v}{t} + (\v\cdot\Grad)\v = -\Grad h .
+\end{equation}
+ここからさらに，$h$を消去することができる．
+\[
+    \frac{1}{2} \Grad v^2 = \v \times \Rot \v + (\v\cdot\Grad)\v
+\]
+であるから
+\begin{details}
+\nazenara
+$\varepsilon_{ijk}$をEddingtonのイプシロン（Levi-Civitaの記号）とする．
+すなわち，$(ijk)$が(123)の偶置換ならば$+1$，奇置換ならば$-1$，それ以外なら0となる量で，$\vec{A}\times\vec{B}$の$i$成分は$\varepsilon_{ijk}A_jB_k$を表される．
+恒等式$\varepsilon_{ijk}\varepsilon_{lmk} = \delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$に注意すると
+\begin{align*}
+    \pqty{\v \times \Rot \v}_i &= \varepsilon_{ijk}v_j \pqty{\varepsilon_{klm}\pdv{v_m}{x_l}} = (\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}) v_j \pdv{v_m}{x_l} \\
+    &= v_j \pdv{v_j}{x_i} - v_j \pdv{v_i}{x_j} = \frac{1}{2}\pdv{x_i}(v_jv_j) - v_j \pdv{v_i}{x_j} \\
+    &= \pqty{ \frac{1}{2} \Grad v^2 - (\v\cdot\Grad)\v }_i
+\end{align*}
+となる．
+\end{details}
+%
+\noindent
+\eqref{eq2.9:hを用いたEuler方程式}は
+\begin{equation}\label{eq2.10:rotとhを用いたEuler方程式}
+    \pdv{\v}{t} = \v \times \Rot \v - \Grad\pqty{\frac{1}{2}v^2+h} .
+\end{equation}
+両辺のrotを取ると，$\Rot\Grad f=0$であるから
+\begin{equation}\label{eq2.11:理想流体の渦度方程式}
+    \pdv{t}(\Rot\v) = \Rot(\v \times \Rot \v) .
+\end{equation}
+これは速度だけを含んでいる．
+$\vec{\omega}\equiv\Rot\v$で\emph{渦度}を定義すると
+\[
+    \pdv{\vec{\omega}}{t} = \Rot(\v \times \vec{\omega}) .
+\]
+これは\emph{渦度方程式}と呼ばれる．
+
+
+\subsection*{運動方程式の境界条件}
+理想流体の境界条件は，流体が固体の表面を通り抜けないことである．
+固体表面に垂直な速度成分を$v_n$とすると，
+\begin{itemize}
+    \item 固体表面が静止しているとき
+    \begin{equation} v_n = 0 . \end{equation}    
+    \item 固体表面が動くときは，$v_n$は固体表面の速度の垂直成分に等しい．
+\end{itemize}
+混じり合わない2つの流体の境界では，圧力が等しく（$p^{(1)}=p^{(2)}$），
+境界面に垂直な流速が境界面の速度の垂直成分に等しい（${v_n}^{(1)}={v_n}^{(2)}={v_n}^{(\textrm{boundary})}$）．
+
+% \S~1で述べたように，流体を記述する変数は$\v,\rho,p$の5つであり，方程式も5本必要である．理想流体では連続の式，Euler方程式，断熱の式である．
+
+\begin{mondai}{}{}
+ある時刻$t=t_0$での流体粒子の座標を$a$とする（これはLagrange座標と呼ばれる）．
+$a,t$を用いて，理想流体の1次元運動の方程式を書け．
+\end{mondai}
+
+\begin{kaitou}
+このようなLagrange的記述のもとでは，任意の流体粒子の座標$x$は$a,t$の関数とみなされる；$x=x(a,t).$
+$t=t_0$での密度分布を$\rho_0(a)$とすると，連続の式は
+\[
+    \rho dx = \rho_0 da
+    \qquad\yueni \rho \PDV{x}{a}{t} = \rho_0 .
+\]
+流体粒子の速度は$v = \dPDV{x}{t}{a}$であり，その偏微分$\dPDV{v}{t}{a}$は加速度を表す．
+粒子に働く力を考え，Euler方程式は
+\[
+    \rho_0 \PDV{v}{t}{a} = - \PDV{p}{a}{t} .
+\]
+断熱の式は
+\[
+    \PDV{s}{t}{a} = 0 .
+\]
+\end{kaitou}
+
+
+
+
+\BackToTheToc

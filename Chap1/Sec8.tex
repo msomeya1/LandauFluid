@@ -1,0 +1,252 @@
+\section{循環の保存}
+\subsection*{Kelvinの循環定理}
+ある閉曲線$C$に沿った線積分
+\[
+    \varGamma=\oint_C \v\cdot\dl
+\]
+を\emph{循環}という．
+$C$が流体粒子から成り立っている（空間中に固定されていない）とすると，$C$は流れに乗って動いていく．
+それに伴う循環の時間変化$\displaystyle\DDt{}\oint_C \v\cdot\dl$を計算しよう．
+
+混乱を避けるため，時間微分を$D$，空間微分を$\delta$で表すことにすると，$\dl=\delta\vec{r}$である．
+\[
+    \DDt{}\oint_C \v\cdot\dl = \DDt{}\oint_C \v\cdot\delta\vec{r} = \oint_C \DDt{\v}\cdot\delta\vec{r} + \oint_C \v\cdot \DDt{(\delta\vec{r})} 
+\]
+\eqref{eq2.9:hを用いたEuler方程式}より$\dDDt{\v}=-\Grad h$である．
+また，
+\[
+    \v\cdot \DDt{(\delta\vec{r})} = \v\cdot \delta \pqty{\DDt{\vec{r}}}
+    = \v \cdot \delta\v = \delta \pqty{\frac{1}{2}v^2}
+\]
+は1周積分すると0になる．よって
+\[
+    \DDt{}\oint_C \v\cdot\dl = -\oint_C \Grad h\cdot\delta\vec{r} + 0
+    = - \int_S \Rot(\Grad h) \cdot \dS = 0
+\]
+となるから
+\begin{equation}
+    \varGamma = \oint_C \v\cdot\dl = \const \; \text{（流体の運動にしたがって）} .
+\end{equation}
+つまり，理想流体では流れとともに動く閉曲線についての循環は時間によらず一定である（\emph{Kelvinの循環定理，循環の保存則}）
+\footnote{結果は一様重力場（さらにいえばポテンシャル外力場）中でも成り立つ．
+なぜなら，\eqref{eq2.9:hを用いたEuler方程式}で$h$が$h+gz$に変わるだけで，rotを取ると結局0になるからである．}．
+
+
+ここで，循環の保存則は\eqref{eq2.9:hを用いたEuler方程式}から導かれたことに注意せよ．
+\eqref{eq2.9:hを用いたEuler方程式}で用いている等エントロピーの仮定が破れると，循環は保存しない
+（数学的には，$\dfrac{1}{\rho}\Grad p$がスカラー関数のgradの形に書ければよい．
+つまり，$p$と$\rho$が1対1対応であればよい）．
+
+
+\subsection*{\spade\spade さまざまな渦定理}
+渦に関しては色々な定理があるので，ここで整理しておく．
+
+
+まず，必要な用語を導入する．
+速度ベクトル$\v$に対して流線を考えたのと同様に，渦度ベクトル$\vec{\omega}$に対して渦線を考えることができる．
+つまり，その線上の任意の点における接ベクトルがその点での渦度ベクトル$\vec{\omega}$と平行であるような曲線を\emph{渦線}という．
+また，流体中にとった曲線上の各点を通る渦線が作る曲面を\emph{渦面}といい，
+特に閉曲線$C$上の各点を通る渦線が作る曲面を\emph{渦管}という．
+$C$の断面積が微小の渦管を\emph{渦糸}という．
+
+
+
+\subsubsection*{循環・渦管（渦糸）の強さが渦管（渦糸）に固有の量であること}
+
+ある時刻における渦管を考え，渦管を一周する2つの閉曲線を$C,C'$とする．また，$C$上の点Aと$C'$上の点$\mathrm{A'}$を線で結び，
+閉曲線「$C$→$\mathrm{AA'}$→$-C'$（$C'$を$C$とは逆向きに回ることを意味する）→$\mathrm{A'A}$」にストークスの定理を適用すると
+\[
+    \oint_C \v\cdot\dl + \int_\mathrm{AA'} \v\cdot\dl + \oint_{-C'} \v\cdot\dl + \int_\mathrm{A'A} \v\cdot\dl
+    = \int_S \Rot\v\cdot\dS .
+\]
+曲面$S$として渦管の壁面をとることにすれば，渦管の定義から$\Rot\v\perp\dS$であるから右辺は0である．
+また，$\mathrm{AA'}$の線積分と$\mathrm{A'A}$の線積分は互いに打ち消しあい，
+$\displaystyle \oint_{-C'} \v\cdot\dl = -\oint_{C'} \v\cdot\dl$に注意すると
+\[
+    \oint_C \v\cdot\dl = \oint_{C'} \v\cdot\dl .
+\]
+よって，循環は（ある時刻の）渦管上の任意の閉曲線について同じ値をとる．
+
+
+特に，微小な閉曲線$\delta C$を通る渦糸を考え，$\delta C$で囲まれる閉曲面を$\delta\vec{S}$とする．
+断面積$\delta S$が微小であるから，断面内で渦度の大きさ$\omega$は一定とみなすことができ，
+\[
+    \oint_{\delta C} \v\cdot\dl = \int_{\delta\vec{S}} \Rot\v\cdot\dS 
+    \simeq \omega\delta S
+\]
+は渦糸上の任意の点で同じ値をとる．
+渦度の大きさと断面積の積$\omega\delta S$は「渦糸の強さ」と呼ばれる．したがって，
+\[
+    \text{渦糸の強さはその渦糸に固有の量である．}
+    \mytag{1}
+\]
+$\omega\delta S=\const$より，渦糸の細いところでは渦度が大きく，渦糸の太いところでは渦度が小さいことがわかる．
+
+
+断面積が有限の渦管についても，沢山の渦糸の集合とみなせば，同様の結果が成り立つ．
+
+
+
+\subsubsection*{Helmholtzの渦定理}
+
+次に渦面について考えよう．
+ある時刻において，渦面$S$と，渦面上の閉曲線$C$を考える．
+渦面上では$\Rot\v\perp\dS$であるから
+\[
+    \oint_{C} \v\cdot\dl = \int_{S} \Rot\v\cdot\dS  = 0
+\]
+$C$が流れに乗って$C'$になったとし，$C'$の乗っている平面を$S'$とすれば，Kelvinの循環定理より
+\[
+    0 = \oint_{C'} \v\cdot\dl = \int_{S'} \Rot\v\cdot\dS
+\]
+を得る．$C'$したがって$C$は任意にとれるから，$S'$上の任意の点で$\Rot\v\cdot\dS=0$となる．
+よって，$S'$も渦面であり，渦面は常に渦面のままであることがわかる．
+定義より，渦管は渦面の一種であるから，
+\[
+    \text{流体が動いても，渦管（渦糸）は渦管（渦糸）であり続ける}
+    \mytag{2}
+\]
+（ある瞬間の渦管（渦糸）を構成する流体粒子は，その後の時刻も渦管（渦糸）を構成する）ということがわかる．
+これと\ajMaru{1}を合わせると，
+\[
+    \text{渦管（渦糸）の強さは時間的に変化しない}
+    \mytag{3}
+\]
+という結論が導かれる．
+あるいは
+\[
+    \text{渦度は，各渦管（渦糸）に乗って移動していく}
+    \mytag{4}
+\]
+と解釈してもよい．
+\ajMaru{2}〜\ajMaru{4}を総称して\emph{Helmholtzの渦定理}と呼ぶ．
+
+% \begin{equation}\label{eq8.2:渦糸の強さ}
+%     \oint_{\delta C} \v\cdot\dl = \int_{\delta\vec{S}} \Rot\v\cdot\dS 
+%     \simeq \omega \cdot \delta S = \const \;\text{流れとともに}
+% \end{equation}
+
+
+\subsubsection*{Lagrangeの渦定理（渦の不生不滅の定理）}
+
+Helmholtzの渦定理から，ある時刻に$\omega=0$であった流体はその後も$\omega=0$であり，
+逆にある時刻に$\omega\neq 0$の流体はその後も$\omega\neq 0$であることがわかる．
+これを\emph{Lagrangeの渦定理}（\emph{渦の不生不滅の定理}）という
+\footnote{
+ここでは詳細な証明を省くが，Lagrange的記述，Euler的記述の双方で，この定理を定量的に説明することができる．
+
+まずLagrange的記述では，初期時刻での座標を$(a,b,c)$，渦度を$(\xi_0,\eta_0,\zeta_0)$，密度を$\rho_0$とし，
+その後の時刻での座標を$(x,y,z)$，渦度を$(\xi,\eta,\zeta)$，密度を$\rho$とすると，
+\[
+    \begin{cases}
+        \xi = \dfrac{\rho}{\rho_0} \pqty{ \dpdv{x}{a} \xi_0 + \dpdv{x}{b} \eta_0 + \dpdv{x}{c} \zeta_0 } \\[7pt]
+        \eta = \dfrac{\rho}{\rho_0} \pqty{ \dpdv{y}{a} \xi_0 + \dpdv{y}{b} \eta_0 + \dpdv{y}{c} \zeta_0 } \\[7pt]
+        \zeta = \dfrac{\rho}{\rho_0} \pqty{ \dpdv{z}{a} \xi_0 + \dpdv{z}{b} \eta_0 + \dpdv{z}{c} \zeta_0 } \\
+    \end{cases}
+\]
+が成り立つ（Cauchyの積分；証明は今井やLamb参照）．
+よって，最初に流体粒子の渦度が0ならばその後も0であり，逆に最初に渦度の成分に1つでも0でないものがあれば，その後も渦度は0でない．
+
+
+またEuler的記述でも，渦度方程式\eqref{eq2.11:理想流体の渦度方程式}から類似の式
+\[
+    \DDt{} \pqty{\frac{\vec{\omega}}{\rho}} = \pqty{ \frac{\vec{\omega}}{\rho} \cdot \Grad } \v
+\]
+が示せる．}．
+ただし，この定理は渦あり／渦なしを区別する定性的なものと受け止めるべきである．
+また，\S~\ref{sec:9}で見るように，物体表面で「はがれ」が起こる場合には，渦のないところから渦が生成される．
+
+
+
+
+最後に，これらの渦定理の適用条件について考えよう．
+Kelvinの循環定理と，そこから導かれるHelmholtzの渦定理，Lagrangeの渦定理は，
+いずれも理想流体・等エントロピー過程・ポテンシャル外力場という条件下で成り立つ（当然ながら，粘性流体では成り立たないことに注意）．
+一方，\ajMaru{1}は，Kelvinの循環定理が成り立つかどうかによらない一般的な結果である．
+
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{smondai}{}{}
+等エントロピーではない（傾圧的）流れにおいて，移動する流体粒子とともに$\dfrac{\vec{\omega}\cdot\Grad s}{\rho}$という量が保存されることを示せ（H. Ertel 1942）．
+
+（この結果は，Ertelの渦位保存則と呼ばれている．例えば総観気象学入門（小倉）の4.1.2節を見よ．
+なお，気象学で用いられる温位$\theta$とエントロピー$s$の間には$s=c_p \log\theta+\const$という関係がある．）
+\end{smondai}
+\begin{kaitou}
+等エントロピーではないから，Euler方程式は
+\[
+    \pdv{\v}{t} = \v \times \Rot \v - \Grad\pqty{\frac{v^2}{2}} - \frac{1}{\rho}\Grad p
+\]
+である．両辺のrotをとると，傾圧の場合の渦度方程式が得られる；
+\begin{align*}
+    \pdv{\vec{\omega}}{t} &= \Rot(\v\times\vec{\omega}) - \Rot \pqty{\frac{1}{\rho}\Grad p} \\
+    &= \Rot(\v\times\vec{\omega}) - \Grad\pqty{\frac{1}{\rho}} \times \Grad p - \frac{1}{\rho} \, \cancel{ \Rot(\Grad p) } \\
+    &= \Rot(\v\times\vec{\omega}) + \frac{1}{\rho^2} \Grad\rho \times \Grad p .
+\end{align*}
+この式と$\Grad s$の内積を作る．
+$s=s(p,\rho)$であるから
+\begin{align*}
+    ds &= \PDV{s}{p}{\rho} dp + \PDV{s}{\rho}{p} d\rho, \\
+    \Grad s &= \PDV{s}{p}{\rho} \Grad p + \PDV{s}{\rho}{p} \Grad\rho.
+\end{align*}
+$\Grad s$は$\Grad p, \; \Grad\rho$の線形結合であるから，
+$\Grad s \cdot (\Grad\rho \times \Grad p) = 0$となる．よって
+\begin{align*}
+    \Grad s \cdot \pdv{\vec{\omega}}{t} &= \Grad s \cdot \Rot(\v\times\vec{\omega}) + 0 \\
+    & \gyoukan{ベクトル解析の公式 $\vec{A}\cdot\Rot\vec{B} = (\Rot\vec{A})\cdot\vec{B} - \Div(\vec{A}\times\vec{B})$ } \\
+    &= \cancel{\Rot(\Grad s)} \cdot (\v\times\vec{\omega}) - \Div[ \Grad s \times (\v\times\vec{\omega}) ] \\
+    & \gyoukan{$[\,]$内をベクトル3重積で展開} \\
+    &= -\Div[ \v(\vec{\omega}\cdot\Grad s) - \vec{\omega}(\v\cdot\Grad s) ] \\
+    & \gyoukan{ベクトル解析の公式 $\Div(\vec{A}f) = f \Div\vec{A} + \vec{A}\cdot\Grad f$} \\
+    &= -(\vec{\omega}\cdot\Grad s) \cdot \Div\v - \v\cdot\Grad(\vec{\omega}\cdot\Grad s)
+    + (\v\cdot\Grad s) \cdot \cancel{ \Div{\vec{\omega}} }
+    + \vec{\omega} \cdot \Grad( \ucomment{\v\cdot\Grad s}{ $=-\partial s/\partial t$ } ) \\
+    &= -(\vec{\omega}\cdot\Grad s) \cdot \Div\v - \v\cdot\Grad(\vec{\omega}\cdot\Grad s)
+    - \vec{\omega} \cdot \pdv{t}(\Grad s) ,
+\end{align*}
+\[
+    \yueni \pdv{t}(\vec{\omega}\cdot\Grad s) + \v\cdot\Grad(\vec{\omega}\cdot\Grad s) + (\vec{\omega}\cdot\Grad s) \cdot \Div\v = 0 .
+\]
+前半を$\dDDt{}$でまとめ，後半に$\Div\v = -\dfrac{1}{\rho}\dDDt{\rho}$を代入すると
+\[
+    \DDt{} (\vec{\omega}\cdot\Grad s) + (\vec{\omega}\cdot\Grad s) \pqty{ -\frac{1}{\rho} \dDDt{\rho} } = 0
+\]
+\[
+    \frac{1}{\rho} \DDt{} (\vec{\omega}\cdot\Grad s) + (\vec{\omega}\cdot\Grad s) \pqty{ -\frac{1}{\rho^2} \dDDt{\rho} } = 0
+\]
+\[
+    \yueni \DDt{} \pqty{ \frac{\vec{\omega}\cdot\Grad s}{\rho} } = 0
+\]
+となる．
+
+以上の証明は本文に従ったが，逆向きに示した方がわかりやすいかもしれない．
+\begin{align*}
+    \rho \DDt{} \pqty{ \frac{\vec{\omega}\cdot\Grad s}{\rho} }
+    &= \DDt{} (\vec{\omega}\cdot\Grad s) + (\vec{\omega}\cdot\Grad s) \pqty{ -\frac{1}{\rho} \dDDt{\rho} } \\
+    &= \pdv{t}(\vec{\omega}\cdot\Grad s) + \v\cdot\Grad(\vec{\omega}\cdot\Grad s) + (\vec{\omega}\cdot\Grad s) \cdot \Div\v \\
+    &= \pdv{\vec{\omega}}{t}\cdot\Grad s + \vec{\omega}\cdot\Grad\pqty{\pdv{s}{t}} + \Div [\v(\vec{\omega}\cdot\Grad s)]
+\end{align*}
+第3項は，ベクトル三重積の公式より
+\begin{align*}
+    \Div [\v(\vec{\omega}\cdot\Grad s)] &= \Div[ \Grad s \times (\v\times\vec{\omega}) + \vec{\omega}(\v\cdot\Grad s) ] \\
+    &= \cancel{\Rot(\Grad s)} \times (\v\times\vec{\omega}) -\Grad s \cdot \Rot(\v\times\vec{\omega})
+    + (\v\cdot\Grad s) \cancel{\Div\vec{\omega}} + \vec{\omega} \cdot \Grad(\v\cdot\Grad s)
+\end{align*}
+であるから，
+\begin{align*}
+    \rho \DDt{} \pqty{ \frac{\vec{\omega}\cdot\Grad s}{\rho} }
+    &= \Grad s \cdot \pqty{ \pdv{\vec{\omega}}{t} - \Rot(\v\times\vec{\omega}) }
+    + \vec{\omega} \cdot \Grad \cancel{ \pqty{\pdv{s}{t} + \v\cdot\Grad s} } \\
+    &= \Grad s \cdot \pqty{\frac{1}{\rho^2} \Grad\rho \times \Grad p } = 0
+\end{align*}
+となる．
+
+\end{kaitou}
+
+
+
+
+\BackToTheToc

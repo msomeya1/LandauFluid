@@ -1,0 +1,98 @@
+\section{非圧縮性流体でのエネルギー散逸}\label{sec:16}
+
+粘性によりエネルギーは散逸し，最終的には熱に変換される．
+非圧縮性流体でのエネルギー散逸は，簡単に計算することができる．
+
+
+
+非圧縮性流体の全運動エネルギー
+\[
+    E_\mathrm{kin} = \frac{1}{2} \rho \int v^2 \dV
+\]
+の時間微分を計算しよう．
+Navier-Stokes方程式より
+\begin{align*}
+    \pdv{t} \pqty{\frac{1}{2}\rho v^2} &= \rho v_i \pdv{v_i}{t} \\
+    &= v_i \bqty{ -\rho v_j\pdv{v_i}{x_j} - \rho\pdv{x_i} \pqty{\frac{p}{\rho}} + \pdv{\sigma'_{ij}}{x_j} } \\
+    &= -\rho v_j \pdv{x_j} \pqty{\frac{1}{2}v_iv_i} - \rho v_i \pdv{x_i} \pqty{\frac{p}{\rho}} + v_i \pdv{\sigma'_{ij}}{x_j}
+\end{align*}
+ベクトル解析の公式より
+\begin{align*}
+    \rho v_j \pdv{x_j} \pqty{\frac{1}{2}v_iv_i} + \rho v_i \pdv{x_i} \pqty{\frac{p}{\rho}}
+    &= \rho\v \cdot \Grad \pqty{ \frac{v^2}{2} + \frac{p}{\rho} } \\
+    &= \Div \bqty{ \rho\v \pqty{ \frac{v^2}{2} + \frac{p}{\rho} } } - \rho \pqty{ \frac{v^2}{2} + \frac{p}{\rho} } \cancel{\Div\v}
+\end{align*}
+である．
+また，第$j$成分が$v_i\sigma'_{ij}$であるようなベクトルを$\v\cdot\mat{\sigma'}$と書くことにすると
+\[
+    v_i \pdv{\sigma'_{ij}}{x_j} = \pdv{x_j} (v_i \sigma'_{ij}) - \sigma'_{ij} \pdv{v_i}{x_j}
+    = \Div(\v\cdot\mat{\sigma'}) - \sigma'_{ij} \pdv{v_i}{x_j} .
+\]
+以上より
+\begin{equation}\label{eq16.1:非圧縮性粘性流体での運動エネルギー保存則（微分形）}
+    \pdv{t} \pqty{\frac{1}{2}\rho v^2} 
+    = -\Div\bqty{ \rho\v \pqty{ \frac{v^2}{2} + \frac{p}{\rho} } - \v\cdot\mat{\sigma'} } - \sigma'_{ij} \pdv{v_i}{x_j} .
+\end{equation}
+
+
+\eqref{eq16.1:非圧縮性粘性流体での運動エネルギー保存則（微分形）}をある体積$V$で積分してガウスの発散定理を用いると
+\begin{equation}\label{eq16.2:非圧縮性粘性流体での運動エネルギー保存則（積分形）}
+    \pdv{t} \int_V \frac{1}{2}\rho v^2 \dV
+    = -\int_S \bqty{ \rho\v \pqty{ \frac{v^2}{2} + \frac{p}{\rho} } - \v\cdot\mat{\sigma'} } \cdot \dS - \int_V \sigma'_{ij} \pdv{v_i}{x_j} \dV .
+\end{equation}
+$\rho\v \pqty{ \dfrac{v^2}{2} + \dfrac{p}{\rho} }$は流体の運動によるエネルギーフラクス，
+$-\v\cdot\mat{\sigma'}$は内部摩擦によるエネルギーフラックスである．
+よって\eqref{eq16.2:非圧縮性粘性流体での運動エネルギー保存則（積分形）}右辺の面積分は，
+$V$の表面を通るエネルギーフラックスによる$E_\mathrm{kin}$の変化率を表す．
+また第2項は，粘性散逸による$E_\mathrm{kin}$の単位時間あたりの減少率を表す．
+
+
+
+積分を全体積にわたって行おう．
+流体の体積が無限大なら，無限遠での速度は0であるから，面積分は0になる．
+また，流体の体積が有限であっても，表面での法線速度は0であるから，やはり面積分は0になる．
+よって
+\[
+    \dot{E}_\mathrm{kin} = - \int \sigma'_{ij} \pdv{v_i}{x_j} \dV
+\]
+となる．$\sigma'_{ij}$が対称であることを用い，\eqref{eq15.8:非圧縮性流体での応力テンソル}を代入すると
+\[
+    \sigma'_{ij} \pdv{v_i}{x_j} = \frac{1}{2} \sigma'_{ij} \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} }
+    = \frac{1}{2} \eta \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} }^2 .
+\]
+よって非圧縮性流体のエネルギー散逸は
+\begin{equation}\label{eq16.3:非圧縮性流体のエネルギー散逸}
+    \dot{E}_\mathrm{kin} = -\frac{1}{2} \eta \int \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} }^2 \dV
+\end{equation}
+となる．
+エネルギーが散逸することで力学的エネルギーは減少するはずであるから，\eqref{eq16.3:非圧縮性流体のエネルギー散逸}は負でなければならない．
+よって
+\[
+    \eta > 0 ,
+\]
+つまり粘性率は正である．
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+ポテンシャル流に対して，\eqref{eq16.3:非圧縮性流体のエネルギー散逸}を面積分に書き換えよ．
+\end{mondai}
+\begin{kaitou}
+$v_i = \dpdv{\phi}{x_i}$より
+$\dpdv{v_i}{x_j} = \dpdv{\phi}{x_i}{x_j} = \dpdv{v_j}{x_i}$
+であるから
+\[
+    \pqty{ \pdv{v_i}{x_j} + \pdv{v_j}{x_i} }^2 = 4 \pdv{v_i}{x_j} \pdv{v_i}{x_j}
+    = 4 \bqty{ \pdv{x_j}\pqty{v_i\pdv{v_i}{x_j}} - v_i \pdv[2]{v_i}{{x_j}} }
+\]
+$\Laplacian\v = \Grad(\Laplacian\phi) = 0$より最右辺第2項は消える．
+結局
+\begin{align*}
+    \dot{E}_\mathrm{kin} &= -2\eta \int \pdv{x_j}\pqty{v_i\pdv{v_i}{x_j}} \dV 
+    = -2\eta \int v_i\pdv{v_i}{x_j} \, dS_j \\
+    &= -\eta \int \pdv{x_j}(v_iv_i) \, dS_j = -\eta \int \Grad v^2 \cdot \dS .\\
+\end{align*}
+    
+\end{kaitou}
+
+\BackToTheToc

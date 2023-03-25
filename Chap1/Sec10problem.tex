@@ -1,0 +1,1012 @@
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+一様重力場中で，一様な角速度$\Omega$で軸のまわりを回転している円筒がある．
+この円筒内の非圧縮性流体の表面の形を求めよ．
+\end{mondai}
+\begin{kaitou}
+円筒の軸を$z$軸とする．
+円筒を回転しはじめたときは速度は時間に依存しているだろうが，十分長い時間が経過したあとは液体は剛体回転を行うと考えられる．
+\begin{details}
+この仮定が正しいか，よくわからない．
+粘性流体ならば剛体回転することが示せる（\S~18）が，今は粘性がないから，円筒の動きは流体には伝わらず，流体が静止している解も可能なはずではないか？
+
+ひとまず，なんらかの方法で剛体的に回転している非圧縮性流体の表面の形を考える問題だと思うことにする．
+\end{details}
+\noindent
+その流速分布は$v_x = -\Omega y, \; v_y = \Omega x, \; v_z=0$となり，連続の式$\Div\v=0$は自動的に満たされる．
+$\v$が既知となったので，未知関数$p$をEuler方程式から求めよう．
+\[
+    \begin{cases}
+        v_y \dpdv{v_x}{y} = - \dpdv{x} \pqty{\dfrac{p}{\rho}} \\[7pt]
+        v_x \dpdv{v_y}{x} = - \dpdv{y} \pqty{\dfrac{p}{\rho}} \\[7pt]
+        0 = - \dpdv{z} \pqty{\dfrac{p}{\rho}} -g \\[7pt]
+    \end{cases}
+\]
+$\dpdv{x}\pqty{\dfrac{p}{\rho}}=\Omega^2x, \; \dpdv{y}\pqty{\dfrac{p}{\rho}}=\Omega^2y, \; \dpdv{z}\pqty{\dfrac{p}{\rho}}=-g$より
+\[
+    \frac{p}{\rho} = \frac{1}{2}\Omega^2 (x^2+y^2) -gz + \const
+\]
+となる．
+自由表面では$p=\const$であるから，最も低い表面を原点に取れば
+\[
+    z = \frac{\Omega^2}{2g} (x^2+y^2) .
+\]
+これは回転放物面である．
+
+\begin{details}
+流体粒子を質点とみて，それに働く力を考えてもよい．
+自由表面上の粒子で，軸から$r$の距離にあるものを考える．この点における表面の傾きは
+\[
+    \dv{z}{r} = \tan\theta.
+\]
+一方，粒子に働く重力$mg$と遠心力$mr\Omega^2$の合力は自由表面と垂直であるから
+\[
+    \tan\theta = \frac{mr\Omega^2}{mg} .
+\]
+よって
+\[
+    \dv{z}{r} = \frac{\Omega^2}{g}r
+    \qquad\yueni z = \frac{\Omega^2}{2g}r^2 + \const
+\]
+
+
+\end{details}
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{問題10.2（運動する球のまわりのポテンシャル流）}
+非圧縮性流体中を速度$\vec{u}$で運動する，半径$R$の球の周りに生じるポテンシャル流を求めよ．
+\end{mondai}
+\begin{kaitou}
+\begin{details}
+$\phi$を求める過程がかなり大胆（強引？）である．もう少し丁寧な論証を，本解の後に載せる．
+\end{details}
+
+座標原点を球の中心にとる．$r\neq0$では$\Laplacian\pqty{\dfrac{1}{r}}=0$であるから
+\footnote{一般には$\Laplacian\pqty{\dfrac{1}{r}}=-4\pi\delta(r)$だが，$r=0$は流体中にはない点だから，今は考える必要がない．}，
+$\dfrac{1}{r}$の座標微分
+\[
+    \frac{1}{r}, \; \pdv{x_i}\pqty{\frac{1}{r}}, \; \pdv{}{x_i}{x_j} \pqty{\frac{1}{r}}, \; \ldots
+\]
+もまたLaplace方程式$\Laplacian\phi=0$の解である．
+一般に，$r\to\infty$で$\phi\to0$になる調和関数は
+\[
+    \phi = \frac{A}{r} + A_i \pdv{x_i}\pqty{\frac{1}{r}} + A_{ij} \pdv{}{x_i}{x_j} \pqty{\frac{1}{r}} + \cdots
+\]
+のように書くことができる（各項は$2^n$重湧き出しを表すが，知らなくてもこの問題は解ける）．
+これらの係数を求める．
+
+Laplace方程式と境界条件の線形性から，$\phi$は$\vec{u}$の1次式だけを含むだろう（本当？）．
+$\phi$の展開係数の中でベクトルは$A_i$のみであり，もし他の階数のテンソルを$\vec{u}$から作ろうとすると，それは1次式ではなくなってしまう．
+よって第2項以外は消え，$\vec{u}$に比例する定数ベクトル$\vec{A}$を用いて
+\[
+    \phi = A_i \pdv{x_i}\pqty{\frac{1}{r}} = \vec{A} \cdot \Grad \pqty{\frac{1}{r}}
+\]
+となる．
+\begin{details}
+以下の計算では次の関係を頻繁に用いる；
+
+$r=\sqrt{x^2+y^2+z^2}$のとき$\dpdv{r}{x_i} = \dfrac{2x_i}{2\sqrt{\qquad}} = \dfrac{x_i}{r}$であるから
+\[
+    \pdv{x_i}(r^N) = \pdv{r}{x_i}\pdv{r}(r^N) = \frac{x_i}{r} Nr^{N-1} = Nx_i r^{N-2}
+    \qquad\yueni \Grad(r^N) = N\vec{r} r^{N-2} = N \vec{n} r^{N-1} .
+\]
+ただし$\vec{n}=\dfrac{\vec{r}}{r}$は動径方向の単位ベクトルである．
+\end{details}
+\[
+    \phi = A_i \pqty{ -\frac{x_i}{r^3}} = - \frac{\vec{A}\cdot\vec{r}}{r^3} = - \frac{\vec{A}\cdot\vec{n}}{r^2}
+\]
+\begin{align*}
+    v_i &= \pdv{\phi}{x_i} = \pdv{x_i} \pqty{-\frac{A_jx_j}{r^3}} \\
+    &= -A_j \bqty{ \pdv{x_j}{x_i} \frac{1}{r^3} + x_j \pdv{x_i} \pqty{\frac{1}{r^3}}} \\
+    &= -A_j \bqty{ \frac{\delta_{ij}}{r^3} + x_j \pqty{-3x_i \frac{1}{r^5}} } \\
+    &= -\frac{A_i}{r^3} + 3\frac{x_iA_jx_j}{r^5} \\
+    &= \frac{3(A_jn_j)n_i-A_i}{r^3} \\
+    \v &= \frac{3(\vec{A}\cdot\vec{n})\vec{n}-\vec{A}}{r^3}
+\end{align*}
+$r=R$で$\v$の法線成分と$\vec{u}$の法線成分が等しいから
+\[
+    \v\cdot\vec{n} = \vec{u}\cdot\vec{n} \quad @\, r=R ,
+\]
+\[
+    \frac{3\vec{A}\cdot\vec{n}-\vec{A}\cdot\vec{n}}{R^3} = \vec{u}\cdot\vec{n}
+    \qquad\yueni \vec{A} = \frac{R^3}{2} \vec{u} .
+\]
+よって速度ポテンシャル，速度は
+\[
+    \phi= - \frac{R^3}{2r^2}(\vec{u}\cdot\vec{n}), \quad
+    \v = \frac{R^3}{2r^2} \bqty{ 3(\vec{u}\cdot\vec{n})\vec{n}-\vec{u} }
+\]
+となる（これは双極子の作る場にほかならず，流体の場合は特に「2重湧き出し」と呼ばれる）．
+
+
+\begin{details}
+$\vec{u}$と$\vec{n}$のなす角を$\theta$とすると$\vec{u}\cdot\vec{n}=u\cos\theta$であるから，
+速度ポテンシャルは
+\[
+    \phi = - \frac{R^3 u\cos\theta}{2r^2} ,
+\]
+速度の法線成分は
+\[
+    v_r = \v\cdot\vec{n} = \frac{R^3}{2r^2} (2\vec{u}\cdot\vec{n}) = \frac{R^3 u\cos\theta}{r^3}.
+\]
+\end{details}
+
+圧力方程式\eqref{eq10.7:非圧縮性流体のポテンシャル流に対する圧力方程式}を用いて，表面での圧力を求めよう．無限遠での圧力を$p_0$とすると
+\[
+    \pdv{\phi}{t} + \frac{1}{2}v^2 + \frac{p}{\rho} = \text{（無限遠での値）} = \frac{p_0}{\rho} ,
+\]
+\[
+    \eval{p}_{r=R} = p_0 - \rho\pqty{\frac{1}{2}v^2 + \pdv{\phi}{t} }_{r=R} .
+\]
+ここで
+\begin{align*}
+    \eval{\frac{1}{2}v^2}_{r=R} &= \frac{1}{8} \bqty{3(\vec{u}\cdot\vec{n})\vec{n}-\vec{u}}^2 \\
+    &= \frac{1}{8} \bqty{ 9(\vec{u}\cdot\vec{n})^2 -6(\vec{u}\cdot\vec{n})^2 +u^2 } \\
+    &= \frac{u^2}{8} (3\cos^2\theta+1).
+\end{align*}
+
+$\dpdv{\phi}{t}$を計算するときには，座標原点が速度$\vec{u}$で動いていることに注意する必要がある．
+図で$\delta\vec{r}=\vec{r}(t+\delta t)-\vec{r}(t) \simeq -\vec{u}\delta t$であるから
+\begin{align*}
+    \pdv{\phi}{t} &= \pdv{\phi}{\vec{u}} \cdot \dv{\vec{u}}{t} + \pdv{\phi}{\vec{r}} \cdot \dv{\vec{r}}{t} \\
+    &= -\frac{R^3}{2r^2} \vec{n} \cdot \dv{\vec{u}}{t} + \vec{v} \cdot (-\vec{u}) \\
+    \eval{\pdv{\phi}{t}}_{r=R} &= -\frac{R}{2} \vec{n} \cdot \dv{\vec{u}}{t} - \frac{1}{2} \bqty{3(\vec{u}\cdot\vec{n})\vec{n}-\vec{u}} \cdot \vec{u} \\
+    &= -\frac{R}{2} \vec{n} \cdot \dv{\vec{u}}{t} - \frac{1}{2} \bqty{3(\vec{u}\cdot\vec{n})^2-u^2} \\
+    &= -\frac{R}{2} \vec{n} \cdot \dv{\vec{u}}{t} - \frac{u^2}{2} (3\cos^2\theta-1) .
+\end{align*}
+
+以上より，
+\begin{align*}
+    \eval{p}_{r=R} &= p_0 - \rho\bqty{ \frac{u^2}{8} (3\cos^2\theta+1) -\frac{R}{2} \vec{n} \cdot \dv{\vec{u}}{t} - \frac{u^2}{2} (3\cos^2\theta-1) } \\
+    &= p_0 + \frac{1}{8}\rho u^2 \bqty{ -3\cos^2\theta-1 + 4(3\cos^2\theta-1) } + \frac{1}{2}\rho R \vec{n} \cdot \dv{\vec{u}}{t} \\
+    &= p_0 + \frac{1}{8}\rho u^2 (9\cos^2\theta-5) + \frac{1}{2}\rho R \vec{n} \cdot \dv{\vec{u}}{t}  .
+\end{align*}
+
+
+\begin{details}
+【$\phi$を求めるところまで】
+
+実質的に同じだが，もう少し丁寧に$\phi$を求める方法を紹介する．
+$\vec{u}$の方向が時間によらないとき，流れは軸対称であるから，$\phi$は中心からの距離$r$と軸から測った偏角$\theta$だけの関数で，
+$\phi=F(r)G(\theta)$と変数分離できる．Laplace方程式は
+\[
+    \bqty{ \frac{1}{r^2} \pdv{r} \pqty{r^2\pdv{r}} + \frac{1}{r^2\sin\theta} \pdv{\theta} \pqty{\sin\theta\pdv{\theta}} } F(r)G(\theta) = 0 .
+\]
+両辺を$\dfrac{FG}{r^2}$で割って
+\[
+    \frac{1}{F} \dv{r} \pqty{r^2\dv{F}{r}} = -\frac{1}{G} \frac{1}{\sin\theta} \dv{\theta} \pqty{\sin\theta\dv{G}{\theta}} .
+\]
+左辺は$r$，右辺は$\theta$だけの関数だから，両辺は定数$\lambda$に等しい．
+\[
+    \dv{r} \pqty{r^2\dv{F}{r}} = \lambda F \mytag{1} 
+\]
+\[
+    \frac{1}{\sin\theta} \dv{\theta} \pqty{\sin\theta\dv{G}{\theta}} + \lambda G = 0 \mytag{2}
+\]
+\ajMaru{2}で$\lambda=n(n+1)$とする．また，$x=\cos\theta$と置換すると$\ddv{\theta}=-\sin\theta\ddv{x}$であるから
+\[
+    \dv{x} \bqty{ (1-x^2)\dv{G}{x} } + n(n+1) G = 0
+\]
+これはLegendreの微分方程式であり，基本解はLegendre関数$P_n(x), Q_n(x)$である（この時点では$n$が整数かどうかは不明）．
+まず$Q_n(x)$は，$n$の値によらず$x=\pm1$が特異点となるので除外する．
+また$P_n(x)$については，$n$が整数でないとき$x=-1$が特異点となるが，$n$が整数であれば特異点を持たないから，$n$は整数でなければならない．
+言い換えれば$P_n(x)$はLegendre多項式であり
+\[
+    G(\theta) \propto P_n(\cos\theta)
+\]
+となる（なお$P_n=P_{-(n+1)}$なので$n \ijou 0$としてよい）．
+
+次に\ajMaru{1}は
+\[
+    \dv{r} \pqty{r^2\dv{F}{r}} = n(n+1)F .
+\]
+$F$が$r$の冪だとすると両辺が整合するから，$F=r^k$とおいてみると
+\[
+    \text{（左辺）} =  \dv{r} \pqty{r^2 \cdot kr^{k-1}} = k(k+1)r^k
+\]
+となるから，
+\[
+    k(k+1) = n(n+1)
+    \qquad\yueni k = n, -(n+1).
+\]
+$r\to\infty$で発散する$r^n$を除外すれば$F(r) \propto \dfrac{1}{r^{n+1}}$となり，結局
+\[
+    \phi = \sum_{n=0}^{\infty} a_n \frac{1}{r^{n+1}} P_n(\cos\theta)
+\]
+を得る．
+
+境界条件は，$r=R$で$v_r = \dpdv{\phi}{r} = u\cos\theta$となることで
+\[
+    \sum_{n=0}^{\infty} \frac{-(n+1)a_n}{R^{n+2}} P_n(\cos\theta) = u \cos\theta
+\]
+Legendre多項式で$\cos\theta$の1次式が現れるのは$P_1(\cos\theta)=\cos\theta$のみであるから，
+$n\neq1$のとき$a_n=0$で，$n=1$のとき
+\[
+    \frac{-2a_1}{R^3} \cos\theta = u \cos\theta
+    \qquad\yueni a_1 = -\frac{R^3}{2} u .
+\]
+ゆえに
+\[
+    \phi = - \frac{R^3 u\cos\theta}{2r^2} .
+\]
+
+\end{details}
+
+
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題3 %%%%%%%%%%
+
+\begin{mondai}{}{}
+問題~\ref{mo:問題10.2（運動する球のまわりのポテンシャル流）}で，無限に長い円柱が軸と垂直な方向に運動する場合はどうか．
+\end{mondai}
+\begin{kaitou}
+要は，2次元で考えよということである．
+2次元では，$\dfrac{1}{r}$の座標微分だけでなく$\log r$もLaplace方程式の解となる．よって
+\[
+    \phi = A \log r+ A_i \pdv{x_i}(\log r)  + A_{ij} \pdv{}{x_i}{x_j} {(\log r)} + \cdots .
+\]
+問題~\ref{mo:問題10.2（運動する球のまわりのポテンシャル流）}と同様に，ベクトルが展開係数となっている第2項だけが残り
+\[
+    \phi = A_i \pdv{x_i}(\log r) = \vec{A} \cdot \Grad (\log r)
+\]
+となる．
+$\dpdv{x_i} \log\sqrt{x^2+y^2+z^2} = \dfrac{1}{2} \dfrac{2x_i}{x^2+y^2+z^2} = \frac{x_i}{r^2}$であるから
+\[
+    \phi = A_i \frac{x_i}{r^2} = \frac{\vec{A}\cdot\vec{r}}{r^2} = \frac{\vec{A}\cdot\vec{n}}{r}
+\]
+\begin{align*}
+    v_i &= \pdv{\phi}{x_i} = \pdv{x_i} \pqty{\frac{A_jx_j}{r^2}} \\
+    &= A_j \bqty{ \pdv{x_j}{x_i} \frac{1}{r^2} + x_j \pdv{x_i} \pqty{\frac{1}{r^2}}} \\
+    &= A_j \bqty{ \frac{\delta_{ij}}{r^2} + x_j \pqty{-2x_i \frac{1}{r^4}} } \\
+    &= \frac{A_i}{r^2} - 2\frac{x_iA_jx_j}{r^4} \\
+    &= \frac{A_i-2(A_jn_j)n_i}{r^2} \\
+    \v &= \frac{\vec{A}-2(\vec{A}\cdot\vec{n})\vec{n}}{r^2}
+\end{align*}
+境界条件$\v\cdot\vec{n} = \vec{u}\cdot\vec{n} \quad @\, r=R$より
+\[
+    \frac{\vec{A}\cdot\vec{n}-2(\vec{A}\cdot\vec{n})}{R^2} = \vec{u}\cdot\vec{n}
+    \qquad\yueni \vec{A} = - R^2 \vec{u} .
+\]
+よって
+\[
+    \phi= - \frac{R^2}{r}(\vec{u}\cdot\vec{n}), \quad
+    \v = \frac{R^2}{r^2} \bqty{ 2(\vec{u}\cdot\vec{n})\vec{n}-\vec{u} }
+\]
+を得る．
+
+圧力について
+\begin{align*}
+    \eval{\frac{1}{2}v^2}_{r=R} &= \frac{1}{2} \bqty{2(\vec{u}\cdot\vec{n})\vec{n}-\vec{u}}^2 \\
+    &= \frac{1}{2} \bqty{ 4(\vec{u}\cdot\vec{n})^2 -4(\vec{u}\cdot\vec{n})^2 +u^2 } = \frac{u^2}{2},
+\end{align*}
+\begin{align*}
+    \pdv{\phi}{t} &= \pdv{\phi}{\vec{u}} \cdot \dv{\vec{u}}{t} + \pdv{\phi}{\vec{r}} \cdot \dv{\vec{r}}{t} \\
+    &= -\frac{R^2}{r} \vec{n} \cdot \dv{\vec{u}}{t} - \vec{v} \cdot \vec{u} \\
+    \eval{\pdv{\phi}{t}}_{r=R} &= -R \vec{n} \cdot \dv{\vec{u}}{t} - \bqty{2(\vec{u}\cdot\vec{n})\vec{n}-\vec{u}} \cdot \vec{u} \\
+    &= -R \vec{n} \cdot \dv{\vec{u}}{t} - u^2 (2\cos^2\theta-1) .
+\end{align*}
+よって
+\begin{align*}
+    \eval{p}_{r=R} &= p_0 - \rho\bqty{ \frac{u^2}{2} - R \vec{n} \cdot \dv{\vec{u}}{t} - u^2(2\cos^2\theta-1) } \\
+    &= p_0 + \frac{1}{2}\rho u^2 \bqty{ -1 + 2(2\cos^2\theta-1) } + \rho R \vec{n} \cdot \dv{\vec{u}}{t} \\
+    &= p_0 + \frac{1}{2}\rho u^2 (4\cos^2\theta-3) + \rho R \vec{n} \cdot \dv{\vec{u}}{t}  .
+\end{align*}
+
+\end{kaitou}
+
+
+\begin{details}
+楕円体，楕円柱のまわりのポテンシャル流については，本文に載っている参考文献を参照のこと（前者は入手困難）．
+\end{details}
+
+%%%%%%%%%% 問題4 %%%%%%%%%%
+
+\begin{mondai}{}{}
+角速度$\Omega$で主軸のまわりを回転している楕円体がある．
+この中の非圧縮性流体のポテンシャル流と，流体の全角運動量を求めよ．
+\end{mondai}
+\begin{kaitou}
+主軸を$z$軸とする静止座標$(x,y,z)$で考える．
+楕円体上の任意の点$\vec{r}$における速度は
+\[
+    \vec{u} = \pmqty{0\\ 0\\ \Omega} \times \pmqty{x\\ y\\ z} = \pmqty{-\Omega y\\ \Omega x \\ 0} .
+\]
+さて，楕円体の方程式を
+\[
+    f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} -1  =0
+    \mytag{1}
+\]
+とすると，表面での（規格化されていない）法線ベクトルとして
+\[
+    \vec{n} = \frac{1}{2} \Grad f = \pmqty{ x/a^2 \\ y/b^2 \\ z/c^2 }
+\]
+がある．
+\begin{details}
+表面上の隣接する2点$(x,y,z)$と$(x+dx,y+dy,z+dz)$を考える．$f(x+dx,y+dy,z+dz)=0$と$f(x,y,z)=0$の辺々引いて，Taylor展開を用いると
+\[
+    0 \simeq \pdv{f}{x}dx + \pdv{f}{y}dy + \pdv{f}{z}dz = \Grad f \cdot d\vec{r}
+\]
+よって$\Grad f$は表面に垂直である．
+ここでは余計な係数2を除くために$1/2$倍してある．
+\end{details}
+\noindent
+よって境界条件は，\ajMaru{1}上で
+\[
+    \pdv{\phi}{n} = \vec{n} \cdot \Grad\phi = \vec{u} \cdot \vec{n}
+\]
+となることで
+\[
+    \frac{x}{a^2}\cdot\pdv{\phi}{x} + \frac{y}{b^2}\cdot\pdv{\phi}{y} + \frac{z}{c^2}\cdot\pdv{\phi}{z}
+    = -\Omega y \cdot \frac{x}{a^2} + \Omega x \cdot \frac{y}{b^2}
+    = \Omega xy \pqty{\frac{1}{b^2}-\frac{1}{a^2}} \quad \text{（on \ajMaru{1}）} .
+    \mytag{2}
+\]
+\ajMaru{2}を満たす，Laplace方程式の解を探そう．
+
+$\phi(x,y,z)=X(x)Y(y)Z(z)$と変数分離できると仮定する．$\Laplacian\phi=0$より
+\[
+    \frac{1}{X} \dv[2]{X}{x}  + \frac{1}{Y} \dv[2]{Y}{y} + \frac{1}{Z} \dv[2]{Z}{z} = 0.
+\]
+各項は$x$のみ，$y$のみ，$z$のみの関数であるから，各々は定数であり，
+\[
+    \begin{cases}
+        \dfrac{1}{X} \ddv[2]{X}{x} = {k_x}^2 \\[7pt]
+        \dfrac{1}{Y} \ddv[2]{Y}{y} = {k_y}^2 \\[7pt]
+        \dfrac{1}{Z} \ddv[2]{Z}{z} = {k_z}^2 \\
+    \end{cases}
+\]
+（ただし$k_x,k_y,k_z$は複素数で${k_x}^2+{k_y}^2+{k_z}^2=0$）とおける．
+
+$k_x,k_y,k_z\neq0$だとすると，$X \sim e^{\pm k_xx}$などとなるが，これを\ajMaru{2}へ代入すると成立しない（本当？）．
+よって$k_x=k_y=k_z=0$で，$X,Y,Z$はそれぞれ$x,y,z$の1次関数となる．
+さらに\ajMaru{2}の右辺には$x,y$しか含まれないから$\dpdv{\phi}{z}=0$つまり$Z$は定数であり
+\footnote{回転軸まわりの対称性から，$\phi$は$z$によらないと言った方がよいかもしれない．しかし，本当に$z$に依存しないと対称性だけから言い切れるか，少々不安ではある．}，
+\[
+    \phi = pxy + qx + ry
+\]
+とおける（定数は結果に影響しない）．
+これを\ajMaru{2}の左辺に代入し
+\[
+    \frac{x}{a^2} \pqty{py+q} + \frac{y}{b^2} \pqty{px+r} 
+    = pxy \frac{a^2+b^2}{a^2b^2} + \frac{qx}{a^2} + \frac{ry}{b^2} .
+\]
+これと$\Omega xy \pqty{\dfrac{1}{b^2}-\dfrac{1}{a^2}}$を等置すると$p=\dfrac{a^2-b^2}{a^2+b^2}\Omega,\; q=r=0$となり
+\[
+    \phi = \frac{a^2-b^2}{a^2+b^2}\Omega xy
+\]
+を得る．
+\begin{details}
+    実は\ajMaru{1}上だけでなく，楕円体内の至るところで$\v \cdot \vec{n} = \vec{u} \cdot \vec{n}$を満たしている．
+\end{details}
+\noindent
+このとき
+\[
+    v_x = \frac{a^2-b^2}{a^2+b^2}\Omega y, \; v_y = \frac{a^2-b^2}{a^2+b^2}\Omega x, \; v_z = 0 .
+    \mytag{3}
+\]
+容器内の流体の全角運動量は次式で与えられる（積分は$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2} \ika 1$全体にわたって行う）．
+\[
+    M = \rho \int (xv_y-yv_x)\dV = \rho \Omega \frac{a^2-b^2}{a^2+b^2} \int (x^2-y^2) \dV
+\]
+これを計算するために，まず変数変換$\dfrac{x}{a}=\xi, \; \dfrac{y}{b}=\eta, \; \dfrac{z}{c}=\zeta$により$(\xi,\eta,\zeta)$系に移り，
+次に$(\xi,\eta,\zeta)$系での球座標$(r,\theta,\varphi)$に移る：
+\[
+    \begin{cases}
+        \xi = r \sin\theta \cos\varphi \\
+        \eta = r \sin\theta \sin\varphi \\
+        \zeta = r \cos\theta  \\
+    \end{cases} .
+\]
+このとき
+\begin{align*}
+    \int_{x^2/a^2+y^2/b^2+z^2/c^2 \ika 1} dxdydz \, (x^2-y^2)
+    &= \int_{\xi^2+\eta^2+\zeta^2 \ika 1} abc \, d\xi d\eta d\zeta \, (a^2\xi^2-b^2\eta^2)\\
+    &= abc \int_0^1 dr \int_0^\pi d\theta \int_0^{2\pi} d\varphi \, r^2\sin\theta \cdot r^2\sin^2\theta(a^2\cos^2\varphi-b^2\sin^2\varphi) \\
+    &= abc \int_0^1 r^4 \, dr \int_0^\pi \sin^3\theta \, d\theta \int_0^{2\pi} (a^2\cos^2\varphi-b^2\sin^2\varphi) \, d\varphi \\
+    &= abc \cdot \frac{1}{5} \cdot \frac{4}{3} \cdot \pi(a^2-b^2).
+\end{align*}
+よって，$V=\dfrac{4}{3}abc$を楕円体の体積として
+\[
+    M = \frac{\rho V}{5} \Omega \frac{(a^2-b^2)^2}{a^2+b^2} .
+\]
+
+\ajMaru{3}は，静止座標に対する流体の速度を表している．
+ここから$\vec{\Omega}\times\vec{r}$を差し引くことで，容器に対する相対速度（ダッシュをつけて区別する）が得られる．
+\begin{align*}
+    v_x' &= \frac{a^2-b^2}{a^2+b^2} \Omega y - (-\Omega y) = \frac{2a^2}{a^2+b^2} \Omega y \\
+    v_y' &= \frac{a^2-b^2}{a^2+b^2} \Omega x - \Omega x = \frac{-2b^2}{a^2+b^2} \Omega x \\
+    v_z' &= 0 
+\end{align*}
+流体粒子の相対運動の軌跡は，$\ddv{x}{t}=v_x', \; \ddv{y}{t}=v_y'$を積分し
+\[
+    \frac{x^2}{a^2} + \frac{y^2}{b^2} = \const
+\]
+である．
+\begin{details}
+\nazenara
+両辺を$t$で微分すると
+\begin{align*}
+    \dv{t} \pqty{\frac{x^2}{a^2} + \frac{y^2}{b^2}} &= \frac{2x}{a^2} \dv{x}{t} + \frac{2y}{b^2} \dv{y}{t} \\
+    &= \frac{2x}{a^2} \cdot \frac{2a^2}{a^2+b^2} \Omega y + \frac{2y}{b^2} \cdot \frac{-2b^2}{a^2+b^2} \Omega x = 0.
+\end{align*}
+\end{details}
+\noindent
+つまり，回転軸に垂直な面内を，断面と相似な楕円を描きながら運動する．
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題5 %%%%%%%%%%
+
+\begin{mondai}{}{問題10.5（よどみ点付近のポテンシャル流）}
+よどみ点付近のポテンシャル流を求めよ．
+\end{mondai}
+\begin{kaitou}
+よどみ点のごく近傍では，物体の表面は平面とみなせる．これを$xy$平面にとる．
+$x,y,z$が微小として，$\phi$をこれらの2次まで展開すれば
+\[
+   \phi = ax+by+cz + Ax^2+By^2+Cz^2 + Dxy+Eyz+Fzx .
+\]
+係数をLaplace方程式と境界条件から決める．
+$\Laplacian\phi=0$より
+\[
+    2(A+B+C)=0
+    \qquad\yueni C = -(A+B) .
+\]
+$z=0$で$\dpdv{\phi}{z}=0$より
+\[
+    (c+2Cz+Ey+Fx)_{z=0} = 0.
+\]
+これが任意の$x,y$について成り立つから
+\[
+    c=0, E=F=0.
+\]
+よどみ点$x=y=z=0$では$\dpdv{\phi}{x}=\dpdv{\phi}{y}=0$も成り立つから
+\[
+    \begin{cases}
+        (a+2Ax+Dy+Fz)_{x=y=z=0} = 0 \\
+        (b+2By+Dx+Ez)_{x=y=z=0} = 0 \\
+    \end{cases}
+    \qquad\yueni a=b=0 .
+\]
+さらに，$Dxy$の項は$x,y$軸を適当に回転することで消すことができるから，結局
+\[
+    \phi = Ax^2 + By^2 -(A+B)z^2 .
+\]
+ここでは，次の2つの場合を考える．
+
+
+\noindent
+【流れが$z$軸について軸対称の場合】
+
+$A=B$であるから$\phi=A(x^2+y^2-2z^2)$となる．速度は
+\[
+    v_x = 2Ax, \; v_y = 2Ay, \; v_z = -4Az.
+\]
+流線を\eqref{eq5.2:流線の方程式}から求めよう．
+\[
+    \frac{dx}{2Ax} = \frac{dz}{-4Az} , \;
+    \frac{dy}{2Ay} = \frac{dz}{-4Az}  
+\]
+第1式から
+\[
+    \frac{2dx}{x} + \frac{dz}{z} = 0
+    \qquad\yueni x^2z = c_1
+\]
+第2式も同様に
+\[
+    y^2z = c_2
+\]
+これは3次の双曲線である（らしい）．
+
+
+\noindent
+【流れが$y$方向に一様の場合】
+
+$\phi$は$y$に依存しないから$B=0$で，$\phi=A(x^2-z^2)$となる．速度は
+\[
+    v_x = 2Ax, \; v_y = 0, \; v_z = -2Az.
+\]
+流線の方程式は
+\[
+    \frac{dx}{2Ax} = \frac{dz}{-2Az}
+\]
+\[
+    \frac{dx}{x} + \frac{dz}{z} = 0
+    \qquad\yueni xz = \const
+\]
+
+
+
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題6 %%%%%%%%%%
+
+\begin{mondai}{}{問題10.6（角付近のポテンシャル流）}
+互いに交わる平面が作る角（かど）近傍のポテンシャル流を求めよ．
+\end{mondai}
+\begin{kaitou}
+流れは，二平面に垂直な面内の二次元流となる．
+交線を原点とする極座標$(r,\theta)$を取り（$\theta$はどちらか一方の面から測る），二平面のなす角を$\alpha$とする
+（$0<\alpha<\pi$は角の「内側」，$\pi<\alpha<2\pi$は角の「外側」の流れを表す）．
+境界条件を満たす正則関数は
+\[
+    w = Az^n = Ar^n (\cos n\theta + i \sin n\theta) \quad \pqty{n=\frac{\pi}{\alpha}} ,
+\]
+すなわち
+\[
+    \begin{cases}
+        \phi = Ar^n \cos n\theta \\
+        \psi = Ar^n \sin n\theta \\        
+    \end{cases}, 
+\]
+\[
+    \begin{cases}
+        v_r = \dpdv{\phi}{r} = nAr^{n-1} \cos n\theta \\[7pt]
+        v_\theta = \dfrac{1}{r}\dpdv{\phi}{\theta} = -nAr^{n-1} \sin n\theta \\
+    \end{cases}
+\]
+である．
+実際，$\theta=0,\alpha$で$\sin n\theta=0$つまり$v_\theta=0, \; \psi=0$であるから，二平面に垂直な流れはなく流線となっていることがわかる
+（もちろん，$z^n$の他に$z^{2n}, z^{3n}, \ldots$も解となるが，$r$が小さい
+\footnote{これは平面が無限に続くと仮定することと同じである．}
+と仮定すれば，最も小さな冪だけを取ればよい．）．
+
+原点$r=0$での，動径方向の速度$v_r$を求めよう．
+$n>1$つまり角の内側の流れの場合，
+\[
+    v_r = nAr^{n-1} \cos n\theta \to 0 \; (r\to 0)
+\]
+となるから，原点はよどみ点である．
+一方，$n<1$つまり角の外側の流れの場合，
+\[
+    v_r = nAr^{-(1-n)} \cos n\theta \to \infty \; (r\to 0)
+\]
+で発散する．この矛盾は液体の圧縮性や粘性を無視したため生じるもので，実際には原点で「はがれ」が生じ，渦が発生する．
+あるいは高速気流の場合，原点で密度が急激に低下し，非圧縮の仮定が破れてしまう（膨張波が出現する）．
+
+\end{kaitou}
+
+
+\begin{details}
+\spade
+境界面が無限に続くと仮定すると，問題~\ref{mo:問題10.5（よどみ点付近のポテンシャル流）}，\ref{mo:問題10.6（角付近のポテンシャル流）}の解は「縮退」する．
+つまり，解の定数$A,B$は未定のまま残る．
+実際の流れでは物体の大きさが有限であるため，$A,B$は一意に定まる．
+\end{details}
+
+
+
+%%%%%%%%%% 問題7 %%%%%%%%%%
+
+\begin{mondai}{}{問題10.7（流体が穴を埋める時間）}
+無限に広い領域を占める非圧縮性流体中に，半径$a$の球状の穴が開いた．
+この穴を流体が埋めるのにかかる時間を求めよ（Besant 1859, Rayleigh 1917）．
+\end{mondai}
+\begin{kaitou}
+穴が開いたあとの流れは中心へ向かい，かつ球対称であるから，非ゼロの速度成分は$v_r \equiv v\;(<0)$のみであり，球座標系でのEuler方程式は
+\[
+    \pdv{v}{t} + v\pdv{v}{r} = -\frac{1}{\rho} \pdv{p}{r} .
+    \mytag{1}
+\]
+連続の式（質量保存則）は，ある時刻$t$から$t+\D t$までの間に半径$r$の球面を通って内側に流れ込む流体の体積が半径によらず時間だけの関数となることで
+\[
+    4\pi r^2 v \D t = \,\text{（時間だけの関数）}
+    \qquad\yueni r^2v = F(t) .
+    \mytag{2}
+\]
+\begin{details}
+【以降の方針】
+
+ある瞬間の穴の半径を$R(t) \; (\ika a)$，その時間変化率を$V(t) \equiv \ddv{R}{t} \; (<0)$とすると，穴が消滅するまでの時間は
+\[
+    \int \, dt = \int_{R=a}^{R=0} \pqty{\dv{R}{t}}^{-1} \, dR
+\]
+で計算できる．
+したがって，\ajMaru{1}\ajMaru{2}を積分して$V(t) = \ddv{R}{t}$を$R$だけの関数として表せばよい．
+\end{details}
+
+\ajMaru{2}を$v=\dfrac{F(t)}{r^2}$と書いて，\ajMaru{1}の左辺第1項に代入する．
+\[
+    \frac{1}{r^2} \dv{F}{t} + v\pdv{v}{r} = -\frac{1}{\rho} \pdv{p}{r}
+\]
+$r \to \infty$では$v=0$かつ$p= p_0$，$r=R$では$v=V$かつ$p=0$であることに注意して$R \ika r < \infty$で積分すると
+\[
+    \bqty{ -\frac{1}{r} \dv{F}{t} }_{r=R}^{r=\infty} + \bqty{ \frac{1}{2} v^2 }_{r=R}^{r=\infty}
+    = \bqty{ -\frac{1}{\rho} p }_{r=R}^{r=\infty} ,
+\]
+\[
+    \frac{1}{R} \dv{F}{t} - \frac{1}{2} V^2 = -\frac{p_0}{\rho} .
+    \mytag{3}
+\]
+最終的に$R,V$だけの式を得たいので，$F$を消去する．
+穴の表面を考えると，\ajMaru{2}は$F(t)=R^2(t)V(t)$となるから，\ajMaru{3}は
+\[
+    \frac{1}{R} \pqty{ 2R \dv{R}{t} V + R^2 \dv{V}{t} } - \frac{1}{2} V^2 = -\frac{p_0}{\rho} .
+\]
+$V = \ddv{R}{t}$，$\dfrac{R}{2} \ddv{V^2}{R} = \dfrac{R}{2} 2V \ddv{V}{R} = RV \dfrac{dV/dt}{dR/dt} = R \ddv{V}{t}$に注意すると
+\[
+    \frac{3}{2}V^2 + \frac{1}{2} R \dv{V^2}{R} = -\frac{p_0}{\rho} ,
+    \mytag{4}
+\]
+\[
+    V^2 + \frac{1}{3}R \dv{V^2}{R} = - \frac{2p_0}{3\rho}
+\]
+これは$V^2$に関する非斉次の微分方程式であり，斉次解$V^2=\dfrac{C}{R^3}$と特解$V^2 = - \dfrac{2p_0}{3\rho}$を重ね合わせて
+\[
+    V^2(R) = \frac{C}{R^3} - \frac{2p_0}{3\rho}
+\]
+を得る．
+$R=a$のとき$V(R)=0$であるから$C=\dfrac{2p_0}{3\rho}a^3$となり
+\[
+    V(R) = - \sqrt{ \frac{2p_0}{3\rho} \pqty{ \frac{a^3}{R^3} -1 } } \; \pqty{ = \dv{R}{t} } .
+\]
+よって穴が満たされるまでの時間は
+\[
+    \tau = \int_a^0 \pqty{\dv{R}{t}}^{-1} \, dR 
+    = \sqrt{\frac{3\rho}{2p_0}} \int_0^a \frac{dR}{ \sqrt{(a/R)^3-1} } 
+\]
+で与えられる．
+$\pqty{\dfrac{R}{a}}^3 = x$とおくと$R=ax^{1/3}, \; dR = \dfrac{1}{3} a x^{-2/3}\, dx$であるから
+\begin{align*}
+    \int_0^a \frac{dR}{ \sqrt{(a/R)^3-1} } &= \frac{a}{3} \int_0^1 \sqrt{\frac{x}{1-x}} x^{-2/3} \, dx \\
+    &= \frac{a}{3} \int_0^1 x^{-1/6} (1-x)^{-1/2} \, dx \\
+    & \gyoukan{ベータ関数$\displaystyle B(p,q)\equiv\int_0^1 x^{p-1} (1-x)^{q-1} \, dx=\dfrac{\varGamma(p)\varGamma(q)}{\varGamma(p+q)}$を用いると} \\
+    &= \frac{a}{3} B \pqty{\frac{5}{6}, \frac{1}{2}} = \frac{a}{3} \frac{\varGamma(5/6)\varGamma(1/2)}{\varGamma(4/3)} \\
+    & \gyoukan{$\varGamma(4/3)=\varGamma(1/3)/3, \; \varGamma(1/2)=\sqrt{\pi}$であるから} \\
+    &= \frac{a}{3} \frac{ \varGamma(5/6)\sqrt{\pi} }{\varGamma(1/3)/3} = a\sqrt{\pi} \frac{\varGamma(5/6)}{\varGamma(1/3)} .
+\end{align*}
+ゆえに
+\[
+    \tau = \frac{\varGamma(5/6)}{\varGamma(1/3)} a \sqrt{\frac{3\pi\rho}{2p_0}}
+    \simeq 0.915 a \sqrt{\frac{\rho}{p_0}}
+\]
+を得る．
+
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題8 %%%%%%%%%%
+
+\begin{mondai}{}{}
+非圧縮性流体中を球が半径$R=R(t)$で膨張するとき，球表面での圧力$P(t)$を求めよ．
+\end{mondai}
+\begin{kaitou}
+$R(t)$が与えられた関数であることと，$r=R$での圧力が$P(t)$であること以外は問題~\ref{mo:問題10.7（流体が穴を埋める時間）}と同じである．
+\ajMaru{3}は
+\[
+    \frac{1}{R} \dv{F}{t} - \frac{1}{2} V^2 = \frac{P(t)-p_0}{\rho} , 
+\]
+\ajMaru{4}は
+\[
+    \frac{P(t)-p_0}{\rho} = \frac{3}{2} V^2 + R\dv{V}{t} .
+\]
+ここで
+\[
+    \dv[2]{(R^2)}{t} = \dv{t} \pqty{ 2R\dv{R}{t} } = 2 \pqty{\dv{R}{t}}^2 + 2R \dv[2]{R}{t}
+    = 2 \pqty{\dv{R}{t}}^2 + 2R \dv{V}{t}
+\]
+であるから
+\[
+    \frac{3}{2} V^2 + R\dv{V}{t}
+    = \frac{3}{2} \pqty{\dv{R}{t}}^2 + \frac{1}{2}\dv[2]{(R^2)}{t} - \pqty{\dv{R}{t}}^2
+    = \frac{1}{2} \bqty{ \pqty{\dv{R}{t}}^2 + \dv[2]{(R^2)}{t} }
+    .
+\]
+よって
+\[
+    P(t) = p_0 + \frac{\rho}{2} \bqty{ \pqty{\dv{R}{t}}^2 + \dv[2]{(R^2)}{t} } .
+\]
+
+
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題9 %%%%%%%%%%
+
+\begin{mondai}{}{問題10.9（ジェットの形）}
+無限に長い平面壁に開いたスリットから流れ出るジェットの形を求めよ．
+\end{mondai}
+\begin{kaitou}
+固定された平面壁と自由流線で囲まれた2次元流の理論（不連続流の理論）は，
+Helmholtzが創始し，KirchhoffやRayleighが発展させた歴史あるものだが，Landauの記述はかなりあっさりしていて，初見では分かりづらいかもしれない．
+ここでは，説明の詳しいLamb（\S~73〜）を参考にしながら，丁寧な解説を試みる
+（混乱を避けるため，ノーテーションはLandauに従う）
+\footnote{
+不連続流の理論は今井の第7章や巽の8--8でも解説されているが，
+Helmholtz以来の伝統的な解法（後述のSchwarz-Christoffel変換）を使っていないので，残念ながらLandauの行間を埋めるのには役立たない．
+}
+．
+
+\S~\ref{sec:10}本文で述べられているように，非圧縮性流体の2次元ポテンシャル流の問題は，与えられた境界条件を満たす正則関数$w(z)$を見つけることに帰着する．
+物体まわりの流れの場合，境界の形状は既知である．
+ところが流体が自由流線を持つ場合，その形自体が未定のため，境界条件を満たす$w(z)$を見つけるのは難しそうに思える．
+しかし，$z$平面（物理面）では未定でも，別の複素平面（速度面やそれに類する面）では自由流線の形がわかっているものとして解き進めることができるのである．
+そして問題は，これらの平面同士の関係（つまりこれらを結びつける等角写像）を求めることに帰着する．
+
+% 図1：z平面
+
+
+前置きはこのくらいにして，まずは問題を解くための座標を設定しよう．
+図1のように，$z\,(=x+iy)$平面上の$x$軸に壁があり，$-\dfrac{a}{2} \ika  x \ika \dfrac{a}{2}$がスリットになっているとする．
+流体は$y \ijou 0$の部分を占めており，スリットを通って$y \ika 0$の方へ流れ出ていく．
+$y \to \infty$や$x$軸上の$x\to\pm\infty$の点では流体は静止しており，そこでの圧力を$p_0$とする．
+自由流線BC，$\mathrm{B'C'}$上では$p=0$であり，速度は（Bernoulliの定理より）一定値$v_1 = \sqrt{\dfrac{2p_0}{\rho}}$をとる．
+なお，壁AB，$\mathrm{A'B'}$も流線であり，スリットから出てBC，$\mathrm{B'C'}$と繋がっている．
+また，$y\to-\infty$でのジェットの幅を$a_1$をすると，スリットから単位時間に流れ出る質量は$Q=\rho a_1v_1$と書ける．
+
+
+さて，複素速度$\ddv{w}{z}=v e^{-i\theta}$の逆数を適当に無次元化した
+\footnote{ここでは$y\to-\infty$での複素速度$v_1 e^{i\pi/2}$を用いて無次元化したが，問題に応じて適切なものを選ぶことになる．}
+，次の変数を考えよう．
+\[
+    \eta = \frac{v_1 e^{i\pi/2}}{dw/dz} = \frac{v_1}{v} e^{i(\theta+\pi/2)}
+\]
+\begin{details}
+なお，後の都合で偏角の範囲を$-\pi \ika \theta \ika \pi$に制限する．   
+\end{details}
+\noindent
+流体は，自由流線または直線壁に囲まれている．
+自由流線上は$v=v_1$（一定）で$\theta$が変化するから，$\eta$平面では半径1の円弧に対応し，
+直線壁上は$\theta$一定で$v$が変わるから，$\eta$平面では円弧から外に伸びる放射状の直線に対応する．
+よって$z$平面（物理面）で流体が囲んでいた領域は，$\eta$平面では円弧と放射状の直線で囲まれた領域に移る（もはや境界の形は未定ではない！）．
+
+この問題の場合，
+\begin{itemize}
+    \item ABは$\theta=-\pi, \; v:0\to v_1$．BCは$v=v_1, \; \theta:-\pi\to-\dfrac{\pi}{2}$．
+    \item $\mathrm{A'B'}$は$\theta=0, \; v:0\to v_1$．$\mathrm{B'C'}$は$v=v_1, \; \theta:0\to-\dfrac{\pi}{2}$．
+\end{itemize}
+であるから，$\eta$平面の様子は図2のようになる．
+
+% 図2：η平面
+
+これで境界の形が扱いやすくなったが，さらに簡単な形にするために，別の平面へ移る．
+\[
+    \zeta \equiv \log\eta = \log(\frac{v_1}{v}) + i \pqty{\theta+\frac{\pi}{2}}
+    \mytag{1}
+\]
+とおくと，
+$\eta$平面の円弧$v=v_1$は$\zeta$平面の虚軸の一部に，
+$\eta$平面の放射状の直線$\theta=\const$は$\zeta$平面の実軸に平行な直線の一部になる．
+よって流体が囲む領域は，$\zeta$平面では図3のような無限に長い矩形領域となる．
+
+% 図3：ζ平面
+
+$\eta,\zeta$平面のことは一度忘れ，次は$w\,(=\phi+i\psi)$平面について考える．
+自由流線も直線壁も$\psi=\const$という流線の一部であるから，$w$平面では実軸に平行な直線となる．
+$\phi,\psi$の決め方には任意性があるが，ふつうは後の計算が楽になるよう決める．
+この問題では，流体は2つの流線ABC，$\mathrm{A'B'C'}$に囲まれている．
+ABCを$\psi=0$に対応させることにすると，$\mathrm{A'B'C'}$は$\psi=-\dfrac{Q}{\rho}$に対応する（\eqref{eq10.11:質量フラックスと流線関数の関係}参照）．
+一方ポテンシャル$\phi$は，Aと$\mathrm{A'}$での$\phi\to-\infty$からCと$\mathrm{C'}$での$\phi\to\infty$まで任意の値をとる．
+後の都合上，Bと$\mathrm{B'}$を$\phi=0$に対応づけると，$w$平面で流体が囲む領域は領域は図４のような幅$Q/\rho$の無限に長い帯状領域になる．
+
+
+% 図4：w平面
+
+
+もし，$w$平面の領域と$\zeta$平面の領域の関係が分かれば，$w$と$\ddv{w}{z}$の関係式が得られ，ジェットの形を求めることができる．
+この関係を明らかにするために，\emph{Schwarz-Christoffel変換}（以下SC変換）を用いる．
+SC変換は，ある複素平面（$u$平面とする）の上半面を別の平面（$Z$平面とする）上の多角形で囲まれた領域に移す変換であるから，
+\begin{itemize}
+    \item $u$平面の上半面と$\zeta$平面の矩形領域を結びつける変換
+    \item $u$平面の上半面と$w$平面の帯状領域を結びつける変換
+\end{itemize}
+をSC変換によって作成すればよいことがわかる．
+
+
+以下，SC変換について説明する．
+$Z$と$u$を，次の式で結ばれた複素変数とする．
+\[
+    \dv{Z}{u} = A (u-a)^{\alpha/\pi-1} (u-b)^{\beta/\pi-1} (u-c)^{\gamma/\pi-1} \cdots
+\]
+ただし$a<b<c\cdots$は実数，つまり$u$平面の実軸上に左から順に並んでいるとし，$\alpha,\beta,\gamma,\ldots$も実数とする．
+このとき，$u$の上半面が$Z$平面の多角形に移る．
+これを直感的に説明すると次のようになる
+\footnote{
+日本語の文献では，
+スミルノフ高等数学教程\ajKakko{6}［3巻2部第1分冊］
+に詳しい説明がある．
+}．
+$u$の実軸上を，$-\infty$から$\infty$に向かって進んでいく．
+点$a$を左から右にまたぐとき，$u-a$の符号が変わる．
+複素数的に言えば$u-a$に$e^{-i\pi}$がかかり，$\ddv{Z}{u}$には$e^{i(\pi-\alpha)}$がかかる．
+$\ddv{Z}{u}$を，$du$を$dZ$に変換する操作とみなせば，$a$をまたいだことで，$Z$平面上の$a$に対応する点のところで，進行方向が$\pi-\alpha$だけ変わることになる．
+よって，$u$の実軸上で$a,b,c,\ldots$を順にまたぎながら進んでいくことで，$Z$平面では内角$\alpha,\beta,\gamma,\ldots$の多角形が描かれる．
+
+
+% SC変換の図
+
+
+さて問題に戻って，$u$の上半面と$\zeta$平面の矩形領域を結びつけよう．
+
+
+% 図？
+
+矩形領域は，$\mathrm{A'} \to \mathrm{B'} \to \mathrm{C'} = \mathrm{C} \to \mathrm{B} \to \mathrm{A}$のように囲まれているから，
+$u$の実軸上でもこの順で配置すればよいだろう．
+ここでは，$\mathrm{A'}$を$u$平面の$-\infty$，$\mathrm{B'}$を$-1$，$\mathrm{C'} = \mathrm{C}$を0，Bを$+1$，Aを$+\infty$に対応させる．
+矩形領域の頂点は$\mathrm{B',B}$であるから，SC変換の式で$a=-1, \; b=1, \; \alpha=\beta=\dfrac{\pi}{2}$とおいて
+\[
+    \dv{\zeta}{u} = \frac{A}{\sqrt{u^2-1}} \qq{または$A$をとり直して}
+    \dv{\zeta}{u} = \frac{A}{\sqrt{1-u^2}} .
+\]
+どちらでも結果は同じなので，ここでは後者を採用すると
+\[
+    \zeta = A \sin^{-1}(u) + B
+\]
+となる．
+定数$A,B$を決めるには，点$\mathrm{B',B}$の対応関係を用いればよい．
+$u=-1$と$\zeta=i\dfrac{\pi}{2}$，$u=1$と$\zeta=-i\dfrac{\pi}{2}$が対応しているから
+\[
+    \begin{cases}
+        i\dfrac{\pi}{2} = A\pqty{-\dfrac{\pi}{2}} + B \\[7pt]
+        -i\dfrac{\pi}{2} = A \cdot \dfrac{\pi}{2} + B \\
+    \end{cases}
+    \qquad\yueni
+    \begin{cases}
+        A = -i \\ B = 0 \\
+    \end{cases}
+\]
+となり
+\footnote{多価性をなくすため，ここでは$u$の偏角を$-\pi \ika \arg(u) \ika \pi$に制限した．}，
+$\zeta = -i\sin^{-1}(u)$つまり
+\[
+    u = \sin(i\zeta)
+    \mytag{2}
+\]
+を得る．
+
+\begin{details}
+本当に矩形領域を上半面に移しているか確かめてみよう．$\zeta=\zeta_r+i\zeta_i$とおくと
+\begin{align*}
+    u &= \sin(-\zeta_i+i\zeta_r) \\
+    &= \sin(-\zeta_i)\cos(i\zeta_r) + \cos(-\zeta_i)\sin(i\zeta_r) \\
+    &= -\sin(\zeta_i)\cosh(\zeta_r) + i\cos(\zeta_i)\sinh(\zeta_r) .
+\end{align*}
+$\zeta_r \ijou 0, -\dfrac{\pi}{2} \ika \zeta_i \ika \dfrac{\pi}{2}$のとき，確かに$\Im(u)\ijou 0$である．
+\end{details}
+
+
+
+次に，$u$の上半面と$w$平面の帯状領域を結びつけよう．
+Landauでは天下り的に結果が示されているが，Lambによればこの写像もSC変換から導くことができるので，辿ってみる．
+
+
+% 図？
+
+帯状領域を，頂点$\mathrm{C,C'}$が無限遠にある多角形とみなす．
+すると，SC変換の式で$a=b=0, \; \alpha=\beta=\dfrac{\pi}{2}$とおいて
+\[
+    \dv{w}{u} = \frac{A}{u}
+    \qquad\yueni w = A \log(u) + B .
+\]
+定数$A,B$を決めるため，やはり点$\mathrm{B',B}$の対応関係に着目する．
+$u=-1$と$w = -\dfrac{iQ}{\rho}$，$u=1$と$w=0$が対応しているから
+（やはり$u$の偏角を$-\pi \ika \arg(u) \ika \pi$に制限すれば）
+\[
+    \begin{cases}
+        -\dfrac{iQ}{\rho} = A \cdot i\pi + B \\
+        0 = 0 + B \\
+    \end{cases}
+    \yueni
+    \begin{cases}
+        A = -\dfrac{Q}{\rho\pi} \\ B = 0 \\
+    \end{cases}
+    .
+\]
+よって
+\[
+    w = -\frac{Q}{\rho\pi} \log(u)
+    \mytag{3}
+\]
+を得る．
+
+\begin{details}
+本当に上半面を帯状領域に移しているか確かめてみよう．
+\[
+    w = -\frac{Q}{\rho\pi} \bqty{ \log|u| + i \cdot \arg(u) }
+\]
+$u$の上半面は$0\ika|u|<\infty, \; 0 \ika \arg(u) \ika \pi$で表されるから，
+$-\infty<\phi<\phi, \; -\dfrac{Q}{\rho} \ika \psi \ika 0$となる．
+点$\mathrm{A,A',C,C'}$が対応づけられていることも容易にわかる．
+\end{details}
+
+\ajMaru{1}\ajMaru{2}\ajMaru{3}より$w$と$\ddv{w}{z}$の関係式が得られたので，ジェットの形すなわち曲線BCの式を（パラメータ表示で）求めることができる．
+BC上では$v=v_1, \; -\pi \ika \theta < -\dfrac{\pi}{2}$であるから
+\[
+    \zeta = i\pqty{\theta+\frac{\pi}{2}},
+\]
+\[
+    u = \sin(i\zeta) = \sin\bqty{-\pqty{\theta+\frac{\pi}{2}}} = -\cos\theta \quad (1 \ijou u > 0)
+\]
+である．またBC上では$\psi=0$であるから
+\[
+    \phi = w = -\frac{Q}{\rho\pi} \log(-\cos\theta) \quad (0 \ika \phi < \infty) .
+\]
+$Q = \rho a_1v_1$に注意すると
+\[
+    d\phi = -\frac{Q}{\rho\pi} \frac{\sin\theta}{-\cos\theta} \, d\theta
+    = \frac{a_1v_1}{\pi} \tan\theta \, d\theta .
+    \mytag{4}
+\]
+一方BC上では
+\[
+    \dv{w}{z} = v_1 e^{-i\theta}
+    \qquad\yueni d\phi = v_1 e^{-i\theta} \, dz .
+    \mytag{5}
+\]
+\ajMaru{4}\ajMaru{5}を比べて
+\[
+  dz = \frac{d\phi}{v_1 e^{-i\theta}} = \frac{a_1}{\pi} e^{i\theta} \tan\theta \, d\theta ,
+\]
+\[
+  dx+idy = \frac{a_1}{\pi} (\cos\theta + i\sin\theta) \tan\theta \, d\theta ,
+\]
+\[
+    \yueni
+    \begin{cases}
+        dx = \dfrac{a_1}{\pi} \sin\theta \, d\theta \\[8pt]
+        dy = \dfrac{a_1}{\pi} \sin\theta \tan\theta \, d\theta \\
+    \end{cases}
+    .
+\]
+$\theta=-\pi$（点B）から，BC上の任意の$\theta$の点まで積分する．
+$\theta=-\pi$では$x=\dfrac{a}{2}, \; y=0$であるから
+\[
+    \begin{cases}
+        \displaystyle x - \frac{a}{2} = \frac{a_1}{\pi} \int_{-\pi}^{\theta} \sin\theta \, d\theta \\[8pt]
+        \displaystyle y - 0 = \frac{a_1}{\pi} \int_{-\pi}^{\theta} \sin\theta \tan\theta \, d\theta \\
+    \end{cases}
+    .
+\]
+第1式より$x = \dfrac{a}{2} - \dfrac{a_1}{\pi}(1+\cos\theta)$となるが，特に点C$\pqty{\theta=-\dfrac{\pi}{2}}$では$x = \dfrac{a_1}{2}$であることから
+\[
+    \frac{a_1}{2} = \frac{a}{2} - \frac{a_1}{\pi}
+    \qquad\yueni a_1 = \frac{\pi}{\pi+2} a .
+\]
+よって
+\[
+    x = \frac{a}{2} - \frac{a}{\pi+2}(1+\cos\theta)
+    = \frac{a}{\pi+2} \pqty{ \frac{\pi+2}{2} -1-\cos\theta }
+    = \frac{a}{\pi+2} \pqty{ \frac{\pi}{2} - \cos\theta } .
+    \mytag{6}
+\]
+一方$y$の方は，$t= \tan\dfrac{\theta}{2}$とおくと
+$\sin\theta = \dfrac{2t}{1+t^2}, \; \tan\theta = \dfrac{2t}{1-t^2}, \; d\theta = \dfrac{2dt}{1+t^2}$であるから
+\begin{align*}
+    \int \sin\theta \tan\theta \, d\theta &= \int \frac{8t^2}{(1+t^2)^2(1-t^2)} \, dt \\
+    &= \int \bqty{ \frac{-2(1-t^2)}{(1+t^2)^2} + \frac{2}{1-t^2} } dt \\
+    &= \int \bqty{ -\pqty{\frac{2t}{1+t^2}}' + \frac{1}{1+t} + \frac{1}{1-t} } dt \\
+    &= -\frac{2t}{1+t^2} + \log|1+t| - \log|1-t| \\
+    &= -\sin\theta + \log\vqty{ \frac{1+t}{1-t} } .
+\end{align*}
+$-\pi \ika \theta < -\dfrac{\pi}{2}$では$t<-1$であるから
+\[
+    y = \frac{a_1}{\pi} \pqty{ -\sin\theta + \log \frac{t+1}{t-1} } 
+    = \frac{a}{\pi+2} \pqty{ -\sin\theta + \log \frac{\tan\frac{\theta}{2}+1}{\tan\frac{\theta}{2}-1} } . \mytag{7}
+\]
+\ajMaru{6}\ajMaru{7}が自由流線BCの形を与える$\pqty{-\pi \ika \theta < -\dfrac{\pi}{2}}$．
+特に，ジェットのすぼまり方を表す縮脈係数は
+\[
+    \frac{a_1}{a} = \frac{\pi}{\pi+2} \simeq 0.611 .
+\]
+
+
+\end{kaitou}
+
+
+
+
+\BackToTheToc

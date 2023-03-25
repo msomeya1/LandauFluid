@@ -1,0 +1,84 @@
+\section{対流が起こらない条件}\label{sec:4}
+流体は，熱力学的には平衡でなくても，力学的には平衡（マクロな運動がない）でありうる（例えば\eqref{eq3.1:静水圧平衡}は，温度が一様でなくても成立する力学的平衡の条件である）．
+このような平衡は，ある特定の条件下でのみ安定である．
+不安定の場合，流体中の温度を一様にするような流れ（\emph{対流}）が生じる．
+よって，安定の条件は対流がないことであり，以下のように定式化される．
+\begin{details}
+回りくどい言い方だが，対偶論法を使っていると思えばよい．
+つまり，「不安定$\implies$対流がある」の対偶を取ると「対流がない$\implies$安定」となるから，
+安定の条件は対流がないことだ，というわけである．
+\end{details}
+
+
+高さ$z$にある，比体積$V(p,s)$の流体部分を考える（$p,s$は高さ$z$における平衡状態での圧力とエントロピー）．
+この流体が断熱的に$\zeta$だけ上昇し，比体積が$V(p',s)$になったとする（$p'$は高さ$z+\zeta$での圧力）．
+平衡が安定であるためには，元の位置へ戻そうとす力が働かなければならない．
+\begin{details}
+これは必要条件だが十分条件とは限らない，というが，その意味が今ひとつわからない．
+中立安定のように，平衡点へ収束はしないがその周りに留まり続ける例があるため，「復元力が働く$\implies$安定」とは限らない，ということだろうか？
+\end{details}
+\noindent
+つまり，変位した流体が，そこに元からあった流体よりも重い（比体積で比べると小さい）から
+\[
+    V(p',s') > V(p',s)
+\]
+でなければならない（$s'$は高さ$z+\zeta$における平衡状態でのエントロピー）．
+$\D s \equiv s'-s \simeq \ddv{s}{z}\zeta$とおくと
+\[
+    V(p',s') - V(p',s) = V(p', s+\D s) - V(p',s) \simeq \PDV{V}{s}{p} \D s = \PDV{V}{s}{p} \dv{s}{z}\zeta
+\]
+であるから
+\begin{equation}\label{eq4.1:対流がないときのエントロピー勾配の条件1}
+    \PDV{V}{s}{p} \dv{s}{z} > 0.
+\end{equation}
+熱力学の公式
+\[
+    \PDV{V}{s}{p} = \frac{T}{c_p} \PDV{V}{T}{p}
+\]
+を用いると
+\begin{details}
+Gibbsの自由エネルギー，エンタルピーの全微分から導かれるMaxwell関係式
+\[
+    \PDV{s}{p}{T} = -\PDV{V}{T}{p}, \quad
+    \PDV{T}{p}{s} = \PDV{V}{s}{p}
+\]
+を用いると，定圧比熱は
+\[
+    c_p = T\PDV{s}{T}{p} = -T \frac{ \dPDV{s}{p}{T} }{ \dPDV{T}{p}{s} } = T \frac{ \dPDV{V}{T}{p} }{ \dPDV{V}{s}{p} } .
+\]
+\end{details}
+\begin{equation} 
+    \PDV{V}{T}{p} \dv{s}{z} > 0.
+\end{equation}
+多くの物体は加熱により膨張するから$\dPDV{V}{T}{p}>0$であり
+\begin{equation}
+    \dv{s}{z} > 0.
+\end{equation}
+つまり，エントロピーは高さとともに増加しなければならない．
+
+ここから，温度勾配の満たすべき条件を導こう．$s$を$T,p$の関数とみて
+\begin{align*}
+    \dv{s}{z} &= \PDV{s}{T}{p} \dv{T}{z} + \PDV{s}{p}{T} \dv{p}{z} \\
+    &= \frac{c_p}{T} \dv{T}{z} -\PDV{V}{T}{p} \dv{p}{z} \\
+    & \gyoukan{ \Eqref{gray}{eq3.4:1次元の静水圧平衡}より $dp/dz=-\rho g=-g/V$} \\
+    &= \frac{c_p}{T} \dv{T}{z} + \frac{g}{V}\PDV{V}{T}{p} >0.
+\end{align*}
+\spade
+$\beta\equiv\dfrac{1}{V}\dPDV{V}{T}{p}$を（体積）熱膨張率として
+\begin{equation}\label{eq4.4:対流ないときの温度勾配1}
+    -\dv{T}{z} < \frac{gT}{c_p V} \PDV{V}{T}{p} = \frac{g\beta T}{c_p}.
+\end{equation}
+理想気体の場合$\beta T = \dfrac{1}{V}\cdot\dfrac{nR}{p}T = 1$であるから
+\begin{equation}\label{eq4.5:対流ないときの温度勾配2}
+    -\dv{T}{z} < \frac{g}{c_p} \equiv\Gamma_d \,\text{（乾燥断熱減率）}.
+\end{equation}
+\eqref{eq4.4:対流ないときの温度勾配1},\eqref{eq4.5:対流ないときの温度勾配2}の右辺は（普通の物質では）正である．
+よって，高さとともに温度が上がるなら安定である．
+また，高さとともに温度が下がる場合でも，温度減率がある程度小さく$-\ddv{T}{z} < \dfrac{g\beta T}{c_p}$ならば安定だが，
+温度減率が大きく$-\ddv{T}{z} > \dfrac{g\beta T}{c_p}$ならば不安定であり，対流が発生する．
+\SI{20}{\tccelsius}の水の場合$\dfrac{g\beta T}{c_p} \simeq \SI{1}{\tccelsius}/\SI{6.7}{km}$，
+大気の場合$\Gamma_d \simeq \SI{1}{\tccelsius}/\SI{100}{m}$である．
+
+
+
+\BackToTheToc

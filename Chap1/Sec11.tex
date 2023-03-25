@@ -1,0 +1,379 @@
+\section{物体のまわりのポテンシャル流による抗力}
+
+静止した物体まわりの，非圧縮性流体のポテンシャル流（無限遠での流れは0ではない）の問題を考える．
+これは物体が流体中を運動するときの流れ（無限遠での流れは0）を求める問題と等価である．
+前者から後者を得るには，無限遠で流体が静止している座標系（流体の重心速度で動く座標系）に移ればよいから，
+以下では後者（物体が流体中を運動している問題）を考える．
+
+
+物体から遠く離れたところでの流れを求めよう
+\footnote{遠く離れたところでの流れだけを考えればよい理由は，このあと流体の全エネルギーを求めるのに必要となるのは，無限遠での$\phi$や$\v$のふるまいだからである．}．
+非圧縮性流体のポテンシャル流は$\Laplacian\phi=0$の解であり，このうち無限遠で0となるものを考えなければならない．
+物体の中に原点をとり（座標系は物体とともに動くので，ある短い時間内での流体の速度を考えることにする），原点からの距離を$r$とする．
+問題~\ref{mo:問題10.2（運動する球のまわりのポテンシャル流）}で述べたように，無限遠で0となるLaplace方程式の解は$1/r$とその高階微分の線形結合であり，物体から十分離れたところでは
+\[
+    \phi = -\frac{a}{r} + \vec{A} \cdot \Grad\pqty{\frac{1}{r}} + \cdots
+\]
+となる（$a,\vec{A}$は座標によらない）．$a=0$であることが以下のようにしてわかる：
+$\phi=-\dfrac{a}{r}$のとき
+\footnote{ポテンシャル$\phi=-\dfrac{a}{r}$の作る流れ場は，湧き出しや吸い込みと呼ばれる．}
+の速度は$\v = \Grad\pqty{-\dfrac{a}{r}} = \dfrac{a\vec{r}}{r^3}$である．
+半径$R$の球面を通過する質量フラックスは
+\[
+    \rho \int_{r=R} \v\cdot\dS = \rho \frac{a}{R^2} \cdot 4\pi R^2 = 4\pi\rho a .
+\]
+一方，湧き出しや吸い込みのない非圧縮性流体では
+\[
+    \rho \int_{r=R} \v\cdot\dS = \int_{r\ika R} \Div\v \dV = 0
+\]
+である．よって$a=0$でなければならない．
+
+
+以上より，$\phi$は$1/r$の1階以上の微分を含む．
+物体から離れたところでの解を求めるので，2階以上を無視すると，次のようになる（$\vec{n}$を$\vec{r}$方向の単位ベクトルとする）．
+\begin{equation}\label{eq11.1:物体から離れたところでのポテンシャル流のポテンシャル}
+    \phi = \vec{A} \cdot \Grad\pqty{\frac{1}{r}} = - \frac{\vec{A}\cdot\vec{n}}{r^2}
+\end{equation}
+\begin{equation}\label{eq11.2:物体から離れたところでのポテンシャル流の速度}
+    \v = \Grad\phi = \frac{3(\vec{A}\cdot\vec{n})\vec{n}-\vec{A}}{r^3}
+\end{equation}
+つまり，物体から離れたところでは速度は$\order{r^{-3}}$で減少する．
+ベクトル$\vec{A}$は物体の速度や形に依存し，物体表面での適切な境界条件のもと$\Laplacian\phi=0$を解くことで求められる．
+
+
+\eqref{eq11.2:物体から離れたところでのポテンシャル流の速度}の$\vec{A}$は，物体まわりの流体の全運動量$\vec{P}$，全エネルギー$E$と結びついている．
+非圧縮性流体では内部エネルギー$\varepsilon$が一定であったから，$\displaystyle E = \frac{1}{2}\rho \int v^2\dV$となる（積分は物体の外側の全空間にわたって行う）．
+これを計算するために，原点を中心とする半径$R$の球の内部$V$（から物体$V_0$を除いた領域）で積分し，最後に$R\to\infty$としよう．
+
+$u$を物体の速度とすると
+\[
+    \int_{V-V_0} v^2 \dV = \int_{V-V_0} u^2 \dV + \int_{V-V_0} (\v+\vec{u})\cdot(\v-\vec{u}) \dV .
+\]
+右辺第1項は，$\vec{u}$が座標によらないから$u^2(V-V_0)$に等しい．
+右辺第2項は，$\v+\vec{u}=\Grad(\phi+\vec{u}\cdot\vec{r})$とベクトル解析の公式
+$\vec{A}\cdot\Grad f = \Div(f\vec{A}) - f\Div\vec{A}$，
+および$\Div\v=\Div\vec{u}=0$より
+\begin{align*}
+    (\v+\vec{u})\cdot(\v-\vec{u}) &= \Grad(\phi+\vec{u}\cdot\vec{r}) \cdot (\v-\vec{u}) \\
+    &= \Div[ (\phi+\vec{u}\cdot\vec{r}) (\v-\vec{u}) ] - (\phi+\vec{u}\cdot\vec{r}) \Div(\v-\vec{u}) \\
+    &= \Div[ (\phi+\vec{u}\cdot\vec{r}) (\v-\vec{u}) ] .
+\end{align*}
+よって，$V$の表面を$S$，物体表面を$S_0$として，Gaussの発散定理を用いると
+\[
+    \int_{V-V_0} v^2 \dV = u^2(V-V_0) + \int_{S+S_0} (\phi+\vec{u}\cdot\vec{r}) (\v-\vec{u}) \cdot \dS .
+\]
+
+$\v,\vec{u}$を物体表面に平行な成分と垂直な成分に分けて
+\[
+    \v-\vec{u} = (\v_{\parallel}-\vec{u}_{\parallel}) + (\v_{\perp}-\vec{u}_{\perp})
+\]
+と書くと，$(\v_{\parallel}-\vec{u}_{\parallel})$は物体表面の面積要素ベクトル$\dS$に垂直であるから，両者の内積は0である．
+また境界条件から，物体表面では$\v_{\perp}=\vec{u}_{\perp}$である．
+よって$S_0$上の面積分は0であり，$S$上の面積分
+\[
+    \int_S (\phi+\vec{u}\cdot\vec{r}) (\v-\vec{u}) \cdot \dS 
+    \mytag{1}
+\]
+を計算すればよい．
+$do$を微小立体角要素とすると$d\vec{S}=\vec{n}R^2\,do$であるから，\eqref{eq11.2:物体から離れたところでのポテンシャル流の速度}より
+\begin{align*}
+    (\v-\vec{u})_{r=R} \cdot \dS &= \pqty{ \frac{3(\vec{A}\cdot\vec{n})\vec{n}-\vec{A}}{R^3} - \vec{u} } \cdot \vec{n}R^2\, do \\
+    &= \pqty{ \frac{3(\vec{A}\cdot\vec{n})-\vec{A}\cdot\vec{n}}{R} - \vec{u}\cdot\vec{n} R^2 } \, do \\
+    &= \pqty{ \frac{2\vec{A}\cdot\vec{n}}{R} - \vec{u}\cdot\vec{n} R^2 } \, do ,
+\end{align*}
+\begin{align*}
+    \text{\ajMaru{1}} &= \int \pqty{ -\frac{\vec{A}\cdot\vec{n}}{R^2} + \vec{u}\cdot\vec{n} R } \pqty{ \frac{2\vec{A}\cdot\vec{n}}{R} - \vec{u}\cdot\vec{n} R^2 } \, do \\
+    &= \int \bqty{ -\frac{2(\vec{A}\cdot\vec{n})^2}{R^3} + (\vec{A}\cdot\vec{n})(\vec{u}\cdot\vec{n}) +2(\vec{A}\cdot\vec{n})(\vec{u}\cdot\vec{n}) - (\vec{u}\cdot\vec{n})^2 R^3  } \, do \\
+    & \gyoukan{$R\to\infty$で0となる第1項を除くと} \\
+    &= \int \bqty{ 3(\vec{A}\cdot\vec{n})(\vec{u}\cdot\vec{n}) - (\vec{u}\cdot\vec{n})^2 R^3  } \, do . \\
+\end{align*}
+
+\begin{details}
+\eqref{eq11.1:物体から離れたところでのポテンシャル流のポテンシャル}\eqref{eq11.2:物体から離れたところでのポテンシャル流の速度}で省いた高次の項を書いてみると
+\[
+    \pqty{ -\frac{\vec{A}\cdot\vec{n}}{R^2} + \order{\frac{1}{R^3}} + \vec{u}\cdot\vec{n} R } \pqty{ \frac{2\vec{A}\cdot\vec{n}}{R} + \order{\frac{1}{R^2}} - \vec{u}\cdot\vec{n} R^2 }
+\]
+となる．新たに加えた項は最高でも$\order{1/R}$であるから，省いても結果には影響しない．
+\end{details}
+
+ある量$f$の立体角$o$による積分は，$\vec{n}$のあらゆる方向にわたって$f$を平均して$4\pi$
+\footnote{$\displaystyle \int do = 4\pi$は規格化の定数．}
+をかけたものに等しいから，定数ベクトル$\vec{A},\vec{B}$を用いて$(\vec{A}\cdot\vec{n})(\vec{B}\cdot\vec{n}) = A_iB_jn_in_j$と表される量を$o$で積分すると
+\[
+    \int (\vec{A}\cdot\vec{n})(\vec{B}\cdot\vec{n}) \, do = 4\pi A_iB_j \overline{n_in_j}
+\]
+となる．$\overline{n_in_j}$は対称テンソルであるから$\overline{n_in_j}=a \delta_{ij}$と書けて，$i,j$を縮約して$1=3a$すなわち$a=\dfrac{1}{3}$を得る．
+ゆえに
+\[
+    \int (\vec{A}\cdot\vec{n})(\vec{B}\cdot\vec{n}) \, do = \frac{4}{3}\pi \vec{A}\cdot\vec{B}
+\]
+であり
+\[
+    \text{\ajMaru{1}} = \frac{4}{3}\pi \pqty{ 3\vec{A}\cdot\vec{u} -u^2R^3 } ,
+\]
+\[
+    \int_{V-V_0} v^2 \dV = u^2 \pqty{ \frac{4}{3}\pi R^3 -V_0 } + \frac{4}{3}\pi \pqty{ 3\vec{A}\cdot\vec{u} -u^2R^3 }
+    = 4\pi \vec{A}\cdot\vec{u} -u^2 V_0
+\]
+\begin{equation}\label{eq11.3:物体まわりのポテンシャル流の全エネルギー}
+    E = \frac{1}{2} \rho\pqty{ 4\pi \vec{A}\cdot\vec{u} -u^2 V_0 } .
+\end{equation}
+これで$\vec{A}$と全エネルギーの関係が得られた．
+
+
+
+\begin{details}
+以上の説明を初めて読んだとき，\eqref{eq11.3:物体まわりのポテンシャル流の全エネルギー}を導くのに，かなり大がかりなことをやるものだと思った．
+類書を見ると，次のような説明が載っている：
+$\Div(\phi\Grad\phi) = (\Grad\phi)^2 + \phi\Laplacian\phi = v^2$より
+\[
+    E = \frac{1}{2}\rho \int_{V-V_0} v^2 \dV = \frac{1}{2}\rho \int_{S+S_0} \phi \pdv{\phi}{n} \, dS  
+\]
+が成り立つ．$S$上では$\phi\to0$であるから$S$上の積分は寄与せず
+\[
+    E = \frac{1}{2}\rho \int_{S_0} \phi \pdv{\phi}{n} \, dS
+\]
+となる．
+ここに\eqref{eq11.1:物体から離れたところでのポテンシャル流のポテンシャル}を代入すれば，答えが出るような気がした．
+
+
+ところが，\eqref{eq11.1:物体から離れたところでのポテンシャル流のポテンシャル}は物体から離れたところで成り立つ式だから，今は使うことはできない．
+一方，本文の方法は$S_0$上の面積分の寄与をなくし，逆に$S$上の面積分だけにしており，
+これなら\eqref{eq11.1:物体から離れたところでのポテンシャル流のポテンシャル}を用いることができる．
+
+やや文脈は異なるが，$S_0$上の面積分を全て$S$上の面積分に変換して物体に働く力を求める方法が，巽に載っている．
+他にも載っている本があるかもしれない．
+\end{details}
+
+
+さて，$\vec{A}$の正確な表式を求めるには，物体表面での境界条件のもとで$\Laplacian\phi=0$を解く必要があり，一般には面倒である．
+しかし，Laplace方程式と境界条件の線形性から，$\vec{A}$は$\vec{u}$の成分の線形結合でなければならない．
+よって一般には，\eqref{eq11.3:物体まわりのポテンシャル流の全エネルギー}は$\vec{u}$の成分の2次形式
+\begin{equation}\label{eq11.4:流体の全エネルギーと誘導質量の関係}
+    E = \frac{1}{2} m_{ij} u_i u_j
+\end{equation}
+で表される．
+$m_{ij}$は\emph{誘導質量テンソル}と呼ばれ，定義から明らかなように対称である．
+その具体的な形は$\vec{A}$を求めることで得られる．
+
+
+
+流体の全エネルギーが得られたので，次は全運動量$\vec{P}$を求めよう．
+まず，定義$\displaystyle \vec{P}=\int\rho\v\dV$から直接計算することはできないことに注意しよう．
+なぜなら，この積分は体積の取り方によって異なる値になるからである．
+このため，エネルギーと運動量の微小量の関係
+\[
+    dE = \vec{u}\cdot d\vec{P}
+\]
+を用いる．
+\begin{details}
+\nazenara
+物体が外力$\vec{F}$を受けて時間$dt$のあいだ加速されるとすれば，この間の運動量変化は$d\vec{P}=\vec{F}dt$と書ける．
+$\vec{u}$との内積をとれば$\vec{u}\cdot d\vec{P} = \vec{F}\cdot(\vec{u}dt)$となる．
+右辺は距離$\vec{u}dt$の間に力によってされた仕事であるから，$\vec{u}\cdot d\vec{P}$は流体のエネルギーの増分$dE$に等しい．
+\end{details}
+\noindent
+\eqref{eq11.4:流体の全エネルギーと誘導質量の関係}より（$m_{ij}$は定数であるから）
+\begin{align*}
+    dE &= \frac{1}{2} m_{ij} (du_i\cdot u_j + u_i\, du_j) \\
+    & \gyoukan{第1項で$i,j$を入れかえ，$m_{ij}$が対称であることを用いる．} \\
+    &= \frac{1}{2} m_{ij} \cdot 2 u_i\, du_j = u_i d(m_{ij}u_j) .
+\end{align*}
+よって
+\begin{equation}\label{eq11.5:流体の全運動量と誘導質量の関係}
+    P_i = m_{ij} u_j
+\end{equation}
+を得る．
+
+今考えている問題では，$E = \dfrac{1}{2}\rho (4\pi A_i - V_0 u_i)u_i$より$m_{ij}u_j = 4\pi\rho A_i - \rho V_0 u_i$である．
+したがって流体の全運動量は
+\begin{equation}\label{eq11.6:物体まわりのポテンシャル流の全運動量}
+    \vec{P} = 4\pi\rho\vec{A} - \rho V_0 \vec{u}
+\end{equation}
+となる．$\vec{P}$が確定した有限値であることに注意．
+
+
+
+
+\subsection*{流体中の物体に働く力}
+物体が動くことにより流体に与えられる単位時間あたりの運動量は$\ddv{\vec{P}}{t}$である．
+よって，流体が物体に及ぼす力はこれの符号を変えたもので
+\begin{equation}
+    \vec{F} = - \dv{\vec{P}}{t}
+\end{equation}
+となる．$\vec{F}$のうち，$\vec{u}$に平行な成分は\emph{抗力}，垂直な成分は\emph{揚力}と呼ばれる．
+
+
+理想流体中を一様な速度で動く物体のまわりのポテンシャル流では，$\vec{u}=\const$より$\vec{P}=\const$であり，$\vec{F}=\vec{0}$となる．
+すなわち，物体は流体から力を受けない（\emph{d'Alembertのパラドックス}）．
+\begin{details}
+よく，どのような運動をしても力を受けないと誤解されるが，d'Alembertのパラドックスは\emph{等速度}運動のとき力を受けないことを主張しているのであって，
+加速度運動を行うときは当然力を受ける．
+
+なお，ふつうの本では，「d'Alembertのパラドックスは粘性を考慮すれば解決する」で済まされることが多いが，
+ここでは，理想流体では力が当然0とならなければならないことが説明されている．
+\end{details}
+\noindent
+力を受けない理由は次のとおりである．
+物体の一様な運動で力を受けると仮定すると，この運動を持続させるためには，外力により仕事が行われなければならない．
+この仕事は，\ajKakko{1}\,流体中で消費されるか，\ajKakko{2}\,流体の運動エネルギーに変換され，無限遠へ輸送される．
+しかし，理想流体ではエネルギーの散逸がないから\ajKakko{1}はありえない．
+また，物体の運動によって生じた流れの速度は物体から離れるにしたがって急速に減少するから，\ajKakko{2}もありえない．
+よって，力を受けることはない．
+
+\begin{details}
+この議論は，流体が無限の体積を持つ場合に限ることに注意．
+例えば流体が自由表面を持つ場合，表面と平行に一様な運動をする物体は抗力（\emph{波の抗力}）を受ける．
+これは，自由表面を伝わる波により，エネルギーを無限遠へ運ぶことが可能なためである．
+\end{details}
+
+
+
+
+
+\subsection*{流体中の物体の運動方程式}
+
+流体の運動量が分かったので，そこから得られる結果について考えよう．
+
+まず，物体が外力$\vec{f}$により振動しており，\S~\ref{sec:10}で述べた条件（物体の大きさに比べて振幅が非常に小さい）が満たされ，流れがポテンシャル流である場合を考えよう．
+物体の質量を$M$とする．外力$\vec{f}$は系の全運動量（つまり物体の運動量$M\vec{u}$と流体の運動量$\vec{P}$の和）の時間微分に等しいから
+\[
+    M \dv{\vec{u}}{t} + \dv{\vec{P}}{t} = \vec{f} .
+\]
+\eqref{eq11.5:流体の全運動量と誘導質量の関係}を代入して
+\begin{equation}\label{eq11.8:理想流体中を運動する物体の運動方程式}
+    (M\delta_{ij} + m_{ij}) \dv{u_j}{t} = f_i .
+\end{equation}
+これは理想流体中を運動する物体の運動方程式である．
+
+
+
+これとは逆に，外力によって流体が振動しているときの，物体の運動方程式を導こう．
+前と同じく物体の速度を$\vec{u}$とする．
+物体がない（摂動がない）ときの流体の速度を$\v$とし，物体の長さ程度では流体の速度は変わらないとする．
+
+物体に働く力を考えよう．
+物体が流体と同じ速度で動く（$\vec{u}=\v$）ならば，物体\footnote{日本語版では「流体」となっているが，誤訳であろう．}
+に働く力は，物体がない場合に物体と同じ体積の流体に働く力に等しく$\rho V_0 \ddv{\v}{t}$である．
+実際には，物体と流体の速度が異なるために相対的な運動が生じ，流体は物体がないときとは異なる運動をする．
+物体があることで生じる流体の運動量は，\eqref{eq11.5:流体の全運動量と誘導質量の関係}で$\vec{u}$を（流体から見た相対速度）$\vec{u}-\v$に置きかえて$m_{ij}(u_j-v_j)$である．
+この時間微分の符号を変えたものが，物体に働く．
+以上より物体に働く力は
+\[
+    \rho V_0 \dv{v_i}{t} -m_{ij} \dv{t}(u_j-v_j)
+\]
+となる．よって物体の運動方程式は
+\[
+    \dv{t} (Mu_i) = \rho V_0 \dv{v_i}{t} -m_{ij} \dv{t}(u_j-v_j) .
+\]
+これを時間で積分し，積分定数を0とおくと
+\footnote{流体が動かなければ物体も動かないから，$\v=\vec{0}$ならば$\vec{u}=\vec{0}$である．}
+\[
+    Mu_i = \rho V_0 v_i -m_{ij} (u_j-v_j) ,
+\]
+\begin{equation}\label{eq11.9:流体の速度が与えられたとき物体の速度を求める式}
+    \yueni (M\delta_{ij}+m_{ij})u_j = (m_{ij}+\rho V_0\delta_{ij})v_j .
+\end{equation}
+この式は，流体の速度が与えられたとき物体の速度を求める式である．
+特に，物体の密度が流体の密度に等しい（$M=\rho V_0$）とき，当然$\vec{u}=\v$となる．
+
+
+
+
+    
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+理想流体中で振動しているの球の運動方程式を求めよ．
+また，振動している理想流体中の球の運動方程式を求めよ．
+\end{mondai}
+\begin{kaitou}
+
+問題~\ref{mo:問題10.2（運動する球のまわりのポテンシャル流）}の結果より，球の半径を$R$として
+\[
+    \vec{A} = \frac{1}{2} R^3 \vec{u}
+\]
+である．よって\eqref{eq11.6:物体まわりのポテンシャル流の全運動量}より，球が流体に与える全運動量は
+\[
+    \vec{P} = 4\pi\rho \cdot \frac{R^3}{2} \vec{u} - \rho \pqty{\frac{4}{3}\pi R^3} \vec{u}
+    = \frac{2}{3}\pi\rho R^3 \vec{u}
+\]
+であり，誘導質量テンソルは
+\[
+    m_{ij} = \frac{2}{3}\pi\rho R^3 \delta_{ij},
+\]
+球に働く力は
+\[
+    \vec{F} = -\dv{\vec{P}}{t} = -\frac{2}{3}\pi\rho R^3 \dv{\vec{u}}{t}
+\]
+となる．
+
+
+\noindent
+【前半】
+球の密度を$\rho_0$とすると$M=\dfrac{4}{3}\pi\rho_0 R^3$であるから\eqref{eq11.8:理想流体中を運動する物体の運動方程式}は
+\[
+    \pqty{ \frac{4}{3}\pi\rho_0 R^3\delta_{ij} +\frac{2}{3}\pi\rho R^3 \delta_{ij} } \dv{u_j}{t} = f_i,
+\]
+\[
+    \underline{ \frac{4}{3}\pi R^3 \pqty{ \rho_0 + \frac{1}{2}\rho } } \dv{\vec{u}}{t} = \vec{f} .
+\]
+下線部は球のみかけの質量と呼ばれ，球自身の質量と誘導質量の和である．
+この場合，誘導質量は球が押しのけた流体の質量の半分になっている．
+
+
+\noindent
+【後半】
+\eqref{eq11.9:流体の速度が与えられたとき物体の速度を求める式}は
+\[
+    \pqty{ \frac{4}{3}\pi\rho_0 R^3 \delta_{ij} + \frac{2}{3}\pi\rho R^3 \delta_{ij} } u_j 
+    = \pqty{ \frac{2}{3}\pi\rho R^3 \delta_{ij} + \frac{4}{3}\pi\rho R^3 \delta_{ij} }v_j .
+\]
+\[
+    \pqty{ \rho_0 + \frac{1}{2}\rho } \vec{u} = \frac{3}{2} \rho \v
+    \qquad\yueni \vec{u} = \frac{3\rho}{\rho+2\rho_0} \v
+\]
+流体よりも球の方が重い（$\rho<\rho_0$）ときは$u<v$となり，球は流体から遅れる（引きずられる）．
+流体よりも球の方が軽い（$\rho>\rho_0$）ときは$u>v$となり，球の方が流体より先に進む．
+
+
+\end{kaitou}
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+流体中を運動する物体に働く力のモーメント$\vec{M}$をベクトル$\vec{A}$を用いて表せ．
+\end{mondai}
+\begin{kaitou}
+力学で学んだように\footnote{『力学』\S~9参照．}，
+物体を無限小角度$\delta\vec{\theta}$だけ回転させたとき，働くモーメントとの間には
+\[
+    \delta E = \vec{M} \cdot \delta\vec{\theta}
+\]
+の関係が成り立つ（$\delta E$は回転によるエネルギーの変化）．
+
+物体を$\delta\vec{\theta}$回転させると，$\vec{u}$と流れのなす角が変わり，$m_{ij}$が変わってしまう．
+これを避けるために，流体を$-\delta\vec{\theta}$だけ回転してみよう．これは座標自体を回転していることに相当し，$\vec{u}$が変化する．
+その変化分は$\delta\vec{u}=(-\delta\vec{\theta})\times\vec{u}$であるから（？）
+\[
+    \delta E = \vec{P} \cdot \delta\vec{u}
+    = \vec{P} \cdot (-\delta\vec{\theta}\times\vec{u})
+    = -\delta\vec{\theta} \cdot (\vec{u}\times\vec{P}) .
+\]
+よって
+\[
+    \vec{M} = -\vec{u}\times\vec{P} 
+    = -\vec{u}\times( 4\pi\rho\vec{A} - \rho V_0 \vec{u} )
+    = 4\pi\rho \vec{A}\times\vec{u} .
+\]
+
+\end{kaitou}
+
+    
+
+
+
+
+\BackToTheToc

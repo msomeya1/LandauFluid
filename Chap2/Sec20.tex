@@ -1,0 +1,651 @@
+\section{\spade 小Reynolds数での流れ}
+Reynolds数が小さいとき，Navier-Stokes方程式はかなり簡単になる．
+非圧縮性流体の定常流の場合，方程式は
+\[
+    (\v\cdot\Grad)\v = - \frac{1}{\rho} \Grad p + \frac{\eta}{\rho} \Laplacian \v
+\]
+となる．
+主流の速度を$u$，物体の大きさを$l$とすると，
+$(\v\cdot\Grad)\v$は$u^2/l$，
+$(\eta/\rho)\Laplacian\v$は$\nu u/l^2$のオーダーであり，
+両者の比$\dfrac{u^2/l}{\nu u/l^2} = \dfrac{ul}{\nu}$がちょうどReynolds数である．
+したがって，Reynolds数が小さければ移流項を粘性項に比べて無視することができ，方程式は線形になる．
+\begin{equation}\label{eq20.1:線形化したNS方程式}
+    \eta \Laplacian\v - \Grad p = 0
+\end{equation}
+この式と連続の式
+\begin{equation}\label{eq20.2:連続の式（Stokes流）}
+    \Div\v=0
+\end{equation}
+（および境界条件）により，運動が完全に決まる．また，\eqref{eq20.1:線形化したNS方程式}のrotをとった式
+\begin{equation}\label{eq20.3:rotvに対するLaplace方程式}
+    \Laplacian (\Rot\v) = 0
+\end{equation}
+も有用である．
+
+
+例として，粘性流体中を球が一様な直線運動をする場合を考えよう（G. G. Stokes 1851）．
+この問題は明らかに，固定された球のまわりに生じる，無限遠で速度が$\vec{u}$で一定となる流れの問題と等価である．
+最初の問題（球が動く問題）の速度分布は，2番目の問題（球が静止している問題）の速度分布から速度$\vec{u}$を差し引くことで得られる；
+そうすれば流体は無限遠で静止し，球は一様な速度$-\vec{u}$で動く．
+
+今考えている定常流の場合には，（2番目の）固定された球のまわりの流れとして（つまり球にとっての静止系で）考えなければならない．
+なぜなら，（1番目の）球が動く問題では，流体の速度が時間とともに変化してしまうからである．
+
+
+$\Div(\v-\vec{u})=\Div\v=0$であるから，$\v-\vec{u}$はあるベクトル$\vec{A}$のrotとして表すことができる；
+\[
+    \v - \vec{u} = \Rot\vec{A}
+\]
+（但し$\Rot\vec{A}$は無限遠で0になる）．
+$\v, \vec{u}$は極性ベクトルであるから$\Rot\vec{A}$も極性ベクトルであり，$\vec{A}$は軸性ベクトルでなければならない
+\footnote{$\nabla$は極性ベクトルであり，$\text{（極性）}\times\text{（軸性）}=\text{（極性）}$}．
+
+さて，$\vec{A}$は動径ベクトル$\vec{r}$と，速度$\vec{u}$というパラメータに依存する（原点は球の中心にとる）．これらは極性ベクトルである．
+また，運動方程式と境界条件の線形性から，$\vec{A}$は$\vec{u}$の1次関数でなければならない．
+極性ベクトル$\vec{r},\vec{u}$から作られる軸性ベクトルは$\vec{r}\times\vec{u}$または$\vec{n}\times\vec{u}$であり，
+$\Vec{A}=f'(r) \vec{n}\times\vec{u}$と書けるはずである
+（ここで$\vec{n}$は球の中心を原点にとったときの，位置ベクトル$\vec{r}$に平行な単位ベクトルであり，$f'(r)$は$r$のスカラー関数の微分である）．
+$f'(r)\vec{n}=\Grad f$であるから結局
+\begin{equation}\label{eq20.4:Stokes流でのvの表現}
+    \v = \vec{u} + \Rot(\Grad f \times \vec{u})
+    = \vec{u} + \Rot\Rot(f\vec{u}).
+\end{equation}
+最後の等号は，$\Rot(f\vec{u}) = \grad f \times \vec{u}  + f \Rot\vec{u}$で$\vec{u}$が一定であることを用いた．
+
+\begin{details}
+Landauを読んでも$\Vec{A}=f'(r) \vec{n}\times\vec{u}$と書ける理由が今ひとつわからないが，こういうものだと思って先に進むことにする．
+同様の論法はこの後も何回か出てくる．
+\end{details}
+
+
+関数$f$を求めるために，式\eqref{eq20.3:rotvに対するLaplace方程式}を用いよう．
+\[
+    \Rot\v = \Rot\Rot\Rot(f\vec{u}) = (\Grad\Div-\Laplacian)\Rot(f\vec{u})
+    = -\Laplacian\Rot(f\vec{u})
+\]
+より
+\begin{align*}
+    0 &= \Laplacian (\Rot\v) = -\Laplacian^2 \Rot(f\vec{u}) \\
+    &= -\Laplacian^2 (\Grad f \times \vec{u}) = -\Laplacian^2 (\Grad f) \times\vec{u} ,
+\end{align*}
+\begin{equation}\label{eq20.5:Stokes流でのfに関する重調和的方程式}
+    \yueni \Laplacian^2 \Grad f = 0 .
+\end{equation}
+1回積分して
+\[
+    \Laplacian^2 f = \const 
+\]
+
+\begin{details}
+Landauに載っている，$\const$を0とおいてよい理由が今ひとつわからない．
+ここでは（後の都合も考え）積分定数を残したまま議論を進めることにする．
+\end{details}
+
+$\Laplacian = \dfrac{1}{r^2} \ddv{r} \left( r^2 \ddv{r} \right)$を代入して4回積分すると，最終的に
+\[
+    f(r) = C_1 r^4 + C_2 r^2 + C_3 r + \frac{C_4}{r} + C_5
+    \mytag{1}
+\]
+を得る．
+定数$C_5$は結果に影響しないから除いてよい．
+また，速度は$f$の2階（以下の）微分で与えられるから，それらを計算してみると
+\[
+    f'(r) = 4C_1 r^3 + 2C_2 r + C_3 - \frac{C_4}{r^2},
+    \mytag{2}
+\]
+\[
+    f''(r) = 12C_1 r^2 + 2C_2 + \frac{2C_4}{r^3}.
+    \mytag{3}
+\]
+この問題では，$\v-\vec{u}$は無限遠で0とならなければならないから，$C_1 = C_2 = 0$となる．
+$C_3 ,C_4$を改めて$a,b$と書けば
+\begin{equation}
+    f = ar + \frac{b}{r} .
+\end{equation}
+
+\begin{details}
+\[
+    \Grad(r) = \frac{\vec{r}}{r}, \;
+    \Grad \left( \frac{1}{r} \right) = -\frac{\vec{r}}{r^3}, \;
+    \Grad \left( \frac{1}{r^3} \right) = -\frac{3\vec{r}}{r^5} \;
+\]
+に注意すると
+\end{details}
+
+\begin{align*}
+    \Rot\Rot (f \vec{u}) &= \Grad \Div (f \vec{u}) - \Laplacian (f \vec{u}) \\
+    &= \Grad (\vec{u}\cdot\Grad f) - \vec{u}\Div \Grad f \\
+    &= \Grad \left[ \vec{u} \cdot \left( \frac{a\vec{r}}{r}-\frac{b\vec{r}}{r^3} \right) \right] - \vec{u}\Div \left( \frac{a\vec{r}}{r}-\frac{b\vec{r}}{r^3} \right) \\
+    &= a \left[ \frac{1}{r} \Grad(\vec{u}\cdot\vec{r}) + (\vec{u}\cdot\vec{r}) \Grad \left( \frac{1}{r} \right) \right]
+      -b \left[ \frac{1}{r^3} \Grad(\vec{u}\cdot\vec{r}) + (\vec{u}\cdot\vec{r}) \Grad \left( \frac{1}{r^3} \right) \right] \\
+    &\phantom{=} -\vec{u} \left[ 
+        a \left\{ \frac{1}{r} \Div\vec{r} + \vec{r} \cdot \Grad \left( \frac{1}{r} \right) \right\} 
+       -b \left\{ \frac{1}{r^3} \Div\vec{r} + \vec{r} \cdot \Grad \left( \frac{1}{r^3} \right) \right\} 
+    \right] \\
+    &= a \left( \frac{\vec{u}}{r} - \frac{(\vec{u}\cdot\vec{r})\vec{r}}{r^3} \right) -b \left( \frac{\vec{u}}{r^3} - \frac{3(\vec{u}\cdot\vec{r})\vec{r}}{r^5} \right)
+    -\vec{u} \left[ a\left( \frac{3}{r} - \frac{r^2}{r^3} \right) -b \cancel{ \left( \frac{3}{r^3} - \frac{3r^2}{r^5} \right) } \right] \\
+    &= -a \frac{ \vec{u} + (\vec{u}\cdot\vec{n}) \vec{n} }{r} +b \frac{ 3(\vec{u}\cdot\vec{n}) \vec{n} - \vec{u} }{r^3}
+\end{align*}
+\begin{equation}\label{eq20.7:a,bで表したStokes流の速度}
+    \yueni \v = \vec{u} -a \frac{ \vec{u} + (\vec{u}\cdot\vec{n}) \vec{n} }{r} +b \frac{ 3(\vec{u}\cdot\vec{n}) \vec{n} - \vec{u} }{r^3} .
+\end{equation}
+定数$a$と$b$は，球の表面$r=R$で$\v=\vec{0}$という境界条件から決まる．
+\[
+    \vec{u} \left( 1-\frac{a}{R}-\frac{b}{R^3} \right) + (\vec{u}\cdot\vec{n}) \vec{n} \left( -\frac{a}{R}+\frac{3b}{R^3} \right) = \vec{0}
+\]
+これがあらゆる方向の$\vec{n}$に対して成り立つためには，$\vec{u}$と$\vec{n}(\vec{u}\cdot\vec{n})$の係数はそれぞれ0でなければならない．よって
+\[
+    1-\frac{a}{R}-\frac{b}{R^3} = 0, \quad -\frac{a}{R}+\frac{3b}{R^3} = 0
+    \qquad\yueni a = \frac{3}{4}R, \; b = \frac{1}{4} R^3 .
+\]
+結局
+\begin{equation}
+    f = \frac{3}{4}Rr + \frac{1}{4} \frac{R^3}{r},
+\end{equation}
+\begin{equation}\label{eq20.9:Stokes流での流速}
+    \v = \vec{u} - \frac{3}{4}R \frac{\vec{u}+(\vec{u}\cdot\vec{n})\vec{n}}{r} + \frac{R^3}{4} \frac{3(\vec{u}\cdot\vec{n})\vec{n} - \vec{u}}{r^3}
+\end{equation}
+を得る．
+
+
+$\vec{u}$の方向を極軸とする球座標系での成分を書き下そう．
+動径方向の成分は，$\v$を$\vec{n}$方向へ射影したものであるから
+\[
+    v_r = \v\cdot\vec{n}
+    = \vec{u}\cdot\vec{n} \left[ 1 - \frac{3R}{4r} \cdot 2 + \frac{R^3}{4r^3}  \cdot 2 \right].
+\]
+偏角方向の成分$v_\theta$を求めるために，$\v$が
+$\v = \alpha \vec{u} + \beta (\vec{u}\cdot\vec{n})\vec{n}$
+という形をしていることに着目しよう．
+$v_\theta$の方向は$\vec{n}$と垂直であるから，$\beta(\vec{u}\cdot\vec{n})\vec{n}$は$v_\theta$に寄与しない．
+よって$\alpha\vec{u}$を動径方向と垂直な方向に射影した$-\alpha u \sin\theta$が$v_\theta$である．
+以上より
+\begin{equation}\label{eq20.10:Stokes流での流速成分}
+    \begin{cases}
+        v_r = u\cos\theta \left( 1-\dfrac{3R}{2r} + \dfrac{R^3}{2r^3} \right) \\[7pt]
+        v_\theta = -u\sin\theta \left( 1-\dfrac{3R}{4r} - \dfrac{R^3}{4r^3} \right) \\
+    \end{cases}.
+\end{equation}
+こうして，運動する球のまわりの流速分布が得られた．
+
+
+
+圧力を求めるため，\eqref{eq20.4:Stokes流でのvの表現}を\eqref{eq20.1:線形化したNS方程式}に代入する．
+\[
+    \Grad p = \eta\Laplacian\v
+    = \eta\Laplacian[ \cancel{\vec{u}} + \Rot\Rot(f\vec{u}) ]
+    = \eta\Laplacian [ \Grad\Div(f\vec{u})-\vec{u}\Laplacian f ]
+    = \eta \Grad[ \vec{u}\cdot\Grad(\Laplacian f) ]
+\]
+（途中で$\Laplacian^2f=0$を用いた）
+$p_0$を無限遠での流体の圧力として
+\begin{equation}
+    p = p_0 + \eta \vec{u}\cdot\Grad\Laplacian f
+\end{equation}
+を得る．
+ここで
+\[
+    \Laplacian f = \frac{1}{r^2} \ddv{r} \left[ r^2 \ddv{r} \left( ar + \frac{b}{r} \right) \right]
+    = \frac{1}{r^2} \ddv{r} \left[ r^2 \left( a - \frac{b}{r^2} \right) \right] = \frac{2a}{r} ,
+\]
+\[
+    \Grad(\Laplacian f ) = \frac{-2a \vec{r}}{r^3} = - \frac{3R \vec{n}}{2r^2}
+\]であるから
+\begin{equation}\label{eq20.12:Stokes流での圧力1}
+    p = p_0 - \frac{3\eta R (\vec{u}\cdot\vec{n}) }{2r^2}
+\end{equation}
+を得る．
+
+以上の式を用いて，運動する流体が固定球に及ぼす力$\vec{F}$（あるいは，同じことだが，無限遠で静止している流体中を球が運動するときに受ける抗力）を計算することができる．
+引き続き，$\vec{u}$の方向を極軸とする球座標系で考えることにすると，すべての量は球の中心からの距離$r$と極軸から測った角度$\theta$だけの関数である．
+
+球の面積要素$dS$にはたらく力は，ベクトル$\vec{n}$が球の外側に向かっていることに注意すると，(15.14)より
+\[
+    -p \vec{n} + \sigma'_{rr} \vec{n} + \sigma'_{r\theta} \Unit{\theta}.
+    \mytag{4}
+\]
+力$\vec{F}$は速度$\vec{u}$と平行であるから，\ajMaru{4}を$\vec{u}$方向に射影して球の表面全体で積分したものが力の大きさである：
+\begin{equation}\label{eq20.13:Stokes流で抗力を求める積分}
+    F = \int dS( -p\cos\theta + \sigma'_{rr}\cos\theta - \sigma'_{r\theta} \sin\theta )
+\end{equation}
+(15.20)に\eqref{eq20.10:Stokes流での流速成分}を代入し$r=R$とおくと
+\[
+    \eval{\sigma'_{rr}}_{r=R} = 2\eta \eval{\pdv{v_r}{r}}_{r=R}
+    = 2\eta u \cos\theta \left( \frac{3R}{2r^2} - \frac{3R^3}{2r^4} \right)_{r=R} = 0,
+\]
+\begin{align*}
+    \eval{\sigma'_{r\theta}}_{r=R} &= \eta \left( \frac{1}{r}\pdv{v_r}{\theta} + \pdv{v_\theta}{r} - \frac{v_\theta}{r} \right)_{r=R} \\
+    &= \eta \left[ 
+        -\frac{u\sin\theta}{r} \cancel{ \left( 1 - \frac{3R}{2r} + \frac{R^3}{2r^3} \right) }
+        - u\sin\theta \left( \frac{3R}{4r^2} + \frac{3R^3}{4r^4} \right)
+        - \frac{u \sin\theta}{r} \cancel{ \left( 1 - \frac{3R}{4r} - \frac{R^3}{4r^3} \right) }
+     \right]_{r=R} \\
+    &= -\frac{3\eta}{2R} u \sin\theta .
+\end{align*}
+また，表面での圧力は\eqref{eq20.12:Stokes流での圧力1}より
+\[  
+    p=p_0-\dfrac{3\eta}{2R}u\cos\theta .
+\]
+よって
+\[
+    F = \int dS \left( -p_0 \cos\theta + \frac{3\eta}{2R} u \cos^2\theta + \frac{3\eta}{2R} u \sin^2\theta \right)   
+    = -p_0 \int dS \cos\theta + \frac{3\eta u}{2R} \int dS.
+\]
+$\displaystyle \int dS$は球の表面積$4\pi R^2$に等しい．
+また
+\[
+    \int dS \cos\theta = 2\pi R^2 \int_0^\pi \sin\theta \cos\theta \; d\theta = 0
+\]
+である．以上より
+\begin{equation}\label{eq20.14:Stokesの法則}
+    F = 6\pi\eta Ru .
+\end{equation}
+これは\emph{Stokesの法則}と呼ばれる
+\footnote{
+後の応用のために，\eqref{eq20.7:a,bで表したStokes流の速度}で定数$a,b$を決めずに計算した式を書いておくと
+\[
+    F = 8\pi\eta au
+    \tag{20.14a}
+\]
+となる．
+なおLambには，任意形状の楕円体に対する抗力の式が書いてあるとのこと．
+}．
+
+
+
+
+抗力は，速度$u$と物体の大きさ$R$に比例しているが，これは次元解析から予想できたことである：
+以上の議論の出発点である\eqref{eq20.1:線形化したNS方程式},\eqref{eq20.2:連続の式（Stokes流）}には密度$\rho$が含まれないから，
+力$F$は，$\eta,R,u$で表されなければならない．
+この3数から作られる，力の次元をもつ組み合わせは$\eta Ru$のみである．
+
+
+ゆっくりと運動する球以外の物体に対しても，\eqref{eq20.14:Stokesの法則}と同様の依存性がある．
+ただし，任意の形状の物体に働く抗力$\vec{F}$の方向が$\vec{u}$と平行とは限らないから，一般に
+\begin{equation}
+    F_i = \eta a_{ij} u_j
+\end{equation}
+と書ける．ここで$a_{ij}$は速度によらない2階のテンソルである．
+このテンソルが対称であることは，散逸を伴うゆっくりとした運動について一般に成り立つOnsagerの相反定理の帰結である
+（ただし速度についての線形近似が成り立つ場合）．『統計物理学』\S~121参照．
+
+
+
+
+
+
+
+\subsection*{Stokesの法則の精密化}
+\subsubsection*{Oseen近似}
+球のまわりの流れの問題に対する上記の解は，球から離れたところでは，たとえReynolds数が小さくても成り立たない．
+これを明らかにするために，\eqref{eq20.1:線形化したNS方程式}で無視した$(\v\cdot\Grad)\v$の大きさを見積もってみよう．
+\eqref{eq20.9:Stokes流での流速}によると，$r$が大きいとき$\v$は$u$のオーダー，速度の微分は$uR/r^2$のオーダーである．
+よって$(\v\cdot\Grad)\v$は$u^2R/r^2$のオーダーになる．
+圧力傾度力$\Grad p / \rho$は，\eqref{eq20.12:Stokes流での圧力1}から見積もって$\eta uR/\rho r^3$のオーダーであり，粘性項$\nu \Laplacian\v$も$\nu uR/r^3$のオーダーである．
+以上より，$(\v\cdot\Grad)\v$を他の項に比べて無視できるのは
+\begin{equation}
+    \frac{u^2R}{r^2} \ll \frac{\nu uR}{r^3} \qquad\yueni r \ll \frac{\nu}{u}
+\end{equation}
+程度の距離だけである．よって球から離れると，$(\v\cdot\Grad)\v$はもはや無視できなくなり，求めた速度分布は正しくなくなる．
+
+
+
+
+球から離れたところでの速度分布を求めるためには，\eqref{eq20.1:線形化したNS方程式}で省略した$(\v\cdot\Grad)\v$の項を考慮しなければならない．
+この距離では$\v$はほとんど$\vec{u}$に等しいから，$\v\cdot\Grad$を近似的に$\vec{u}\cdot\Grad$で置き換えることができる．
+よって，球から離れたところでの速度は，線形の方程式
+\begin{equation}\label{eq20.17:Oseen近似した定常NS方程式}
+    (\vec{u}\cdot\Grad)\v = -\frac{1}{\rho} \Grad p + \nu \Laplacian\v
+\end{equation}
+に従う（\emph{Oseen近似}）．
+
+ここでは，\eqref{eq20.17:Oseen近似した定常NS方程式}の解を求める手順は省略するが，得られた速度分布を用いることにより，球に働く抗力の正確な式
+\begin{equation}\label{eq20.18:Stokesの法則の1次補正}
+    F = 6\pi\eta Ru \left( 1 + \frac{3uR}{8\nu} \right)
+\end{equation}
+が導かれることに触れておく（これはReynolds数$\R = uR/\nu$の1次までの展開になっている）．
+
+
+
+
+
+\subsubsection*{Navier-Stokes方程式に基づくStokesの法則の精密化}
+Goldstein（1929）は，Oseen方程式の解をReynolds数の級数に展開し，次の結果を得た．
+\[
+    F =  6\pi\eta Ru \left( 1 + \frac{3}{8}\R - \frac{19}{320}\R^2 + \cdots \right)
+\]
+この式は一見それらしく見えるが，実は正しくない．
+というのは，この式はOseen方程式に基づくものではあっても，Navier-Stokes方程式に基づくものではないからである．
+Navier-Stokes方程式に基づく計算はProudmanとPearson（1957）によって始められ，ChesterとBreach（1969）が
+\[
+    F =  6\pi\eta Ru \left[ 1 + \frac{3}{8}\R + \frac{9}{40}\R^2 \left( \log \R + C + \frac{5}{3} \log 2 - \frac{323}{360} \right) + \cdots \right]
+\]
+という結果を得ている（$C=0.577\cdots$はEulerの定数）．
+Goldsteinの結果は最初の2項しか正しくないことが分かる．
+
+
+
+\begin{details}
+摂動法の詳細については，省略する．
+\end{details}
+
+
+
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+半径$R_1<R_2$の2つの同心球が，角速度$\Omega_1, \Omega_2$で一様に回転している．
+Reynolds数$\Omega_1{R_1}^2/\nu \ll 1$，$\Omega_2{R_2}^2/\nu \ll 1$のとき，球の間を占める流体の運動を求めよ．
+    
+\end{mondai}
+\begin{kaitou}
+運動方程式\eqref{eq20.1:線形化したNS方程式}の線形性から，回転している2つの球の間の流体の運動は，一方が静止し他方が回転している場合の解を重ね合わせることで得られる．
+まずは$\Omega_2=0$，つまり内側の球が回転している場合を考えよう．
+
+回転軸を極軸とする球座標系をとる．
+極軸に垂直な断面内では，流体の速度は$\phi$成分のみが0でない．
+また対称性から$\partial p/\partial\phi=0$である．
+よって\eqref{eq20.1:線形化したNS方程式}は$\Laplacian\v=\vec{0}$（より正確には$\Laplacian v_\phi=0$）となる．
+
+角速度ベクトル$\vec{\Omega_1}$は軸性ベクトルであるから，前と同様の議論により
+\[
+    \v = \Rot[ f(r)\vec{\Omega_1} ] = \Grad f \times \vec{\Omega_1}
+\]
+と書くことができる
+\footnote{ここの行間は前よりも狭いように感じる．
+$\v$は$\phi$方向を向いているから，（$r$方向の，距離に依存するベクトル）$\times$（角速度ベクトル）で書けるとしてよいだろう．}．
+よって
+\[
+    \Laplacian\v = \Grad( \Laplacian f) \times \vec{\Omega_1} = \vec{0}.
+\]
+$\Grad( \Laplacian f)$は$r$方向を向いているから，この式が任意の$\vec{\Omega_1}$で成り立つためには$\Grad( \Laplacian f)=0$でなければならない．
+\[
+    \Laplacian f = \const
+\]
+$\Laplacian = \dfrac{1}{r^2} \ddv{r} \left( r^2 \ddv{r} \right)$を代入して2回積分すると，最終的に
+$f(r) = ar^2 + \dfrac{b}{r}$となり（結果に影響しない定数は省いた），
+\[
+    \Grad f = \left( 2ar - \frac{b}{r^2} \right) \Unit{r} = \left( 2a - \frac{b}{r^3} \right) \vec{r}, 
+\]
+\[
+    \v = \Grad f \times \vec{\Omega_1} = \left( \frac{b}{r^3} - 2a \right) \vec{\Omega_1} \times \vec{r}
+\]
+を得る．
+定数$a,b$は，$r=R_1$で$\v=\vec{\Omega_1} \times \vec{r}$，$r=R_2$で$\v=\vec{0}$という境界条件から決まる：
+\[
+    \begin{cases}
+        \dfrac{b}{{R_1}^3} - 2a = 1 \\[8pt] \dfrac{b}{{R_2}^3} - 2a = 0
+    \end{cases}
+    \qquad\yueni
+    b = \frac{(R_1R_2)^3}{{R_2}^3-{R_1}^3}, \;
+    2a = \frac{{R_1}^3}{{R_2}^3-{R_1}^3} .
+\]
+よって
+\[
+    \v = \frac{(R_1R_2)^3}{{R_2}^3-{R_1}^3} \left( \frac{1}{r^3} - \frac{1}{{R_2}^3} \right) (\vec{\Omega_1} \times \vec{r}).
+\]
+また，$\Grad p = \eta\Laplacian\v = \vec{0}$であるから，流体の圧力は一定である．
+
+
+外側の球が回転し，内側の球が回転している場合の解も同様に求めることができ
+\[
+    \v = \frac{(R_1R_2)^3}{{R_2}^3-{R_1}^3} \left( \frac{1}{{R_1}^3} - \frac{1}{r^3} \right) (\vec{\Omega_2} \times \vec{r})
+\]
+となる．そして両方の球が回転している場合は
+\[
+    \v = \frac{(R_1R_2)^3}{{R_2}^3-{R_1}^3} \left[ \left( \frac{1}{r^3} - \frac{1}{{R_2}^3} \right) (\vec{\Omega_1} \times \vec{r}) + \left( \frac{1}{{R_1}^3} - \frac{1}{r^3} \right) (\vec{\Omega_2} \times \vec{r}) \right]
+\]
+となる．
+
+ここで，2つの極限の場合を考えてみよう．
+\begin{itemize}
+    \item 内側の球がないとき（$R_1 \to 0, \Omega_1 \to 0$）：$\v = \vec{\Omega_2} \times \vec{r}$，つまり流体は球とともに剛体回転を行う．
+    \item 外側の球がないとき（$R_2 \to \infty, \Omega_2 \to 0$）：$\v = \left( \dfrac{R_1}{r} \right)^3 (\vec{\Omega_1} \times \vec{r})$となり，
+    球から離れるにつれて$\order{1/r^2}$で減衰する解になる．
+\end{itemize}
+後者の場合に，球に働く摩擦力のモーメントを計算してみよう（以下，添字1を省く）．
+\[
+    v_r = v_\theta = 0, \;
+    v_\phi \;(=v) = \left( \frac{R}{r} \right)^3 \Omega r \sin\theta = \Omega R^3 \frac{\sin\theta}{r^2}
+\]
+であるから，0でない粘性応力テンソルは
+\[
+    \eval{\sigma'_{\theta\phi}}_{r=R} = \eta \left( \frac{1}{r} \pdv{v_\phi}{\theta} - \frac{v_\phi \cot\theta}{r} \right)_{r=R}
+    = \eta\Omega R^3 \left( \frac{\cos\theta}{r^3} - \frac{\cos\theta}{r^3} \right)_{r=R} = 0,
+\]
+\[
+    \eval{\sigma'_{\phi r}}_{r=R} = \eta \left( \pdv{v_\phi}{r} - \frac{v_\phi}{r}\right)_{r=R}
+    = \eta\Omega R^3 \left( -\frac{2\sin\theta}{r^3} - \frac{\sin\theta}{r^3} \right)_{r=R} = -3\eta\Omega\sin\theta.
+\]
+角度$\theta \sim \theta+d\theta$の細い帯状領域に働くモーメントは
+\[
+    dM = \text{（力）} \times \text{（腕の長さ）}
+    = \text{（応力）} \times \text{（面積）}\times \text{（腕の長さ）}
+    = \eval{\sigma'_{\phi r}}_{r=R} \cdot (2\pi R\sin\theta \cdot R d\theta) \cdot R\sin\theta
+\]
+であるから，求めるモーメントは
+\[
+    M = \int_{0}^{\pi} (-3\eta\Omega\sin\theta) \cdot 2\pi R^3 \sin^2 \theta \; d\theta
+    = -6\pi\eta\Omega R^3 \int_{0}^{\pi} \sin^3 \theta \; d\theta
+    = -8\pi\eta\Omega R^3.
+\]
+
+
+\end{kaitou}
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+密度$\rho'$，粘性率$\eta'$，半径$R$の球状の液滴が，重力によって粘性率$\eta$，密度$\rho$の流体中を落下する速度を求めよ
+（W. Rybczy\'{n}ski 1911）．
+    
+\end{mondai}
+\begin{kaitou}
+液滴が静止しているような座標系をとり，無限遠での流体の速度を$\vec{u}$とする（すると，落下速度は$-\vec{u}$となる）．
+液滴の外側（e）の流体に対しては，\eqref{eq20.5:Stokes流でのfに関する重調和的方程式}の解は\eqref{eq20.7:a,bで表したStokes流の速度}である：
+\[
+    \v_\mathrm{e} = \vec{u} - a \frac{\vec{u}+(\vec{u}\cdot\vec{n})\vec{n}}{r} + b \frac{3(\vec{u}\cdot\vec{n})\vec{n} - \vec{u}}{r^3} .
+\]
+内側（i）の流体に対する解を求めるためには，本文の\ajMaru{1}〜\ajMaru{3}に戻らなければならない：
+\[
+    f(r) = C_1 r^4 + C_2 r^2 + C_3 r + \frac{C_4}{r}
+\]
+\[
+    f'(r) = 4C_1 r^3 + 2C_2 r + C_3 - \frac{C_4}{r^2}
+\]
+\[
+    f''(r) = 12C_1 r^2 + 2C_2 + \frac{2C_4}{r^3}
+\]
+$C_3r, C_4/r$は$r\to0$で特異的な解をもたらすから除外しなければならない．
+$C_1,C_2$を$B/8, A/4$と書いて
+\[
+    f(r) = \frac{A}{4}r^2 + \frac{B}{8}r^4.
+\]
+このとき
+\begin{align*}
+    \v_\mathrm{i} &= \Rot\Rot(f\vec{u}) = \Grad(\vec{u}\cdot \Grad f) - \vec{u} \Div\Grad f \\
+    &= \Grad \left[ \vec{u} \cdot \left( \frac{A}{2} \vec{r} + \frac{B}{2}r^2 \vec{r} \right) \right]
+        -\vec{u} \Div\left( \frac{A}{2} \vec{r} + \frac{B}{2}r^2 \vec{r} \right) \\
+    &= \frac{A}{2} \Grad(\vec{u}\cdot\vec{r}) + \frac{B}{2} \Grad(r^2\vec{u}\cdot\vec{r}) 
+        -\frac{A}{2} \vec{u} \Div\vec{r} - \frac{B}{2} \vec{u} \Div(r^2\vec{r}) \\
+    &= \frac{A}{2} \vec{u} + \frac{B}{2} \left[ 2\vec{r}(\vec{u}\cdot\vec{r}) + r^2\vec{u} \right]
+        -\frac{A}{2}3\vec{u} - \frac{B}{2}\vec{u} \left[ 2\vec{r}\cdot\vec{r} + r^2\cdot3 \right] \\
+    &= -A\vec{u} + B \left[ \vec{r}(\vec{u}\cdot\vec{r}) - 2r^2 \vec{u} \right] \\
+    &= -A\vec{u} + B r^2 \left[ \vec{n}(\vec{u}\cdot\vec{n}) - 2 \vec{u} \right].
+\end{align*}
+
+定数$a,b,A,B$は，$r=R$
+\footnote{液滴の形が球からずれる効果は，高次の微小量として無視することができる．
+しかし，実際に球形を維持するためには，境界面での表面張力が，液滴を変形させようとする圧力差よりも大きいという条件が必要である．
+第7章によれば，表面張力の係数を$\alpha$とすると表面張力は$\alpha/R$のオーダーであり，
+圧力差は$\D p \sim R \Grad p \sim R\eta\Laplacian\v \sim \eta u/R$のオーダーであるから，この条件は
+$\eta \dfrac{u}{R} \ll \dfrac{\alpha}{R}$と書ける．
+すぐ後で見るように$u \sim \rho gR^2/\eta$であるから
+\[
+    \rho gR \ll \frac{\alpha}{R} \qquad \yueni R \ll \sqrt{\frac{\alpha}{\rho g}}
+\]
+でなければならない．}
+での境界条件から決まる（法線成分$\sigma'_{rr}$が連続という条件もあるが，書かない．
+この条件から$u$が決まるが，これは抗力とのつりあいから求める方が簡単だからである）．
+\begin{itemize}
+    \item $r=R$で（液滴内部の）流速の法線成分が0：$v_{\mathrm{i},r}=0$．\par
+    $v_{\mathrm{i},r} = \v_\mathrm{i} \cdot \vec{n} = -A \vec{u}\cdot\vec{n} -Br^2 (\vec{u}\cdot\vec{n})$より
+    \[
+        A+BR^2=0 . \mytag{5}    
+    \]
+    \item $r=R$で（液滴外部の）流速の法線成分が0：$v_{\mathrm{e},r}=0$．\par
+    $v_{\mathrm{e},r} = \v_\mathrm{e} \cdot \vec{n} = \vec{u}\cdot\vec{n} -a \dfrac{2\vec{u}\cdot\vec{n}}{r} + b \dfrac{2\vec{u}\cdot\vec{n}}{r^3}$より
+    \[
+        1 - \frac{2a}{R} + \frac{2b}{R^3} = 0 . \mytag{6}
+    \]
+    \item $r=R$で流速の接線成分が連続：$v_{\mathrm{i},\theta} = v_{\mathrm{e},\theta}$．\par    
+    $\v=\alpha \vec{u} + \beta (\vec{u}\cdot\vec{n}) \vec{n}$と分解したとき$v_\theta=-\alpha u\sin\theta$が成り立つから
+    \[
+        v_{\mathrm{i},\theta} = (A+2Br^2) u\sin\theta, \quad
+        v_{\mathrm{e},\theta} = \left( -1 + \frac{a}{r} + \frac{b}{r^3} \right) u\sin\theta,
+    \]
+    \[
+        \yueni A+2BR^2 = -1 + \frac{a}{R} + \frac{b}{R^3} . \mytag{7}    
+    \]
+    \item $r=R$で粘性応力テンソルの剪断成分が連続：$\sigma'_{\mathrm{i},r\theta} = \sigma'_{\mathrm{e},r\theta}$．\par
+    $\sigma'_{r\theta} = \eta \left( \dfrac{1}{r}\dpdv{v_r}{\theta} + \dpdv{v_\theta}{r} - \dfrac{v_\theta}{r} \right)$であるから
+    \[
+        \sigma'_{\mathrm{i},r\theta} = \eta' \left[ \frac{1}{r}(A+Br^2)u\sin\theta + 4Bru\sin\theta - \frac{1}{r}(A+2Br^2)u\sin\theta \right]
+        = 3\eta'Bru\sin\theta,
+    \]
+    \[
+        \sigma'_{\mathrm{e},r\theta} = \eta \left[ 
+            \frac{-1}{r} \left( 1-\frac{2a}{r}+\frac{2b}{r^3} \right)u\sin\theta 
+            + \left( -\frac{a}{r^2}-\frac{3b}{r^4} \right)u\sin\theta 
+            - \frac{1}{r} \left( -1+\frac{a}{r}+\frac{b}{r^3} \right) u\sin\theta \right]
+        = -\frac{6\eta bu\sin\theta}{r^4}.
+    \]
+    よって
+    \[
+        \eta'RB = -\frac{2\eta}{R^4} b. \mytag{8}
+    \]
+\end{itemize}
+$A$以外を消去する．\ajMaru{5}より$B=-A/R^2$で，これを\ajMaru{8}へ代入して
+\[
+    \eta'R \left( -\frac{A}{R^2} \right) = -\frac{2\eta}{R^4} b
+    \qquad \yueni b = \frac{\eta'R^3}{2\eta} A.
+\]
+\ajMaru{6}より
+\[
+    \frac{2a}{R} = 1 + \frac{2b}{R^3} = 1 + \frac{\eta'}{\eta} A
+    \qquad \yueni a = \frac{R}{2} \left( 1 + \frac{\eta'}{\eta} A \right).
+\]
+以上を\ajMaru{7}に代入して
+\[
+    A - 2A = -1 + \frac{1}{2} \left( 1 + \frac{\eta'}{\eta} A \right) + \frac{\eta'}{2\eta} A ,
+\]
+\[
+    -A = -\frac{1}{2} + \frac{\eta'}{\eta} A 
+    \qquad \yueni A = \frac{\eta}{2(\eta+\eta')} \; (=-BR^2).
+\]
+また
+\[
+    a = \frac{R}{2} \left[ 1 + \frac{\eta'}{2(\eta+\eta')} \right] = \frac{2\eta+3\eta'}{4(\eta+\eta')}R, \quad
+    b = \frac{R^3}{2} \cdot \frac{\eta'}{2(\eta+\eta')} = \frac{\eta'}{4(\eta+\eta')}R^3
+\]
+となる．
+
+
+
+さて，(20.14a)より抗力は
+\[
+    F = 8\pi\eta au = 2\pi \frac{2\eta+3\eta'}{\eta+\eta'} \eta Ru
+\]
+となり，$\eta'\to\infty$（固体球の極限）では$F \to 6\pi\eta Ru$でStokesの法則になる．
+また$\eta'\to0$（気泡の極限）では$F \to 4\pi\eta Ru$で，固体球の抗力の$2/3$になる．
+
+
+最後に，液滴に働く力のつりあいから$u$を求めよう．
+\[
+    F= 2\pi \frac{2\eta+3\eta'}{\eta+\eta'} \eta Ru = \frac{4}{3}\pi R^3 (\rho-\rho')g
+    \qquad \yueni u = \frac{2(\eta+\eta')(\rho-\rho')gR^2}{3\eta(2\eta+3\eta')}.
+\]
+
+\end{kaitou}
+
+%%%%%%%%%% 問題3 %%%%%%%%%%
+
+\begin{mondai}{}{}
+半径$R$の2枚の円板が，少し離れて平行に置かれており，両者の間を流体が満たしている．円板は一定速度$u$で近づき，流体を変位させる．
+この運動に対する抗力を求めよ（O. Reynolds）．
+\end{mondai}
+\begin{kaitou}
+下の円板の中心を原点とする円筒座標系を用い，下の円板が静止しているとする．
+流体層が薄いため，流れは半径方向の成分が支配的で，かつ軸対称とみなすことができる．
+すなわち$v_z \ll v_r \;(v_\phi=0)$，$\dpdv{v_r}{r} \ll \dpdv{v_r}{z}$である．
+短い時間を考え，その間は定常（$\partial/\partial t=0$）と仮定すると，運動方程式と連続の式は
+\[
+    \eta \pdv[2]{v_r}{z} = \pdv{p}{r}, \quad \pdv{p}{z}=0,
+    \mytag{1}
+\]
+\[
+    \frac{1}{r} \pdv{(rv_r)}{r} + \pdv{v_z}{z} = 0.
+    \mytag{2}
+\]
+円板間の距離を$h$，外圧を$p_0$とすると，境界条件は
+\begin{itemize}
+    \item $z=0$で$v_r=v_z=0,$
+    \item $z=h$で$v_r=0, v_z=-u,$
+    \item $r=R$で$p=p_0.$
+\end{itemize}
+
+\ajMaru{1}より$p$は$r$だけの関数であり，積分して$v_r = \dfrac{1}{2\eta}\ddv{p}{r}z^2+az+b$となる．
+境界条件より
+\[
+    \begin{cases}
+        0 = b \\[8pt]
+        0 = \dfrac{1}{2\eta}\ddv{p}{r}h^2+ah+b
+    \end{cases}
+    \qquad \yueni a = -\frac{1}{2\eta}\dv{p}{r}h.
+\]
+よって
+\[
+    v_r = \frac{1}{2\eta}\dv{p}{r} z(z-h)
+\]
+を得る．
+
+次に\ajMaru{2}を$z$について積分し
+\[
+    \frac{1}{r} \dv{r} \int_{0}^{h} rv_r \; dz + \Bigl[ v_z \Bigr]_0^h = 0,
+\]
+\[
+    \yueni u = \frac{1}{r} \dv{r} \int_{0}^{h} rv_r \; dz
+    = \frac{1}{r} \dv{r} \left( r\dv{p}{r} \right) \cdot \frac{1}{2\eta}\int_{0}^{h} z(z-h) \; dz
+    = -\frac{h^3}{12\eta} \cdot \frac{1}{r} \dv{r} \left( r\dv{p}{r} \right).
+\]
+これを$p(r)$に関する微分方程式とみなして解こう．
+\[
+    \dv{r} \left( r\dv{p}{r} \right) = -\frac{12\eta u}{h^3}r \;\Rightarrow\; 
+    r\dv{p}{r} = -\frac{6\eta u}{h^3}r^2 + C_1
+\]
+\[
+    \dv{p}{r} = -\frac{6\eta u}{h^3}r + \frac{C_1}{r}
+    \qquad \yueni 
+    p = -\frac{3\eta u}{h^3}r^2 + C_1 \log r + C_2.
+\]
+$r=0$で$p$は有界でなければならないから$C_1=0$である．
+また$r=R$での条件から$C_2$が決まり
+\[
+    p = p_0 + \frac{3\eta u}{h^3} (R^2-r^2)
+\]
+となる．
+
+円板に働く抗力は，$p-p_0$を円板全体で積分したもので
+\[
+    F  = \int_{0}^{R} (p-p_0) 2\pi r \; dr
+    = 2\pi \cdot \frac{3\eta u}{h^3} \int_{0}^{R} r(R^2-r^2) \; dr
+    = \frac{3\pi\eta uR^4}{2h^3}.
+\]
+
+\end{kaitou}
+
+\BackToTheToc
