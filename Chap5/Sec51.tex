@@ -1,5 +1,397 @@
 \section{無限媒質中の熱伝導}\label{sec:51}
+静止した無限媒質中の熱伝導を考える．
+$t=0$における全空間の温度分布$T_0(\vec{r})$が与えられているとき，$t>0$での温度分布を求める問題を考えよう．
 
+
+$T$を座標に関してFourier変換しよう．
+\begin{equation}
+    T_{\vec{k}}(t) = \int T(\vec{r}, t) e^{-i\vec{k}\cdot\vec{r}} \, d^3\vec{r}, \quad
+    T(\vec{r}, t) = \frac{1}{(2\pi)^3} \int T_{\vec{k}}(t) e^{i\vec{k}\cdot\vec{r}} \, d^3\vec{k}
+\end{equation}
+後者を\eqref{eq50.4:静止流体での熱伝導方程式}に代入し
+\[
+    \frac{1}{(2\pi)^3} \int \left( \dv{T_{\vec{k}}}{t} + \chi k^2 T_{\vec{k}} \right) e^{i\vec{k}\cdot\vec{r}} \, d^3\vec{k} = 0
+\]
+\[
+    \dv{T_{\vec{k}}}{t} + \chi k^2 T_{\vec{k}} = 0
+    \qquad \yueni T_{\vec{k}} = T_{0\vec{k}} \exp(-\chi k^2 t) .
+\]
+$t=0$で$T=T_0$に戻らなければならないから，$T_{0\vec{k}}$は$T_0$のFourier変換である．
+\[
+    T_{0\vec{k}} = \int T_0(\vec{r}') e^{-i\vec{k}\cdot\vec{r}'} \, d^3\vec{r}'
+\]
+したがって
+\[
+    T(\vec{r}, t) = \frac{1}{(2\pi)^3} \int d^3\vec{k} \int d^3\vec{r}' \, T_0(\vec{r}') e^{-\chi k^2 t} e^{i\vec{k}\cdot(\vec{r}-\vec{r}')} .
+\]
+積分の順序を入れ替え，まず$\vec{k}$についての積分を行おう．
+\begin{align*}
+    \int_{-\infty}^{\infty} dk_x \, e^{-\chi {k_x}^2 t} e^{ik_x(x-x')}
+    &= \int_{-\infty}^{\infty} dk_x \, e^{-\chi {k_x}^2 t} \left\{ \cos k_x(x-x') + i \, \cancel{ \sin k_x(x-x') } \right\} \\
+    & \gyoukan{←積分公式 $\displaystyle \int_{-\infty}^{\infty} e^{-\alpha x^2} \cos \beta x \, dx %
+    = \sqrt{\dfrac{\pi}{\alpha}} e^{-\beta^2/4\alpha} \quad (\alpha>0) $ } \\
+    &= \sqrt{\frac{\pi}{\chi t}} \exp\left[ - \frac{(x-x')^2}{4\chi t} \right]
+\end{align*}
+であるから
+\begin{align}
+    T(\vec{r}, t) 
+    &= \frac{1}{(2\pi)^3} \int d^3\vec{r}' \, T_0(\vec{r}') \sqrt{\frac{\pi}{\chi t}}^3 %
+    \exp[ - \frac{ (x-x')^2 + (y-y')^2 + (z-z')^2 }{4\chi t} ] \notag \\
+    &= \frac{1}{8(\pi\chi t)^{3/2}} \int d^3\vec{r}' \, T_0(\vec{r}') \exp\left[ - \frac{(\vec{r}-\vec{r}')^2}{4\chi t} \right] .
+    \label{eq51.2:3D熱伝導方程式の解}
+\end{align}
+この式は問題に対する完全な解である．
+つまり，与えられた初期の温度分布から，任意の時刻における温度分布を求めることができる．
+
+特に，初期の温度分布が$x$のみに依存する場合，$y',z'$についての積分を行えば
+\begin{details}
+$\displaystyle \int_{-\infty}^{\infty} dy' \, e^{-(y-y')^2/4\chi t} = 2\sqrt{\pi\chi t}$より
+\end{details}
+\begin{equation}
+    T(x, t) = \frac{1}{2\sqrt{\pi\chi t}} \int_{-\infty}^{\infty} dx' \, T_0(x') \exp\left[ - \frac{(x-x')^2}{4\chi t} \right]
+\end{equation}
+となる．
+
+
+
+時刻$t=0$で，原点では$T_0=\infty$であるが，それ以外の場所では$T_0=0$であるような状況を考えよう
+（但し，全熱量$\propto \displaystyle\int d^3\vec{r} \, T_0(\vec{r})$は有限とする）．
+そのような初期分布はデルタ関数で表される．
+\begin{equation}
+    T_0(\vec{r}) = \const \times \delta(\vec{r})
+\end{equation}
+式\eqref{eq51.2:3D熱伝導方程式の解}は次のようになる．
+\begin{equation}\label{eq51.5:3D点熱源の場合の解}
+    T(\vec{r}, t) = \const \times \frac{1}{8(\pi\chi t)^{3/2}} \exp\left( - \frac{r^2}{4\chi t} \right) 
+\end{equation}
+時間が経過すると，原点$r=0$での温度は$t^{-3/2}$で減少する．
+それに伴って周りの温度は上昇し，温度が0よりもかなり高い領域が広がっていく（図39）．
+この広がり方は主に\eqref{eq51.5:3D点熱源の場合の解}の指数因子によって決まる．
+この領域の大きさのオーダーを$l$とすると
+\begin{equation}\label{eq51.6:熱拡散のルートt則}
+    \frac{l^2}{4\chi t} \sim \const
+    \qquad\yueni l \sim \sqrt{\chi t}.
+\end{equation}
+つまり，時間の平方根で増加する．
+
+
+\eqref{eq51.5:3D点熱源の場合の解}は3次元の場合の式であるが，1次元の場合にも同様の式が成り立つ．
+$t=0$で，有限の熱が平面$x=0$に集中しているとき，その後の温度分布は
+\begin{equation}\label{eq51.7:1D面熱源の場合の解}
+    T(x, t) = \const \times \frac{1}{2\sqrt{\pi\chi t}} \exp\left( - \frac{x^2}{4\chi t} \right) 
+\end{equation}
+で与えられる．
+
+
+
+
+\eqref{eq51.6:熱拡散のルートt則}を，やや異なった見方で解釈することができる．
+物体の大きさのオーダーを$l$としよう．
+すると，物体が非一様に加熱される場合，物体の温度がどこでもほぼ等しくなるのにかかる時間のオーダー$\tau$は
+\begin{equation}
+    \tau \sim \frac{l^2}{\chi}
+\end{equation}
+となる．
+$\tau$は熱伝導の\emph{緩和時間}と呼ばれ，物体の長さの次元の2乗に比例し，温度伝導度に反比例する．
+
+
+
+
+以上で得られた式によって記述される熱伝導の過程は，任意の摂動が瞬時に全空間に伝わるという特徴を持っている．
+\eqref{eq51.5:3D点熱源の場合の解}から明らかなように，点源から発せられた熱は次の瞬間には媒質に伝わり，無限遠でのみ$T=0$である．
+この特徴は，$\chi$が温度に依存しても（全空間で$\chi=0$でない限り）成り立つ．
+しかし，$T=0$で$\chi=0$となるような温度依存性を持つ媒質の場合，熱の伝播は遅れ，摂動の効果は有限の領域にしか現れない
+（考えている領域の外では$T=0$とする）．
+この結果，および，以下の問題の解は，
+Ya. B. Zel'dovich and A. S. Kompaneets (1950)
+による．
+
+
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+熱伝導度と比熱は温度の冪で変化するが，密度は一定の媒質がある．
+ある瞬間に任意の熱源から熱が伝播した領域の境界付近で，温度が0に近づく様子を調べよ（考えている領域の外では温度は0とする）．
+\end{mondai}
+\begin{kaitou}
+熱伝導度$\kappa$と比熱$c_p$が温度の冪で書けるなら，温度伝導度$\chi=\dfrac{\kappa}{\rho c_p}$やエンタルピー
+$h = \displaystyle\int c_p \, dT$も温度の冪で変化する．
+よって，$H=\rho h$を単位体積当たりのエンタルピーとして，$\chi = a H^n$と書ける．
+熱伝導方程式$\rho c_p \dpdv{T}{t} = \Div(\kappa \Grad T)$は
+\[
+    \pdv{H}{t} = a \Div (H^n \Grad H)
+    \mytag{1}
+\]
+となる．
+
+
+ある短い時間の間には，領域の境界の一部を平面とみなし，一定速度$v$で動くと仮定することができる．
+よって\ajMaru{1}の解は$H=H(x-vt)$とおけて（$x$は境界面に垂直な方向の座標）
+\[
+    -v \dv{H}{x} = a \dv{x} \left( H^n \dv{H}{x} \right)
+    \mytag{2}
+\]
+となる．1回積分して
+\[
+    -v H = a H^n \dv{H}{x}.
+\]
+$\ddv{x}{H} \sim H^{n-1}$より$x \sim H^n$となり
+\[
+    H \sim |x|
+    \mytag{3}
+\]
+となる（$|x|$は境界からの距離）．
+
+もし$n>0$なら，加熱された領域は$T=0$の領域との境界を持つ．
+もし$n \ika 0$なら，$T=0$となる有限な領域は存在しない．つまり熱は各瞬間に全空間に分布する．
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+前問と同様の媒質において，$t=0$で単位面積あたり$Q$の熱が平面$x=0$に集中している（この面以外では$T=0$とする）．
+$t>0$での温度分布を求めよ．
+\end{mondai}
+\begin{kaitou}
+1次元の場合，方程式\ajMaru{1}は
+\[
+    \pdv{H}{t} = a \pdv{x} \left( H^n \pdv{H}{x} \right)
+    \mytag{4}
+\]
+となる．
+この問題に現れるパラメータは
+$Q[\si{J m^{-2}}]$，
+$a=\dfrac{\chi}{H^n} \left[ \dfrac{\si{m^2 s^{-1}}}{(\si{Jm^{-3}})^n} \right]$
+である．相似な解を求めるため，これらと変数$x[\si{m}]$，$t[\si{s}]$から無次元の変数$\xi$を作ろう．
+$\xi = Q^\alpha a^\beta x^\gamma t^\delta$とすると
+\[
+    (\si{J m^{-2}})^\alpha \left( \dfrac{\si{m^2 s^{-1}}}{(\si{Jm^{-3}})^n} \right)^\beta \si{m}^\gamma \si{s}^\delta = 1
+    \qquad \yueni
+    \begin{cases}
+        \alpha - n \beta = 0 \\
+        -2\alpha + (2+3n)\beta + \gamma = 0 \\
+        -\beta + \delta = 0 .
+    \end{cases}
+\]
+$\gamma=1$と選ぶと$\alpha=-\dfrac{n}{2+n}$，$\beta=\delta=-\dfrac{1}{2+n}$となり
+\[
+    \xi = \frac{x}{(Q^n at)^{\frac{1}{2+n}}}
+    \mytag{5}
+\]
+を得る．
+
+次に，$H [\si{Jm^{-3}}]$の次元をもつ量を作ろう．
+\[
+    (\si{J m^{-2}})^\alpha \left( \dfrac{\si{m^2 s^{-1}}}{(\si{Jm^{-3}})^n} \right)^\beta \si{m}^\gamma \si{s}^\delta = \si{Jm^{-3}}
+    \qquad \yueni
+    \begin{cases}
+        \alpha - n \beta = 1 \\
+        -2\alpha + (2+3n)\beta + \gamma = -3 \\
+        -\beta + \delta = 0.
+    \end{cases}
+\]
+$\gamma=0$とすると$\alpha=\dfrac{2}{2+n}$，$\beta=\delta=-\dfrac{1}{2+n}$となる．
+よって$H$の次元をもつ量として
+$ H_0 \equiv \left( \dfrac{Q^2}{at} \right) ^{\frac{1}{2+n}} $が取れるから，求める解を次のようにおくことができる．
+\[
+    H(x, t) = H_0 f(\xi)
+    \mytag{6}
+\]
+$f$は$\xi$のみの関数で，無次元である．以下，$'$（プライム）は$\xi$による微分とする．
+\begin{align*}
+    \pdv{H}{t} &= \dv{H_0}{t} f + H_0 f' \pdv{\xi}{t} \\
+    &= -\frac{1}{2+n} \frac{H_0}{t} f + H_0 f' \left( -\frac{1}{2+n} \frac{\xi}{t} \right) \\
+    &= -\frac{1}{2+n} \cdot \frac{H_0}{t} (f + \xi f').
+\end{align*}
+\[
+    \pdv{H}{x} = H_0 f' \pdv{\xi}{x} = H_0 f' \frac{\xi}{x}, \quad
+    H^n \pdv{H}{x} = {H_0}^{n+1} f^n f' \frac{\xi}{x} 
+\]
+\[
+    \pdv{x} \left( H^n \pdv{H}{x} \right) = {H_0}^{n+1} ( f^n f' )' \left( \frac{\xi}{x}  \right)^2
+\]
+よって\ajMaru{4}は
+\[
+    -\frac{1}{2+n} \cdot \frac{H_0}{t} (f + \xi f') = a {H_0}^{n+1} ( f^n f' )' \left( \frac{\xi}{x}  \right)^2
+\]
+\begin{details}
+無次元化を行ったから，次元を持つ量は全て消える．
+\end{details}
+\[
+    -\frac{1}{2+n} (f + \xi f') = ( f^n f' )'
+\]
+\begin{equation}
+    \yueni (2+n) \dv{\xi} \left( f^n \dv{f}{\xi} \right) + \xi \dv{f}{\xi} + f = 0.
+    \tag{\star}
+\end{equation}
+
+(\star)を解くために$g=f^n$とおく．$f=g^{\frac{1}{n}}$であるから
+\[
+    f' = \frac{1}{n} g^{\frac{1}{n}-1} g', \quad
+    f^n f' =  \frac{1}{n} g^{\frac{1}{n}} g'
+\]
+\[
+    (f^n f')' =  \frac{1}{n} \left\{ \frac{1}{n} g^{\frac{1}{n}-1} (g')^2 + g^{\frac{1}{n}} g'' \right\} .
+\]
+よって(\star)は
+\[
+    \frac{2+n}{n} \left\{ \frac{1}{n} g^{\frac{1}{n}-1} (g')^2 + g^{\frac{1}{n}} g'' \right\}
+    + \xi \frac{1}{n} g^{\frac{1}{n}-1} g' + g^{\frac{1}{n}} = 0.
+\]
+両辺を$\dfrac{1}{n}g^{\frac{1}{n}-1}$で割り
+\[
+    \frac{2+n}{n} \left\{ (g')^2 + n g g'' \right\} + \xi g' + ng = 0
+\]
+\[
+    g' \left( \frac{2+n}{n} g' + \xi \right) + ng \left( \frac{2+n}{n} g'' + 1 \right) = 0.
+\]
+両辺に$\left( \dfrac{2+n}{n} g' + \xi \right)^{n-1}$をかけて
+\[
+    \left\{ g\left( \frac{2+n}{n} g' + \xi \right)^n \right\}' = 0
+    \qquad \yueni
+    g\left( \frac{2+n}{n} g' + \xi \right)^n = \const
+\]
+対称性より$\xi=0$で$f'=0$（よって$g'=0$）であるから，右辺の定数は0となり
+\[
+    \frac{2+n}{n} g' + \xi = 0
+    \qquad\yueni g = \frac{n}{2+n} \cdot \frac{{\xi_0}^2 - \xi^2}{2}.
+\]
+ここで$\xi_0$は積分定数である．
+以上より
+\[
+    f(\xi) = \left[ \frac{n}{2+n} \cdot \frac{{\xi_0}^2 - \xi^2}{2} \right]^{\frac{1}{n}}
+    \mytag{7}
+\]
+を得る．
+
+
+\subsubsection*{$n>0$のとき}
+\ajMaru{7}は$-\xi_0 \ika \xi \ika \xi_0$に対応する，2つの平面$x=\pm x_0$に挟まれた領域内の温度分布を与える（その外側では$H=0$である）．
+\ajMaru{5}から，加熱された領域は$x_0 \sim t^{\frac{1}{2+n}}$で広がる．
+
+定数$\xi_0$は，全ての熱量が一定という条件から決まる．
+\[
+    \int_{-x_0}^{x_0} H \, dx = \int_{-\xi_0}^{\xi_0} H_0 f(\xi) (Q^n at)^{\frac{1}{2+n}} \, d\xi
+    = Q \int_{-\xi_0}^{\xi_0} f(\xi) \, d\xi
+\]
+が$Q$に等しいから，条件は
+\[
+    \int_{-\xi_0}^{\xi_0} \left[ \frac{n}{2+n} \cdot \frac{{\xi_0}^2 - \xi^2}{2} \right]^{\frac{1}{n}} \, d\xi = 1
+\]
+と書ける．$\xi = \xi_0 y$と置換し
+\[
+    \int_{-1}^{1} \left[ \frac{n {\xi_0}^2}{2(2+n)} (1-y^2) \right]^{\frac{1}{n}} \xi_0\, dy = 1 .
+\]
+岩波数学公式I（微分積分・平面曲線）第V篇・第1章\S~46(i)によれば
+\[
+    \int_{0}^{1} x^\alpha (1-x^\lambda)^\beta \, dx = \frac{1}{\lambda} B \left( \frac{\alpha+1}{\lambda}, \beta+1 \right) \quad
+    (\alpha, \beta > -1, \lambda>0)
+\]
+であるから，$\alpha=0, \beta=\dfrac{1}{n}, \lambda=2$として
+\[
+    \int_{0}^{1} (1-x^2)^{\frac{1}{n}} \, dx = \frac{1}{2} B \left( \frac{1}{2}, \frac{1}{n}+1 \right)
+\]
+\[
+    \int_{-1}^{1} (1-x^2)^{\frac{1}{n}} \, dx = B \left( \frac{1}{2}, \frac{1}{n}+1 \right)
+    = \frac{ \Gamma\left(\frac{1}{2}\right) \Gamma\left(\frac{1}{n}+1\right) }{\Gamma\left(\frac{1}{n}+\frac{1}{2}+1\right)}
+    = \frac{ \sqrt{\pi} \cdot \frac{1}{n} \Gamma\left(\frac{1}{n}\right) }{\left(\frac{1}{n}+\frac{1}{2}\right)\Gamma\left(\frac{1}{n}+\frac{1}{2}\right)}
+    = \frac{ 2\sqrt{\pi} \Gamma\left(\frac{1}{n}\right) }{(2+n)\Gamma\left(\frac{1}{n}+\frac{1}{2}\right)}
+\]
+となる．規格化の積分は
+\[
+    \left[ \frac{n {\xi_0}^2}{2(2+n)} \right]^{\frac{1}{n}} \xi_0 \cdot \frac{ 2\sqrt{\pi} \Gamma\left(\frac{1}{n}\right) }{(2+n)\Gamma\left(\frac{1}{n}+\frac{1}{2}\right)} = 1 .
+\]
+\[
+    {\xi_0}^{\frac{2}{n}+1} = \frac{2^{\frac{1}{n}-1} (2+n)^{\frac{1}{n}+1}}{n^{\frac{1}{n}} \sqrt{\pi} } \cdot \frac{ \Gamma\left(\frac{1}{n}+\frac{1}{2}\right) }{ \Gamma\left(\frac{1}{n}\right) }
+\]
+両辺$n$乗して
+\[
+    {\xi_0}^{2+n} = \frac{2^{1-n} (2+n)^{1+n}}{n \pi^{\frac{n}{2}} } \cdot \left( \frac{ \Gamma\left(\frac{1}{n}+\frac{1}{2}\right) }{ \Gamma\left(\frac{1}{n}\right) } \right)^n .
+    \mytag{9}
+\]
+こうして定数$\xi_0$が決まった．
+
+
+
+
+\subsubsection*{$n=-\nu<0$のとき}
+$-{\xi_0}^2$を改めて${\xi_0}^2$とおくと
+\[
+    f(\xi) = \left[ \frac{\nu}{2(2-\nu)} ({\xi_0}^2 + \xi^2) \right]^{-\frac{1}{\nu}}
+    \mytag{10}
+\]
+となる．この場合，熱は全空間に分布しており，原点から十分離れたところでは，$H$は$x^{-\frac{2}{\nu}}$で減少する．
+但し解\ajMaru{10}は$\nu \ijou 2$のときは意味がない（物理的には，熱が一瞬で無限遠に到達することを意味する）．
+
+$\nu<2$のとき，規格化条件は
+\[
+    \int_{-\infty}^{\infty} \left[ \frac{\nu}{2(2-\nu)} ({\xi_0}^2 + \xi^2) \right]^{-\frac{1}{\nu}} \, d\xi = 1
+\]
+\[
+    \int_{-\infty}^{\infty} \left[ \frac{\nu {\xi_0}^2}{2(2-\nu)} (1 +y^2) \right]^{-\frac{1}{\nu}} \xi_0\, dy = 1 .
+\]
+再び岩波数学公式\S~46(ii)によれば
+\[
+    \int_{0}^{\infty} \frac{dx}{x^\alpha (1+x^\lambda)^\beta} = \frac{1}{\lambda} B \left( \beta - \frac{1-\alpha}{\lambda}, \frac{1-\alpha}{\lambda} \right) \quad
+    (\alpha<1, \beta,\lambda >0, \lambda\beta>1-\alpha)
+\]
+であるから，$\alpha=0, \beta=\dfrac{1}{\nu}, \lambda=2$として
+\[
+    \int_{0}^{\infty} (1+x^2)^{-\frac{1}{\nu}} \, dx = \frac{1}{2} B \left( \frac{1}{\nu}-\frac{1}{2}, \frac{1}{2} \right)
+\]
+\[
+    \int_{-\infty}^{\infty} (1+x^2)^{-\frac{1}{\nu}} \, dx = B \left( \frac{1}{\nu}-\frac{1}{2}, \frac{1}{2} \right)
+    = \frac{ \Gamma\left(\frac{1}{\nu}-\frac{1}{2}\right) \Gamma\left(\frac{1}{2}\right) }{\Gamma\left(\frac{1}{\nu}\right)}
+    = \frac{ \sqrt{\pi} \Gamma\left(\frac{1}{\nu}-\frac{1}{2}\right) }{\Gamma\left(\frac{1}{\nu}\right)}
+\]
+となる．規格化の積分は
+\[
+    \left[ \frac{\nu {\xi_0}^2}{2(2-\nu)} \right]^{-\frac{1}{\nu}} \xi_0 \cdot \frac{ \sqrt{\pi} \Gamma\left(\frac{1}{\nu}-\frac{1}{2}\right) }{\Gamma\left(\frac{1}{\nu}\right)} = 1 .
+\]
+\[
+    {\xi_0}^{\frac{2}{\nu}-1} = \frac{ \sqrt{\pi} \nu^{-\frac{1}{\nu}} }{ \{ 2(2-\nu)\}^{-\frac{1}{\nu}} } \cdot \frac{ \Gamma\left(\frac{1}{\nu}-\frac{1}{2}\right) }{\Gamma\left(\frac{1}{\nu}\right)}
+\]
+両辺$\nu$乗して
+\[
+    {\xi_0}^{2-\nu} = \frac{2(2-\nu) \pi^{\frac{\nu}{2}}}{\nu} \cdot \left( \frac{ \Gamma\left(\frac{1}{\nu}-\frac{1}{2}\right) }{\Gamma\left(\frac{1}{\nu}\right)} \right)^\nu
+    \mytag{11}
+\]
+を得る．
+
+
+
+\subsubsection*{$n\to 0$のとき}
+$\xi \to \dfrac{x}{\sqrt{at}}$，\ajMaru{9}と
+\[
+    \lim_{n \to 0} \left( \frac{ \Gamma\left(\frac{1}{n}+\frac{1}{2}\right) }{ \Gamma\left(\frac{1}{n}\right) } \right)^n =1
+\]
+より${\xi_0}^2 \to \dfrac{2\cdot2}{n}$である．また\ajMaru{7}より
+\[
+    f(\xi) \to \lim_{n=0} \left[ \frac{n}{4} \left( \frac{4}{n} - \frac{x^2}{at} \right) \right]^{\frac{1}{n}}
+    = \lim_{n=0} \left( 1 - \frac{nx^2}{4at} \right)^{\frac{1}{n}}
+    = \exp\left( - \frac{x^2}{4at} \right).
+\]
+$H=H_0 e^{-x^2/4at}$として規格化条件は
+\[
+    Q = \int_{-\infty}^{\infty} H_0 e^{-x^2/4at} \, dx = H_0 \cdot \sqrt{\pi \cdot 4at}
+    \qquad\yueni H_0 = \frac{Q}{2\sqrt{\pi at}}.
+\]
+したがって
+\[
+    H \to \frac{Q}{2\sqrt{\pi at}} \exp\left( - \frac{x^2}{4at} \right)
+\]
+となり\eqref{eq51.7:1D面熱源の場合の解}と一致する．
+
+
+\end{kaitou}
 
 
 
