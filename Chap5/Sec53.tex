@@ -1,7 +1,142 @@
 \section{熱輸送の相似則}
 
+流体中の熱輸送の過程は，流体が運動するために，固体中の問題よりも複雑である．
+非一様に加熱された流体の運動は\emph{対流}と呼ばれる．
 
 
+
+ここでは，流体の物性値が（温度によらず）一定と仮定できるほど，流体中の温度差が小さいと仮定する．
+一方で，粘性散逸によって生じる温度差を無視できるほど，温度差が大きいとしよう．
+このとき\eqref{eq50.2:非圧縮性流体での熱輸送の式}で粘性項を除くことができるから
+\begin{equation}
+    \pdv{T}{t} + \v \cdot \Grad T = \chi \Laplacian T 
+\end{equation}
+となる．
+これと連続の式，Navier-Stokes方程式により，今考えている対流が完全に決定する．
+
+
+以下では定常な対流のみを扱う（そのような対流が維持されるためには，流体に接している熱源が必要である）．
+時間微分項を落として
+\begin{align}
+    \v \cdot \Grad T &= \chi \Laplacian T \label{eq53.2:対流の支配方程式1} \\
+    (\v \cdot \Grad) \v &= - \Grad \left( \frac{p}{\rho} \right) + \nu \Laplacian \v, \;
+    \Div \v = 0.
+\end{align}
+この方程式系は3つの未知数$\v, T, \dfrac{p}{\rho}$および2つのパラメータ$\chi, \nu$を含んでいる．
+よって方程式の解は，境界条件を通して，物体の長さスケール$l$，主流の速度$U$，流体と物体の温度差$T_1-T_0$に依存する．
+
+これらのパラメータから無次元量を作る際，温度の次元をどのように決めるかという問題が生じる．
+これを解決するために，温度が\eqref{eq53.2:対流の支配方程式1}のみに現れることに注目しよう．
+\eqref{eq53.2:対流の支配方程式1}は$T$について線形であるから，温度に任意定数をかけても方程式を満たす．
+したがって温度自身に（他の次元に依存しない）次元を与えることができる．
+ここでは温度の単位をK（ケルビン）とする．
+
+
+
+
+よって，この対流は5つのパラメータ
+$\nu=\chi [\si{m^2s^{-1}}]$，$U[\si{m s^{-1}}]$，$l[\si{m}]$，$T_1-T_0[\si{K}]$で特徴付けられる．
+これらの量から，2つの独立な無次元パラメータを作ることができる．
+1つはReynolds数$\R = lU/\nu$であり，もう1つは\emph{Prandtl数}
+\begin{equation}
+    \mathrm{P} = \frac{\nu}{\chi}
+\end{equation}
+である．Prandtl数は熱拡散に対する粘性拡散の比である．
+
+他の無次元量は$\R, \mathrm{P}$の組み合わせとして表現される．
+例えば\emph{P\'{e}clet数}
+\[
+    \mathrm{Pe} = \R \cdot \mathrm{P} = \frac{lU}{\chi}
+\]
+である．P\'{e}clet数は熱拡散に対する移流拡散の比である．
+
+
+Prandtl数は物性値であり，流れの性質にはよらない．
+気体の場合は1のオーダーであるが，液体の場合は様々である．
+
+
+
+
+
+
+\S~19と同様に，このような定常対流では，温度と速度の分布は
+\begin{equation}
+    \frac{T-T_0}{T_1-T_0} = f \left( \frac{\vec{r}}{l}, \R, \mathrm{P} \right), \quad
+    \frac{\v}{U} = \vec{f} \left( \frac{\vec{r}}{l}, \R \right)
+\end{equation}
+の形になると結論づけることができる．
+温度分布を与える無次元関数$f$は2つのパラメータ$\R, \mathrm{P}$に依存する．
+しかし，温度を決める方程式には$\chi$が現れないから，$\vec{f}$は$\R$のみに依存する．
+そして，Reynolds数とPrandtl数が等しい2つの対流は相似である．
+
+
+
+さて，物体（固体）と流体の間の熱輸送は，\emph{熱伝達係数}
+\begin{equation}
+    \alpha = \frac{q}{T_1-T_0}
+\end{equation}
+により特徴付けられる．
+ここで$q$は表面を通る熱フラックス密度であり，$T_1-T_0$は固体と流体の間の特徴的な温度差である．
+流体の温度差が分かれば，境界で$q = -\kappa \dpdv{T}{n}$を計算することにより$\alpha$を求めることができる．
+
+
+熱伝達係数は無次元ではない．
+熱輸送を特徴付ける無次元量は\emph{Nusselt数}
+\begin{equation}
+    \mathrm{N} = \frac{\alpha l}{\kappa}
+\end{equation}
+である．
+Nusselt数は，静止した流体での熱伝導に対する，対流による熱輸送の比であり，対流がなければ$\mathrm{N}=1$である．
+相似則の議論から，どのような対流に対しても，Nusselt数はReynolds数とPrandtl数のみの関数として表される．
+\begin{equation}
+    \mathrm{N} = f(\R, \mathrm{P})
+\end{equation}
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+円形断面の管において，壁の温度が軸方向に線形に増加するものとする．
+管内のPoiseuille流中の温度分布を求めよ．
+\end{mondai}
+\begin{kaitou}
+管の軸を$z$軸とする円筒座標系を用いる．
+$Az$を管の温度として，解を$T=Az + f(r)$の形に求めよう．
+速度分布は，(17.9)より$v_z = 2\overline{v} (1-r^2/R^2)$となる（$\overline{v}$は平均速度）．
+\eqref{eq53.2:対流の支配方程式1}に代入し
+\[
+    Av_z = \chi \Laplacian T = \chi \frac{1}{r} \dv{r} \left( r \dv{f}{r} \right)
+\]
+\begin{align*}
+    \dv{r} \left( r \dv{f}{r} \right) &= \frac{2\overline{v}A}{\chi} \left( r - \frac{r^3}{R^2} \right) \\
+    r \dv{f}{r} &= \frac{2\overline{v}A}{\chi} \left( \frac{r^2}{2} - \frac{r^4}{4R^2} \right) + C_1 \\
+    \dv{f}{r} &= \frac{2\overline{v}A}{\chi} \left( \frac{r}{2} - \frac{r^3}{4R^2} \right) + \frac{C_1}{r} \\
+    f &= \frac{2\overline{v}A}{\chi} \left( \frac{r^2}{4} - \frac{r^4}{16R^2} \right) + C_1 \log r + C_2 .
+\end{align*}
+解は$r=0$で有限でなければならないから$C_1=0$となる．
+また$r=R$で$T=0$とすれば
+\[
+    C_2 = -\frac{2\overline{v}A}{\chi} \left( \frac{R^2}{4} - \frac{R^2}{16} \right) = -\frac{3\overline{v}AR^2}{8\chi}
+\]
+\[
+    \yueni f(r) = -\frac{\overline{v}AR^2}{2\chi} \left[ \frac{3}{4} - \left( \frac{r}{R} \right)^2 + \frac{1}{4} \left( \frac{r}{R} \right)^4 \right]
+\]
+となる．
+熱フラックス密度は
+\[
+    q = \kappa \eval{\pdv{T}{r}}_{r=R}
+    = \kappa \cdot \frac{2\overline{v}A}{\chi} \left( \frac{R}{2} - \frac{R}{4} \right) 
+    = \frac{1}{2} \rho c_p \overline{v} AR
+\]
+であり，温度伝導度$\chi$に依存しない．
+
+
+
+
+
+
+
+
+\end{kaitou}
 
 
 \BackToTheToc

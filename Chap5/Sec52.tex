@@ -1,6 +1,338 @@
 \section{有限媒質中の熱伝導}\label{sec:52}
 
+有限媒質中の熱伝導の問題では，初期の温度分布だけでは解が一意的に定まらず，媒質表面での境界条件が与えられなければならない．
 
+
+\subsection*{境界面が一定の温度に保たれている場合}
+半無限媒質（$x>0$）において，境界面$x=0$が一定の温度に保たれている場合を考えよう．
+この温度を0としても一般性を失わない（つまり，$x=0$での温度を基準として測る）．
+\S~\ref{sec:51}と同様に，$t=0$での温度分布が与えられているとすると，境界条件および初期条件は
+\begin{equation}
+    T=0 \quad(x=0), \qquad T=T_0(x,y,z) \quad (t=0, x>0).
+\end{equation}
+このような条件下での熱伝導方程式の解は，鏡像法により，無限媒質中の解に帰着させることができる．
+媒質が$x<0$にも（仮想的に）続いているとし，$x<0$での初期温度分布が$-T_0$で与えられているとしよう．
+すなわち，全空間では初期分布が$x$の奇関数で与えられるとする．
+\begin{equation}\label{eq52.2:奇関数型の初期温度分布}
+    T_0(-x,y,z) = - T_0(x,y,z)
+\end{equation}
+このとき$T_0(0,y,z)=0$となり，境界条件は$t=0$で自動的に満たされている．
+熱伝導方程式は変換$x \to -x$に対して不変であるから，対称性より，$t>0$でも$T$が奇関数である
+（そして境界条件も満たされる）ことは明らかである．
+
+
+よってこの問題は，\eqref{eq52.2:奇関数型の初期温度分布}を満たす初期分布を持つ無限媒質中の熱伝導の問題になる．
+一般解\eqref{eq51.2:3D熱伝導方程式の解}で，$x'$の積分区間を$(-\infty,0)$と$(0, \infty)$の2つに分け，
+\begin{align}
+    T(x,y,z,t) &=
+    \frac{1}{8(\pi\chi t)^{3/2}} \int_{-\infty}^{\infty} dy' \int_{-\infty}^{\infty} dz' 
+    \Biggl( \int_{-\infty}^{0} dx' \, T_0(x',y',z') e^{-(x-x')^2/4\chi t} \notag \\
+    & \hspace{5\zw} + \int_{0}^{\infty} dx' \, T_0(x',y',z') e^{-(x-x')^2/4\chi t} \Biggr)
+    e^{-\frac{(y-y')^2+(z-z')^2}{4\chi t}} \notag \\
+    &= \frac{1}{8(\pi\chi t)^{3/2}}  \int_{0}^{\infty} dx' \int_{-\infty}^{\infty} dy' \int_{-\infty}^{\infty} dz' \, \notag\\
+    &  \hspace{5\zw}\times T_0(x',y',z') \left\{ e^{-(x-x')^2/4\chi t} - e^{-(x+x')^2/4\chi t} \right\} e^{-\frac{(y-y')^2+(z-z')^2}{4\chi t}} 
+    \label{eq52.3:境界で温度一定の場合の一般解}
+\end{align}
+を得る．
+この式は媒質全体での温度分布を与える式であるが，もちろん$x>0$での解でもある．
+
+
+もし初期の温度分布が$x$のみの関数なら，\eqref{eq52.3:境界で温度一定の場合の一般解}で$y',z'$の積分を実行し
+\begin{equation}
+    T(x,t) = \frac{1}{2\sqrt{\pi\chi t}} \int_{0}^{\infty} dx' \, T_0(x') 
+    \left\{ e^{-(x-x')^2/4\chi t} - e^{-(x+x')^2/4\chi t} \right\} 
+    \label{eq52.4:境界で温度一定の場合の一般解 1D}
+\end{equation}
+となる．
+
+
+
+一例として，$x=0$を除いて初期の温度が一定である場合を考えよう．
+一般性を失うことなく，この一定値を$-1$とすることができる（つまり，$x>0$と$x=0$の温度差が1になるよう温度計の目盛を変更する）．
+\eqref{eq52.4:境界で温度一定の場合の一般解 1D}に$T_0(x)=-1$を代入し，
+第1項で$\xi = \dfrac{x'-x}{2\sqrt{\chi t}}$，第2項で$\xi = \dfrac{x'+x}{2\sqrt{\chi t}}$とおくと
+\begin{align*}
+    T(x,t) &= \frac{-1}{2\sqrt{\pi\chi t}} \int_{0}^{\infty} dx' \,
+    \left\{ e^{-(x-x')^2/4\chi t} - e^{-(x+x')^2/4\chi t} \right\} \\
+    &= \frac{-1}{\sqrt{\pi}} \left( \int_{-x/2\sqrt{\chi t}}^{\infty} d\xi \, e^{-\xi^2} 
+    - \int_{x/2\sqrt{\chi t}}^{\infty} d\xi \, e^{-\xi^2} \right)  \\
+    &= \frac{-1}{\sqrt{\pi}} \int_{-x/2\sqrt{\chi t}}^{x/2\sqrt{\chi t}} d\xi \, e^{-\xi^2} 
+    = -\frac{2}{\sqrt{\pi}} \int_{0}^{x/2\sqrt{\chi t}} d\xi \, e^{-\xi^2}
+\end{align*}
+となる．ここで\emph{誤差関数}を
+\begin{equation}
+    \erf(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-\xi^2} \, d\xi
+\end{equation}
+で定義すれば
+\begin{equation}\label{eq52.6:熱伝導方程式の誤差関数解}
+    T(x,t) = - \erf \left( \frac{x}{2\sqrt{\chi t}} \right)
+\end{equation}
+となる．
+時間の経過とともに，温度分布は空間的に一様になっていく．
+\eqref{eq52.6:熱伝導方程式の誤差関数解}の形は，次元解析からも予想できたことである；
+温度差$T_0$（ここでは$1$），温度伝導度$\chi$，$x,t$から作られる無次元量は$\dfrac{x}{\sqrt{\chi t}}$のみであるから，
+求める温度分布は$T=T_0 f\left( \dfrac{x}{\sqrt{\chi t}} \right)$の形をしていなければならない．
+
+
+
+\subsection*{境界面が断熱されている場合}
+この場合，$x=0$を通り抜ける熱フラックスがないから，境界条件と初期条件は
+\begin{equation}
+    \pdv{T}{x}=0 \quad(x=0), \qquad T=T_0(x,y,z) \quad (t=0, x>0).
+\end{equation}
+となる．今度は，全空間の初期温度分布が$x$の偶関数であるとすればよい．
+\begin{equation}
+    T_0(-x,y,z) = T_0(x,y,z)
+\end{equation}
+そうすれば$x=0$で$\dpdv{T}{x}=0$であり，$t>0$でも境界条件は満たされる．
+積分を行えば，\eqref{eq52.3:境界で温度一定の場合の一般解}や\eqref{eq52.4:境界で温度一定の場合の一般解 1D}で
+2つの指数関数の差を和に変えた式が得られる．
+
+
+
+\subsection*{境界面から熱の流出入がある場合}
+境界面$x=0$における熱フラックスが，時間の関数として与えられているとしよう．
+境界条件と初期条件は
+\begin{equation}\label{eq52.9:熱流入の境界条件}
+    -\kappa\pdv{T}{x}=q(t) \quad(x=0), \qquad T=0 \quad (t=-\infty, x>0).
+\end{equation}
+とする．
+
+まず$q(t)=\delta(t)$という補助的な問題を解いておこう．
+これは物理的には，$t=0$の瞬間に平面$x=0$の単位面積を通って単位熱量が流入することを意味している．
+そしてこの問題は，無限媒質中に置かれた点（正確には面）熱源からの熱の伝播と同等である．
+よって\eqref{eq51.7:1D面熱源の場合の解}から
+\[
+    T(x, t) = \frac{A}{2\sqrt{\pi\chi t}} e^{-x^2/4\chi t} 
+\]
+となる．定数$A$を決めるために，両辺に$\rho c_p$をかけて$0 \ika x < \infty$で積分すると
+\[
+    \int_{0}^{\infty} \rho c_p T \, dx = \frac{1}{2} \rho c_p A
+\]
+となる．左辺の積分は，$x>0$に流れ込んだ全熱量であり，この場合は1である．
+よって$A = \dfrac{2}{\rho c_p} = \dfrac{2\chi}{\kappa}$となり
+\[
+    \kappa T(x, t) = \sqrt{\frac{\chi}{\pi t}} e^{-x^2/4\chi t} \quad (t>0)
+    \mytag{1}
+\]
+を得る．
+\ajMaru{1}はこの問題に対するGreen関数であるから，一般の$q(t)$に対する解は，畳み込み
+$G*q = \displaystyle \int_{-\infty}^{t} G(t-\tau)q(\tau)\, d\tau$
+を計算し
+\begin{equation}\label{eq52.10:熱の流入が与えられた時の一般解}
+    \kappa T(x, t) = \int_{-\infty}^{t} \sqrt{\frac{\chi}{\pi (t-\tau)}} q(\tau) e^{-x^2/4\chi (t-\tau)} \, d\tau
+\end{equation}
+となる．
+特に平面$x=0$での温度は
+\begin{equation}\label{eq52.11:熱の流入が与えられた時の一般解(x=0)}
+    \kappa T(0, t) = \int_{-\infty}^{t} \sqrt{\frac{\chi}{\pi (t-\tau)}} q(\tau) \, d\tau
+\end{equation}
+となる．
+
+
+
+
+\subsection*{境界面の温度が与えられている場合}
+以上の結果から，平面$x=0$での温度が時間の関数として与えられている場合の解を得ることができる．
+境界条件と初期条件は
+\begin{equation}\label{eq52.12:温度が与えられた境界条件}
+    T=T_0(t) \quad(x=0), \qquad T=0 \quad (t=-\infty, x>0).
+\end{equation}
+とする．
+問題を解くために，関数$T(x,t)$が熱伝導方程式を満たすなら，その微分$\dpdv{T}{x}$も満たすということに注目しよう．
+\eqref{eq52.10:熱の流入が与えられた時の一般解}を$x$について微分し
+\[
+    -\kappa \pdv{T(x, t)}{x} 
+    = \int_{-\infty}^{t} \sqrt{\frac{\chi}{\pi (t-\tau)}} q(\tau) \frac{x}{2\chi(t-\tau)} e^{-x^2/4\chi (t-\tau)} \, d\tau
+    = \int_{-\infty}^{t} \frac{x q(\tau)}{2\sqrt{\pi\chi(t-\tau)^3}} e^{-x^2/4\chi (t-\tau)} \, d\tau
+    \mytag{2}
+\]
+となる．\eqref{eq52.9:熱流入の境界条件}より，$x=0$のとき右辺は$q(t)$になるから，
+これは\eqref{eq52.9:熱流入の境界条件}を満たす熱伝導方程式の解である．
+\eqref{eq52.9:熱流入の境界条件}と\eqref{eq52.12:温度が与えられた境界条件}を見比べることにより，
+$-\kappa \dpdv{T}{x}$を$T$に，$q(t)$を$T_0(t)$に置き換えれば解が得られることが分かる；
+\begin{equation}\label{eq52.13:境界面の温度が与えられた時の一般解}
+    T(x, t) = \frac{x}{2\sqrt{\pi\chi}} \int_{-\infty}^{t} \frac{T_0(\tau)}{(t-\tau)^{3/2}} e^{-x^2/4\chi (t-\tau)} \, d\tau
+\end{equation}
+境界面$x=0$を通る熱フラックスは
+\begin{align}
+    q(t) &= -\kappa \eval{\pdv{T}{x}}_{x=0} \notag \\
+    &= \frac{-\kappa}{2\sqrt{\pi\chi}} \int_{-\infty}^{t} \frac{T_0(\tau)}{(t-\tau)^{3/2}} \, d\tau + 0 \notag \\
+    & \gyoukan{←部分積分} \notag \\
+    &= \frac{-\kappa}{2\sqrt{\pi\chi}} \left( 
+        \left[ T_0(\tau) \frac{2}{\sqrt{t-\tau}} \right]_{\tau=-\infty}^{\tau=t}
+        - \int_{-\infty}^{t} \dv{T_0}{\tau} \frac{2}{\sqrt{t-\tau}} \, d\tau
+    \right) \notag \\
+    & \gyoukan{←第1項が0になる理由が判然としない．} \notag \\
+    &= \frac{\kappa}{2\sqrt{\pi\chi}} \int_{-\infty}^{t} \dv{T_0}{\tau} \frac{d \tau}{\sqrt{t-\tau}}
+\end{align}
+である．
+これは\eqref{eq52.11:熱の流入が与えられた時の一般解(x=0)}の逆になっている．
+
+
+
+
+
+境界$x=0$での温度が$T=T_0 e^{-i \omega t}$のように周期的に変化する重要な場合についても，簡単に解を得ることができる．
+全空間の温度分布も$e^{-i \omega t}$的に変化することは明らかである．
+1次元熱伝導方程式と\S~24の粘性流体中の振動の類似から，解は
+\begin{equation}\label{eq52.15:熱の波の伝播}
+    T(x,t) = T_0 e^{-\sqrt{\frac{\omega}{2\chi}}x} e^{ i \left(\sqrt{\frac{\omega}{2\chi}}x - \omega t \right)}
+\end{equation}
+となる（式(24.5)と比較せよ）．
+よって，境界面における温度の振動は，境界から\emph{熱の波}として伝播することが分かる．
+この波は，媒質内部を進むにつれて急速に減衰する．
+
+
+
+
+
+
+\subsection*{非一様に加熱された物体の緩和時間の問題}
+最後に，表面で与えられた条件のもと，非一様に加熱された有限物体の内部で，温度がどのように等しくなっていくか，という問題を考えよう．
+一般的な方法でこの問題を解くために，$T=T_n(x,y,z) e^{-\lambda_n t}$という形の解を求めよう（$\lambda_n$は定数）．
+熱伝導方程式に代入し，$T_n$に関する次の方程式を得る．
+\begin{equation}\label{eq52.16:熱伝導の固有値方程式}
+    \chi \Laplacian T_n = -\lambda_n T_n
+\end{equation}
+与えられた境界条件のもとでは，この方程式は特定の$\lambda_n$（\emph{固有値}）に対してのみ0でない解を持つ．
+固有値$\lambda_n$は全て実かつ正であり，対応する固有関数$T_n(x,y,z)$は完全直交関数系をなす．
+$t=0$での温度分布$T_0(x,y,z)$が与えられたとして，これを$T_n$の級数で展開しよう．
+\[
+    T_0(x,y,z) = \sum_n c_n T_n(x,y,z)
+\]
+このとき求める解は
+\begin{equation}
+    T(x,y,z,t) = \sum_n c_n T_n(x,y,z) e^{-\lambda_n t}
+\end{equation}
+となる．
+温度が一様になるのにかかる時間（緩和時間）は，最小の$n$に対応する項によって決まる．
+つまり緩和時間は$\tau=1/\lambda_1$である．
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+媒質中に半径$R$の球が置かれ，その表面の温度が時間の関数$T_0(t)$で与えられている．
+球のまわりの温度分布を求めよ．
+\end{mondai}
+\begin{kaitou}
+球対称性から，熱伝導方程式は
+\[
+    \pdv{T}{t} = \chi \frac{1}{r} \pdv[2]{r} (rT)
+\]
+であり，$rT=F$とおくと
+\[
+    \pdv{F}{t} = \chi \pdv[2]{F}{r}
+\]
+となって1次元の熱伝導方程式に帰着する．
+境界条件は$r=R$で$F=RT_0(t)$である．
+\eqref{eq52.13:境界面の温度が与えられた時の一般解}で$x$の代わりに$r-R$として
+\[
+    F(r, t) = \frac{r-R}{2\sqrt{\pi\chi}} \int_{-\infty}^{t} \frac{RT_0(\tau)}{(t-\tau)^{3/2}} e^{-(r-R)^2/4\chi (t-\tau)} \, d\tau
+\]
+\[
+    \yueni T(r, t) = \frac{R(r-R)}{2\sqrt{\pi\chi}r} \int_{-\infty}^{t} \frac{T_0(\tau)}{(t-\tau)^{3/2}} e^{-(r-R)^2/4\chi (t-\tau)} \, d\tau .
+\]
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+前問で$T_0(t)=T_0 e^{-i\omega t}$の場合はどうか．
+\end{mondai}
+\begin{kaitou}
+\eqref{eq52.15:熱の波の伝播}で$T_0$の代わりに$RT_0$，$x$の代わりに$r-R$として
+\[
+    F(r,t) = RT_0 e^{-\sqrt{\frac{\omega}{2\chi}}(r-R)} e^{ i \left(\sqrt{\frac{\omega}{2\chi}} (r-R) - \omega t \right)}
+\]
+\[
+    \yueni T(r,t) = T_0 e^{-i\omega t} \frac{R}{r} e^{ -(1-i)\sqrt{\frac{\omega}{2\chi}} (r-R) }.
+\]
+
+\end{kaitou}
+
+
+
+
+
+%%%%%%%%%% 問題3 %%%%%%%%%%
+
+\begin{mondai}{}{}
+1辺$a$の立方体の緩和時間を，\ajKakkoalph{1}\, 表面の温度が$T=0$に保たれている場合，
+\ajKakkoalph{2}\, 表面が断熱されている場合，のそれぞれについて求めよ．
+\end{mondai}
+\begin{kaitou}
+立方体の1つの頂点を原点に取る．
+
+
+\noindent\ajKakkoalph{1}\,
+表面で$T=0$になる固有関数のうち，最小（$n=1$）のモードは
+\[
+    T_1 \propto \sin \left( \frac{\pi x}{a} \right) \sin \left( \frac{\pi y}{a} \right) \sin \left( \frac{\pi z}{a} \right)
+\]
+である．
+これを\eqref{eq52.16:熱伝導の固有値方程式}に代入し
+\[
+    \chi \left( -3 \frac{\pi^2}{a^2} \right) = \lambda_1
+    \qquad \yueni \tau_1 = \frac{1}{\lambda_1} = \frac{a^2}{3\pi^2\chi}
+\]
+となる．
+
+
+\noindent\ajKakkoalph{2}\,
+境界で$\dpdv{T}{n}=0$となる最小のモードは$T_1 \propto \cos \left( \dfrac{\pi x}{a} \right)$である．
+よって$\tau_1 = \dfrac{a^2}{\pi^2\chi}$となる．
+
+
+\end{kaitou}
+
+
+
+
+
+
+%%%%%%%%%% 問題4 %%%%%%%%%%
+
+\begin{mondai}{}{}
+前問で半径$R$の球の場合はどうか．
+\end{mondai}
+\begin{kaitou}
+\eqref{eq52.16:熱伝導の固有値方程式}の中心対称解のうち最小のモードは$T_1 \propto \dfrac{\sin (kr)}{r}$である．
+
+
+
+\noindent\ajKakkoalph{1}\,
+$r=R$で$T_1=0$より$kR=\pi$であり，
+\[
+    \chi k^2 = \lambda_1
+    \qquad \yueni \tau_1 = \frac{1}{\lambda_1} = \frac{R^2}{\pi^2\chi} .
+\]
+
+
+\noindent\ajKakkoalph{2}\,
+$\dpdv{T_1}{r} \propto k \cos(kr) \cdot r - \sin (kr)$より，$k$は
+$kR = \tan(kR)$の最小（$\neq 0$）の解であり，$kR = 4.493$となる．
+よって$\tau_1 = \dfrac{0.050 R^2}{\chi}$となる．
+
+
+
+
+\end{kaitou}
 
 
 
