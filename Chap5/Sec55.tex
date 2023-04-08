@@ -1,7 +1,147 @@
 \section{運動している流体中での物体の加熱}
 
+静止流体中に浸された温度計は，流体の温度に等しい温度を示す．
+しかし，流体が運動している場合，温度計はやや高い温度を示す．
+これは，温度計の表面で流体が静止しなければならないために，内部摩擦による加熱が起こるからである．
+
+一般的な問題は以下のようになる：
+「任意の形の物体が，運動している流体中に置かれている．
+十分長い時間ののち熱平衡状態になったとして，物体と流体の間に存在する温度差$T_1-T_0$を求めよ．」
 
 
+
+この問題の解は方程式\eqref{eq50.2:非圧縮性流体での熱輸送の式}により与えられるが，
+この場合\eqref{eq53.1:粘性なしの非圧縮性流体での熱輸送の式}で行ったように粘性項を無視することはできない；
+今考えている効果はこの項によるものだからである．
+定常状態での方程式は
+\begin{equation}\label{eq55.1:定常状態での物体の加熱の方程式}
+    \v \cdot \Grad T = \chi \Laplacian T + \frac{\nu}{2c_p} \left( \pdv{v_i}{x_j} + \pdv{v_j}{x_i} \right)^2
+\end{equation}
+である．
+この式には流体自身の運動方程式\eqref{eq53.3:対流の支配方程式2}を加えなければならない．
+厳密に言えば，物体の熱伝導を表す方程式も必要であるが，物体の熱伝導度が十分小さい極限では無視することができる．
+そして，物体の表面を通る熱フラックスがないという条件$\dpdv{T}{n}=0$のもとで
+方程式\eqref{eq55.1:定常状態での物体の加熱の方程式}を解き，得られた物体表面での流体の温度が物体の温度に等しいとすればよい．
+物体の熱伝導度が十分大きいという逆の極限では，物体表面の温度がどこでも等しいという近似的な条件を用いることができる．
+この場合，微分$\dpdv{T}{n}$は表面で0とはならないが，表面を通る全熱フラックス（つまり$\dpdv{T}{n}$の積分）が0とすればよい．
+どちらの極限でも，物体の熱伝導度は陽には現れない．
+以下では，これらのどちらかの場合が成り立っていると仮定する．
+
+
+方程式\eqref{eq55.1:定常状態での物体の加熱の方程式}，\eqref{eq53.3:対流の支配方程式2}はパラメータとして
+$\chi,\nu,c_p$を含み，解には物体の大きさ$l$と主流の速度$U$も関係する
+（温度差$T_1-T_0$はこの場合任意のパラメータではなく，方程式を解くことで決められなければならない）．
+これらの量から，2つの独立な無次元量を作ることができる．
+ここでは$\R$と$\mathrm{P}$とする．
+すると，求める温度差$T_1-T_0$は，温度の次元を持つ量（ここでは$U^2/c_p$とする）に$\R$と$\mathrm{P}$の関数をかけたものに等しい．
+\begin{equation}
+    T_1 - T_0 = \frac{U^2}{c_p} f(\R,\mathrm{P})
+\end{equation}
+
+Reynolds数とPrandtl数の積$\R\mathrm{P}=\dfrac{Ul}{\chi}$が十分小さい，つまり$U$が十分小さい場合には，関数$f$の形を簡単に求めることができる．
+この場合，\eqref{eq55.1:定常状態での物体の加熱の方程式}で$\v\cdot\Grad T$を$\chi \Laplacian T$に比べて無視することができるから
+\begin{equation}\label{eq55.3:Rが小さいときの物体の加熱の方程式}
+    \chi \Laplacian T = - \frac{\nu}{2c_p} \left( \pdv{v_i}{x_j} + \pdv{v_j}{x_i} \right)^2
+\end{equation}
+となる．
+温度と速度は，$l$程度の距離で大きく変化する．
+\eqref{eq55.3:Rが小さいときの物体の加熱の方程式}の両辺のオーダーを見積もれば
+\[
+    \chi \frac{T_1-T_0}{l^2} \sim \frac{\nu}{c_p} \left( \frac{U}{l} \right)^2
+\]
+\begin{equation}
+    \yueni T_1 - T_0 \sim \frac{\nu U^2}{\chi c_p} = \mathrm{P} \frac{U^2}{c_p}
+\end{equation}
+となる．
+比例定数は物体の形に依存する．
+温度差が$U^2$に比例することに注目しよう．
+
+
+$\R$が十分大きいという逆の極限の場合にも，関数$f(\R,\mathrm{P})$の形について一般的な結論を得ることができる．
+この場合，速度と温度は狭い境界層内でのみ大きく変化する．
+速度境界層，温度境界層の厚さのオーダーをそれぞれ$\delta,\delta'$とする
+（両者は$\mathrm{P}$に依存する定数因子の分だけ異なる）．
+流体の粘性により単位時間に境界層で発生する熱量は(16.3)で与えられる．
+この積分は物体表面の単位面積当たりでは$\rho\nu (U/\delta)^2 \delta \sim \rho\nu U^2/\delta$のオーダーである．
+同量の熱が物体に流れなければならず，そのオーダーは
+$q = -\kappa \partial T/\partial n \sim \rho c_p\chi (T_1-T_0)/\delta'$である．
+両者を比べ
+\[
+    \rho c_p\chi \frac{T_1-T_0}{\delta'} \sim \frac{\rho\nu U^2}{\delta}
+    \qquad \yueni T_1-T_0 \sim \frac{U^2}{c_p} \cdot\frac{\nu}{\chi} \frac{\delta'}{\delta}.
+\]
+よって
+\begin{equation}
+    T_1-T_0 = \frac{U^2}{c_p} f(\mathrm{P}).
+\end{equation}
+この場合関数$f$は$\R$に依存せず，$\mathrm{P}$への依存性は決まらないまま残る．
+
+
+
+
+
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+円形断面の管中のPoiseuille流中の温度分布を求めよ．
+壁面の温度は一定値$T_0$に保たれているとする．
+\end{mondai}
+\begin{kaitou}
+速度分布は$v_z = 2\overline{v} (1-r^2/R^2)$で与えられる．
+\eqref{eq55.3:Rが小さいときの物体の加熱の方程式}は
+\[
+    \chi \frac{1}{r} \dv{r} \left( r \dv{T}{r} \right) 
+    = -\frac{\nu}{2c_p} \cdot 2 \left( \dv{v_z}{r} \right)^2
+    = -\frac{\nu}{2c_p} \cdot 2 \left( 2\overline{v} \frac{2r}{R^2} \right)^2
+\]
+\[
+    \frac{1}{r} \dv{r} \left( r \dv{T}{r} \right) 
+    = -\frac{16\overline{v}^2\nu}{\chi c_p} \cdot \frac{r^2}{R^4} 
+\]
+\[
+    \dv{r} \left( r \dv{T}{r} \right) 
+    = -\frac{16\mathrm{P}\overline{v}^2}{c_p} \cdot \frac{r^3}{R^4} 
+\]
+\[
+    r \dv{T}{r}
+    = -\frac{4\mathrm{P}\overline{v}^2}{c_p} \cdot \frac{r^4}{R^4} + \const
+\]
+解は$r=0$で有限であるから$\const=0$である．
+\[
+    \dv{T}{r}
+    = -\frac{4\mathrm{P}\overline{v}^2}{c_p} \cdot \frac{r^3}{R^4}
+\]
+\[
+    T = -\frac{\mathrm{P}\overline{v}^2}{c_p} \cdot \frac{r^4}{R^4} + \const
+\]
+$r=R$で$T=T_0$より$\const$の値が決まり
+\[
+    T - T_0 
+    = \frac{\mathrm{P}\overline{v}^2}{c_p} \left[ 1 - \left( \frac{r}{R} \right)^4 \right]
+\]
+
+
+
+\end{kaitou}
+
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+固体球のまわりにReynolds数の小さな流れがあるとき，球と流体間の温度差を求めよ．
+球の熱伝導率は大きいと仮定する．
+\end{mondai}
+\begin{kaitou}
+省略する．
+
+
+
+
+
+\end{kaitou}
 
 
 \BackToTheToc

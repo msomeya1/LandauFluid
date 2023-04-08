@@ -1,6 +1,133 @@
 \section{自由対流}
 
+\S~3で見たように，重力場中の流体が力学的平衡状態にあるなら，温度は高度のみに依存する：$T=T(z)$．
+温度分布がこの条件を満たさず，他の座標の関数でもある場合には，流体は力学的平衡になることはできない．
+さらに，もし$T=T(z)$であっても，温度が上空ほど低く，温度勾配がある値（断熱減率）を超える場合は，やはり力学的平衡にはならない（\S~4）．
 
+力学的平衡にならない場合には，流体を混合して温度を一様にしようとする流れが生じる．
+重力場中でのこのような運動は\emph{自由対流}と呼ばれる．
+
+
+この対流を記述する方程式を導こう．
+流体は非圧縮であると仮定する．
+このことは，流体中で圧力がほんのわずかしか変化せず，圧力による密度変化が無視できることを意味する．
+例えば，気圧が高度によって変化する大気の場合，この仮定は高い大気柱を考えないことに相当する
+（高い大気柱では，密度が高度によって大きく変化してしまう）．
+もちろん，流体が非一様に加熱されることで生じる密度変化は無視できない．
+これが対流を駆動するからである．
+
+
+温度を$T=T_0+T'$と書く．
+$T_0$はある一定の平均温度，$T'$はそこからのずれであり，$T' \ll T_0$と仮定する．
+同様に密度も$\rho=\rho_0+\rho'$と書く（$\rho_0$は定数）．
+$T'$が微小量であるから，$\rho'$も微小量であり
+\begin{equation}\label{eq56.1:Boussinesq近似での密度変化}
+    \rho' = \PDV{\rho_0}{T}{p} T' = -\rho_0 \beta T'.
+\end{equation}
+ここで$\beta = -\dfrac{1}{\rho_0}\dPDV{\rho_0}{T}{p}>0$は流体の熱膨張率である．
+
+
+次に圧力も$p=p_0+p'$を書けるが，$p_0$は定数でなく，温度と密度が$T_0,\rho_0$である静水圧平衡での値である．
+\begin{equation}
+    p_0 = \rho_0 \vec{g} \cdot \vec{r} + \const
+    = -\rho_0 gz + \const
+\end{equation}
+ここで$z$は鉛直上向きに取られている．
+
+
+
+\spade
+高さ$h$の気体柱では，静水圧の変化は$\rho_0 gh$であり，これによる密度変化は$\rho_0 gh/c^2$のオーダーである
+（$c$は音速．(64.4)参照）．
+上述の条件によれば，この変化は密度自身に比べて無視できるだけでなく，
+熱的変化\eqref{eq56.1:Boussinesq近似での密度変化}に比べても無視できなければならない．
+よって
+\begin{equation}
+    \frac{gh}{c^2} \ll \beta \Theta
+\end{equation}
+でなければならない．
+ここで$\Theta$は温度差の特徴的な値である．
+
+
+さて，方程式を得るために，Navier-Stokes方程式
+\[
+    \pdv{\v}{t} + (\v\cdot\Grad) \v = - \frac{1}{\rho} \Grad p + \nu \Laplacian\v + \vec{g}
+\]
+を書きかえることから始めよう．
+$p=p_0+p'$，$\rho=\rho_0+\rho'$を代入して微小量の1次まで取れば，圧力項は
+\begin{align*}
+    - \frac{1}{\rho} \Grad p
+    &= - \frac{1}{\rho_0 (1+\rho'/\rho_0)} \Grad (p_0 + p') \\
+    &\simeq - \frac{1}{\rho_0} \left( 1 - \frac{\rho'}{\rho_0} \right) \Grad (p_0 + p') \\
+    &\simeq - \frac{1}{\rho} \Grad p_0 - \frac{1}{\rho_0} \Grad p' + \frac{\rho'}{{\rho_0}^2} \Grad p_0 \\
+    &= \vec{g} - \frac{1}{\rho_0} \Grad p' - \beta T' \vec{g}
+\end{align*}
+となるから，Navier-Stokes方程式は
+\begin{equation}\label{eq56.4:自由対流の方程式1}
+    \pdv{\v}{t} + (\v\cdot\Grad) \v = - \frac{1}{\rho} \Grad p' + \nu \Laplacian\v -\beta T' \vec{g}
+\end{equation}
+となる（以下$\rho_0$の添字を省く）．
+自由対流では，熱伝導方程式\eqref{eq50.2:非圧縮性流体での熱輸送の式}で粘性項が小さいから落とすことができ
+\begin{equation}\label{eq56.5:自由対流の方程式2}
+    \pdv{T'}{t} + \v \cdot \Grad T' = \chi \Laplacian T'
+\end{equation}
+となる．
+式\eqref{eq56.4:自由対流の方程式1}と\eqref{eq56.5:自由対流の方程式2}及び連続の式$\Div\v=0$が，
+自由対流を記述する方程式系をなす（A. Oberbeck 1879, J. Boussinesq 1903）．
+
+
+
+
+定常流では，対流の方程式は次のようになる．
+\begin{align}
+    (\v\cdot\Grad) \v &= -\Grad \left( \frac{p'}{\rho} \right) - \beta T' \vec{g} + \nu \Laplacian\v \\
+    \v \cdot \Grad T' &= \chi \Laplacian T' \\
+    \Div \v &= 0
+\end{align}
+未知数$\v, p'/\rho, T'$を含むこの方程式系は，3つのパラメータ$\nu, \chi, \beta g$を含む．
+さらに，解は特徴的な長さ$h$と温度差$\Theta$も含むだろう
+（特徴的な速度は存在しない．というのは，流れは外力によるものではなく，非一様に加熱されたことで生じるからである）．
+これらの量から2つの無次元量を作ることができる．
+普通使われる量は
+Prandtl数$\mathrm{P}=\dfrac{\nu}{\chi}$と
+\emph{Rayleigh数}
+\begin{equation}
+    \mathscr{R} = \frac{\beta g \Theta h^3}{\nu\chi}
+\end{equation}
+である．
+\emph{Grashof数}
+\[
+    \mathrm{G} = \frac{\beta g \Theta h^3}{\nu^2} = \frac{\mathscr{R}}{\mathrm{P}}
+\]
+もよく使われる．
+
+
+
+
+Prandtl数は流体の物性のみで決まったが，Rayleigh数は対流そのものの性質を決める．
+
+
+
+自由対流での相似則は
+\begin{equation}
+    \v = \frac{\nu}{h} \vec{f} \left( \frac{\vec{r}}{h}, \mathscr{R}, \mathrm{P} \right),
+    T' = \Theta f \left( \frac{\vec{r}}{h}, \mathscr{R}, \mathrm{P} \right)
+\end{equation}
+となる．
+Rayleigh数とPrandtl数が等しい2つの流れは相似である．
+また，重力下における対流熱輸送はやはりNusselt数で記述されるが，
+この場合$\mathrm{N}$は$\mathscr{R}, \mathrm{P}$のみの関数である．
+
+
+
+対流は層流／乱流のどちらのタイプもありうる．
+乱流の開始はRayleigh数により決まり，$\mathscr{R}$が十分大きいとき対流は乱流になる．
+
+
+
+
+
+問題は省略する．
 
 
 

@@ -8,7 +8,7 @@
 ここでは，流体の物性値が（温度によらず）一定と仮定できるほど，流体中の温度差が小さいと仮定する．
 一方で，粘性散逸によって生じる温度差を無視できるほど，温度差が大きいとしよう．
 このとき\eqref{eq50.2:非圧縮性流体での熱輸送の式}で粘性項を除くことができるから
-\begin{equation}
+\begin{equation}\label{eq53.1:粘性なしの非圧縮性流体での熱輸送の式}
     \pdv{T}{t} + \v \cdot \Grad T = \chi \Laplacian T 
 \end{equation}
 となる．
@@ -20,7 +20,7 @@
 \begin{align}
     \v \cdot \Grad T &= \chi \Laplacian T \label{eq53.2:対流の支配方程式1} \\
     (\v \cdot \Grad) \v &= - \Grad \left( \frac{p}{\rho} \right) + \nu \Laplacian \v, \;
-    \Div \v = 0.
+    \Div \v = 0. \label{eq53.3:対流の支配方程式2}
 \end{align}
 この方程式系は3つの未知数$\v, T, \dfrac{p}{\rho}$および2つのパラメータ$\chi, \nu$を含んでいる．
 よって方程式の解は，境界条件を通して，物体の長さスケール$l$，主流の速度$U$，流体と物体の温度差$T_1-T_0$に依存する．
