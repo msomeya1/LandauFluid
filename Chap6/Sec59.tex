@@ -1,0 +1,251 @@
+\section{質量拡散と熱拡散の係数}\label{sec:59}
+
+拡散フラックス$\vec{i}$と熱フラックス$\vec{q}$は，流体に濃度や温度の勾配が存在することにより生じる．
+しかし，$\vec{i}$が濃度勾配のみに，$\vec{q}$が温度勾配のみに依存すると考えてはならない．
+実際には，各フラックスは両方の勾配に依存する．
+
+
+濃度や温度の勾配が小さい場合には，$\vec{i}$や$\vec{q}$が$\Grad \mu$と$\Grad T$の1次関数であるとしてよい
+（\S~49と同様の理由で，$\vec{i}$や$\vec{q}$は圧力勾配には依存しない）．そこで
+\[
+    \vec{i} = -\alpha \Grad \mu - \beta \Grad T, \quad 
+    \vec{q} = - \delta \Grad \mu - \gamma \Grad T + \mu\vec{i}
+    \mytag{1}
+\]
+と書こう．
+
+係数$\beta,\delta$の間には単純な関係が成り立つ．
+これは輸送係数に関する\emph{Onsagerの相反定理}の帰結であり，その概略は以下の通りである（『統計物理学』\S~120参照）．
+
+ある閉じた系を考え，$x_a \; (a=1,2,3,\ldots)$を系の状態を記述する量としよう．
+統計力学的平衡状態における$x_a$の値は，系全体のエントロピー$S$が最大になるという条件により決定される．
+つまり，
+\begin{equation}
+    X_a \equiv - \pdv{S}{x_a}
+\end{equation}
+とするとき，全ての$a$に対して$X_a=0$でなければならない．
+
+
+系は平衡状態に近い状態にあると仮定する．
+つまり，全ての$x_a$は平衡状態での値からわずかに異なるだけで，$X_a$は小さいとする．
+この系では，系を平衡状態に向かわせるような過程が起こる．
+$x_a$の時間変化を$X_a$の級数で展開して1次まで取る．
+\begin{equation}\label{eq59.2:xaの時間微分の展開}
+    \dot{x_a} = - \sum_b \gamma_{ab} X_b
+\end{equation}
+相反定理は，\emph{輸送係数}$\gamma_{ab}$が添字$a,b$に関して対称であることを主張する
+（証明は『統計物理学』を見よ）．
+\begin{equation}
+    \gamma_{ab} = \gamma_{ba}
+\end{equation}
+また\eqref{eq59.2:xaの時間微分の展開}より，エントロピーの時間変化率は
+\begin{equation}\label{eq59.4:Sの時間微分の展開}
+    \dot{S} = \sum_a \pdv{S}{x_a} \dot{x_a} = - \sum_a X_a \dot{x_a}
+\end{equation}
+で与えられる
+（もし$x_a$が座標の関数なら，$a$に関する和だけでなく，系の体積での積分も行わなければならない）．
+
+
+
+今考えている問題では，$\dot{x_a}$として$\vec{i}, \vec{q}-\mu\vec{i}$の成分を取ることにする．
+すると，\eqref{eq58.7:混合流体でのエントロピー変化（積分形）}と\eqref{eq59.4:Sの時間微分の展開}を見比べることにより，
+$X_a$は$\dfrac{1}{T} \Grad\mu, \dfrac{1}{T^2} \Grad T$の成分に対応することが分かる．
+よって\ajMaru{1}を
+\[
+    \vec{i} = -\alpha T \cdot \frac{1}{T} \Grad \mu - \beta T^2 \cdot \frac{1}{T^2} \Grad T, \quad 
+    \vec{q}-\mu\vec{i} = - \delta T \cdot \frac{1}{T} \Grad \mu - \gamma T^2 \cdot \frac{1}{T^2} \Grad T 
+\]
+と書くことにより，輸送係数の対称性から
+\[
+    \beta T^2 = \delta T 
+    \qquad \yueni \delta = \beta T
+\]
+が成り立つことが分かり，\ajMaru{1}は
+\begin{equation}
+    \vec{i} = -\alpha \Grad \mu - \beta \Grad T, \quad 
+    \vec{q} = - \beta T \Grad \mu - \gamma \Grad T + \mu\vec{i}
+\end{equation}
+となる．
+第1式より$\Grad \mu = - \dfrac{1}{\alpha}(\vec{i} + \beta \Grad T)$であり，これを第2式に代入して
+\[
+    \vec{q} = \frac{\beta T}{\alpha}(\vec{i} + \beta \Grad T) - \gamma \Grad T + \mu\vec{i}.
+\]
+よって
+\begin{equation}\label{eq59.6:iとqの展開}
+    \vec{i} = -\alpha \Grad \mu - \beta \Grad T, \quad
+    \vec{q} = \left( \mu + \frac{\beta T}{\alpha} \right) \vec{i} - \kappa \Grad T ,
+\end{equation}
+\begin{equation}
+    \kappa = \gamma - \frac{\beta^2 T}{\alpha}
+\end{equation}
+となる．
+
+
+もし拡散フラックス$\vec{i}$が0なら，\emph{純粋な熱伝導}となる．
+これは$\alpha d\mu + \beta dT =0$のときに成り立つ．
+これを積分することにより，拡散フラックスが0の時の濃度の温度依存性$f(c, T)=0$が得られる．
+また，$\vec{i}=\vec{0}$なら$\vec{q}= -\kappa \Grad T$であるから，$\kappa$は熱伝導度であることが分かる．
+
+
+
+さて，変数として$p,T,c$を選ぶと
+\[
+    \Grad \mu = \PDV{\mu}{c}{p,T} \Grad c + \PDV{\mu}{T}{c,p} \Grad T + \PDV{\mu}{p}{c,T} \Grad p
+\]
+が成り立つ．
+Gibbsの自由エネルギーから導かれるMaxwell関係式 $\dPDV{\mu}{p}{c,T} = \dPDV{V}{c}{p,T}$（$V$は比体積）も用いると
+\begin{align*}
+    \vec{i} &= - \alpha \left[ \PDV{\mu}{c}{p,T} \Grad c + \PDV{\mu}{T}{c,p} \Grad T 
+    + \PDV{V}{c}{p,T} \Grad p \right] - \beta \Grad T \\
+    &= - \alpha \PDV{\mu}{c}{p,T} \left[ \Grad c 
+    + \frac{ \alpha\PDV{\mu}{T}{c,p} + \beta }{ \alpha \PDV{\mu}{c}{p,T} } \Grad T 
+    + \frac{ \PDV{V}{c}{p,T} }{ \PDV{\mu}{c}{p,T} } \Grad p \right].
+\end{align*}
+ここで
+\setcounter{equation}{8}
+\begin{equation}\label{eq59.9:D,k_Tの定義}
+    D = \frac{\alpha}{\rho} \PDV{\mu}{c}{p,T}, \quad
+    \frac{\rho k_T D}{T} = \alpha\PDV{\mu}{T}{c,p} + \beta,
+\end{equation}
+\begin{equation}
+    k_p = p \frac{ \PDV{V}{c}{p,T} }{ \PDV{\mu}{c}{p,T} }
+\end{equation}
+により係数$D, k_T, k_p$を定義すると
+\begin{equation}\label{eq59.11:iの表現}
+    \vec{i} = -\rho D \left( \Grad c + \frac{k_T}{T} \Grad T + \frac{k_p}{p} \Grad p \right)
+\end{equation}
+となる．
+また\eqref{eq59.9:D,k_Tの定義}から
+\[
+    \beta = \frac{k_T}{T} \alpha \PDV{\mu}{c}{p,T} - \alpha \PDV{\mu}{T}{c,p}
+\]
+\[
+    \yueni \frac{\beta T}{\alpha} = k_T \PDV{\mu}{c}{p,T} - T \PDV{\mu}{T}{c,p}
+\]
+であるから
+\begin{equation}\label{eq59.12:qの表現}
+    \vec{q} = \left[ k_T \PDV{\mu}{c}{p,T} - T \PDV{\mu}{T}{c,p} + \mu \right] \vec{i} - \kappa \Grad T
+\end{equation}
+を得る．
+
+
+
+係数$D$は\emph{拡散係数}または\emph{質量輸送係数}と呼ばれ，（温度や圧力の勾配がなく）濃度勾配のみが存在するときの拡散フラックスを与える．
+温度勾配による拡散フラックスは\emph{熱拡散係数} $k_T D$により与えられ，無次元数$k_T$は\emph{熱拡散比}と呼ばれる．
+
+
+
+\eqref{eq59.11:iの表現}の最後の項は，流体中に（例えば外力場によって作られた）顕著な圧力勾配が存在する場合にのみ考慮される．
+係数$k_pD$は\emph{圧拡散係数}と呼ぶことができる．
+
+
+1成分の流体では，もちろん拡散フラックスは存在しない．
+よって$c \to 0$または1の極限では，$k_T$と$k_p$は0になる．
+
+
+エントロピーが増加しなければならないという条件は，\eqref{eq59.6:iとqの展開}の係数に制約を加える．
+\eqref{eq58.7:混合流体でのエントロピー変化（積分形）}に代入することにより
+\begin{align}
+    \pdv{t} \int \rho s \,\dV &= \int \frac{\Phi}{T} dV
+    - \int \frac{ \left( \cancel{ \frac{\beta T}{\alpha}\vec{i} } - \kappa \Grad T \right) \cdot\Grad T }{T^2} dV 
+    - \int \frac{ \vec{i}\cdot \left( -\frac{1}{\alpha} \right) (\vec{i} + \cancel{\beta \Grad T} ) }{T} dV \nonumber \\
+    &= \int \frac{\Phi}{T} dV + \int \frac{ \kappa (\Grad T)^2 }{T^2} dV + \int \frac{ \vec{i}^2 }{\alpha T} dV .
+\end{align}
+よって，$\kappa>0$に加えて$\alpha>0$でなければならない．
+熱力学不等式$\dPDV{\mu}{c}{p,T}>0$（『統計物理学』\S~96を見よ）より，拡散係数$D$も正でなければならない．
+しかし，$k_T,k_p$は正にも負にもなりうる．
+
+
+
+
+以上の$\vec{i}$や$\vec{q}$の表式を\eqref{eq58.3:1成分に対する連続の式}や\eqref{eq58.6:混合流体でのエントロピー変化}に代入すれば，
+混合流体の方程式系が完成するが，長くなるからやめておく．
+ここでは，圧力勾配が大きくない場合を考える．
+さらに，濃度や温度の変化が小さいために，（一般には$c$や$T$の関数である）
+\eqref{eq59.11:iの表現}\eqref{eq59.12:qの表現}に現れる係数は定数とみなせると仮定する．
+さらに，濃度や温度の勾配による流れを除けば，流体のマクロな運動は存在しないと仮定する．
+この場合の速度は$\Grad c$や$\Grad T$に比例するから，\eqref{eq58.3:1成分に対する連続の式}や\eqref{eq58.6:混合流体でのエントロピー変化}で
+$\v$が含まれる項は2次以上として無視することができる．
+また\eqref{eq58.6:混合流体でのエントロピー変化}で$\vec{i}\cdot\Grad\mu$も2次のオーダーである．
+よって
+\[
+    \begin{cases}
+        \rho \dpdv{c}{t} &= -\Div \vec{i} \\[8pt]
+        \rho T \dpdv{s}{t} &= - \Div(\vec{q} - \mu \vec{i})
+    \end{cases}
+    \mytag{2}
+\]
+となる．
+
+第1式は
+\[
+    \rho\pdv{c}{t} = - \Div \left[ -\rho D \left( \Grad c + \frac{k_T}{T} \Grad T \right) \right]
+\]
+\begin{equation}\label{eq59.14:cの拡散方程式}
+    \yueni \pdv{c}{t} = D \left( \Laplacian c + \frac{k_T}{T} \Laplacian T \right)
+\end{equation}
+となる（$1/T$の微分は高次のオーダーとして現れるから無視することができる）．
+次に，\ajMaru{2}の第2式の$\dpdv{s}{t}$を書き換えよう．
+Maxwell関係式$-\dPDV{s}{c}{p,T} = \dPDV{\mu}{T}{p,c}$を用いると
+\[
+    \pdv{s}{t} = \PDV{s}{T}{c,p} \pdv{T}{t} + \PDV{s}{c}{T,p} \pdv{c}{t}
+    = \frac{c_p}{T} \pdv{T}{t} - \PDV{\mu}{T}{p,c} \pdv{c}{t} .
+\]
+よって第2式は
+\[
+    \rho T \left[ \frac{c_p}{T} \pdv{T}{t} - \PDV{\mu}{T}{p,c} \pdv{c}{t} \right]
+    = -\Div \left[ \left\{ k_T \PDV{\mu}{c}{p,T} - T \PDV{\mu}{T}{c,p} \right\}
+    \left\{ -\rho D \left( \Grad c + \frac{k_T}{T} \Grad T \right) \right\} - \kappa \Grad T \right] .
+\]
+やはり$T$の微分を無視することができるから
+\[
+    \rho c_p \pdv{T}{t} - \rho T \PDV{\mu}{T}{p,c} \pdv{c}{t}
+    = \rho D \left\{ k_T \PDV{\mu}{c}{p,T} - T \PDV{\mu}{T}{c,p} \right\}
+    \left( \Laplacian c + \frac{k_T}{T} \Laplacian T \right) + \kappa \Laplacian T 
+\]
+右辺の$\left( \Laplacian c + \dfrac{k_T}{T} \Laplacian T \right)$を\eqref{eq59.14:cの拡散方程式}を用いて書き換えれば
+\[
+    \rho c_p \pdv{T}{t} - \cancel{ \rho T \PDV{\mu}{T}{p,c} \pdv{c}{t} }
+    = \rho \left\{ k_T \PDV{\mu}{c}{p,T} - \cancel{ T \PDV{\mu}{T}{c,p} } \right\} \pdv{c}{t}  + \kappa \Laplacian T .
+\]
+\begin{equation}\label{eq59.14:Tの拡散方程式}
+    \yueni \pdv{T}{t} - \frac{k_T}{c_p} \PDV{\mu}{c}{p,T} \pdv{c}{t} = \chi \Laplacian T .
+\end{equation}
+線形方程式系\eqref{eq59.14:cの拡散方程式}\eqref{eq59.14:Tの拡散方程式}は，流体中の濃度と温度の分布を与える．
+
+
+
+濃度が小さい場合は特に重要である．
+$c \to 0$では$k_T \to 0$（しかし$D$は有限のまま）であるから
+\begin{equation}\label{eq59.16:純粋な拡散方程式}
+    \pdv{c}{t} = D \Laplacian c
+\end{equation}
+および$\dpdv{T}{t} = \chi \Laplacian T$となる．
+
+
+\eqref{eq59.16:純粋な拡散方程式}の境界条件は，場合によって異なる．
+\begin{itemize}
+    \item 物体の表面が流体に溶けない場合．拡散フラックス$\vec{i} = -\rho D \Grad c$の法線成分は0でなければならないから$\dpdv{c}{n}=0$である．
+    \item 物体が流体に溶けることができ，物体から拡散がある場合．表面付近では速やかに平衡状態になり，流体の濃度は飽和濃度$c_0$に等しくなる．つまり境界条件は$c=c_0$である．
+    \item 固体表面が拡散物質を吸収する場合．$c=0$となる．これは例えば，固体表面で化学反応が起こる場合に見られる．
+\end{itemize}
+
+
+
+純粋な拡散方程式\eqref{eq59.16:純粋な拡散方程式}は純粋な熱伝導方程式と全く同じ形をしている．
+よって\S~51-52で得られた式を，$T$を$c$に，$\chi$を$D$に置き換えるだけで当てはめることができる．
+断熱の境界条件は不溶表面の条件に，一定温度の境界条件は表面での溶出の条件に対応する．
+
+
+特に(51.5)との類似から，$t=0$で溶質が原点に集中していた場合の，$t>0$での濃度分布を書き下すことができる．
+\begin{equation}\label{eq59.17:拡散方程式のGreen関数}
+    c(r,t) = \frac{M}{8\rho(\pi Dt)^{3/2}} \exp\left( - \frac{r^2}{4Dt} \right)
+\end{equation}
+ここで$M$は溶質の全質量である．
+
+
+
+問題などは省略する．
+
+
+\BackToTheToc
