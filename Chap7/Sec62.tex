@@ -1,0 +1,53 @@
+\section{表面張力波}
+
+流体の表面は，重力と表面張力の作用のもと，平衡状態での形に移行しようとする．
+\S~12で流体の表面波を調べたときには，表面張力を考慮していなかった．
+以下では，短波長の重力波に対して表面張力が重要な影響を与えることを学ぼう．
+
+
+\S~12と同様に，波の振幅は波長に比べて十分小さいと仮定する．
+速度ポテンシャルに対する方程式は以前と同様$\Laplacian\phi=0$である．
+しかし今の場合，表面での境界条件が異なる．
+表面を挟んで両側の圧力差は0ではなく，Laplaceの式\eqref{eq61.3:Laplaceの式}で与えられる．
+
+表面の点の$z$座標を$\zeta$としよう．
+$\zeta$は微小量であるから，\eqref{eq61.11:曲率と微小変位の関係}より
+\[
+    p-p_0 = -\alpha \left( \pdv[2]{\zeta}{x} + \pdv[2]{\zeta}{y} \right).
+\]
+ここで$p$は表面近傍での流体の圧力，$p_0$は一定の外圧である．
+(12.2)より$p = -\rho g\zeta - \rho \dpdv{\phi}{t}$であるから
+\[
+    \rho g\zeta + \rho \pdv{\phi}{t} -\alpha \left( \pdv[2]{\zeta}{x} + \pdv[2]{\zeta}{y} \right) = 0
+\]
+となる（\S~12と同様に，$\phi$を定義し直すことにより，$p_0$を除くことができる）．
+これを$t$で微分し$\dpdv{\zeta}{t} \simeq v_z = \dpdv{\phi}{z}$とおけば，$\phi$に関する境界条件が得られる．
+\begin{equation}\label{eq62.1:表面張力波の境界条件}
+    \rho g \pdv{\phi}{z} + \rho \pdv[2]{\phi}{t} -\alpha \pdv{z} \left( \pdv[2]{\phi}{x} + \pdv[2]{\phi}{y} \right) = 0
+    \quad (z=0) .
+\end{equation}
+
+
+$x$軸方向に伝播している平面波$\phi = A e^{kz} \cos(kx-\omega t)$を求めよう（これは$\Laplacian\phi=0$を満たす）．
+\eqref{eq62.1:表面張力波の境界条件}より
+\[
+    \rho gk - \rho \omega^2 - \alpha k (-k^2) = 0
+\]
+\begin{equation}\label{eq62.2:表面張力重力波}
+    \yueni \omega^2 = gk + \frac{\alpha k^3}{\rho}
+\end{equation}
+を得る（W. Thomson 1871）．
+
+
+長波長の場合（$gk \gg \dfrac{\alpha k^3}{\rho}$すなわち$\dfrac{1}{k} \gg a$），
+表面張力の影響を無視することができ，純粋な重力波となることがわかる．
+逆に短波長の場合，重力の影響を無視することができ
+\begin{equation}
+    \omega^2 = \frac{\alpha k^3}{\rho}
+\end{equation}
+となる．
+このような波は\emph{表面張力波}（\emph{さざなみ}）と呼ばれる．
+\eqref{eq62.2:表面張力重力波}のような，重力波と表面張力波の中間の場合は\emph{表面張力重力波}と呼ばれる．
+
+
+\BackToTheToc

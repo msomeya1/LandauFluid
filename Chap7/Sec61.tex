@@ -1,0 +1,191 @@
+\section{Laplaceの式}
+
+この章では，2つの連続媒質の境界面付近で起こる現象を調べることにする
+（もちろん実際には，媒質は薄い遷移層に分かれているが，この層は薄いので面とみなすことができる）．
+境界が曲面の場合，表面付近で2つの媒質の圧力は異なっている．
+この圧力差（\emph{表面圧}）を求めるために，境界面の性質を考慮して，2つの媒質が熱力学的に平衡状態にある条件を書き下そう．
+
+
+
+2つの媒質を1，2とし，境界面が無限小の変位$\delta\zeta$を行ったとする
+（$\delta\zeta$は，変化後の境界面から変化前の境界面におろした垂線の長さであり，
+1から2に変位するとき$\delta\zeta>0$と定める）．
+境界の面積要素を$dS$とすると，変化前後の表面に挟まれた体積要素は$\delta\zeta \, dS$となる．
+媒質1，2の圧力を$p_1, p_2$とすると，以上のような変位を行うのに必要な仕事は
+\[
+    \int (-p_1 + p_2) \delta\zeta \, dS
+\]
+である．
+
+次に，表面積を変化させるのに必要な仕事は，表面積の変化$\delta S$に比例し$\alpha \, \delta S$と表せる
+（$\alpha$は\emph{表面張力係数}と呼ばれる）．
+よって，表面を変位させるのに必要な仕事$\delta W$は
+\begin{equation}\label{eq61.1:表面を変位させるための仕事}
+    \delta W = -\int (p_1 - p_2) \delta\zeta \, dS + \alpha \, \delta S
+\end{equation}
+となる．
+熱力学的に平衡であるための条件は，もちろん$\delta W = 0$である．
+
+
+
+
+次に，$\delta S$を$\delta\zeta$と関係付けるために，曲率半径を考えよう．
+ある点の主曲率半径を$R_1, R_2$とする（媒質2側に曲がるとき曲率が正とする）．
+また，曲率円上の線素を$dl_1, dl_2$とする．
+表面が$\delta\zeta$変位することで，
+主曲率半径は$R_1'=R_1+\delta\zeta$，$R_2'=R_2+\delta\zeta$となり，
+線素は$dl_1' = \dfrac{R_1+\delta\zeta}{R_1} dl_1$，$dl_2' = \dfrac{R_2+\delta\zeta}{R_2} dl_2$となる．
+したがって微小面積$dS=dl_1dl_2$の変化は
+\[
+    dS' - dS = dl_1'dl_2' - dl_1dl_2
+    = \left[ \left( 1 + \frac{\delta\zeta}{R_1} \right) \left( 1 + \frac{\delta\zeta}{R_2} \right) -1 \right] dl_1dl_2
+    \simeq \left( \frac{\delta\zeta}{R_1} + \frac{\delta\zeta}{R_2} \right) dS ,
+\]
+つまり
+\begin{equation}\label{eq61.2:面積の変分と曲率}
+    \delta S = \int \left( \frac{1}{R_1} + \frac{1}{R_2} \right) \delta\zeta \, dS
+\end{equation}
+となる．これを\eqref{eq61.1:表面を変位させるための仕事}に代入し
+\[
+    \int \left\{ -(p_1 - p_2) + \alpha \left( \frac{1}{R_1} + \frac{1}{R_2} \right) \right\} \delta\zeta \, dS = 0
+\]
+\begin{equation}\label{eq61.3:Laplaceの式}
+    \yueni p_1 - p_2 = \alpha \left( \frac{1}{R_1} + \frac{1}{R_2} \right) .
+\end{equation}
+これが\emph{Laplaceの式}であり，表面圧（\emph{Laplace圧}）$p_1-p_2$を与える．
+もし$R_1$と$R_2$が正なら$p_1>p_2$であり，圧力の大きい方の媒質が凸になる．
+また境界が平面（$R_1, R_2 \to \infty$）なら$p_1=p_2$であり，2つの媒質の圧力は等しい．
+
+
+
+隣接する2つの媒質の力学的平衡を調べるために\eqref{eq61.3:Laplaceの式}を適用してみよう．
+境界面にも媒質にも，外力は作用していないものとする．
+よって圧力は2つの媒質で等しいから，平衡状態の方程式は
+\begin{equation}\label{eq61.4:力学的平衡の式}
+    \frac{1}{R_1} + \frac{1}{R_2} = \const
+\end{equation}
+である．
+つまり，曲率の和は任意の自由表面上で一定でなければならない．
+もし表面全体が自由表面なら，条件\eqref{eq61.4:力学的平衡の式}は表面が球状でなければならないことを意味する
+（例：重力が無視できる場合の，小さい液滴の表面）．
+しかし，表面がある曲線によって支えられている場合（例：固体枠上の液体薄膜），表面の形はそれほど単純ではない．
+
+
+
+条件\eqref{eq61.4:力学的平衡の式}が，固体枠に支えられた液体薄膜の平衡状態に適用される場合には，右辺の定数は0でなければならない．
+和$1/R_1+1/R_2$は薄膜表面上のどこでも等しい値を取る．
+一方，曲率は，反対側から見れば大きさが同じで符号が逆になるから，この定数は膜の反対側で逆符号となる．
+よって
+\begin{equation}
+    \frac{1}{R_1} + \frac{1}{R_2} = 0 .
+\end{equation}
+
+
+次に，重力場中にある媒質表面の平衡条件を考えよう．
+簡単のため，媒質2は大気であり，その圧力は表面で一定とみなせるとする．
+また，媒質1は非圧縮性流体とする．
+このとき$p_2=\const$であり，式(3.2)より$p_1 = \const - \rho gz$となる（$z$軸は鉛直上向きにとる）．
+よって平衡条件は
+\begin{equation}\label{eq61.6:重力場中の流体表面の平衡条件}
+    \frac{1}{R_1} + \frac{1}{R_2} + \frac{\rho gz}{\alpha} = \const
+\end{equation}
+となる．
+
+
+個々の場合に平衡状態での流体表面の形を求めるには，式\eqref{eq61.6:重力場中の流体表面の平衡条件}の形ではなく，
+全自由エネルギーを最小にするという変分法の問題を解く方が便利である，ということを指摘しておこう．
+この場合に解くべき式は
+\begin{equation}\label{eq61.7:重力場中の流体表面の平衡条件（変分）}
+    \alpha \int dS + \rho g \int z \, dV = \min,
+\end{equation}
+\begin{equation}
+    \int dV = \const
+\end{equation}
+である．
+
+
+
+定数$\rho, g, \alpha$は，条件\eqref{eq61.6:重力場中の流体表面の平衡条件}
+\eqref{eq61.7:重力場中の流体表面の平衡条件（変分）}の中で$\alpha/\rho g$という形でしか出てこない．
+この量の次元は長さの2乗である．
+長さの次元を持つ量
+\begin{equation}
+    a = \sqrt{ \frac{2\alpha}{\rho g} }
+\end{equation}
+は，今考えている物質の\emph{毛細定数}と呼ばれる．
+流体の表面の形はこの量のみで決まる．
+毛細定数が，媒質の特徴的な長さのオーダーに比べて大きい場合には，表面の形を求める際に重力の影響を無視することができる．
+
+
+
+条件\eqref{eq61.4:力学的平衡の式}\eqref{eq61.6:重力場中の流体表面の平衡条件}から表面の形を求めるためには，
+表面の形が与えられた場合に，その曲率半径を求める式が必要である．
+この公式は微分幾何により与えられるが，一般の場合にはやや複雑である．
+しかし，表面が平面からわずかにずれている特殊な場合には，この式は簡単になる．
+ここでは，微分幾何を用いずに，適当な式を導くことにしよう．
+
+表面の形を$z = \zeta(x,y) $とし，$\zeta$は十分小さいとする．
+よく知られているように，表面積は次で与えられる．
+\begin{equation}
+    S = \bigintsss \sqrt{ 1 + \left( \pdv{\zeta}{x} \right)^2 + \left( \pdv{\zeta}{y} \right)^2 } dxdy
+    \simeq \bigintsss \left[ 1 + \frac{1}{2} \left( \pdv{\zeta}{x} \right)^2 + \frac{1}{2} \left( \pdv{\zeta}{y} \right)^2 \right] dxdy
+\end{equation}
+その変分は
+\begin{align*}
+    \delta S &= \int \left( \pdv{\zeta}{x} \pdv{\delta\zeta}{x} + \pdv{\zeta}{y} \pdv{\delta\zeta}{y} \right) dxdy \\
+    & \gyoukan{←部分積分} \\
+    &= - \int \left( \pdv[2]{\zeta}{x} + \pdv[2]{\zeta}{y} \right) \delta\zeta \, dxdy .
+\end{align*}
+これを\eqref{eq61.2:面積の変分と曲率}と比べ
+\begin{equation}\label{eq61.11:曲率と微小変位の関係}
+    \frac{1}{R_1} + \frac{1}{R_2} = - \left( \pdv[2]{\zeta}{x} + \pdv[2]{\zeta}{y} \right)
+\end{equation}
+を得る．
+
+
+3つの媒質が隣接して平衡状態にある場合，表面の形は，共通の交線上で表面張力の和が0になるという条件から求められる．
+この条件は，表面張力係数$\alpha$の値から決まるある角度（\emph{接触角}）で境界面同士が交わることを意味する．
+
+
+
+最後に，表面張力を考慮して，運動している2つの流体の境界面で満たされるべき条件を考えよう．
+表面張力が無視できる場合は
+\[
+    ( \sigma_{2,ij} - \sigma_{1,ij} ) n_j = 0
+\]
+であったが，表面張力を考える場合には，右辺にLaplaceの式から決まる項を加えなければならない．
+\begin{equation}
+    ( \sigma_{2,ij} - \sigma_{1,ij} ) n_j = \alpha \left( \frac{1}{R_1} + \frac{1}{R_2} \right) n_i
+\end{equation}
+$\sigma_{ij} = -p \delta_{ij} + \sigma_{ij}'$を代入して粘性応力テンソルを用いて書けば
+\begin{equation}\label{eq61.13:粘性流体の境界条件（表面張力あり）}
+    (p_1-p_2) n_i = ( \sigma_{1,ij}' - \sigma_{2,ij}' ) n_j + \alpha \left( \frac{1}{R_1} + \frac{1}{R_2} \right) n_i .
+\end{equation}
+2つの流体がどちらも理想流体なら$\sigma_{ij}'=0$であり，\eqref{eq61.3:Laplaceの式}に戻る．
+
+
+
+しかし\eqref{eq61.13:粘性流体の境界条件（表面張力あり）}は，まだ完全ではない．
+というのは，表面張力係数$\alpha$が（例えば温度変化によって）非一様になるかもしれないからである．
+この場合，法線応力のほかに接線応力を考える必要がある．
+圧力が非一様な場合，単位体積に$-\Grad p$の力が加わるのと同様に，この場合，
+表面の単位面積に$\Grad \alpha$の力が（接線方向に）かかる．
+符号が正であるのは，表面張力は表面積を減らすように働くからである．
+\eqref{eq61.13:粘性流体の境界条件（表面張力あり）}は
+\begin{equation}\label{eq61.14:αが変わる場合の境界条件}
+    \left[ (p_1-p_2) - \alpha \left( \frac{1}{R_1} + \frac{1}{R_2} \right) \right] n_i 
+    = ( \sigma_{1,ij}' - \sigma_{2,ij}' ) n_j +  \pdv{\alpha}{x_i}
+\end{equation}
+となる（$\vec{n}$は媒質1に向かうようにとる）．
+この条件は粘性流体でなければ満たされないことに注目せよ；
+理想流体では$\sigma_{ij}'=0$であるから，\eqref{eq61.14:αが変わる場合の境界条件}は
+（法線方向の力）＝（接線方向の力）という式になる．
+これは（両辺が0というつまらない場合を除けば）成立し得ない．
+
+
+
+
+
+
+
+\BackToTheToc
