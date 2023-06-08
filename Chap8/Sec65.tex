@@ -1,15 +1,103 @@
 \section{音波のエネルギーと運動量}
 
+音波のエネルギーの表式を導こう．
+一般に，単位体積当たりの流体のエネルギーは$\rho\varepsilon+\dfrac{1}{2}\rho v^2$である．
+これを2次のオーダーまで取ることにすると
+\[
+    \rho_0\varepsilon_0 + \rho' \eval{\pdv{(\rho\varepsilon)}{\rho}}_{\rho=\rho_0} + \frac{1}{2} {\rho'}^2 \eval{\pdv[2]{(\rho\varepsilon)}{\rho}}_{\rho=\rho_0}
+    +\frac{1}{2}\rho_0 v^2
+\]
+となる（音波は断熱的であるから，偏微分はエントロピー一定のもとで行うことにする．なお$\dfrac{1}{2}\rho' v^2$は3次のオーダーである）．
+\[
+    d(\rho\varepsilon) = \varepsilon d\rho + \rho d\varepsilon
+    = \varepsilon d\rho + \rho\left(Tds+\frac{p}{\rho^2}d\rho\right)
+    = \left( \varepsilon+\frac{p}{\rho} \right) d\rho + \rho T ds
+    = h d\rho + \rho T ds
+\]
+より
+\[
+    \eval{\pdv{(\rho\varepsilon)}{\rho}}_{\rho=\rho_0} = h_0, \quad
+    \eval{\pdv[2]{(\rho\varepsilon)}{\rho}}_{\rho=\rho_0} = \eval{\pdv{h}{\rho}}_{\rho=\rho_0}
+    = \eval{\pdv{h}{p}\pdv{p}{\rho}}_{\rho=\rho_0} = \frac{c^2}{\rho_0}
+\]
+であるから，単位体積当たりのエネルギーは
+\[
+    \rho_0\varepsilon_0 + h_0 \rho' + \frac{c^2{\rho'}^2}{2\rho_0} + \frac{1}{2} \rho_0 v^2
+\]
+となる．
+第1項$\rho_0\varepsilon_0$は，流体が静止しているときのエネルギーであり，音波に関係しない．
+第2項$ h_0 \rho'$は，流体の質量変化に伴うエネルギーの変化である．
+この項は，全体積で積分すると消える（$\because \int\rho' dV=0$）．
+よって音波による流体のエネルギー変化量は積分
+\[
+    \int \left( \frac{1}{2} \rho_0 v^2 + \frac{c^2{\rho'}^2}{2\rho_0} \right) dV
+\]
+で与えられる．
+被積分関数
+\begin{equation}
+    E = \frac{1}{2} \rho_0 v^2 + \frac{c^2{\rho'}^2}{2\rho_0}
+\end{equation}
+は音のエネルギー密度とみなすことができる．
+
+進行平面波の場合，上式は簡単になる．
+$\rho' = \dfrac{v \rho_0}{c}$を代入して
+\begin{equation}
+    E = \rho_0 v^2
+\end{equation}
+となる．
+一般にはこの式は成り立たないが，全エネルギーの時間平均については同様の式を得ることができる．
+よく知られた力学の一般理論により，微小振動を行っている系の全平均ポテンシャルエネルギーは，全平均運動エネルギーに等しい．
+よって
+\begin{equation}
+    \int \overline{E} \dV = \int \rho_0 \overline{v^2} \dV
+\end{equation}
+が成り立つ．
 
 
+次に，音波が伝播している流体のある体積を考え，この体積を囲む閉曲面を通るエネルギーフラックスを求めよう．
+流体のエネルギーフラックス密度は，式(6.3)より$\rho\v\left( \dfrac{1}{2}v^2+h \right)$である．
+今の場合，$v^2$の項は3次のオーダーであるから無視することができる．
+よって$\rho(h_0+h')\v$となる．
+エンタルピーの微小変化は$h'=\dPDV{h}{p}{s}p'=\dfrac{p'}{\rho}$であるから$\rho h_0\v + p'\v$となり，表面を通る全エネルギーフラックスは
+\[
+    \int \left( \rho h_0\v + p'\v \right)\cdot\dS
+\]
+となる．
+第1項は，考えている体積中の流体の質量が変化したことによるエネルギーフラックスである．
+我々はエネルギー密度を求める際，対応する項$h_0 \rho'$を省いたから，ここでも省くことにする．
+よって全エネルギーフラックスは単に
+\[
+    \int p' \v \cdot \dS
+\]
+となる．
+音波のエネルギーフラックス密度は，ベクトル
+\begin{equation}
+    \vec{q} = p' \v
+\end{equation}
+により表される．
+エネルギー密度とフラックス密度は，エネルギー保存則
+\begin{equation}
+    \pdv{E}{t} + \Div \vec{q} = 0
+\end{equation}
+により結ばれている．
+\begin{details}
+\begin{align*}
+    \text{（左辺）} 
+    &= \pdv{t} \left( \frac{1}{2} \rho_0 v^2 + \frac{c^2{\rho'}^2}{2\rho_0} \right) + \Div(p'\v) \\
+    &= \rho_0 \v \cdot \pdv{\v}{t} + \frac{c^2}{\rho_0}\rho'\pdv{\rho'}{t} + \v \cdot\Grad p' + p' \Div\v \\
+    & \gyoukan{（$p'=c^2\rho'$に注意する）} \\
+    &= \v \cdot \left( \rho_0 \pdv{\v}{t} + \Grad p' \right) + \frac{p'}{\rho_0} \left( \pdv{\rho'}{t} + \rho_0 \Div\v \right) = 0
+\end{align*}
+\end{details}
 
 
-
-
-
-
-
-
+進行平面波では，圧力変化は速度と$p'=c\rho_0v$の関係にある（$v$の符号は適当に決める）．
+波の伝播方向の単位ベクトル$\vec{n}$を導入すれば
+\begin{equation}
+    \vec{q} = \rho_0 c v^2 \vec{n} = cE\vec{n}
+\end{equation}
+となる．
+よって，期待されるように，平面音波のエネルギーフラックス密度は，エネルギー密度に音速をかけたものに等しい．
 
 
 

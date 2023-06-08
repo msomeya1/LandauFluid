@@ -1,17 +1,130 @@
 \section{音波の反射と屈折}
 
+音波が異なる2つの流体の境界に入射すると，反射や屈折を起こす．
+1つ目の媒質中の運動は，入射波と\emph{反射波}の組み合わせであるが，2つ目の媒質には\emph{屈折波}しか存在しない．
+これら3つの関係は，境界条件により決定される．
+
+
+2つの媒質の平面境界（$yz$平面とする）における，単色の縦波の反射と屈折について考えよう．
+3つの波は同じ振動数$\omega$と同じ波数ベクトルの成分$k_y,k_z$を持つが，境界に垂直な波数$k_x$は異なる値を持つ．
+その理由は以下の通りである．
+均質な無限媒質の場合，一定の$\vec{k},\omega$を持つ単色波は運動方程式を満たす．
+境界面の存在は，単に境界条件を加えるに過ぎない．
+この場合の境界は$x=0$であり，$t,y,z$には依存しない．
+よって，$t,y,z$に対する解の依存性は全ての時間や座標に対して等しい．
+よって$\omega,k_y,k_z$は入射波と同じ値をとる．
+
+
+この結果からただちに，反射波と屈折波の伝播方向を与える関係式を導くことができる．
+入射波を含む平面を$xy$平面とすると，入射波では$k_z=0$であり，反射波と屈折波でも同様のことが成り立つ必要がある．
+ゆえに，3つの波の伝播方向は同一平面上にある．
+
+
+さて，波の伝播方向が$x$軸となす角を$\theta$としよう．
+$k_y = \dfrac{\omega}{c}\sin\theta$であり，これが入射波と反射波で等しいことから
+\begin{equation}
+    \theta_1 = \theta_1'
+\end{equation}
+となる．
+つまり入射角$\theta_1$と反射角$\theta_1'$は等しい．
+次に入射波と屈折波で$k_y$が等しいことから
+\begin{equation}\label{eq66.2:スネルの法則}
+    \frac{\omega}{c_1}\sin\theta_1 = \frac{\omega}{c_2}\sin\theta_2
+    \qquad\yueni \frac{\sin\theta_1}{\sin\theta_2} = \frac{c_1}{c_2}
+\end{equation}
+を得る（$c_1,c_2は2つの媒質の音速$）．
+これは\emph{Snellの法則}と呼ばれる．
+
+
+3つの波の強さの間に成り立つ定量的な関係を得るために，入射波，反射波，屈折波の速度ポテンシャルを次のように書く．
+\begin{align*}
+    \phi_1 &= A_1 \exp\left[ i\omega \left( \frac{x}{c_1}\cos\theta_1 + \frac{y}{c_1}\sin\theta_1 -t \right) \right] \\
+    \phi_1' &= A_1' \exp\left[ i\omega \left( -\frac{x}{c_1}\cos\theta_1 + \frac{y}{c_1}\sin\theta_1 -t \right) \right] \\
+    \phi_2 &= A_2 \exp\left[ i\omega \left( \frac{x}{c_2}\cos\theta_2 + \frac{y}{c_2}\sin\theta_2 -t \right) \right]     
+\end{align*}
+境界では圧力$p'=-\rho\dpdv{\phi}{t}$と法線速度$v_x=\dpdv{\phi}{x}$が等しいから
+\[
+    \rho_1(A_1+A_1') = \rho_2A_2,
+    \mytag{1}    
+\]
+\[
+    \frac{\cos\theta_1}{c_1}(A_1-A_1') = \frac{\cos\theta_2}{c_2} A_2.
+    \mytag{2}
+\]
+音波の\emph{反射係数}$R$は，反射波と入射波のエネルギーフラックス密度の（時間）平均の比として定義される．
+平面波のエネルギーフラックスは$c\rho v^2$であるから，
+$R = \dfrac{c_1\rho_1 \overline{{v_1'}^2}}{c_1\rho_1 \overline{{v_1}^2}} = \dfrac{|A_1'|^2}{|A_1|^2}$となる．
+\begin{details}
+$\text{\ajMaru{1}} \divisionsymbol \text{\ajMaru{2}}$より
+\[
+    \frac{\rho_1c_1}{\cos\theta_1} \cdot \frac{A_1+A_1'}{A_1-A_1} = \frac{\rho_2c_2}{\cos\theta_2}
+\]
+\[
+    \frac{A_1+A_1'}{A_1-A_1'} = \frac{1+\frac{A_1'}{A_1}}{1-\frac{A_1'}{A_1}}
+    = \frac{\rho_2c_2\cos\theta_1}{\rho_1c_1\cos\theta_2}
+    \overset{\Eqref{gray}{eq66.2:スネルの法則}}{=}
+    \frac{\rho_2\tan\theta_2}{\rho_1\tan\theta_1}
+\]
+\[
+    1+\frac{A_1'}{A_1} = \frac{\rho_2\tan\theta_2}{\rho_1\tan\theta_1} \left( 1-\frac{A_1'}{A_1} \right)
+\]
+\[
+    \left( 1 + \frac{\rho_2\tan\theta_2}{\rho_1\tan\theta_1} \right)\frac{A_1'}{A_1}
+    = \frac{\rho_2\tan\theta_2}{\rho_1\tan\theta_1} -1
+\]
+\[
+    \frac{A_1'}{A_1} = \frac{\rho_2\tan\theta_2-\rho_1\tan\theta_1}{\rho_2\tan\theta_2+\rho_1\tan\theta_1}  
+\]
+\end{details}
+よって
+\begin{equation}
+    R = \left( \frac{\rho_2\tan\theta_2-\rho_1\tan\theta_1}{\rho_2\tan\theta_2+\rho_1\tan\theta_1} \right)^2
+\end{equation}
+となる．
+\eqref{eq66.2:スネルの法則}を用いて，$\theta_2$を$\theta_1$で表そう．
+\[
+    \frac{\tan\theta_2}{\tan\theta_1} = \frac{\sin\theta_2}{\sin\theta_1} \frac{\cos\theta_1}{\cos\theta_2}
+    = \frac{c_2}{c_1}\frac{\cos\theta_1}{\sqrt{1-\sin^2\theta_2}}
+    = \frac{c_2}{c_1}\frac{\cos\theta_1}{\sqrt{1-\left( \frac{c_2}{c_1}\sin\theta_1 \right)^2}}
+    = \frac{c_2\cos\theta_1}{\sqrt{{c_1}^2-{c_2}^2\sin^2\theta_1}}
+\]
+であるから
+\begin{equation}
+    R = \left( \frac{\rho_2c_2\cos\theta_1 - \rho_1\sqrt{{c_1}^2-{c_2}^2\sin^2\theta_1}}{\rho_2c_2\cos\theta_1 + \rho_1\sqrt{{c_1}^2-{c_2}^2\sin^2\theta_1}} \right)^2
+\end{equation}
+となる．
+
+
+特に垂直入射（$\theta_1=0$）のときは
+\begin{equation}
+    R = \left( \frac{\rho_2c_2 - \rho_1c_1}{\rho_2c_2 + \rho_1c_1} \right)^2
+\end{equation}
+となる．
+
+
+
+最後に，$R=0$となるのはどのような場合か調べよう．
+\[
+    {\rho_2}^2{c_2}^2\cos^2\theta_1 = {\rho_1}^2 ({c_1}^2 - {c_2}^2 \sin^2\theta_1)
+    = {\rho_1}^2 ({c_1}^2 - {c_2}^2) + {\rho_1}^2{c_2}^2\cos^2\theta_1
+\]
+\[
+    ({\rho_2}^2-{\rho_1}^2){c_2}^2\cos^2\theta_1 = {\rho_1}^2 ({c_1}^2 - {c_2}^2)
+\]
+\begin{equation}\label{eq66.6:音波が全屈折する条件}
+    \tan^2\theta_1 = \frac{1}{\cos^2\theta_1} -1
+    = \frac{({\rho_2}^2-{\rho_1}^2){c_2}^2}{{\rho_1}^2 ({c_1}^2 - {c_2}^2)} -1
+    = \frac{{\rho_2}^2{c_2}^2 - {\rho_1}^2{c_1}^2}{{\rho_1}^2 ({c_1}^2 - {c_2}^2)}
+\end{equation}
+のときである．
+つまり，\eqref{eq66.6:音波が全屈折する条件}が成り立つとき，波は全て屈折する．
+これが起こるのは，$c_1>c_2$かつ$\rho_2c_2>\rho_1c_1$が成り立つとき，または$c_1<c_2$かつ$\rho_2c_2<\rho_1c_1$が成り立つときである．
 
 
 
 
 
-
-
-
-
-
-
-
+問題は省略する．
 
 
 \BackToTheToc
