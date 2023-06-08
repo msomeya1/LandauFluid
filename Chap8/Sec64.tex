@@ -1,0 +1,210 @@
+\section{音波}
+
+ここでは圧縮性流体の流れを調べよう．
+まず微小振動を考える．
+圧縮性流体の微小振幅の振動は\emph{音波}と呼ばれる．
+音波により，流体の各点で濃縮と希薄が交互に起こる．
+
+
+振幅が小さいから速度$\v$も小さく，Euler方程式で移流項$(\v\cdot\Grad)\v$を無視することができる．
+また，流体の圧力や密度の相対的な変化も小さい．
+よって
+\begin{equation}\label{eq64.1:音波中での圧力と密度の変化}
+    p = p_0 + p', \quad \rho = \rho_0 + \rho'
+\end{equation}
+と書くことができる．
+ここで$p_0, \rho_0$は定数で，平衡状態での圧力と密度を表す．
+$p', \rho'$は音波中での圧力と密度の変化で，$p' \ll p_0, \rho' \ll \rho_0$である．
+連続の式に\eqref{eq64.1:音波中での圧力と密度の変化}を代入して，2次の微小量を無視すると
+\begin{equation}\label{eq64.2:線形化した連続の式}
+    \pdv{\rho'}{t} + \rho_0 \Div\v = 0
+\end{equation}
+となる．
+Euler方程式は，同程度の近似で
+\begin{equation}\label{eq64.3:線形化したEuler方程式}
+    \pdv{\v}{t} + \frac{1}{\rho_0} \Grad p' = 0
+\end{equation}
+となる．
+
+
+線形化された方程式\eqref{eq64.2:線形化した連続の式}\eqref{eq64.3:線形化したEuler方程式}が音波の伝播に適用できるための条件は，
+流体粒子の速度が音速に比べて十分小さいこと（$v \ll c$）である．
+この条件は例えば$\rho' \ll \rho_0$から導くことができる（以下の\eqref{eq64.12:速度と密度変化の関係}を見よ）．
+
+
+方程式\eqref{eq64.2:線形化した連続の式}\eqref{eq64.3:線形化したEuler方程式}は未知数$\v, p', \rho'$を含んでいる．
+ここから1つを消去するためには，理想流体中の音波は断熱的であるということに注目すればよい．
+すなわち$p', \rho'$は
+\begin{equation}\label{eq64.4:圧力変化と密度変化の関係}
+    p' = \PDV{p}{\rho}{s} \rho'
+\end{equation}
+という関係にある（これ以降，$p,\rho$の添字0を省く）．
+式\eqref{eq64.2:線形化した連続の式}に代入し
+\begin{equation}\label{64.5:圧力変化で書いた連続の式}
+    \pdv{p'}{t} + \rho \PDV{p}{\rho}{s} \Div \v = 0.
+\end{equation}
+未知数$\v,p'$についての方程式\eqref{eq64.3:線形化したEuler方程式}\eqref{64.5:圧力変化で書いた連続の式}が，音波を完全に記述する．
+
+
+全ての未知数を1つの未知数で表すためには，$\v=\Grad\phi$により速度ポテンシャルを導入するのが便利である．
+\eqref{eq64.3:線形化したEuler方程式}より
+\begin{equation}
+    p' = -\rho \pdv{\phi}{t}
+\end{equation}
+となる（もちろん定数の任意性があるが，$\phi$を定義し直すことによりその影響を消すことができる）．
+よって\eqref{64.5:圧力変化で書いた連続の式}から
+\begin{equation}\label{eq64.7:音波の波動方程式}
+    \pdv[2]{\phi}{t} - c^2 \Laplacian\phi = 0
+\end{equation}
+となる．ここで
+\begin{equation}\label{eq64.8:音速の定義式}
+    c = \sqrt{\PDV{p}{\rho}{s}}
+\end{equation}
+である．
+\eqref{eq64.7:音波の波動方程式}の形の方程式は\emph{波動方程式}と呼ばれる．
+\eqref{eq64.7:音波の波動方程式}にgradや$\partial/\partial t$を作用させることにより，$\v$の各成分や$p',\rho'$も波動方程式を満たすことが分かる．
+
+全ての量が1つの座標（例えば$x$）のみに依存するような音波を考えよう．
+つまり，流れは$yz$平面内で完全に一様とする．
+そのような波は\emph{平面波}と呼ばれる．
+波動方程式\eqref{eq64.7:音波の波動方程式}は
+\begin{equation}\label{eq64.9:1次元波動方程式}
+    \pdv[2]{\phi}{x} - \frac{1}{c^2} \pdv[2]{\phi}{t} = 0
+\end{equation}
+となる．
+この方程式を解くために，新しい変数$\xi=x-ct, \eta=x+ct$を導入しよう．
+このとき\eqref{eq64.9:1次元波動方程式}は$\dpdv[2]{\phi}{\eta}{\xi}=0$となる．
+$\xi$について積分し$\dpdv{\phi}{\eta}=F(\eta)$となり，次に$\eta$で積分して$\phi=f_1(\xi)+f_2(\eta)$となる．
+ここで$f_1,f_2$は$\xi_,\eta$の任意関数である．
+したがって
+\begin{equation}
+    \phi = f_1(x-ct) + f_2(x+ct)
+\end{equation}
+となる（\emph{d'Alembertの解}）．
+平面波における他の諸量（$p',\rho',\v$）の分布も，同じ形の関数で与えられる．
+
+
+
+話を明確にするために，密度$\rho'=f_1(x-ct)+f_2(x+ct)$について考えよう．
+例えば$f_2=0$とすると，$\rho'=f_1(x-ct)$となる．
+この解の意味は明らかである；
+$x=\const$という任意の平面では，密度は時間とともに変化する．
+また，ある瞬間（$t=\const$）の密度は$x$によって異なる．
+しかし，$x-ct=\const$（あるいは$x=ct+\const$）を満たす組$(x,t)$に対しては，密度は同じ値をとる．
+このことは，$t=0$にある点で密度がある値をとるとき，時刻$t$にはこの点から$x$軸方向に$ct$だけ離れた点で，密度は同じ値をとることを意味する．
+このことは密度以外の諸量に対しても成り立つ．
+よって運動のパターンは$x$軸に沿って速さ$c$で媒質中を伝播する．
+$c$は\emph{音速}と呼ばれる．
+
+
+
+以上より，$f_1(x-ct)$は$x$軸の正の方向に伝播する\emph{進行平面波}と呼ばれるものを表している．
+$f_2(x+ct)$が逆向きに伝播する波を表すことは明らかである．
+
+
+平面波では，速度$\v=\Grad\phi$の3つの成分のうち，$v_x=\dpdv{\phi}{x}$のみが0でない．
+よって音波中の流体の速度は伝播方向に平行である．
+このため流体中の音波は\emph{縦波}であるという．
+
+進行平面波では，速度$v_x=v$は圧力$p'$や密度$\rho'$と簡単な式で結ばれている．
+$\phi=f(x-ct)$とおくと，$v=\dpdv{\phi}{x} = f'(x-ct)$，$p'=-\rho\dpdv{\phi}{t} = \rho c f'(x-ct)$であり，両者を比べて
+\begin{equation}
+    v = \frac{p'}{\rho c}
+\end{equation}
+となる．あるいは，\eqref{eq64.4:圧力変化と密度変化の関係}を$p'=c^2\rho'$と書いて代入すれば
+\begin{equation}\label{eq64.12:速度と密度変化の関係}
+    v = \frac{c \rho'}{\rho}.
+\end{equation}
+
+
+音波中の温度変化と速度の関係について触れておこう．
+$T' = \dPDV{T}{p}{s}p'$であり，よく知られた熱力学の公式
+$\dPDV{T}{p}{s} = \dfrac{T}{c_p}\dPDV{V}{T}{p}$
+\footnote{証明は\S~4を見よ．}
+を用いると
+\begin{equation}
+    T' = \frac{T}{c_p}\PDV{V}{T}{p}\rho cv = \frac{c\beta T}{c_p} v
+\end{equation}
+となる（$\beta=\dfrac{1}{V}\dPDV{V}{T}{p}=\rho\dPDV{V}{T}{p}$は熱膨張係数）．
+
+
+\eqref{eq64.8:音速の定義式}は，流体の断熱圧縮率を用いて音速を表した式である．
+これは等温圧縮率とは熱力学の公式
+\begin{equation}
+    \PDV{p}{\rho}{s} = \frac{c_p}{c_v}\PDV{p}{\rho}{T}
+\end{equation}
+で結ばれている．
+\begin{details}
+証明にはヤコビアンを用いるのがよい（参照：久保統計3章問題11）：
+\[
+    \frac{(\partial p/\partial\rho)_s}{(\partial p/\partial\rho)_T}
+    = \frac{ \frac{\partial(p,s)}{\partial(\rho,s)} }{ \frac{\partial(p,T)}{\partial(\rho,T)} }
+    = \frac{ \frac{\partial(p,s)}{\partial(p,T)} }{ \frac{\partial(\rho,s)}{\partial(\rho,T)} }
+    = \frac{(\partial s/\partial T)_p}{(\partial s/\partial T)_\rho} = \frac{c_p}{c_v}
+\]
+\end{details}
+\noindent%
+理想気体の音速を計算してみよう．
+気体定数を$R$，分子量を$\mu$とすると，状態方程式は$pV=\dfrac{p}{\rho}=\dfrac{RT}{\mu}$である．
+比熱比を$\gamma=\dfrac{c_p}{c_v}$と書けば
+\begin{equation}
+    c = \sqrt{\gamma\frac{RT}{\mu}}
+\end{equation}
+となる
+\footnote{気体の音速が$c^2=\dfrac{p}{\rho}$と書けることを最初に示したのはNewton（1687）である．$\gamma$が必要であることはLaplaceが指摘した．}．
+$\gamma$は温度にわずかにしか依存しないから，気体の音速は$\sqrt{T}$に比例すると考えてよい
+\footnote{気体の音速は分子の平均熱速度と同じオーダーであることは，知っておくとよい．}．
+そして，温度一定のとき音速は圧力に依存しない．
+
+
+
+\emph{単色波}と呼ばれる波は非常に重要である．
+この場合には，全ての量は時間の周期関数（調和振動）である．
+このような関数を，複素数の実部として書くのが便利である（\S~24冒頭を見よ）．
+例として，速度ポテンシャルを
+\begin{equation}
+    \phi = \Re \{\phi_0(x,y,z)e^{-i\omega t}\}
+\end{equation}
+と書こう（$\omega$は波の振動数）．
+これを\eqref{eq64.7:音波の波動方程式}へ代入することにより，関数$\phi_0$はHelmholtz方程式
+\begin{equation}
+    \Laplacian \phi_0 + \frac{\omega^2}{c^2}\phi_0 = 0
+\end{equation}
+を満たすことが分かる．
+
+
+$x$軸の正の方向に伝播する単色進行平面波を考えよう．
+この場合，全ての量は$x-ct$のみの関数であるから，ポテンシャルは
+\begin{equation}\label{eq64.18:単色進行平面波のポテンシャル}
+    \phi = \Re \{ A e^{-i\omega(t-x/c)} \}
+\end{equation}
+と書ける（定数$A$は\emph{複素振幅}と呼ばれる）．
+実定数$a,\alpha$を用いて$A=ae^{i\alpha}$と書けば
+\begin{equation}
+    \phi = a \cos \left( \frac{\omega x}{c} - \omega t + \alpha \right)
+\end{equation}
+を得る．
+$a$は波の\emph{振幅}，cosの引数は\emph{位相}と呼ばれる．
+$\vec{n}$を伝播方向の単位ベクトルとするとき，ベクトル
+\begin{equation}
+    \vec{k} = \frac{\omega}{c}\vec{n} = \frac{2\pi}{\lambda} \vec{n}
+\end{equation}
+は\emph{波数ベクトル}，その大きさ$k$は\emph{波数}と呼ばれる．
+$\vec{k}$を用いると，\eqref{eq64.18:単色進行平面波のポテンシャル}は一般に
+\begin{equation}
+    \phi = \Re \{ A e^{i(\vec{k}\cdot\vec{r}-\omega t)} \}
+\end{equation}
+となる．
+
+
+単色波が重要な理由は，どのような波も様々な波数と振動数をもつ単色平面波の重ね合わせで表現できるからである．
+波を単色波に分解するには，単にFourier級数またはFourier積分に展開すればよい（スペクトル分解）．
+展開の各項は波の\emph{単色成分}や\emph{Fourier成分}と呼ばれる．
+
+
+
+
+
+問題は省略する．
+
+\BackToTheToc
