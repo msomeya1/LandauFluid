@@ -1,13 +1,218 @@
 \section{球面波}
 
+密度，速度などの分布が，ある点からの距離のみに依存する（つまり球対称な）音波を考えよう．
+そのような波は\emph{球面波}と呼ばれる．
+
+
+球面波を表す，波動方程式の一般解を求めよう．
+波動方程式を速度ポテンシャルで表し$\Laplacian\phi - \dfrac{1}{c^2}\dpdv[2]{\phi}{t}=0$とする．
+$\phi$は原点からの距離$r$および時間$t$の関数であるから，球座標でのラプラシアンを用いて
+\begin{equation}\label{eq70.1:球座標での波動方程式}
+    \pdv[2]{\phi}{t} = c^2 \frac{1}{r^2} \pdv{r} \left( r^2 \pdv{\phi}{r} \right)
+\end{equation}
+となる．$\phi = \dfrac{f(r,t)}{r}$とおいて代入すると
+\[
+    \frac{1}{r} \pdv[2]{f}{t} = c^2 \frac{1}{r^2} \pdv{r} \left( \pdv{f}{r} r - f \right) 
+    = c^2 \frac{1}{r^2} \left( \pdv[2]{f}{r} r + \pdv{f}{r} - \pdv{f}{r} \right)
+\]
+\[
+    \yueni \pdv[2]{f}{t} = c^2 \pdv[2]{f}{r}.
+\]
+よって，$r$を座標と考えたときの1次元波動方程式になる．
+その解は，$f_1,f_2$を任意関数として$f=f_1(ct-r)+f_2(ct+r)$であるから，\eqref{eq70.1:球座標での波動方程式}の一般解は
+\begin{equation}\label{eq70.2:球面波のポテンシャル}
+    \phi = \frac{f_1(ct-r)}{r} + \frac{f_2(ct+r)}{r}
+\end{equation}
+となる．
+第1項は，原点から全ての方向へ伝播する「外向き」の波であり，第2項は原点に集まる波である．
+振幅が一定の平面波とは異なり，球面波の振幅は原点からの距離に反比例して減少する．
+波の強度は振幅の2乗で与えられるから，球面波では$\order{1/r^2}$で減少する．
+これは，全エネルギーが表面積$4\pi r^2$の球面上に分布しているというエネルギー保存則から期待される通りである．
+
+
+圧力と密度の変化は，速度ポテンシャルと$p'=-\rho\dpdv{\phi}{t}, \; \rho'=-\dfrac{\rho}{c^2}\dpdv{\phi}{t}$で関係付けられる．
+一方，（半径方向の）速度は
+\begin{equation}
+    v = \pdv{\phi}{r} = \pdv{r} \left\{ \frac{f_1(ct-r)}{r} + \frac{f_2(ct+r)}{r} \right\}
+\end{equation}
+で与えられる．
+
+
+原点に音源がない場合には，ポテンシャル\eqref{eq70.2:球面波のポテンシャル}は$r=0$で有限でなければならない．
+そうなるためには$f_1(ct)=-f_2(ct)$でなければならず
+\begin{equation}\label{eq70.4:原点に音源がない球面波のポテンシャル}
+    \phi = \frac{f(ct-r) - f(ct+r)}{r}
+\end{equation}
+となる．
+一方，原点に音源がある場合には，外へ向かう波のポテンシャルは$\phi = \dfrac{f(ct-r)}{r}$である．
+解は音源以外の領域で成り立つものであるから，$r=0$で有限になる必要はない．
+
+
+単色波の場合，\eqref{eq70.4:原点に音源がない球面波のポテンシャル}は
+\begin{equation}\label{eq70.5:単色球面波のポテンシャル}
+    \phi = A e^{-i\omega t} \frac{\sin(kr)}{r}, \; k = \frac{\omega}{c} 
+\end{equation}
+となる．
+また，外へ向かう球面波は
+\begin{equation}\label{eq70.6:外向き単色球面波のポテンシャル}
+    \phi = A \frac{e^{i(kr-\omega t)}}{r}
+\end{equation}
+である．
+\eqref{eq70.6:外向き単色球面波のポテンシャル}は，以下の微分方程式を満たすことに注目しよう．
+\begin{equation}\label{eq70.7:Helmholtz方程式のGreen関数が満たす式}
+    \Laplacian \phi + k^2 \phi = -4\pi A e^{-i\omega t} \delta(\vec{r})
+\end{equation}
+
+\begin{details}
+原点を除く領域では，解はHelmholtz方程式$\Laplacian \phi + k^2 \phi = 0$を満たす．
+次に，原点を取り囲む半径$\varepsilon$の球で\eqref{eq70.7:Helmholtz方程式のGreen関数が満たす式}を体積積分すると，左辺は
+\begin{align*}
+    \int_{r=\varepsilon} \Grad \phi \cdot \dS + 0
+    &= \eval{ A \frac{ ik e^{i(kr-\omega t)} \cdot r - e^{i(kr-\omega t)} }{\cancel{r^2}} 4\pi \cancel{r^2} }_{r=\varepsilon} \\
+    &= 4\pi A (ik\varepsilon-1)e^{i(k\varepsilon-\omega t)} \\
+    &\to -4\pi A e^{-i\omega t} \; (\varepsilon\to 0)
+\end{align*}
+\end{details}
+
+
+さて，外へ向かう球面波を考えよう．
+球面波が占める球殻の外側では，媒質は静止しているか，それに近い状態であるとする．
+そのような波は，有限の時間だけ音を発する音源か，または音の擾乱が存在するある領域から生じる．
+音波が到達する前は，$\phi=0$である．
+音波が通過し終わると，運動は止まる．
+これは$\phi$が定数であることを意味する．
+しかし，外へ向かう球面波では$\phi = \dfrac{f(ct-r)}{r}$であるから，この定数は0しかあり得ない．
+したがって，音波の到達前と通過後では，ポテンシャルは0でなければならない．
+この事実から，球面波での疎密の分布について重要な結論を引き出すことができる．
+
+
+音波中の圧力変化は$p'=-\rho\dpdv{\phi}{t}$と書けるから，$r$を固定して全時間で積分すると
+\begin{equation}
+    \int_{-\infty}^{\infty} p' \, dt = -\rho (\phi(\infty)-\phi(-\infty)) = 0 
+\end{equation}
+となる．
+このことは，球面波が通過するとき，任意の点で必ず濃縮（$p'>0$）と希薄（$p'<0$）の両方が観察されることを意味する．
 
 
 
 
 
 
+%%%%%%%%%% 問題1 %%%%%%%%%%
+
+\begin{mondai}{}{}
+$t=0$で，半径$a$の球の内部の気体が$\rho'=\Delta$（定数）となるように圧縮されている（球の外では$\rho'=0$とする）．
+また，$t=0$ではどこでも速度は0とする．
+その後の運動を求めよ．
+\end{mondai}
+\begin{kaitou}
+
+$\rho'=-\dfrac{\rho}{c^2}\dpdv{\phi}{t}$に注意して，ポテンシャル$\phi(r,t)$の初期条件を書き下すと
+\[
+    \phi(r,0) = 0, \quad
+    \dot{\phi}(r,0) = F(r) \equiv \begin{cases}
+        0 & (r>a) \\[8pt]
+        -\dfrac{c^2\Delta}{\rho} & (r<a) \\[8pt]
+    \end{cases}
+\]
+となる．
+$\phi = \dfrac{f(ct-r) - f(ct+r)}{r}$の形に解を求めよう．
+初期条件から
+\[
+    f(-r) - f(r) = 0, \quad
+    \frac{c}{r} \left( f'(-r)-f'(r) \right) = F(r).
+\]
+第1式を微分し
+\[
+    f'(r) + f'(-r) = 0,
+\]
+第2式から
+\[
+    f'(r)-f'(-r) = -\frac{r}{c} F(r).
+\]
+よって
+\[
+    f'(r) = - f'(-r) = -\frac{r}{2c} F(r)
+\]
+となる．混乱を避けるため$f$の引数を$\xi$と書くことにすると
+\[
+    f'(\xi) = -\frac{\xi}{2c} F(\xi) = 
+    \begin{cases}
+        0 & (|\xi|>a) \\[8pt]
+        \dfrac{c\Delta}{2\rho} \xi & (|\xi|<a) \\[8pt]
+    \end{cases}.
+\]
+これを$\xi$で積分し
+\[
+    f(\xi) =
+    \begin{cases}
+        A & (|\xi|>a) \\[8pt]
+        \dfrac{c\Delta}{4\rho} \xi^2 + B & (|\xi|<a) \\[8pt]
+    \end{cases}
+\]
+となり，$|\xi|=a$での連続性から$A = \dfrac{c\Delta}{4\rho} a^2 + B$となるから結局
+\[
+    f(\xi) =
+    \begin{cases}
+        A & (|\xi|>a) \\[8pt]
+        \dfrac{c\Delta}{4\rho} (\xi^2-a^2) + A & (|\xi|<a) \\[8pt]
+    \end{cases}.
+\]
+これが求める解を与える．
 
 
+特に$r>a$での解を調べよう．
+この場合$|ct+r|>a$より常に$f(ct+r)=A$となるから，$|ct-r|$と$a$の大小関係を調べればよいことがわかる．
+\begin{itemize}
+    \item $0 < t < \dfrac{r-a}{c}$のとき．$f(ct-r)=A$より$\phi=0, \; \rho'=0$となる．
+    \item $\dfrac{r-a}{c} < t < \dfrac{r+a}{c}$のとき．
+        $f(ct-r) = \dfrac{c\Delta}{4\rho} \left\{ (ct-r)^2 - a^2 \right\} + A $より
+        \[ 
+            \phi = \frac{c\Delta}{4\rho r} \left\{ (ct-r)^2 - a^2 \right\} ,
+        \]
+        \[ 
+            \rho' = -\frac{\rho}{c^2} \pdv{\phi}{t} = -\frac{\rho}{c^2} \frac{c\Delta}{4\rho r} 2c(ct-r)
+            = \frac{\Delta}{2} \left( 1-\frac{ct}{r} \right).
+        \]
+    \item $t > \dfrac{r+a}{c}$のとき．やはり$\phi=0, \; \rho'=0$となる．
+\end{itemize}
+
+音波は，考えている点を時間$\dfrac{2a}{c}$だけ通過する．
+いいかえると，音波は$ct-a<r<ct+a$で表される球殻内にのみ存在する．
+この球殻内では，密度は線形に変化し，まず圧縮（$\rho'>0$）が，次に希薄（$\rho'<0$）が到達する．
+
+
+
+\end{kaitou}
+
+
+
+
+%%%%%%%%%% 問題2 %%%%%%%%%%
+
+\begin{mondai}{}{}
+半径$a$の球状容器における球対称な固有振動の固有振動数を求めよ．
+\end{mondai}
+\begin{kaitou}
+
+境界条件は$r=a$で$v = \dpdv{\phi}{r} = 0$となることで，\eqref{eq70.5:単色球面波のポテンシャル}より
+\[
+    \pdv{r} \left( \frac{\sin(kr)}{r} \right)_{r=a} = \eval{ \frac{kr \cos(kr) - \sin(kr)}{r^2} }_{r=a} = 0
+\]
+\[
+    \yueni \tan(ka) = ka.
+\]
+この式が固有振動数を決める．
+特に基準振動数は，$\tan x = x \;(x>0)$の最小解から
+\[
+    ka \simeq 4.49
+    \qquad \yueni \omega = 4.49 \frac{c}{a}.
+\]
+
+
+
+
+\end{kaitou}
 
 
 

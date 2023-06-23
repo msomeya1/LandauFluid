@@ -1,7 +1,106 @@
 \section{円筒波}
 
+全ての量の分布がある方向（$z$軸方向とする）に一様で，この方向について完全に軸対称な波を考えよう．
+このような波は\emph{円筒波}と呼ばれる．
+$z$軸からの距離を$R$とすると，$\phi=\phi(R,t)$となる．
+波動方程式の軸対称な解は，球対称の解\eqref{eq70.2:球面波のポテンシャル}から求めることができる．
+$R$と$r$の関係は$r^2=R^2+z^2$であるから，\eqref{eq70.2:球面波のポテンシャル}で与えられる$\phi$は$R$と$t$が与えられたとき$z$に依存する．
+よって$R$と$t$のみに依存する解は，\eqref{eq70.2:球面波のポテンシャル}を$-\infty<z<\infty$または$0<z<\infty$で積分することで得られる．
+$z$の積分を$r$の積分に置き換えよう．
+$z = \sqrt{r^2-R^2}$より$dz = \dfrac{rdr}{\sqrt{r^2-R^2}}$で，
+$z:0\to\infty$のとき$r:R\to\infty$であるから，求める解は
+\begin{equation}
+    \phi = \int_{R}^{\infty} \frac{f_1(ct-r)}{\sqrt{r^2-R^2}} \, dr
+    + \int_{R}^{\infty} \frac{f_2(ct+r)}{\sqrt{r^2-R^2}} \, dr
+\end{equation}
+となる（$f_1,f_2$は任意関数）．
+第1項は外へ向かう円筒波，第2項は内側へ向かう円筒波である．
+
+この積分で$ct \mp r = \xi$と置き換えると
+\begin{equation}\label{eq71.2:円筒波の積分表示2}
+    \phi = \int_{-\infty}^{ct-R} \frac{f_1(\xi) \, d\xi}{\sqrt{(ct-\xi)^2-R^2}}
+    + \int_{ct+R}^{\infty} \frac{f_2(\xi) \, d\xi}{\sqrt{(\xi-ct)^2-R^2}}
+\end{equation}
+となる．
+外へ向かう円筒波の時刻$t$でのポテンシャルの値は，$-\infty$から$t-R/c$までの$f_1$の値で決まる．
+同様に，内側へ向かう円筒波は$t+R/c$から$\infty$までの$f_2$の値で決まる．
 
 
+
+単色円筒波のポテンシャルを導こう．
+円筒座標においてポテンシャル$\phi(R,t)$が満たす波動方程式は
+\[
+    \frac{1}{R} \pdv{R} \left( R \pdv{\phi}{R} \right) - \frac{1}{c^2} \pdv[2]{\phi}{t} = 0 .
+\]
+単色波では$\phi=f(R)e^{-i\omega t}$と書けるから
+\[
+    \frac{1}{R} \left( \dv{\,\! f}{R} + R \dv[2]{f}{R} \right) + \frac{\omega^2}{c^2} f = 0 ,
+\]
+\[
+    \dv[2]{f}{R} + \frac{1}{R} \dv{\,\! f}{R} + k^2 f = 0.
+\]
+これは0次のBesselの微分方程式であり，$R=0$で有限な解は$J_0(kR)$である（$J_0$は0次のBessel関数）．
+よって単色円筒波では%
+\setcounter{equation}{3}%
+\begin{equation}
+    \phi = A J_0(kR) e^{-i\omega t}
+\end{equation}
+となる．$R=0$で$J_0=1$であるから，原点で振幅は有限値$A$をとる．
+一方，$R$が大きいところでは，$J_0$を漸近展開して
+\begin{equation}
+    \phi \to A \sqrt{\frac{2}{\pi}} \cdot \frac{\cos\left( kR-\frac{\pi}{4} \right)}{\sqrt{kR}} e^{-i\omega t} \quad (R\to\infty)
+\end{equation}
+となる．
+
+
+
+外へ向かう単色円筒波のポテンシャルも同様にして得ることができる．
+0次のBessel方程式の一般解は，第1種／第2種Hankel関数$H_0^{(1)}, H_0^{(2)}$で表される．
+その漸近形は
+\[
+    H_0^{(1)}(kR) \to \sqrt{\frac{2}{\pi}} \cdot \frac{ e^{i(kR-\frac{\pi}{4})}}{\sqrt{kR}}, \quad
+    H_0^{(2)}(kR) \to \sqrt{\frac{2}{\pi}} \cdot \frac{ e^{-i(kR-\frac{\pi}{4})}}{\sqrt{kR}} \quad
+    (R\to\infty)
+\]
+であり，$e^{-i\omega t}$との積を取ったとき$kR-\omega t$のような依存性を持つのは前者である．
+したがって，外向きの単色円筒波のポテンシャルは
+\begin{equation}
+    \phi = A H_0^{(1)}(kR) e^{-i\omega t}
+\end{equation}
+である．$R\to 0$では，次のような対数的な特異性を持つ．
+\begin{equation}
+    \phi \to A \cdot \frac{2i}{\pi} \log(kR) e^{-i\omega t}
+\end{equation}
+$R\to\infty$での漸近式は
+\begin{equation}
+    \phi \to A \sqrt{\frac{2}{\pi}} \cdot \frac{ e^{i(kR-\omega t-\frac{\pi}{4})}}{\sqrt{kR}}.
+\end{equation}
+円筒波の振幅は，$R$が十分大きいとき$\dfrac{1}{\sqrt{R}}$で減少する．
+よって音波の強度は$\dfrac{1}{R}$で減少する．
+これもエネルギー保存則から期待される通りである．
+
+
+
+外へ向かう円筒波には，前面のフロントはあるが後面のフロントはないという，球面波や平面波とは決定的に異なる特徴がある．
+つまり，ある点に音の擾乱が到達すると，それは有限の時間では消えず，$t\to\infty$でゆっくりと0に近づくのである．
+式\eqref{eq71.2:円筒波の積分表示2}の関数$f_1(\xi)$が，ある有限の期間$\xi_1 \ika \xi \ika \xi_2$でのみ0でない値をもつとしよう．
+十分大きい$t$を考えることにすれば，$ct-R>\xi_2$（または$t>\dfrac{R+\xi_2}{c}$）としてよく，このとき積分を
+$\xi_1 \ika \xi \ika \xi_2$での積分に置き換えることができる：
+\[
+    \phi = \int_{\xi_1}^{\xi_2} \frac{f_1(\xi) \, d\xi}{\sqrt{(ct-\xi)^2-R^2}}
+    \quad \left( t>\frac{R+\xi_2}{c} \right)
+\]
+特に$t\to\infty$のとき，これは次の式に漸近する．
+\[
+    \phi \to \frac{1}{ct} \int_{\xi_1}^{\xi_2} f_1(\xi) \, d\xi
+    \quad (t\to\infty)
+\]
+すなわち，有限の時間だけ作用するような音源が作る，外へ向かう円筒波のポテンシャルは，$t\to\infty$でゆっくりと0に近づく．
+したがって球面波のときと同様に
+\begin{equation}
+    \int_{-\infty}^{\infty} p' \, dt  = 0 
+\end{equation}
+である．円筒波の場合にも，濃縮と希薄の両方が観察される．
 
 
 
