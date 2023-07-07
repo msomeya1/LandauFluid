@@ -1,13 +1,114 @@
 \section{相反定理}
+\S~\ref{sec:64}で音波の方程式を導いた際には，波は均質媒質中を伝播すると仮定した．
+特に，密度$\rho_0$と音速$c$は一定とした．
+任意の不均質媒質に対して適用可能な一般的な関係式を導くために，そのような媒質中の音波の方程式を得ることから始めよう．
 
 
+連続の式において，音波が断熱的であることに注意すると
+\[
+    \frac{D\rho}{Dt} = \PDV{\rho}{p}{s} \frac{Dp}{Dt} = \frac{1}{c^2} \frac{Dp}{Dt}
+    = \frac{1}{c^2} \left( \pdv{p}{t} + \v \cdot \Grad p \right).
+\]
+よって$\dfrac{D\rho}{Dt} + \rho \Div\v=0$は
+\[
+    \pdv{p}{t} + \v \cdot \Grad p + \rho c^2 \Div \v = 0
+\]
+となる．
+ここへ$\rho=\rho_0 + \rho'$，$p=p_0+p'$を代入するのだが，
+$\rho_0$は座標の関数であってよいのに対し，$p_0$は定数として扱わなければならない
+（外力が存在しない平衡状態では，力のつりあいから$p_0=\const$でなければならない）．
+ゆえに，微小量の1次までとって
+\[
+    \pdv{p'}{t} + \rho_0 c^2 \Div \v = 0
+    \mytag{1}
+\]
+となる．$\rho_0c^2$は座標の関数である．
 
 
+\S~\ref{sec:64}と同様に，Euler方程式は
+\[
+    \pdv{\v}{t} = - \frac{1}{\rho_0} \Grad p'
+    \mytag{2}
+\]
+である．
+\ajMaru{1}を時間で微分して\ajMaru{2}を用いると
+\begin{equation}
+    \Div \left( \frac{\Grad p'}{\rho} \right) - \frac{1}{\rho c^2} \pdv[2]{p'}{t} = 0
+\end{equation}
+を得る（$\rho$の添字は省いた）．
+これが不均質媒質中の音波の方程式である．
+もし波が振動数$\omega$の単色波ならば
+\begin{equation}\label{eq76.2:周波数空間での不均質媒質中の音波方程式}
+    \Div \left( \frac{\Grad p'}{\rho} \right) + \frac{\omega^2}{\rho c^2} p' = 0 .
+\end{equation}
 
 
+小さな脈動音源から放射される音波を考えよう．
+\S~\ref{sec:74}で見たように，そのような音波の放射は等方的である．
+音源のある点をAとし，点Bで観測される音波の圧力$p'$を$p'_A(B)$と書こう
+（音源の大きさは，AB間の距離および音波の波長に比べて小さくなければならない）．
+次に，同じ音源がBにあるときAで観測される圧力を$p'_B(A)$と書く．
+$p'_A(B)$と$p'_B(A)$の関係を導こう．
 
 
+\eqref{eq76.2:周波数空間での不均質媒質中の音波方程式}を，音源がA，Bにある場合に適用すると
+\[
+    \Div \left( \frac{\Grad p'_A}{\rho} \right) + \frac{\omega^2}{\rho c^2} p'_A = 0 ,
+\]
+\[
+    \Div \left( \frac{\Grad p'_B}{\rho} \right) + \frac{\omega^2}{\rho c^2} p'_B = 0 .
+\]
+第1式に$p'_B$を，第2式に$p'_A$をかけて辺々引くと
+\[
+    p'_B \Div \left( \frac{\Grad p'_A}{\rho} \right) - p'_A \Div \left( \frac{\Grad p'_B}{\rho} \right) = 0,
+\]
+\[
+    \Div \left( \frac{p'_B \Grad p'_A}{\rho} - \frac{p'_A \Grad p'_B}{\rho} \right) = 0.
+\]
+この式を，十分大きな閉領域$D$から，AとBを取り囲む小球$D_A,D_B$を除いた領域で体積積分しよう
+（以下，$D,D_A,D_B$の表面を$C,C_A,C_B$と書く）．
+発散定理より，体積積分を面積分に変換することができ，特に$C$上の積分は，無限遠で音波が0に近つくことから無視することができる．
+よって$C_A,C_B$上の面積分が残り
+\begin{equation}\label{eq76.3:相反定理：境界上の面積分}
+    \int_{C_A+C_B} \left( p'_B \frac{\Grad p'_A}{\rho} - p'_A \frac{\Grad p'_B}{\rho} \right) \cdot \dS = 0
+\end{equation}
+となる．
 
+
+まず$C_A$上の積分を考える．
+$D_A$内部では，Aから放射された音波の圧力$p'_A$はAから離れるにつれて急激に減少する．
+よって勾配$\Grad p'_A$は小さくない．
+一方，小球$D_A$はBから離れたところにあるとしているので，$D_A$内部では$p'_B$は座標についてゆるやかに変化し，$\Grad p'_B$は小さい．
+よって，小球$D_A$の半径を十分小さくとれば
+\[
+    \int_{C_A} p'_A \frac{\Grad p'_B}{\rho} \cdot \dS
+    \ll \int_{C_A} p'_B \frac{\Grad p'_A}{\rho} \cdot \dS
+\]
+となる．さらに，右辺の$p'_B$が大きくは変化しないことから，点Aでの値$p'_B(A)$に等しいとおいて，積分の外に出すことができる．
+同様の議論を$C_B$上の積分についても行えば，\eqref{eq76.3:相反定理：境界上の面積分}は
+\[
+    p'_B(A) \int_{C_A} \frac{\Grad p'_A}{\rho} \cdot \dS = p'_A(B) \int_{C_B} \frac{\Grad p'_B}{\rho} \cdot \dS
+\]
+となる．
+Euler方程式より$\dpdv{\v}{t} = - \dfrac{\Grad p'}{\rho}$であったから
+\[
+    p'_B(A) \pdv{t} \int_{C_A} \v_A \cdot \dS = p'_A(B) \pdv{t} \int_{C_B} \v_B \cdot \dS
+\]
+となる（$\v_A,\v_B$はそれぞれ音源A，Bが発した音波による流速）．
+$C_A$上の積分$\displaystyle\int_{C_A} \v_A \cdot \dS$は，$C_A$を通って単位時間に流れ出る流体の体積である．
+AとBにある音源が同じなら，明らかに
+\[
+    \int_{C_A} \v_A \cdot \dS = \int_{C_B} \v_B \cdot \dS
+\]
+が成り立つ．ゆえに
+\begin{equation}
+    p'_A(B) = p'_B(A)
+\end{equation}
+を得る．これは\emph{相反定理}と呼ばれている．
+すなわち，Aにある音源がBに作る圧力変化は，Bにある同じ音源がAに作る圧力変化に等しい．
+この結果は，媒質がいくつかの均質な領域から成り立っていても成立する．
+音波がそのような媒質中を伝わるとき，境界面で反射や屈折が起こる．
+よって相反定理は，波がAからBへ伝わる間に反射や屈折を受けても成り立つことになる．
 
 
 

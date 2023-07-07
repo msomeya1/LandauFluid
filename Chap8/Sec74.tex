@@ -1,15 +1,194 @@
 \section{音の放射}
+\label{sec:74}
+
+流体中で振動している物体は，周囲の流体に周期的な濃縮部と希薄部を生み出し，その結果音波が放射される．
+音波の持ち去るエネルギーは，物体の運動エネルギーにより供給される．
+このように，振動する物体による音波の放射を議論することができる．
+以下では，振動する物体の速度$u$が音速に比べて十分小さいことを常に仮定する．
+振幅を$a$とすれば$u \sim a\omega$であるから，この条件は
+\[
+    a\omega \ll c
+    \qquad\yueni a \ll \frac{1}{k} \sim \lambda
+\]
+を意味する
+\footnote{振幅は，一般に，物体の大きさと比べても小さいと仮定しなければならない．
+もし振幅が小さくないと，物体近傍の流れがポテンシャル流でなくなる．}．
+
+
+
+任意の形の物体が任意に振動している一般の場合には，音波の放射の問題は以下のようにして解かれなければならない．
+基礎となる量として，速度ポテンシャル$\phi$を用いる．
+$\phi$は以下の波動方程式を満たす．
+\begin{equation}\label{eq74.1:ポテンシャルの波動方程式}
+    \Laplacian \phi - \frac{1}{c^2} \pdv[2]{\phi}{t} = 0
+\end{equation}
+物体の表面では，流体の速度の法線成分は物体の速度$\vec{u}$の法線成分に等しくなければならない．
+\begin{equation}\label{eq74.2:物体表面での音波の境界条件}
+    \pdv{\phi}{n} = u_n
+\end{equation}
+物体から十分離れたところでは，音波は外へ向かう球面波にならなければならない．
+この無限遠での条件，および境界条件\eqref{eq74.2:物体表面での音波の境界条件}を満たす\eqref{eq74.1:ポテンシャルの波動方程式}の解が，物体から放射される音波を決定する．
+
+
+
+2つの極限の場合について，詳しく調べよう．
+まず，物体の振動数が非常に大きく，放射される音波の波長$\lambda$が物体の大きさ$l$に比べて十分小さいと仮定する．
+\begin{equation}
+    \lambda \ll l
+\end{equation}
+この場合，物体の表面を，波長に比べれば大きく近似的に平面とみなせるような小部分に分けることができる．
+そうすれば，各小部分が平面波を放射しているとみなすことができ，境界条件は，流体の速度が$u_n$に等しいこと，となる．
+ところで，平面波の平均エネルギーフラックスは$c\rho v^2$である（\S~\ref{sec:65}．$v$は流体の速度）．
+$v=u_n$とおいて，物体の表面全体にわたって積分することにより，物体が単位時間あたり音波の形で放出する平均エネルギー，つまり音波の全強度が
+\begin{equation}
+    I = c\rho \int \overline{{u_n}^2} dS
+\end{equation}
+であることがわかる．
+これは，（速度振幅が与えられたとき）振動の振動数にはよらない．
+
+
+
+次に，逆の極限を考えよう．
+つまり，音波の波長が物体の長さスケールに比べて大きい場合である．
+\begin{equation}
+    \lambda \gg l
+\end{equation}
+この場合，物体の近く（波長に比べて短い距離）では，
+$\Laplacian\phi \sim \dfrac{\phi}{l^2}$，$\dfrac{1}{c^2} \dpdv[2]{\phi}{t} \sim \dfrac{\omega^2}{c^2}\phi \sim \dfrac{\phi}{\lambda^2}$であるから，
+\eqref{eq74.1:ポテンシャルの波動方程式}で$\dfrac{1}{c^2} \dpdv[2]{\phi}{t}$を無視することができる．
+よって，物体近傍の流れは，Laplace方程式$\Laplacian\phi=0$に従う．
+これは非圧縮性流体のポテンシャル流が満たす方程式である．
+したがって，物体近傍の流れはあたかも非圧縮であるかのように振る舞い，音波（圧縮・希薄を伴う流れ）は物体から十分離れたところでのみ生じる．
+
+
+物体の大きさ$l$程度の距離，あるいはそれより近いところでは，$\Laplacian\phi=0$の解は物体の形に大きく依存するため，一般的な形に書くことはできない．
+しかし，$l$よりも十分離れた（ただし$\Laplacian\phi=0$が成り立つように$\lambda$よりは近い）ところでは，
+$\phi$が距離とともに減少しなければならないという事実を用いて，$\Laplacian\phi=0$の解を求めることができる．
+このようなLaplace方程式の解は，既に\S~11で議論したように
+\begin{equation}\label{eq74.6:Laplace方程式の解}
+    \phi = - \frac{a}{r} + \vec{A}\cdot\Grad\left( \frac{1}{r} \right)
+\end{equation}
+と書くことができる．
+ここで$r$は，物体内部に任意にとった原点から測った距離であり，$l \ll r \ll \lambda$を満たさなければならない．
+
+
+
+\eqref{eq74.6:Laplace方程式の解}は2つの項を含んでいるが，第1項は0になる場合があることに留意しなければならない．
+どのような場合に$-\dfrac{a}{r}$が0でないかを考えよう．
+$\phi=-\dfrac{a}{r}$のとき，物体を取り囲む表面を通る質量フラックスが$4\pi\rho a$であることを\S~11で学んだ．
+しかし，非圧縮性流体でこのフラックスが非零となるのは，この表面内の全体積が変化する場合に限る．
+流体の体積は変化しない（もちろん，考えている$r \ll \lambda$の範囲で）から，物体の体積が変化しなければならない．
+よって，\eqref{eq74.6:Laplace方程式の解}の第1項は，音を発する物体が体積変化を伴いながら振動する場合に存在する．
+
+
+
+このような体積変化がある場合に，音波の全強度を計算してみよう．
+物体を取り囲む閉曲面を通って流れる流体の体積$4\pi a$は，上に述べた議論により，物体の体積$V$の単位時間あたりの変化に等しくなければならない．
+つまり$4\pi a = \dot{V}(t)$である．
+よって$l \ll r \ll \lambda$を満たす距離では流体の運動は
+\[
+    \phi = - \frac{\dot{V}(t)}{4\pi r}
+\]
+で与えられる．
+一方，$r \gg \lambda$では，$\phi$は外へ向かう球面波を表さなければならない．
+つまり
+\begin{equation}
+    \phi = - \frac{f(t-r/c)}{r}.
+\end{equation}
+2式を見比べることにより，$r \gg l$での音波は
+\begin{equation}
+    \phi = - \frac{\dot{V}(t-r/c)}{4\pi r}
+\end{equation}
+と書けることがわかる．
+
+速度$\v = \Grad \phi$は半径方向の成分$v = \dpdv{\phi}{r}$のみを持つ．
+$r \gg \lambda$で$v$を求めよう．
+この場合，$\dfrac{1}{r}$の微分は$\order{\dfrac{1}{r^2}}$であり，無視することができる．
+よって分子だけを微分すればよい．
+\begin{equation}
+    v \simeq - \frac{1}{4\pi r} \pdv{r}\dot{V}(t-r/c) = \frac{1}{4\pi cr} \ddot{V}(t-r/c)
+\end{equation}
+音の全強度は
+\[
+    I = c\rho \int \overline{v^2} dS = \frac{\rho}{16\pi^2c} \int \frac{\overline{\ddot{V}(t-r/c)^2}}{r^2} dS
+\]
+で与えられる．
+まず$\overline{\ddot{V}(t-r/c)^2}$について，その引数$t-r/c$は，距離$r$のところでは物体の振動の情報が$r/c$だけ遅れて到達することを意味するが，
+この情報は長い時間にわたる平均をとったあとでは無意味である．
+よって単に$\overline{\ddot{V}^2}$と書いて，積分の外に出すことができる．
+次に，積分は原点を取り囲む閉曲面について行うが，特に半径$r$の球面としてよい．
+その表面積は$4\pi r^2$であるから，$\displaystyle\int \dfrac{dS}{r^2} = 4\pi$となる．
+以上より
+\begin{equation}
+    I = \frac{\rho \overline{\ddot{V}^2}}{4\pi c}
+\end{equation}
+となる．音波の全強度は，物体の体積の時間に関する2次微分に比例する．
+
+物体が振動数$\omega$で調和振動している場合，体積の時間2次微分は$\omega^2$に比例する
+（元の体積を$V_0$とすると$\dfrac{\dot{V}}{V_0}=\Div\v$と書けるから$\ddot{V}\sim\Div\dpdv{\v}{t}$である．
+$\dpdv{t}\sim\omega, v\sim a\omega$より$\ddot{V}\sim\omega^2$）．
+よって音の強度は$\omega^4$に比例する．
 
 
 
 
 
+次に，体積変化なしに振動している物体による音の放射を考えよう．
+この場合，\eqref{eq74.6:Laplace方程式の解}の第1項は0であり第2項が残る．これを
+\[
+    \phi = \vec{A}(t)\cdot\Grad\left( \frac{1}{r} \right) = \Div \left( \frac{\vec{A}(t)}{r} \right)
+\]
+と書こう．
+前と同様に，$r \gg l$での解は
+\[
+    \phi = \Div\left[ \frac{\vec{A}(t-r/c)}{r} \right]
+\]
+であることが分かる
+（これが解であることは容易に理解できる：$\dfrac{\vec{A}(t-r/c)}{r}$はすでに球面波の形になっており，その空間微分もまた波動方程式を満たす）．
+分子のみを微分し，$r \gg \lambda$で
+\begin{equation}
+    \phi \simeq - \frac{1}{cr} \dot{\vec{A}}(t-r/c) \cdot \vec{n}
+\end{equation}
+を得る（$\vec{n}$は半径方向の単位ベクトル）．
+再び微分すれば
+\begin{equation}
+    \v = \Grad \phi \simeq \frac{\ddot{\vec{A}}(t-r/c)\cdot\vec{n}}{c^2r} \vec{n}
+\end{equation}
+を得る．
+これは\emph{双極子放射}と呼ばれる．
+すなわち，原点に2つの近接した点音源が置かれていて，互いに逆位相で音を放射している場合に観測されるパターンである．
 
 
 
+音の全強度は，積分
+\[
+    I = c\rho \int \overline{v^2} dS 
+    = \frac{\rho}{c^3} \int \frac{\overline{\left( \ddot{\vec{A}}\cdot\vec{n} \right)^2}}{r^2} dS
+\]
+で与えられる．
+$\vec{A}$の方向を極軸とする球座標系で計算すると
+\[
+    \int \frac{\overline{\left( \ddot{\vec{A}}\cdot\vec{n} \right)^2}}{r^2} dS
+    = \int_{0}^{2\pi} \int_{0}^{\pi} \frac{\overline{|\ddot{\vec{A}}|^2\cos^2\theta}}{r^2} r^2 \sin\theta \, d\theta d\varphi
+    = 2\pi \overline{|\ddot{\vec{A}}|^2} \int_{0}^{\pi} \cos^2\theta \sin\theta \, d\theta
+    = \frac{4\pi}{3} \overline{|\ddot{\vec{A}}|^2}
+\]
+であるから
+\begin{equation}
+    I = \frac{4\pi\rho}{3c^3} \overline{|\ddot{\vec{A}}|^2}
+\end{equation}
+となる．
 
 
 
+以上の議論では粘性を無視し，放射される音波はポテンシャル流であると仮定した．
+実際には，振動している物体周辺の，厚さ$\sim \sqrt{\nu/\omega}$の層では，流れはポテンシャル流にならない（\S~24）．
+よって上述の公式が適用できるのは，「境界層」の厚さが物体の大きさに比べて無視できるときである：
+\setcounter{equation}{19}%
+\begin{equation}
+    \sqrt{\frac{\nu}{\omega}} \ll l.
+\end{equation}
+この条件は，振動数の小さいとき，または物体が小さいときには成り立たない．
 
 
 
